@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int        @id @default(autoincrement())
+  name     String
+  UserRole UserRole[]
+  UserTeam UserTeam[]
+}
+
+model Role {
+  id       Int        @id @default(autoincrement())
+  name     String
+  UserRole UserRole[]
+}
+
+model Team {
+  id         Int        @id @default(autoincrement())
+  teamName   String
+  teamLeader String
+  UserTeam   UserTeam[]
+  GameTeam   GameTeam[]
+}
+
+model Topic {
+  id        Int         @id @default(autoincrement())
+  name      String
+  Phrase    Phrase[]
+  GameTopic GameTopic[]
+}
+
+model Phrase {
+  id        Int    @id @default(autoincrement())
+  subject   String
+  wordCount Int
+  topic     Topic  @relation(fields: [topicId], references: [id])
+  topicId   Int
+}
+
+model Game {
+  id        Int         @id @default(autoincrement())
+  rounds    Int
+  gameCode  String      @unique
+  size      Int
+  UserRole  UserRole[]
+  UserTeam  UserTeam[]
+  GameTeam  GameTeam[]
+  GameTopic GameTopic[]
+}
+
+model UserRole {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int
+  game   Game @relation(fields: [gameId], references: [id])
+  gameId Int
+}
+
+model UserTeam {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  team   Team @relation(fields: [teamId], references: [id])
+  teamId Int
+  game   Game @relation(fields: [gameId], references: [id])
+  gameId Int
+}
+
+model GameTeam {
+  id        Int  @id @default(autoincrement())
+  team      Team @relation(fields: [teamId], references: [id])
+  teamId    Int
+  game      Game @relation(fields: [gameId], references: [id])
+  gameId    Int
+  teamScore Int
+}
+
+model GameTopic {
+  id      Int   @id @default(autoincrement())
+  topic   Topic @relation(fields: [topicId], references: [id])
+  topicId Int
+  game    Game  @relation(fields: [gameId], references: [id])
+  gameId  Int
+}
