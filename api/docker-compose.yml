@@ -4,8 +4,8 @@ services:
     image: postgres:10.3
     restart: always
     environment:
-      - POSTGRES_USER=sammy
-      - POSTGRES_PASSWORD=your_password
+      - POSTGRES_USER=eyecue
+      - POSTGRES_PASSWORD=password
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
