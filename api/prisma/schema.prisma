@@ -28,10 +28,10 @@ model Team {
   id         Int        @id @default(autoincrement())
   teamName   String
   teamLeader String
+  teamScore  Int
   game       Game @relation(fields:[gameId], references:[id])
   gameId     Int
   User       User[]
-  GameTeam   GameTeam[]
 }
 
 model Topic {
@@ -56,7 +56,6 @@ model Game {
   size      Int
   Team      Team[]
   UserRole  UserRole[]
-  GameTeam  GameTeam[]
   GameTopic GameTopic[]
 }
 
@@ -68,15 +67,6 @@ model UserRole {
   roleId Int
   game   Game @relation(fields: [gameId], references: [id])
   gameId Int
-}
-
-model GameTeam {
-  id        Int  @id @default(autoincrement())
-  team      Team @relation(fields: [teamId], references: [id])
-  teamId    Int
-  game      Game @relation(fields: [gameId], references: [id])
-  gameId    Int
-  teamScore Int
 }
 
 model GameTopic {
