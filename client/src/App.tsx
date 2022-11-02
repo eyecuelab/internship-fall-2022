@@ -1,5 +1,6 @@
-import LandingPage from "./Components/LandingPage";
-import NewGame from './Components/NewGame';
+import LandingPage from "./Containers/LandingPage";
+import Portal from './Containers/Portal';
+import Game from './Containers/Game';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -9,7 +10,8 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/newgame" element={<NewGame />} />
+        <Route path="/portal" element={<Portal />} />
+        <Route path="/game" element={<Game />} />
       </Routes>
     </Router>
   );
