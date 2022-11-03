@@ -10,69 +10,61 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id       Int        @id @default(autoincrement())
-  name     String
-  UserRole UserRole[]
-  team     Team       @relation(fields:[teamId], references:[id])
-  teamId   Int
+model Users {
+  id      Int    @id @default(autoincrement())
+  name    String
+  role    Roles  @relation(fields: [roleId], references: [id])
+  roleId  Int
+  team    Teams  @relation(fields: [teamId], references: [id])
+  teamId  Int
+  Games   Games? @relation(fields: [gamesId], references: [id])
+  gamesId Int?
 }
 
-model Role {
-  id       Int        @id @default(autoincrement())
-  name     String
-  UserRole UserRole[]
+model Roles {
+  id   Int     @id @default(autoincrement())
+  name String
+  User Users[]
 }
 
-model Team {
-  id         Int        @id @default(autoincrement())
-  teamName   String
-  teamLeader String
-  teamScore  Int
-  game       Game @relation(fields:[gameId], references:[id])
-  gameId     Int
-  User       User[]
+model Teams {
+  id           Int     @id @default(autoincrement())
+  teamName     String
+  teamLeaderId Int
+  teamScore    Int
+  game         Games   @relation(fields: [gameId], references: [id])
+  gameId       Int
+  User         Users[]
 }
 
-model Topic {
-  id        Int         @id @default(autoincrement())
+model Topics {
+  id        Int          @id @default(autoincrement())
   name      String
-  Phrase    Phrase[]
-  GameTopic GameTopic[]
+  Phrase    Phrases[]
+  GameTopic GameTopics[]
 }
 
-model Phrase {
+model Phrases {
   id        Int    @id @default(autoincrement())
-  subject   String
+  body      String
   wordCount Int
-  topic     Topic  @relation(fields: [topicId], references: [id])
+  topic     Topics @relation(fields: [topicId], references: [id])
   topicId   Int
 }
 
-model Game {
-  id        Int         @id @default(autoincrement())
+model Games {
+  id        Int          @id @default(autoincrement())
   rounds    Int
-  gameCode  String      @unique
-  size      Int
-  Team      Team[]
-  UserRole  UserRole[]
-  GameTopic GameTopic[]
+  gameCode  String       @unique
+  Team      Teams[]
+  User      Users[]
+  GameTopic GameTopics[]
 }
 
-model UserRole {
-  id     Int  @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
-  role   Role @relation(fields: [roleId], references: [id])
-  roleId Int
-  game   Game @relation(fields: [gameId], references: [id])
-  gameId Int
-}
-
-model GameTopic {
-  id      Int   @id @default(autoincrement())
-  topic   Topic @relation(fields: [topicId], references: [id])
+model GameTopics {
+  id      Int    @id @default(autoincrement())
+  topic   Topics @relation(fields: [topicId], references: [id])
   topicId Int
-  game    Game  @relation(fields: [gameId], references: [id])
+  game    Games  @relation(fields: [gameId], references: [id])
   gameId  Int
 }
