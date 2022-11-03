@@ -9,23 +9,10 @@ function Game() {
     });
   }, []);
 
-  const sendPing = () => {
-    socket.emit('ping');
-  }
-
-
-
   return (
     <div>
-      <button onClick={ sendPing }>Send ping</button>
+      <button>Button</button>
     </div>
-
-
-    
-
-
-
-
   );
 }
 
