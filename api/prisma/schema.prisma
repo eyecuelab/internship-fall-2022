@@ -13,15 +13,18 @@ datasource db {
 model User {
   id       Int        @id @default(autoincrement())
   name     String
-  UserRole UserRole[]
+  role     Role       @relation(fields:[roleId], references:[id])
+  roleId   Int
   team     Team       @relation(fields:[teamId], references:[id])
   teamId   Int
+  game     Game       @relation(fields:[gameId], references:[id])
+  gameId   Int
 }
 
 model Role {
   id       Int        @id @default(autoincrement())
   name     String
-  UserRole UserRole[]
+  User     User[]
 }
 
 model Team {
@@ -55,18 +58,8 @@ model Game {
   gameCode  String      @unique
   size      Int
   Team      Team[]
-  UserRole  UserRole[]
+  User      User[]
   GameTopic GameTopic[]
-}
-
-model UserRole {
-  id     Int  @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id])
-  userId Int
-  role   Role @relation(fields: [roleId], references: [id])
-  roleId Int
-  game   Game @relation(fields: [gameId], references: [id])
-  gameId Int
 }
 
 model GameTopic {
