@@ -10,59 +10,56 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Users {
   id       Int        @id @default(autoincrement())
   name     String
   role     Role       @relation(fields:[roleId], references:[id])
   roleId   Int
   team     Team       @relation(fields:[teamId], references:[id])
   teamId   Int
-  game     Game       @relation(fields:[gameId], references:[id])
-  gameId   Int
 }
 
-model Role {
+model Roles {
   id       Int        @id @default(autoincrement())
   name     String
   User     User[]
 }
 
-model Team {
-  id         Int        @id @default(autoincrement())
-  teamName   String
-  teamLeader String
-  teamScore  Int
-  game       Game @relation(fields:[gameId], references:[id])
-  gameId     Int
-  User       User[]
+model Teams {
+  id            Int        @id @default(autoincrement())
+  teamName      String
+  teamLeaderId  Int
+  teamScore     Int
+  game          Game @relation(fields:[gameId], references:[id])
+  gameId        Int
+  User          User[]
 }
 
-model Topic {
+model Topics {
   id        Int         @id @default(autoincrement())
   name      String
   Phrase    Phrase[]
   GameTopic GameTopic[]
 }
 
-model Phrase {
+model Phrases {
   id        Int    @id @default(autoincrement())
-  subject   String
+  body      String
   wordCount Int
   topic     Topic  @relation(fields: [topicId], references: [id])
   topicId   Int
 }
 
-model Game {
+model Games {
   id        Int         @id @default(autoincrement())
   rounds    Int
   gameCode  String      @unique
-  size      Int
   Team      Team[]
   User      User[]
   GameTopic GameTopic[]
 }
 
-model GameTopic {
+model GameTopics {
   id      Int   @id @default(autoincrement())
   topic   Topic @relation(fields: [topicId], references: [id])
   topicId Int
