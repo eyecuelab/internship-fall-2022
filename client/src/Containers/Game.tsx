@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import $ from 'jquery';
 import socket from '../Hooks/WebsocketHook';
 
 function Game() {
@@ -11,7 +10,10 @@ function Game() {
     });
 
     socket.on('create_team', (team) => {
-      $('#teamList').append(`<h4>${team}</h4>`);
+      const teamList = document.getElementById('teamList');
+      const item = document.createElement('h4');
+      item.textContent = team;
+      teamList ? teamList.appendChild(item) : null;
     });
 
     return () => {
@@ -19,20 +21,20 @@ function Game() {
     }
   }, []);
 
-  useEffect(() => {
-    teamName ? socket.emit('create_team', (teamName)) : null;
-  }, [teamName]);
-
-  const createTeam = (event : React.FormEvent) => {
-    event.preventDefault();
-    const name:any = $('#teamName').val();
-    name ? setTeamName(name) : setTeamName('placeholder');
+  const createTeam = (e : React.FormEvent) => {
+    e.preventDefault();
+    teamName ? socket.emit('create_team', (teamName)) : console.log('error: no team name');
   }
 
   return (
     <div>
       <form id='createTeam' onSubmit={createTeam}>
-        <input type='text' id='teamName' />
+        <input 
+          type='text' 
+          name='teamName' 
+          placeholder='Enter Team Name'
+          onChange={e => setTeamName(e.target.value)}
+        />
         <button type='submit'>Create Team</button>
       </form>
       <div id='teamList'>
