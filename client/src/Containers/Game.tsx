@@ -17,6 +17,7 @@ function Game() {
     });
 
     return () => {
+      socket.off('connection');
       socket.off('create_team');
     }
   }, []);
