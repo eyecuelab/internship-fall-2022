@@ -14,9 +14,13 @@ const io = new Server(server, {
 });
 
 io.on('connection', (socket : Socket) => {
-  console.log('a user connected')
-  io.emit('connection')
-})
+  console.log('a user connected');
+  io.emit('connection');
+
+  socket.on('create_team', (teamName) => {
+    io.emit('create_team', teamName);
+  });
+});
 
 server.listen(3000, () =>
   console.log('Server ready at: http://localhost:3000'),
