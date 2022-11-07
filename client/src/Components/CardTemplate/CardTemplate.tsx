@@ -8,15 +8,14 @@ const CardTemplate = () => {
   return (
     <>
       <Card sx={{ display: 'flex' }}>
-        <CardMedia 
+        <CardMedia
           component="img"
-          sx={{ width: 151 }}
-          image="oranges.jpg"
+          sx={{ width: 490, height: 820 }}
+          image="./images/oranges.jpg"
           alt="an orange"
         />
-        <CardContent>
-          <h1>I'm a computer.</h1>
-          <h1>Stop all the downloading.</h1>
+        <CardContent sx={{ width: 1376 }}>
+
         </CardContent>
       </Card>
     </>
