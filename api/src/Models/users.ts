@@ -6,12 +6,12 @@ export const getUsers = async () => {
   return await prisma.users.findMany();
 }
 
-export const createUser = async (/*teamName: string, teamLeaderId: number*/) => {
+export const createUser = async (userName: string) => {
   return await prisma.users.create({
     data: {
-      name: "user",
+      name: userName,
       role: { connect: { id: 1 } },
-      team: { connect: { id: 1 } },
+      team: {}
     }
   });
 }

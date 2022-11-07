@@ -11,16 +11,14 @@ const usersControllers = {
   },
 
 	async createUser(req: any, res: any) {
-		// const { userName } = req.body;
+		const { userName } = req.body;
 
-		if (Utility.validateInputs(res, "Invalid body parameters"/*, userName*/)) {
-			const newUser = await createUser(/*userName, 1*/);
-			// req.session.userId = newUser.id;
+		const newUser = await createUser(userName);
+		// req.session.userId = newUser.id;
 
-			io.emit("create_user", newUser.id);
-			// io.to(gameId.toString()).emit("player_joined_lobby_chat", userName);
-			res.status(201).json(newUser);
-		}
+		io.emit("create_user", newUser.id);
+		// io.to(gameId.toString()).emit("player_joined_lobby_chat", userName);
+		res.status(201).json(newUser);
 	},
 
 }
