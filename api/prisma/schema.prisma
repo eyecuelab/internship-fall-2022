@@ -11,60 +11,60 @@ datasource db {
 }
 
 model Users {
-  id      Int    @id @default(autoincrement())
-  name    String
-  role    Roles  @relation(fields: [roleId], references: [id])
-  roleId  Int
-  team    Teams  @relation(fields: [teamId], references: [id])
-  teamId  Int
-  Games   Games? @relation(fields: [gamesId], references: [id])
-  gamesId Int?
+  id            Int    @id @default(autoincrement())
+  name          String
+  role          Roles  @relation(fields: [roleId], references: [id])
+  roleId        Int
+  team          Teams? @relation(fields: [teamId], references: [id])
+  teamId        Int?
+  game          Games? @relation(fields: [gameId], references: [id])
+  gameId        Int?
 }
 
 model Roles {
-  id   Int     @id @default(autoincrement())
-  name String
-  User Users[]
+  id            Int     @id @default(autoincrement())
+  name          String
+  User          Users[]
 }
 
 model Teams {
-  id           Int     @id @default(autoincrement())
-  teamName     String
-  teamLeaderId Int
-  teamScore    Int
-  game         Games   @relation(fields: [gameId], references: [id])
-  gameId       Int
-  User         Users[]
+  id            Int     @id @default(autoincrement())
+  teamName      String
+  teamLeaderId  Int
+  teamScore     Int
+  game          Games   @relation(fields: [gameId], references: [id])
+  gameId        Int
+  User          Users[]
 }
 
 model Topics {
-  id        Int          @id @default(autoincrement())
-  name      String
-  Phrase    Phrases[]
-  GameTopic GameTopics[]
+  id            Int          @id @default(autoincrement())
+  name          String
+  Phrase        Phrases[]
+  GameTopic     GameTopics[]
 }
 
 model Phrases {
-  id        Int    @id @default(autoincrement())
-  body      String
-  wordCount Int
-  topic     Topics @relation(fields: [topicId], references: [id])
-  topicId   Int
+  id            Int    @id @default(autoincrement())
+  body          String
+  wordCount     Int
+  topic         Topics @relation(fields: [topicId], references: [id])
+  topicId       Int
 }
 
 model Games {
-  id        Int          @id @default(autoincrement())
-  rounds    Int
-  gameCode  String       @unique
-  Team      Teams[]
-  User      Users[]
-  GameTopic GameTopics[]
+  id            Int          @id @default(autoincrement())
+  rounds        Int
+  gameCode      String       @unique
+  Team          Teams[]
+  User          Users[]
+  GameTopic     GameTopics[]
 }
 
 model GameTopics {
-  id      Int    @id @default(autoincrement())
-  topic   Topics @relation(fields: [topicId], references: [id])
-  topicId Int
-  game    Games  @relation(fields: [gameId], references: [id])
-  gameId  Int
+  id            Int    @id @default(autoincrement())
+  topic         Topics @relation(fields: [topicId], references: [id])
+  topicId       Int
+  game          Games  @relation(fields: [gameId], references: [id])
+  gameId        Int
 }
