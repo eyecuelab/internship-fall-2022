@@ -12,7 +12,7 @@ export const createTeam = async (teamName: string, /*teamLeaderId: number*/) => 
       teamName: teamName,
       teamLeaderId: 1,
       teamScore: 0,
-      game: { connect: { id: 1 } }
+      game: {}
     }
   });
 }
