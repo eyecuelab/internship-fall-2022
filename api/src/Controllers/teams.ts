@@ -11,13 +11,13 @@ const teamsControllers = {
   },
 
 	async createTeam(req: any, res: any) {
-		// const { teamName } = req.body;
+		const { teamName } = req.body;
 
 		if (Utility.validateInputs(res, "Invalid body parameters"/*, teamName*/)) {
-			const newTeam = await createTeam(/*teamName, 1*/);
+			const newTeam = await createTeam(teamName);
 			// req.session.teamId = newTeam.id;
 
-			io.emit("create_team", newTeam.id);
+			io.emit("create_team", newTeam.teamName);
 			// io.to(gameId.toString()).emit("player_joined_lobby_chat", teamName);
 			res.status(201).json(newTeam);
 		}
