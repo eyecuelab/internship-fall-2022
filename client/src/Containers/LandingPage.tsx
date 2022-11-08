@@ -5,10 +5,10 @@ function LandingPage() {
 
   return (
     <>      
-      <h1>HaiCue World</h1>
+      {/* <h1>HaiCue World</h1>
       <p>The place for Haikus</p>
       <a href='/portal'><button>Create a Game</button></a>
-      <button>Join a Game</button>
+      <button>Join a Game</button> */}
       <CardTemplate />
     </>
   );

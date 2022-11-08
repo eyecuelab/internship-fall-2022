@@ -2,20 +2,33 @@ import React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
+import '../../index.css';
 
 const CardTemplate = () => {
 
   return (
     <>
-      <Card sx={{ display: 'flex' }}>
+      <Card sx={{ display: 'flex', width: 1376, borderRadius: "15px", boxShadow: "0px 0px 75px #000" }}>
+        <div style={{ position: "relative" }}>
         <CardMedia
           component="img"
           sx={{ width: 490, height: 820 }}
           image="./images/oranges.jpg"
           alt="an orange"
+          style={{ filter: "brightness(50%)"}}
         />
-        <CardContent sx={{ width: 1376 }}>
-
+        <div style={{ position: "absolute", color: "white", top: 10, left: "25%", transform: "translateX(-50%)", textAlign:"left" }}>
+          {/* example text, will be dynamically rendered */}
+          <h3>Team</h3>
+          <h1>Orange</h1>
+          <h3>Points</h3>
+          <h1>1000</h1>
+          <h3>Timer</h3>
+          <h1>47</h1>
+        </div>
+        </div>
+        <CardContent>
+          
         </CardContent>
       </Card>
     </>
