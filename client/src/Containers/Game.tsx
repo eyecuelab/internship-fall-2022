@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import socket from '../Hooks/WebsocketHook';
+import { getData, postData } from '../ApiHelper';
 
 function Game() {
   const [teamName, setTeamName] = useState('');
@@ -24,7 +25,8 @@ function Game() {
 
   const createTeam = (e : React.FormEvent) => {
     e.preventDefault();
-    teamName ? socket.emit('create_team', (teamName)) : console.log('error: no team name');
+    teamName ? socket.emit('create_team', (teamName)) : null;
+    teamName ? postData('/teams', { teamName: teamName.toString() }) : console.log('error: no team name');
   }
 
   return (

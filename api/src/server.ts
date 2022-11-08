@@ -17,10 +17,6 @@ const io = new Server(server, {
 io.on('connection', (socket : Socket) => {
   console.log('a user connected');
   io.emit('connection');
-
-  socket.on('create_team', (teamName) => {
-    io.emit('create_team', teamName);
-  });
 });
 
 export default io;
