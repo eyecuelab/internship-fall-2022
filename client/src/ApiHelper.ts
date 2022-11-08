@@ -1,11 +1,11 @@
-const credentials: RequestCredentials = 'include';
+// const credentials: RequestCredentials = 'include';
 
 export const API_ENDPOINT = 'http://localhost:3000';
 const BASE_HEADERS = {
   headers: {
     "Content-Type": "application/json"
   },
-  credentials: credentials
+  // credentials: credentials
 };
 
 const handleResponse = async (response: Response) => {
