@@ -13,14 +13,14 @@ const CardTemplate = () => {
         <CardMedia
           component="img"
           sx={{ width: 490, height: 820 }}
-          image="./images/oranges.jpg"
+          image="./images/oranges.png"
           alt="an orange"
-          style={{ filter: "brightness(50%)"}}
+          style={{ background: "#0C114A"}}
         />
-        <div style={{ position: "absolute", color: "white", top: 10, left: "25%", transform: "translateX(-50%)", textAlign:"left" }}>
+        <div style={{ position: "absolute", color: "white", top: 10, left: "35%", transform: "translateX(-50%)", textAlign:"left" }}>
           {/* example text, will be dynamically rendered */}
           <h3>Team</h3>
-          <h1>Orange</h1>
+          <h1>BLUEBERRY</h1>
           <h3>Points</h3>
           <h1>1000</h1>
           <h3>Timer</h3>
