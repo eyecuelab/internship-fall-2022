@@ -38,6 +38,7 @@ const CardTemplate = () => {
             {/* example text, will be dynamically rendered */}
             <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
             <h1>DECORATING TREE</h1>
+            <br />
             <FormTemplate />
           </CardContent>
         </Content>
