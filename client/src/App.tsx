@@ -1,6 +1,7 @@
 import LandingPage from "./Containers/LandingPage";
 import Portal from './Containers/Portal';
 import Game from './Containers/Game';
+import ModControl from './Containers/ModControl/ModControl';
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/" element={<LandingPage />} />
         <Route path="/portal" element={<Portal />} />
         <Route path="/game" element={<Game />} />
+        <Route path="/mod" element={<ModControl />} />
       </Routes>
     </Router>
   );
