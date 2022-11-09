@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../index.css';
 import { Card, CardContent, Button } from '@mui/material';
-import { Header, Content } from './styles';
+import { Header } from './styles';
 
 const ModControl = () => {
 
