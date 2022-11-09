@@ -12,7 +12,7 @@ const CardTemplate = () => {
   return (
     <>
       <Header><h4>Eyecue Haicue</h4></Header>
-      <Card sx={{ display: 'flex', width: 1376, height: 820, borderRadius: "15px", boxShadow: "0px 0px 75px #000", background: '#f6ede9'}}>
+      <Card sx={{ display: 'flex', width: 1376, height: "fit-content", borderRadius: "15px", boxShadow: "0px 0px 75px #000", background: '#f6ede9'}}>
         <div style={{ position: "relative" }}>
         <CardMedia
           component="img"

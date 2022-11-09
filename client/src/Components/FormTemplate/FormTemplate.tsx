@@ -1,13 +1,11 @@
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import '../../index.css';
-import { Container } from './styles';
 
 const FormTemplate = () => {
 
   return (
     <div style={{ position: 'relative', height: '80%' }}>
-      <Container>
         <TextField fullWidth sx={{ mt: 0 }}
           id="standard-basic"
           variant="standard"
@@ -62,7 +60,6 @@ const FormTemplate = () => {
           }}
         />
         <label><h5>5 Syllables</h5></label>
-      </Container>  
       <Button
         sx={{
           height: '95px',
@@ -72,7 +69,8 @@ const FormTemplate = () => {
           borderRadius: '10px',
           position: 'absolute',
           bottom: '0',
-          left: '0'}}
+          left: '0'
+        }}
         variant="outlined" 
       >
         <h3>Submit</h3>
