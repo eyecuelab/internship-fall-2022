@@ -13,26 +13,56 @@ import '../../index.css';
 const FormTemplate = () => {
 
   return (
-    <div style={{ position: 'relative', height: '76%' }}>
+    <div style={{ position: 'relative', height: '80%' }}>
       <TextField fullWidth sx={{ mt: 0 }}
         id="standard-basic"
         variant="standard"
         name="FiveSyllables"
         type="text"
+        InputProps={{
+          style: {
+            fontFamily: "LuloCleanOneBold",
+            fontStyle: "normal",
+            fontWeight: "700",
+            fontSize: "42px",
+            lineHeight: "50px",
+            color: "#363636",
+          }
+        }}
       />
       <label><h5>5 Syllables</h5></label>
-      <TextField fullWidth sx={{ mt: 2 }} 
+      <TextField fullWidth sx={{ mt: 0 }} 
         id="standard-basic"
         variant="standard"
         name="SevenSyllables"
         type="text"
+        InputProps={{
+          style: {
+            fontFamily: "LuloCleanOneBold",
+            fontStyle: "normal",
+            fontWeight: "700",
+            fontSize: "42px",
+            lineHeight: "50px",
+            color: "#363636",
+          }
+        }}
       />
       <label><h5>7 Syllables</h5></label>
-      <TextField fullWidth sx={{ mt: 2 }} 
+      <TextField fullWidth sx={{ mt: 0 }} 
         id="standard-basic"
         variant="standard"
         name="FiveSyllables"
         type="text"
+        InputProps={{
+          style: {
+            fontFamily: "LuloCleanOneBold",
+            fontStyle: "normal",
+            fontWeight: "700",
+            fontSize: "42px",
+            lineHeight: "50px",
+            color: "#363636",
+          }
+        }}
       />
       <label><h5>5 Syllables</h5></label>
         
