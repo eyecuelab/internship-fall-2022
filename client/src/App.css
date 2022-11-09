@@ -1,5 +1,4 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -39,3 +38,55 @@
 .read-the-docs {
   color: #888;
 }
+
+html {
+  background-image: url(../public/images/oranges_background.png);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@font-face {
+  font-family: LuloCleanOne;
+  src: url(./assets/fonts/LuloCleanOne.otf);
+}
+
+@font-face {
+  font-family: LuloCleanOneBold;
+  src: url(./assets/fonts/LuloCleanOneBold.otf);
+}
+
+h1 {
+  font-family: LuloCleanOneBold;
+  font-size: 42px;
+  line-height: 58px;
+  font-weight: 700;
+  margin: 2px;
+  margin-bottom: 39px;
+}
+
+h3 {
+  font-family: LuloCleanOne;
+  font-size: 25px;
+  line-height: 35px;
+  font-weight: 400;
+  margin: 2px;
+}
+
+h4 {
+  font-family: LuloCleanOneBold;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 35px;
+  margin: 0;
+  margin-bottom: 7px;
+}
+
+h5 {
+  font-family: LuloCleanOne;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+}
+
