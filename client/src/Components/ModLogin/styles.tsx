@@ -12,3 +12,8 @@ export const Content = styled.div`
   padding-right: 5.5%;
   text-align: left;
 `;
+
+export const Header = styled.div`
+  display: block;
+  text-align: right;
+`;
