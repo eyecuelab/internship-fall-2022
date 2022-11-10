@@ -8,7 +8,6 @@ const ModControl = () => {
   if (true) { 
     return (
       <>
-        <Header><h4>Eyecue Haicue</h4></Header>
         <ModLogin />
       </>
     ); 
