@@ -12,19 +12,19 @@ const ModOverlay = () => {
           <br />
 {/* render when editing topics/phrases for a game */}
           {/* <h3>Name</h3>
-          <h1>{game name}</h1>
+          <h1>{'EyeCue Winter 2023'}</h1>
           <br /> */}
 {/* render while game is in progress */}
           {/* <h3>Round</h3>
-          <h1>{round number}</h1> 
+          <h1>{'3'}</h1> 
           <br /> */}
 {/* render during brainstorming phase each round */}
           {/* <h3>Timer</h3>
-          <h1>{timer}</h1>
+          <h1>{'47'}</h1>
           <br /> */}
 {/* render during guessing phase */}
           {/* <h3>Teams left</h3>
-          <h1>{number of teams left to present}</h1>
+          <h1>{'4'}</h1>
           <br /> */}
         </FlexItem>
         </Container>
