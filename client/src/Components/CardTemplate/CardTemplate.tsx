@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import HaikuForm from "../HaikuForm/HaikuForm";
 import TeamOverlay from '../TeamOverlay/TeamOverlay';
+import ModOverlay from '../ModOverlay/ModOverlay';
 import '../../index.css';
 import { Overlay, Content, Header } from './styles';
 
@@ -24,6 +25,7 @@ const CardTemplate = () => {
         <Overlay>
           {/* Components in the Overlay tag will likely be rendered with a switch statement */}
           {/* <TeamOverlay /> */}
+          {/* <ModOverlay /> */}
         </Overlay>
         </div>
         <Content>

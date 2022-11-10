@@ -2,10 +2,14 @@ import styled from '@emotion/styled';
 import '../../App.css';
 
 export const Overlay = styled.div`
+  height: 84%;
+  width: 84%;
+  padding: 8%;
+  padding-top: 10%;
   position: absolute;
+  top: 0;
+  left: 0;
   color: white;
-  top: 7%;
-  left: 8%;
   text-align: left;
 `;
 
