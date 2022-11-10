@@ -5,3 +5,5 @@ export const Header = styled.div`
   display: block;
   text-align: right;
 `;
+
+export default Header;
