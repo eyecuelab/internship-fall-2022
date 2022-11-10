@@ -1,23 +1,17 @@
+import React from 'react';
 import '../../index.css';
-import { Header } from './styles';
-import CardTemplate from '../../Components/CardTemplate/CardTemplate';
-import ModLogin from '../../Components/ModLogin/ModLogin';
+// import CardTemplate from '../../Components/CardTemplate/CardTemplate.js';
+import ModLogin from '../../Components/ModLogin/ModLogin.js';
 
-const ModControl = () => {
-
-  if (true) { 
-    return (
-      <>
-        <ModLogin />
-      </>
-    ); 
-  } else { 
-    return ( 
-      <>
-        <CardTemplate />
-      </>
-    ); 
-  }
+function ModControl() {
+	// if (true) {
+	return (
+		<ModLogin />
+	);
+	// }
+	// return (
+	// 	<CardTemplate />
+	// );
 }
 
-export default ModControl
+export default ModControl;
