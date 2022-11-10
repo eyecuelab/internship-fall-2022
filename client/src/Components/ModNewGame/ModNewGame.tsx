@@ -27,13 +27,13 @@ function ModNewGame() {
 					},
 				}}
 			/>
-			<label><h5>Easy, buster. 15 characters max</h5></label>
+			<label><h5>15 characters max</h5></label>
 			<br/>
 			<Button
 				sx={{
 					height: '5rem',
 					width: '100%',
-					color: '#363636',
+					color: '#FFFFFF',
 					backgroundColor: '#61C14A',
 					border: '1px solid #363636',
 					borderRadius: '10px'
