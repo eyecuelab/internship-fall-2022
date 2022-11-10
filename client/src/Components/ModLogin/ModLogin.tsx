@@ -13,11 +13,12 @@ const ModLogin = () => {
           <br />
           <Button 
             sx={{
-              height: '75px',
+              height: '5rem',
               width: '100%',
               color: '#363636',
-                border: '1px solid #363636',
-                borderRadius: '10px',
+              border: '1px solid #363636',
+              borderRadius: '10px',
+              background: '#bbb'
             }}>
               GOOGLE SIGN IN
           </Button>

@@ -65,7 +65,7 @@ const FormTemplate = () => {
         <label><h5>5 Syllables</h5></label>
       <Button
         sx={{
-          height: '95px',
+          height: '5rem',
           width: '46%',
           color: '#363636',
           border: '1px solid #363636',
