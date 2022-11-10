@@ -5,7 +5,10 @@ import '../../index.css';
 const FormTemplate = () => {
 
   return (
-    <div style={{ position: 'relative', height: '80%' }}>
+    <div style={{ position: 'relative', height: '95%' }}>
+      <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
+      <h1>DECORATING TREE</h1>
+      <br />
         <TextField fullWidth sx={{ mt: 0 }}
           id="standard-basic"
           variant="standard"

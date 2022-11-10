@@ -40,7 +40,7 @@
 }
 
 html {
-  background-image: url(../public/images/oranges_background.png);
+  background-image: url(../images/oranges_background.png);
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
