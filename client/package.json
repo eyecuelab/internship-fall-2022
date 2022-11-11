@@ -8,19 +8,20 @@
     "lint:fix": "eslint --fix",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pretty": "prettier --write \"./**/*.{ts,tsx,js,jsx,json}\""
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.13",
+    "@vitejs/plugin-react": "^2.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.3",
     "socket.io-client": "^4.5.3",
-    "vite": "^3.2.0",
-    "@vitejs/plugin-react": "^2.2.0"
+    "vite": "^3.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.22",
@@ -29,6 +30,8 @@
     "@typescript-eslint/parser": "^5.42.1",
     "eslint": "^8.27.0",
     "eslint-plugin-react": "^7.31.10",
+    "prettier": "^1.19.1",
+    "prettier-airbnb-config": "^1.0.0",
     "typescript": "^4.6.4"
   }
 }
