@@ -4,6 +4,7 @@ export const Container = styled.div`
   height: 50%;
   width: 100%;
   display: flex;
+	padding: 0.5rem;
 `;
 
 export const FlexItem = styled.div`
