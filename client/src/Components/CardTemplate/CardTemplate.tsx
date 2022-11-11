@@ -20,7 +20,7 @@ function CardTemplate() {
 					<CardMedia
 						component="div"
 						sx={{ width: 490, minHeight: '101%' }}
-						style={{ background: '#0C114A', minHeight: '101%', backgroundImage: 'url(./images/blueberries_banner.png)' }}
+						style={{ background: '#0C114A', minHeight: '101%', backgroundImage: `url(${'./images/blueberries_banner.png'})` }}
 					/>
 					<Overlay> 
 						{/* Components in the Overlay tag will likely be rendered with a switch statement */}
