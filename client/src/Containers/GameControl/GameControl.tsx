@@ -3,9 +3,7 @@ import '../../index.css';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 
 function ModControl() {
-	return (
-		<CardTemplate />
-	);
+  return <CardTemplate />;
 }
 
 export default ModControl;

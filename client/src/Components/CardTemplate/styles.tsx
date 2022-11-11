@@ -2,10 +2,10 @@ import styled from '@emotion/styled';
 import '../../App.css';
 
 export const Overlay = styled.div`
-  height: 84%;
-  width: 84%;
-  padding: 8%;
-  padding-top: 10%;
+  height: 100%;
+  width: 88%;
+  padding: 1.85rem;
+  padding-top: 2.75rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -26,4 +26,5 @@ export const Content = styled.div`
 export const Header = styled.div`
   display: block;
   text-align: right;
+  color: #FFF;
 `;
