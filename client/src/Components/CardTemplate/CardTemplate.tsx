@@ -14,21 +14,11 @@ function CardTemplate() {
       <Header>
         <h4>Eyecue Haicue</h4>
       </Header>
-      <Card
-        sx={{
-          display: 'flex',
-          width: 1376,
-          minHeight: 820,
-          height: 'fit-content',
-          borderRadius: '15px',
-          boxShadow: '0px 0px 75px #000',
-          background: '#f6ede9',
-        }}
-      >
+      <Card className="cardBanner">
         <div style={{ position: 'relative' }}>
           <CardMedia
             component="div"
-            sx={{ width: 490, minHeight: '101%', height: '101%' }}
+            sx={{ width: '25rem', minHeight: '101%', height: '101%' }}
             style={{
               background: '#0C114A',
               minHeight: '101%',
