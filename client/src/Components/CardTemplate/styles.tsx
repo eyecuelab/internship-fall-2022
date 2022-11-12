@@ -26,4 +26,5 @@ export const Content = styled.div`
 export const Header = styled.div`
   display: block;
   text-align: right;
+  color: #FFF;
 `;
