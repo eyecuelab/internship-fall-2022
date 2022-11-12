@@ -38,8 +38,8 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 
 ### 🎯 MVP <a id="mvp"></a>
 
-- Google authentication for moderator
-- A user should be able to host a game
+- Google authentication for the moderator role.
+- A user should be able to host a game as a moderator.
 - A user should be able to join a game with an access link
 <!-- - A Help section and or tutorial for first time players -->
 - A flowchart of the game and how to win(Readme)
@@ -48,17 +48,17 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 - A buzzer for users to login.
 - "Moderator" interface that allows moderators to create new topics and prompts, as well as keep track of teams' scores, timers, etc.
 - "Team Leader" interface that allows team leaders to see topics, prompts, timer, submit haikus, and buzz "in" to guess.
-- A group of users should be able to successfully start and complete a game
-
+- A group of users should be able to successfully start and complete a game.
+- Moderator's input for topics and prompts should persist (ie, if they write a topic and prompt on Tuesday, it should be available on Thursday.)
 ### ⭐ Stretch Goals <a id="stretch-goals"></a>
 
-[] A simple tutorial toggle with persisted user preferences
+[] A simple tutorial toggle 
 [] Customizable settings
-[] Mini games between rounds
+[] pre-generated topics and prompts
 [] SMS/Email invites
-[] A timer
-[] Custom Themes
-[] In-game communication/Chat
+[] consider making the game fully remote- add team member option which is view only, but also allows in-game communication?
+<!-- [] Custom Themes
+[] In-game communication/Chat -->
 
 ## 🖥️ Technologies Used <a id="technologies-used"></a>
 
