@@ -86,13 +86,13 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 ### Setup/Installation Requirements <a id="installation"></a>
 
 - _Please ensure you have the latest version of NodeJs and PostgreSQL_
-- _Clone this repository <https://github.com/eyecuelab/mafia-lite> locally_
-- _Navigate to the root folder `mafia-lite` and then `cd api` and run `npm install` and then `cd client` and run `npm install`_.
+- _Clone this repository <https://github.com/eyecuelab/internship-fall-2022.git> locally_
+- _Navigate to the root folder `internship-fall-2022` and then `cd api` and run `npm install` and then `cd client` and run `npm install`_.
 - See below for required .env files
-- You will also need to have your database setup in PostgreSQL
+- You will also need to have your database setup in PostgreSQL.
 - To ensure the prisma schema has been updated to PostgreSQL, Run a migration to create your database tables with Prisma Migrate:
   - `npx prisma migrate dev --name init`
-  - `npm run seed` to seed the database with the default roles
+  <!-- - `npm run seed` to seed the database with the default roles -->
 - Also, Prisma Studio is a visual editor for the data in your database.
   - Run `npx prisma studio` in your terminal.
 
@@ -100,7 +100,7 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 
 - In the `/api` directory, create an .env file and insert the following: `DATABASE_URL="postgresql://postgres:yourPasswordGoesHere@localhost:5432/yourDatabaseNameGoesHere?schema=yourSchemaNameGoesHere"` & `SESSION_SECRET="yourSecretGoesHere"`
 - Then save
-- In the `/client` directory, create an .env file (separate from the previous), and insert the following: `VITE_API_ENDPOINT=http://localhost:3000`
+<!-- - In the `/client` directory, create an .env file (separate from the previous), and insert the following: `VITE_API_ENDPOINT=http://localhost:3000` -->
 - Then save
 
 ### Running the App Locally <a id="running-the-app-locally"></a>
@@ -118,7 +118,7 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 
 - All requests should be made to the base URL: `http://localhost:3000/` and use Postman/Thunderclient and requests should be made using the HTTP verbs `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
 
-- Player:
+<!-- - Player:
   - GET `/player` retrieves a single player by Id.
   - GET `/player/:gameId` retrieves all players by gameId.
   - POST `/player/` creates a new player.
@@ -143,7 +143,7 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
   - GET `/votes/:gameId` retrieves all votes by gameId.
   - POST `/vote/` creates a new vote.
   - POST `/tallyVote` Counts casted votes and tally them.
-  - POST `/vote/` casted votes are collected.
+  - POST `/vote/` casted votes are collected. -->
 
 ### The Request Body
 
