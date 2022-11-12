@@ -30,11 +30,17 @@ _This is a full stack application that uses prisma and postgresql for the backen
 
 ## ✅ Description <a id="description"></a>
 
-_This is a web application that will allow a group of users to play a HaiCue. HaiCue is a group game, where teams collaboratively write haikus and then earn points by guessing other teams' haikus. Moderaters generate general topics, and related prompts. Every round has one topic, and each team gets a unique prompt. Teams generate haikus based on these prompts, after every team has written their haiku, each team presents their haiku, and the other teams guess what their prompt was.
+_General instructions:_ 
 
-Scoring: Both the presenting team and the non-presenting teams can earn points. The guessing team gets more points if they guess correctly earlier- 5 points if they guess correctly on the first line, 3 for the second line, and 1 for the last line. The first team to correclty gets the points (only one guessing team can earn the points for a haiku). The presenting team's scoring is inverted- they get 1 point if their prompt is guessed in the first line, 3 if one the 2nd line, and 5 points if no one guesses it until the 3rd line. Teams should write their haikus accordingly (ie, the first line should give a clue but be somewhat vauge, the 2nd line a bit clearer, and the 3rd line should make it clear what the prompt was.)
+This is a web application that will allow a group of users to play a HaiCue. HaiCue is a group game, where teams collaboratively write haikus and then earn points by guessing other teams' haikus. Moderaters generate general topics, and related prompts. Every round has one topic, and each team gets a unique prompt. Teams generate haikus based on these prompts. After every team has written their haiku, teams take turns presenting their haiku, and the other teams guess what their prompt was.
 
-Example: a simple one-round game with 3 teams. First, a moderator might pick the topic of "Holidays", and then generate the propts, "Halloween", "Thanksgiving" and "New Year's Eve". Each team gets one of the of the prompts, and generates a haiku. After everyone has written their haiku, they are presented, and non-presenting teams have a chance to guess. Points are awarded to the guessing team who get the prompt right first and the presenting team. The process is repeated for each team._
+_Scoring:_ 
+
+Both the presenting team and the non-presenting teams can earn points. The guessing team gets more points if they guess correctly earlier- 5 points if they guess correctly on the first line, 3 for the second line, and 1 for the last line. The first team to correclty guesss the points (only one guessing team can earn the points for a haiku). The presenting team's scoring is inverted- they get 1 point if their prompt is guessed in the first line, 3 if one the 2nd line, and 5 points if no one guesses it until the 3rd line. Teams should write their haikus accordingly (ie, the first line should give a clue but be somewhat vauge, the 2nd line a bit clearer, and the 3rd line should make it easy to guess what the prompt was.)
+
+_Example:_ 
+
+a simple one-round game with 3 teams. First, a moderator might pick the topic of "Holidays", and then generate the propts, "Halloween", "Thanksgiving" and "New Year's Eve". Each team gets one of the of the prompts, and generates a haiku. After everyone has written their haiku, they are presented, and non-presenting teams have a chance to guess. Points are awarded to the guessing team who get the prompt right first and the presenting team. The process is repeated for each team.
 
 ### 🎯 MVP <a id="mvp"></a>
 
@@ -52,11 +58,11 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 - Moderator's input for topics and prompts should persist (ie, if they write a topic and prompt on Tuesday, it should be available on Thursday.)
 ### ⭐ Stretch Goals <a id="stretch-goals"></a>
 
-[] A simple tutorial toggle 
-[] Customizable settings
-[] pre-generated topics and prompts
-[] SMS/Email invites
-[] consider making the game fully remote- add team member option which is view only, but also allows in-game communication?
+* A simple tutorial toggle 
+* Customizable settings
+* pre-generated topics and prompts
+* SMS/Email invites
+* consider making the game fully remote- add team member option which is view only, but also allows in-game communication?
 <!-- [] Custom Themes
 [] In-game communication/Chat -->
 
@@ -78,6 +84,7 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 <!-- - _[Swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)_ -->
 - _[Material UI](https://mui.com/)_
 - _[ESLint](https://eslint.org)_
+- [Nameless Terror](https://github.com/eyecuelab/mafia-lite.git), which was the project of the interns before us. Not a technology, but we frequently referenced their project and wanted to credit them.
 
 
 
@@ -163,4 +170,5 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 
 _If you run into any issues or have questions, ideas, or concerns;  please email us_
 
-Copyright (c) 2022 - William Rodriguez - James Fox - Marcus Lorenzo - Mark McConnell
+Copyright (c) 2022 - Anthony DiFalco - Greg Khmara - Todd Pangilinan - Winnie Wang
+ 
