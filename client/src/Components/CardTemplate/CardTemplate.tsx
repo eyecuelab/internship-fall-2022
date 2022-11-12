@@ -39,13 +39,13 @@ function CardTemplate() {
           <Overlay>
             {/* Components in the Overlay tag will likely be rendered with a switch statement */}
             {/* <TeamOverlay /> */}
-            <ModOverlay />
+            {/* <ModOverlay /> */}
           </Overlay>
         </div>
         <Content>
           <CardContent sx={{ height: '100%' }}>
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
-            <HaikuForm />
+            {/* <HaikuForm /> */}
             {/* <ModGameList /> */}
           </CardContent>
         </Content>
