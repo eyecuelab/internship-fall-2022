@@ -38,15 +38,16 @@ Example: a simple one-round game with 3 teams. First, a moderator might pick the
 
 ### 🎯 MVP <a id="mvp"></a>
 
-- Basic game default settings
-- Game logic decides roles based off of the amount of players
-- A Help section and or tutorial for first time players
-- A flowchart of the game and how to win(Readme)
+- Google authentication for moderator
 - A user should be able to host a game
-- A user should be able to join a game with an access code
+- A user should be able to join a game with an access link
+<!-- - A Help section and or tutorial for first time players -->
+- A flowchart of the game and how to win(Readme)
 - A clean & easy UI to interact with
-- A manual "ready" button to move game forward
-- A tooltip for roles to help remind players what their role can/can't do
+- Haiku validation- the application should check to make sure the teams generate a valid haiku that does not use the prompt/word.
+- A buzzer for users to login.
+- "Moderator" interface that allows moderators to create new topics and prompts, as well as keep track of teams' scores, timers, etc.
+- "Team Leader" interface that allows team leaders to see topics, prompts, timer, submit haikus, and buzz "in" to guess.
 - A group of users should be able to successfully start and complete a game
 
 ### ⭐ Stretch Goals <a id="stretch-goals"></a>
