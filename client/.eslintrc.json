@@ -17,6 +17,7 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+    "linebreak-style": 0,
 		"jsx-a11y/label-has-associated-control": 0,
 		"no-unused-expressions": 0,
 		"import/no-unresolved": 0,
