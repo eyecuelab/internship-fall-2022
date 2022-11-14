@@ -1,4 +1,3 @@
-import { Teams } from '@prisma/client';
 import { getTeams, createTeam } from '../Models/teams';
 import io from '../server';
 import Utility from './Utility';
