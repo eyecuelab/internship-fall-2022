@@ -2,13 +2,13 @@ import React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import '../../index.css';
-import {whiteButton} from '../componentStyles';
+import { whiteButton } from '../componentStyles';
 
 function ModChooseTopic() {
   whiteButton.width = '100%';
 
   return (
-    <div style={{position: 'relative', height: '95%'}}>
+    <div style={{ position: 'relative', height: '95%' }}>
       <h3>choose a new round topic</h3>
       <hr />
       <Button sx={whiteButton} variant="outlined">

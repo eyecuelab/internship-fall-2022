@@ -3,7 +3,6 @@ import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
 function GameList() {
-
   return (
     <>
       <Grid container spacing={33}>

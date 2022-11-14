@@ -75,24 +75,24 @@ function FormTemplate() {
       <label>
         <h5>5 Syllables</h5>
       </label>
-			<div style={{ height: '5rem', width: '100%' }}>
-      <Button
-        sx={{
-          height: '5rem',
-          width: '46%',
-          color: '#363636',
-          border: '1px solid #363636',
-          borderRadius: '10px',
-          position: 'absolute',
-          bottom: '0',
-          left: '0',
-					marginBottom: 0
-        }}
-        variant="outlined"
-      >
-        <h3>Submit</h3>
-      </Button>
-			</div>
+      <div style={{ height: '5rem', width: '100%' }}>
+        <Button
+          sx={{
+            height: '5rem',
+            width: '46%',
+            color: '#363636',
+            border: '1px solid #363636',
+            borderRadius: '10px',
+            position: 'absolute',
+            bottom: '0',
+            left: '0',
+            marginBottom: 0,
+          }}
+          variant="outlined"
+        >
+          <h3>Submit</h3>
+        </Button>
+      </div>
     </div>
   );
 }
