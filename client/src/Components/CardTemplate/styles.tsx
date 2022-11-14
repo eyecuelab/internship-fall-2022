@@ -17,9 +17,9 @@ export const Content = styled.div`
   color: #363636;
   width: 100%;
   margin: 0%;
-  padding: 2.75%;
-  padding-left: 5.5%;
-  padding-right: 5.5%;
+  padding: 3rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
   text-align: left;
 `;
 

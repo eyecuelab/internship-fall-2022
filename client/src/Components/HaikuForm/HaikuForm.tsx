@@ -5,7 +5,7 @@ import '../../index.css';
 
 function FormTemplate() {
   return (
-    <div style={{ position: 'relative', height: '95%' }}>
+    <div style={{ position: 'relative', height: '100%' }}>
       <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
       <h1>DECORATING TREE</h1>
       <br />
@@ -75,6 +75,7 @@ function FormTemplate() {
       <label>
         <h5>5 Syllables</h5>
       </label>
+			<div style={{ height: '5rem', width: '100%' }}>
       <Button
         sx={{
           height: '5rem',
@@ -85,11 +86,13 @@ function FormTemplate() {
           position: 'absolute',
           bottom: '0',
           left: '0',
+					marginBottom: 0
         }}
         variant="outlined"
       >
         <h3>Submit</h3>
       </Button>
+			</div>
     </div>
   );
 }
