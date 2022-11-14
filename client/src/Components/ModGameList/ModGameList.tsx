@@ -1,9 +1,9 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { Grid, IconButton } from '@mui/material';
+import { Delete } from '@mui/icons-material';
 
 function GameList() {
+
   return (
     <>
       <Grid container spacing={33}>
@@ -23,7 +23,7 @@ function GameList() {
           <h3>PENDING</h3>
           <Grid item xs={1} />
           <IconButton aria-label="delete">
-            <DeleteIcon />
+            <Delete />
           </IconButton>
         </Grid>
       </Grid>
