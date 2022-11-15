@@ -7,6 +7,8 @@ import TeamOverlay from '../TeamOverlay/TeamOverlay';
 import ModGameList from '../ModGameList/ModGameList';
 import ModOverlay from '../ModOverlay/ModOverlay';
 import ModTeamList from '../ModTeamList/ModTeamList';
+import ModStartRound from '../ModStartRound/ModStartRound'
+
 import '../../index.css';
 import { Overlay, Content, Header } from './styles';
 
@@ -40,7 +42,7 @@ function CardTemplate() {
           <Overlay>
             {/* Components in the Overlay tag will likely be rendered with a switch statement */}
             {/* <TeamOverlay /> */}
-            {/* <ModOverlay /> */}
+            <ModOverlay />
           </Overlay>
         </div>
         <Content>
@@ -48,7 +50,8 @@ function CardTemplate() {
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
             {/* <ModGameList /> */}
-            <ModTeamList />
+            {/* <ModTeamList /> */}
+            <ModStartRound />
           </CardContent>
         </Content>
       </Card>
