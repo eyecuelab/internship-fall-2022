@@ -127,4 +127,4 @@ function FormTemplate() {
   );
 }
 
-export default FormTemplate;
+export default HaikuForm;

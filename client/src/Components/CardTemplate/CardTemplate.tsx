@@ -1,12 +1,11 @@
 import React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
+import { Card, CardContent, CardMedia } from '@mui/material';
 import HaikuForm from '../HaikuForm/HaikuForm';
 import TeamOverlay from '../TeamOverlay/TeamOverlay';
 import ModGameList from '../ModGameList/ModGameList';
 import ModOverlay from '../ModOverlay/ModOverlay';
 import ModTeamList from '../ModTeamList/ModTeamList';
+import TeamLobby from '../TeamLobby/TeamLobby';
 import '../../index.css';
 import { Overlay, Content, Header } from './styles';
 
@@ -48,7 +47,8 @@ function CardTemplate() {
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
             {/* <ModGameList /> */}
-            <ModTeamList />
+            {/* <ModTeamList /> */}
+						<TeamLobby />
           </CardContent>
         </Content>
       </Card>
