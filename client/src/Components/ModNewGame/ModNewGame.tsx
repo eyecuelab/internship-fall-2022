@@ -1,9 +1,13 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import {greenButton} from '../componentStyles';
 import '../../index.css';
 
 function ModNewGame() {
+
+  greenButton.width ='100%';
+
 	return (
 		<div style={{ position: 'relative', height: '95%' }}>
 			<h3>new game name</h3>
@@ -30,17 +34,7 @@ function ModNewGame() {
 			<label><h5>15 characters max</h5></label>
 			<br/>
 			<Button
-				sx={{
-					height: '5rem',
-					width: '100%',
-					color: '#FFFFFF',
-					backgroundColor: '#61C14A',
-					border: '1px solid #363636',
-					borderRadius: '10px'
-					// position: 'absolute',
-					// bottom: '0',
-					// left: '0',
-				}}
+				sx={greenButton}
 				variant="outlined"
 			>
 				<h3>Continue</h3>
