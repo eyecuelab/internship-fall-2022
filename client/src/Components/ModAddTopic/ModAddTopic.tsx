@@ -52,7 +52,7 @@ function ModAddTopic() {
             sx={{mt: 0}}
             id="standard-basic"
             variant="standard"
-            name="FiveSyllables"
+            name="topic"
             type="text"
             multiline
             InputProps={{
