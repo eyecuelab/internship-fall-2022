@@ -11,10 +11,7 @@ interface IFormInput {
 
 function FormTemplate() {
 	const { control, handleSubmit } = useForm<IFormInput>();
-	const onSubmit: SubmitHandler<IFormInput> = (data: any) => { 
-		console.log(data);
-		postData('/haicues', data); 
-	};
+	const onSubmit: SubmitHandler<IFormInput> = (data: any) => postData('/haicues', data); 
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
