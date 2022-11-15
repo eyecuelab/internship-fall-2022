@@ -10,7 +10,7 @@ interface IFormInput {
 }
 
 function FormTemplate() {
-	const { control, register, handleSubmit } = useForm<IFormInput>();
+	const { control, handleSubmit } = useForm<IFormInput>();
 	const onSubmit: SubmitHandler<IFormInput> = (data: any) => console.log(data);
 
   return (
