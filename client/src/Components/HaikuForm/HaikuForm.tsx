@@ -1,9 +1,8 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { TextField, Button } from '@mui/material';
 import '../../index.css';
 
-function FormTemplate() {
+function HaikuForm() {
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
@@ -97,4 +96,4 @@ function FormTemplate() {
   );
 }
 
-export default FormTemplate;
+export default HaikuForm;
