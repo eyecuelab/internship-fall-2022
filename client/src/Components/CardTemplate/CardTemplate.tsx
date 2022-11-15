@@ -6,6 +6,7 @@ import HaikuForm from '../HaikuForm/HaikuForm';
 import TeamOverlay from '../TeamOverlay/TeamOverlay';
 import ModGameList from '../ModGameList/ModGameList';
 import ModOverlay from '../ModOverlay/ModOverlay';
+import ModTeamList from '../ModTeamList/ModTeamList';
 import '../../index.css';
 import { Overlay, Content, Header } from './styles';
 
@@ -47,6 +48,7 @@ function CardTemplate() {
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
             {/* <ModGameList /> */}
+            <ModTeamList />
           </CardContent>
         </Content>
       </Card>
