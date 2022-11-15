@@ -15,14 +15,3 @@ export const createUser = async (userName: string) => {
     }
   });
 }
-
-// model Users {
-//   id      Int    @id @default(autoincrement())
-//   name    String
-//   role    Roles  @relation(fields: [roleId], references: [id])
-//   roleId  Int
-//   team    Teams? @relation(fields: [teamId], references: [id])
-//   teamId  Int?
-//   game    Games? @relation(fields: [gameId], references: [id])
-//   gameId  Int?
-// }
