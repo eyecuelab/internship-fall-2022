@@ -1,6 +1,7 @@
 import teamsRouter from "./Routes/teams";
 import usersRouter from "./Routes/users";
 import haicuesRouter from "./Routes/haicues";
+import topicsRouter from "./Routes/topics";
 import cors from 'cors';
 import express from 'express';
 
@@ -16,6 +17,6 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use(teamsRouter, usersRouter, haicuesRouter);
+app.use(teamsRouter, usersRouter, haicuesRouter, topicsRouter);
 
 export default app;
