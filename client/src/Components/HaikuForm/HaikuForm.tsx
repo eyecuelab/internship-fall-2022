@@ -1,77 +1,105 @@
 import React from 'react';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { TextField, Button } from '@mui/material';
 import '../../index.css';
 
+interface IFormInput {
+	line1: string;
+	line2: string;
+	line3: string;
+}
+
 function FormTemplate() {
+	const { control, register, handleSubmit } = useForm<IFormInput>();
+	const onSubmit: SubmitHandler<IFormInput> = (data: any) => console.log(data);
+
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
       <h1>DECORATING TREE</h1>
       <br />
-      <TextField
-        fullWidth
-        sx={{ mt: 0 }}
-        id="standard-basic"
-        variant="standard"
-        name="FiveSyllables"
-        type="text"
-        multiline
-        InputProps={{
-          style: {
-            fontFamily: 'LuloCleanOneBold',
-            fontStyle: 'normal',
-            fontWeight: '700',
-            fontSize: '42px',
-            lineHeight: '50px',
-            color: '#363636',
-          },
-        }}
-      />
-      <label>
-        <h5>5 Syllables</h5>
-      </label>
-      <TextField
-        fullWidth
-        sx={{ mt: 0 }}
-        id="standard-basic"
-        variant="standard"
-        name="SevenSyllables"
-        type="text"
-        multiline
-        InputProps={{
-          style: {
-            fontFamily: 'LuloCleanOneBold',
-            fontStyle: 'normal',
-            fontWeight: '700',
-            fontSize: '42px',
-            lineHeight: '50px',
-            color: '#363636',
-          },
-        }}
-      />
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<Controller
+				  control={control}
+					name="line1"
+					render={({field}) => (
+      			<TextField
+						{...field}
+						fullWidth
+						sx={{ mt: 0 }}
+						id="standard-basic"
+						variant="standard"
+						name="FiveSyllables"
+						type="text"
+						multiline
+						InputProps={{
+							style: {
+								fontFamily: 'LuloCleanOneBold',
+								fontStyle: 'normal',
+								fontWeight: '700',
+								fontSize: '42px',
+								lineHeight: '50px',
+								color: '#363636',
+							},
+						}}
+					/>
+				)} />
+				<label>
+					<h5>5 Syllables</h5>
+				</label>
+				<Controller
+				  control={control}
+					name="line2"
+					render={({field}) => (
+      			<TextField
+						{...field}
+						fullWidth
+						sx={{ mt: 0 }}
+						id="standard-basic"
+						variant="standard"
+						name="FiveSyllables"
+						type="text"
+						multiline
+						InputProps={{
+							style: {
+								fontFamily: 'LuloCleanOneBold',
+								fontStyle: 'normal',
+								fontWeight: '700',
+								fontSize: '42px',
+								lineHeight: '50px',
+								color: '#363636',
+							},
+						}}
+					/>
+				)} />
       <label>
         <h5>7 Syllables</h5>
       </label>
-      <TextField
-        fullWidth
-        sx={{ mt: 0 }}
-        id="standard-basic"
-        variant="standard"
-        name="FiveSyllables"
-        type="text"
-        multiline
-        InputProps={{
-          style: {
-            fontFamily: 'LuloCleanOneBold',
-            fontStyle: 'normal',
-            fontWeight: '700',
-            fontSize: '42px',
-            lineHeight: '50px',
-            color: '#363636',
-          },
-        }}
-      />
+			<Controller
+				  control={control}
+					name="line3"
+					render={({field}) => (
+      			<TextField
+						{...field}
+						fullWidth
+						sx={{ mt: 0 }}
+						id="standard-basic"
+						variant="standard"
+						name="FiveSyllables"
+						type="text"
+						multiline
+						InputProps={{
+							style: {
+								fontFamily: 'LuloCleanOneBold',
+								fontStyle: 'normal',
+								fontWeight: '700',
+								fontSize: '42px',
+								lineHeight: '50px',
+								color: '#363636',
+							},
+						}}
+					/>
+				)} />
       <label>
         <h5>5 Syllables</h5>
       </label>
@@ -89,10 +117,12 @@ function FormTemplate() {
             marginBottom: 0,
           }}
           variant="outlined"
+					type='submit'
         >
           <h3>Submit</h3>
         </Button>
       </div>
+			</form>
     </div>
   );
 }
