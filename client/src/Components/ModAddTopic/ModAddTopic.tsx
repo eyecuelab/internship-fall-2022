@@ -1,10 +1,7 @@
 import React from 'react';
-import {Grid, IconButton} from '@mui/material';
-import {Delete} from '@mui/icons-material';
-import TextField from '@mui/material/TextField';
-import {greenButton} from '../componentStyles';
-import {whiteButton} from '../componentStyles';
-import Button from '@mui/material/Button';
+import { Grid, IconButton, TextField, Button } from '@mui/material';
+import { Delete } from '@mui/icons-material';
+import { greenButton, whiteButton } from '../componentStyles';
 
 function ModAddTopic() {
   greenButton.width = '100%';
@@ -26,18 +23,18 @@ function ModAddTopic() {
           <h4>HOLIDAY ACTIVITY</h4>
         </Grid>
         <Grid container item xs={3} direction="column">
-          <h3 style={{textAlign:'center'}} >5</h3>
+          <h3 style={{ textAlign: 'center' }}>5</h3>
         </Grid>
         <Grid container item xs={1} direction="column">
           <IconButton aria-label="delete">
             <Delete />
           </IconButton>
         </Grid>
-		<Grid container item xs={8} direction="column">
+        <Grid container item xs={8} direction="column">
           <h4>1ST WORLD PROBLEMS</h4>
         </Grid>
         <Grid container item xs={3} direction="column">
-          <h3 style={{textAlign:'center'}}>5</h3>
+          <h3 style={{ textAlign: 'center' }}>5</h3>
         </Grid>
         <Grid container item xs={1} direction="column">
           <IconButton aria-label="delete">
@@ -45,11 +42,10 @@ function ModAddTopic() {
           </IconButton>
         </Grid>
       </Grid>
-      <Grid container spacing={2} style={{position: 'relative', top:20 }}>
+      <Grid container spacing={2} style={{ position: 'relative', top: 20 }}>
         <Grid container item xs={9} direction="column">
           <TextField
             fullWidth
-            sx={{mt: 0}}
             id="standard-basic"
             variant="standard"
             name="topic"
@@ -74,7 +70,7 @@ function ModAddTopic() {
           </Button>
         </Grid>
       </Grid>
-      <Button sx={whiteButton} style={{position: 'relative', top:345 }} variant="outlined">
+      <Button sx={whiteButton} style={{ position: 'relative', top: 345 }} variant="outlined">
         <h3>BACK TO GAMES</h3>
       </Button>
     </>
