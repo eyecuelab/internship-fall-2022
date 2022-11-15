@@ -1,4 +1,3 @@
-import { Users } from '@prisma/client';
 import { getUsers, createUser } from '../Models/users';
 import io from '../server';
 import Utility from './Utility';
