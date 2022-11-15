@@ -11,9 +11,9 @@ export const createHaicues = async (roundNum: number, team: number, line1: strin
     data: {
 			roundId: 1,
 			teamId: 1,
-			line1: '',
-			line2: '',
-			line3: '',
+			line1: line1,
+			line2: line2,
+			line3: line3,
     }
   });
 }

@@ -10,13 +10,14 @@ const haicuesControllers = {
   },
 
 	async createHaicue(req: any, res: any) {
-		const { roundId, team, line1, line2, line3 } = req.body;
+		const { line1, line2, line3 } = req.body;
 
-
-			const haicue = await createHaicues(roundId, team, line1, line2, line3);
+		if (Utility.validateInputs(res, "Invalid body parameters")) {
+			const haicue = await createHaicues(1, 1, line1, line2, line3);
 
 			io.emit("create_haicue", haicue);
 			res.status(201).json(haicue);
+		}
 	},
 
 }
