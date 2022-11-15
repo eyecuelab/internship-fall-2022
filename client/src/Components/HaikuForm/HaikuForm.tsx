@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
-import '../../index.css';
+import { postData } from '../../ApiHelper';
 
 interface IFormInput {
 	line1: string;
@@ -11,7 +11,10 @@ interface IFormInput {
 
 function FormTemplate() {
 	const { control, handleSubmit } = useForm<IFormInput>();
-	const onSubmit: SubmitHandler<IFormInput> = (data: any) => console.log(data);
+	const onSubmit: SubmitHandler<IFormInput> = (data: any) => { 
+		console.log(data);
+		postData('/haicues', data); 
+	};
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>

@@ -31,5 +31,6 @@ export const postData = async (endpoint: string, payload: unknown) => {
     method: 'POST',
     body: JSON.stringify(payload),
   });
+	console.log(payload);
   return handleResponse(response);
 };
