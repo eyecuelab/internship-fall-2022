@@ -1,4 +1,4 @@
-import haicuesControllers from "../Controllers/haicue";
+import haicuesControllers from "../Controllers/haicues";
 import express from "express";
 
 const router = express.Router();

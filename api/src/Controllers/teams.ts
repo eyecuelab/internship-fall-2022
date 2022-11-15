@@ -4,7 +4,7 @@ import Utility from './Utility';
 
 const teamsControllers = {
 
-  async getTeams(req: any, res: any) {
+  async getTeam(req: any, res: any) {
     const teams = await getTeams();
     return res.json(teams);
   },
