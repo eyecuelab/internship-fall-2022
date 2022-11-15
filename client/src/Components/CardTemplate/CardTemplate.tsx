@@ -48,7 +48,7 @@ function CardTemplate() {
             {/* <HaikuForm /> */}
             {/* <ModGameList /> */}
             {/* <ModTeamList /> */}
-						<TeamLobby />
+            {/* <TeamLobby /> */}
           </CardContent>
         </Content>
       </Card>

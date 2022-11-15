@@ -1,10 +1,7 @@
 import React from 'react';
-import {Grid, IconButton} from '@mui/material';
-import {Delete} from '@mui/icons-material';
-import TextField from '@mui/material/TextField';
-import {greenButton} from '../componentStyles';
-import {whiteButton} from '../componentStyles';
-import Button from '@mui/material/Button';
+import { Grid, IconButton, TextField, Button } from '@mui/material';
+import { Delete } from '@mui/icons-material';
+import { greenButton, whiteButton } from '../componentStyles';
 
 function ModAddPhrase() {
   greenButton.width = '100%';
@@ -12,9 +9,12 @@ function ModAddPhrase() {
 
   return (
     <>
-      <Grid container spacing={33} >
+      <Grid container spacing={33}>
         <Grid container item xs={12} direction="column">
-          <h3>TOPIC: <span className="topicName">HOLIDAY ACTIVITY</span></h3>
+          <h3>
+            TOPIC:
+            <span className="topicName">HOLIDAY ACTIVITY</span>
+          </h3>
         </Grid>
       </Grid>
       <hr />
@@ -27,7 +27,7 @@ function ModAddPhrase() {
             <Delete />
           </IconButton>
         </Grid>
-		<Grid container item xs={11} direction="column">
+        <Grid container item xs={11} direction="column">
           <h3>BAKE COOKIES</h3>
         </Grid>
         <Grid container item xs={1} direction="column">
@@ -36,11 +36,10 @@ function ModAddPhrase() {
           </IconButton>
         </Grid>
       </Grid>
-      <Grid container spacing={2} style={{position: 'relative', top:20 }}>
+      <Grid container spacing={2} style={{ position: 'relative', top: 20 }}>
         <Grid container item xs={9} direction="column">
           <TextField
             fullWidth
-            sx={{mt: 0}}
             id="standard-basic"
             variant="standard"
             name="phrase"
@@ -65,7 +64,7 @@ function ModAddPhrase() {
           </Button>
         </Grid>
       </Grid>
-      <Button sx={whiteButton} style={{position: 'relative', top:345 }} variant="outlined">
+      <Button sx={whiteButton} style={{ position: 'relative', top: 345 }} variant="outlined">
         <h3>BACK TO TOPICS</h3>
       </Button>
     </>
