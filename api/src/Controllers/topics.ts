@@ -2,7 +2,7 @@ import { getTopics, createTopic } from '../Models/topics';
 import io from '../server';
 import Utility from './Utility';
 
-const teamsControllers = {
+const topicsControllers = {
 
   async getTopic(req: any, res: any) {
     const topics = await getTopics();
@@ -22,4 +22,4 @@ const teamsControllers = {
 
 }
 
-export default teamsControllers;
+export default topicsControllers;
