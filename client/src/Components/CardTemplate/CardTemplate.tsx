@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardMedia } from '@mui/material';
 import HaikuForm from '../HaikuForm/HaikuForm';
 import TeamOverlay from '../TeamOverlay/TeamOverlay';
 import ModGameList from '../ModGameList/ModGameList';
 import ModOverlay from '../ModOverlay/ModOverlay';
+import ModNewGame from '../ModNewGame/ModNewGame';
 import ModTeamList from '../ModTeamList/ModTeamList';
 import TeamLobby from '../TeamLobby/TeamLobby';
 import '../../index.css';
 import { Overlay, Content, Header } from './styles';
 
 function CardTemplate() {
+	const [createNewGame, setCreateNewGame] = useState(false);
+
+	const handleNewGameView = () => {
+		setCreateNewGame(false);
+	}
+
+	const handleAddNewGame = () => {
+		setCreateNewGame(true);
+	}
+
   return (
     <>
       <Header>
@@ -39,14 +50,14 @@ function CardTemplate() {
           <Overlay>
             {/* Components in the Overlay tag will likely be rendered with a switch statement */}
             {/* <TeamOverlay /> */}
-            {/* <ModOverlay /> */}
+            <ModOverlay />
           </Overlay>
         </div>
         <Content>
           <CardContent sx={{ height: '100%' }}>
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
-            {/* <ModGameList /> */}
+            { createNewGame ? <ModGameList handleCreateNewGame={handleNewGameView} /> : <ModNewGame handleSubmitNewGame={handleAddNewGame}/> }
             {/* <ModTeamList /> */}
             {/* <TeamLobby /> */}
           </CardContent>

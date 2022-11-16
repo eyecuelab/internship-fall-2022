@@ -3,7 +3,11 @@ import { TextField, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
 import '../../index.css';
 
-function ModNewGame() {
+interface Props {
+	handleSubmitNewGame: () => void;
+}
+
+function ModNewGame(props: Props) {
   greenButton.width = '100%';
 
   return (
@@ -32,7 +36,7 @@ function ModNewGame() {
         <h5>15 characters max</h5>
       </label>
       <br />
-      <Button sx={greenButton} variant="outlined">
+      <Button sx={greenButton} variant="outlined" onClick={props.handleSubmitNewGame}>
         <h3>Continue</h3>
       </Button>
     </div>

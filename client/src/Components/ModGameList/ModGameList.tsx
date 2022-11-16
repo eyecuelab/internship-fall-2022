@@ -1,8 +1,13 @@
 import React from 'react';
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton, Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { greenButton } from '../componentStyles';
 
-function GameList() {
+interface Props {
+	handleCreateNewGame: () => void;
+}
+
+function GameList(props: Props) {
   return (
     <>
       <Grid container>
@@ -26,6 +31,7 @@ function GameList() {
 						<Delete />
 					</IconButton>
 				</Grid >
+				<Button sx={greenButton} onClick={props.handleCreateNewGame}>Create New Game</Button>
       </Grid>
     </>
   );
