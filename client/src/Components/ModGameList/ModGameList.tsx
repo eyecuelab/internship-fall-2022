@@ -1,8 +1,11 @@
 import React from 'react';
-import { Grid, IconButton } from '@mui/material';
+import { Grid, IconButton, Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { greenButton } from '../componentStyles';
 
-function GameList() {
+function ModGameList() {
+  greenButton.width = '100%';
+
   return (
     <>
       <Grid container>
@@ -27,8 +30,11 @@ function GameList() {
 					</IconButton>
 				</Grid >
       </Grid>
+      <Button sx={greenButton} style={{ position: 'relative', top: 480 }} variant="outlined">
+        <h3>CREATE A NEW GAME</h3>
+      </Button>
     </>
   );
 }
 
-export default GameList;
+export default ModGameList;
