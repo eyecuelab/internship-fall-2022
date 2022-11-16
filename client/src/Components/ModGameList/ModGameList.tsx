@@ -3,7 +3,11 @@ import { Grid, IconButton, Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { greenButton } from '../componentStyles';
 
-function ModGameList() {
+interface Props {
+	handleCreateNewGame: () => void;
+}
+
+function ModGameList(props: Props) {
   greenButton.width = '100%';
 
   return (
@@ -30,7 +34,7 @@ function ModGameList() {
 					</IconButton>
 				</Grid >
       </Grid>
-      <Button sx={greenButton} style={{ position: 'relative', top: 480 }} variant="outlined">
+      <Button onClick={props.handleCreateNewGame} sx={greenButton} style={{ position: 'relative', top: 480 }} variant="outlined">
         <h3>CREATE A NEW GAME</h3>
       </Button>
     </>
