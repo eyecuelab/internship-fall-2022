@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardMedia } from '@mui/material';
 import HaikuForm from '../HaikuForm/HaikuForm';
 import TeamOverlay from '../TeamOverlay/TeamOverlay';
@@ -39,14 +39,14 @@ function CardTemplate() {
           <Overlay>
             {/* Components in the Overlay tag will likely be rendered with a switch statement */}
             {/* <TeamOverlay /> */}
-            {/* <ModOverlay /> */}
+            <ModOverlay />
           </Overlay>
         </div>
         <Content>
           <CardContent sx={{ height: '100%' }}>
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
-            {/* <ModGameList /> */}
+            <ModGameList />
             {/* <ModTeamList /> */}
             {/* <TeamLobby /> */}
           </CardContent>
