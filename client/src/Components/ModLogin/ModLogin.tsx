@@ -2,7 +2,11 @@ import React from 'react';
 import { Card, CardContent, Button } from '@mui/material';
 import { Content, Header } from './styles';
 
-function ModLogin() {
+interface Props {
+	login: () => void;
+}
+
+function ModLogin(props: Props) {
   return (
     <>
       <Header>
@@ -34,6 +38,7 @@ function ModLogin() {
               <h4>Moderator Login</h4>
               <br />
               <Button
+								onClick={props.login}
                 sx={{
                   height: '5rem',
                   width: '100%',
