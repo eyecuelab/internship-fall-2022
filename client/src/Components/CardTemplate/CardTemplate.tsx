@@ -49,7 +49,7 @@ function CardTemplate() {
           <CardContent sx={{ width: 700, minHeight: '101%', height: '101%' }}>
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
-            {/* <ModGameList /> */}
+            {/* <ModGameList /> */} 
             {/* <ModTeamList /> */}
             <ModStartRound />
           </CardContent>
