@@ -32,7 +32,7 @@ function CardTemplate() {
         <div style={{ position: 'relative' }}>
           <CardMedia
             component="div"
-            sx={{ width: 490, minHeight: '101%', height: '101%' }}
+            sx={{  width: 490, minHeight: '101%',height: '101%' }}
             style={{
               background: '#15586A',
               minHeight: '101%',

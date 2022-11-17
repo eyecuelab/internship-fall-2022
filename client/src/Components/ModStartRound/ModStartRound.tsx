@@ -15,7 +15,7 @@ function ModStartRound() {
       <div>
           <h3>round *insert number* topic</h3>
           <hr />
-          <h1>12345678901234567890123</h1>
+          <h1>WWWWWWWWWWWWWWW</h1>
           <br />
      </div>
       <ButtonContainer>
