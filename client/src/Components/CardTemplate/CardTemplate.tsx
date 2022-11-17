@@ -46,7 +46,7 @@ function CardTemplate() {
           </Overlay>
         </div>
         <Content>
-          <CardContent sx={{ height: '100%' }}>
+          <CardContent sx={{ width: 700, minHeight: '101%', height: '101%' }}>
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
             {/* <ModGameList /> */}

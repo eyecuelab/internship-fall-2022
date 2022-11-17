@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../index.css';
-import {Container, GridButton, GridHeader, GridStyle, } from './styles'
-import {Grid, Button} from '@mui/material';
+import { Container, ButtonContainer } from './styles'
+import { Button } from '@mui/material';
 import {whiteButton, greenButton, redButton} from '../componentStyles';
 
 function ModStartRound() {
@@ -11,14 +11,14 @@ function ModStartRound() {
 
   return (
     <>
+    <Container>
       <div>
           <h3>round *insert number* topic</h3>
           <hr />
-          <h1>passed-in topic</h1>
+          <h1>12345678901234567890123</h1>
           <br />
      </div>
-      
-    <Container>
+      <ButtonContainer>
         <Button sx={greenButton}>
           <h3>start round</h3>
         </Button>
@@ -30,6 +30,7 @@ function ModStartRound() {
         <Button sx={redButton}>
           <h3>end game</h3>
         </Button>
+      </ButtonContainer>
   </Container>
   </>
   );
