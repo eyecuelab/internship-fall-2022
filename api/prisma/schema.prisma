@@ -54,8 +54,9 @@ model Phrases {
 
 model Games {
   id                  Int               @id @default(autoincrement())
+	name								String						@default("haicue")
   rounds              Int
-  gameCode            String            @unique
+  gameCode            String          	@unique  
   Team                Teams[]
   User                Users[]
   GameTopic           GameTopics[]

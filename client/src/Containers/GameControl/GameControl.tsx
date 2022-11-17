@@ -1,9 +1,10 @@
 import React from 'react';
 import '../../index.css';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
+import TeamLobby from '../../Components/TeamLobby/TeamLobby';
 
-function ModControl() {
-  return <CardTemplate />;
+function GameControl() {
+  return <CardTemplate user="player" content={ <TeamLobby /> }/>;
 }
 
-export default ModControl;
+export default GameControl;

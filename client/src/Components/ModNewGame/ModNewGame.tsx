@@ -1,9 +1,20 @@
 import React from 'react';
 import { TextField, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
+import { postData } from '../../ApiHelper';
 import '../../index.css';
 
-function ModNewGame() {
+interface Props {
+	handleCreateNewGame: () => void;
+}
+
+function ModNewGame(props: Props) {
+
+	const createNewGame = () => {
+		postData('/games', { name: 'haicue game', joinCode: 'XXYY' });
+		props.handleCreateNewGame();
+	}
+
   greenButton.width = '100%';
 
   return (
@@ -32,7 +43,7 @@ function ModNewGame() {
         <h5>15 characters max</h5>
       </label>
       <br />
-      <Button sx={greenButton} variant="outlined">
+      <Button onClick={createNewGame} sx={greenButton} variant="outlined">
         <h3>Continue</h3>
       </Button>
     </div>
