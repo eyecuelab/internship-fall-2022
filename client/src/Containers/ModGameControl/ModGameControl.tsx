@@ -24,7 +24,8 @@ function ModGameControl() {
 			return <CardTemplate user="moderator" content={<ModNewGame handleCreateNewGame={handleCreateNewGame}/>}/>;
 		}
 	}
-		return <ModLogin login={handleLogin} />;
+	return <ModLogin login={handleLogin} />;
+	
 }
 
 export default ModGameControl;

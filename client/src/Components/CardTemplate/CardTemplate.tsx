@@ -50,7 +50,7 @@ function CardTemplate(props: Props) {
             style={{
               minHeight: '101%',
               background: props.user === "moderator" ? '#15586A' : '#0c114a',
-              backgroundImage: props.user === "moderator" ? `url(${'./images/moderator_card_background_2.png'})` : `url(${'./images/blueberries_banner.png'})`,
+              backgroundImage: props.user === "moderator" ? `url(${'/images/moderator_card_background_2.png'})` : `url(${'/images/blueberries_banner.png'})`,
             }}
           />
           <Overlay>

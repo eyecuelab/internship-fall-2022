@@ -3,7 +3,12 @@ import { Grid, IconButton, TextField, Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { greenButton, whiteButton } from '../componentStyles';
 
-function ModAddPhrase() {
+interface Props {
+	handleAddNewPhrase: () => void;
+}
+
+function ModAddPhrase(props: Props) {
+
   greenButton.width = '100%';
   whiteButton.width = '100%';
 
@@ -64,7 +69,7 @@ function ModAddPhrase() {
           </Button>
         </Grid>
       </Grid>
-      <Button sx={whiteButton} style={{ position: 'relative', top: 345 }} variant="outlined">
+      <Button sx={whiteButton} onClick={props.handleAddNewPhrase} style={{ position: 'relative', top: 345 }} variant="outlined">
         <h3>BACK TO TOPICS</h3>
       </Button>
     </>

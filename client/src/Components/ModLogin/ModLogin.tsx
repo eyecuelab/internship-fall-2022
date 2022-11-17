@@ -20,7 +20,7 @@ function ModLogin(props: Props) {
           borderRadius: '15px',
           boxShadow: '0px 0px 75px #000',
           background: '#15586a',
-          backgroundImage: 'url(./public/images/moderator_card_background.png)',
+          backgroundImage: 'url(/public/images/moderator_card_background.png)',
         }}
       >
         <Content style={{ color: '#f9f9f9' }}>
