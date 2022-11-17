@@ -3,7 +3,12 @@ import { Grid, IconButton, TextField, Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { greenButton, whiteButton } from '../componentStyles';
 
-function ModAddTopic() {
+interface Props {
+  handleAddNewPhrase: () => void;
+}
+
+function ModAddTopic(props: Props) {
+
   greenButton.width = '100%';
   whiteButton.width = '100%';
 
@@ -20,7 +25,7 @@ function ModAddTopic() {
       <hr />
       <Grid container spacing={2}>
         <Grid container item xs={8} direction="column">
-          <h4>HOLIDAY ACTIVITY</h4>
+        <h4 onClick={props.handleAddNewPhrase}>HOLIDAY ACTIVITY</h4>
         </Grid>
         <Grid container item xs={3} direction="column">
           <h3 style={{ textAlign: 'center' }}>5</h3>
@@ -31,7 +36,7 @@ function ModAddTopic() {
           </IconButton>
         </Grid>
         <Grid container item xs={8} direction="column">
-          <h4>1ST WORLD PROBLEMS</h4>
+          <h4 onClick={props.handleAddNewPhrase}>1ST WORLD PROBLEMS</h4>
         </Grid>
         <Grid container item xs={3} direction="column">
           <h3 style={{ textAlign: 'center' }}>5</h3>
