@@ -10,9 +10,9 @@ const gamesControllers = {
   },
 
 	async createGame(req: any, res: any) {
-		const { joinCode } = req.body;
+		const { name } = req.body;
 
-		const newGame = await createGame(joinCode);
+		const newGame = await createGame(name);
 
 		io.emit("create_game", newGame.id);
 		res.status(201).json(newGame);
