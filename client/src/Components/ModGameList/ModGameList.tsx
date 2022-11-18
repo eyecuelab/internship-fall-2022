@@ -2,13 +2,23 @@ import React from 'react';
 import { Grid, IconButton, Button } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { greenButton } from '../componentStyles';
+import { getData } from '../../ApiHelper';
 
 interface Props {
 	handleCreateNewGame: () => void;
 }
 
+const getGames = async () => { 
+	const games = await getData("/games"); 
+	return games; 
+}
+
+const gameList = await getGames();
+
 function ModGameList(props: Props) {
   greenButton.width = '100%';
+
+	console.log('LINE 26: ', gameList);
 
   return (
     <>
