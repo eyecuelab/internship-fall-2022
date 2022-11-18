@@ -19,10 +19,10 @@ const renderGame = (game: any) => {
 	return (
 		<>
 			<Grid container item xs={7}>
-				<h4>{ game.name.toString() }</h4>
+				<h4 style={{ lineHeight: '56px' }}>{ game.name.toString() }</h4>
 			</Grid>
 			<Grid container item xs={4} justifyContent='flex-end'>
-				<h3 style={{ width: '100%', textAlign: 'right'}}>{ game.publishedAt ? 'published' : 'pending' }</h3>
+				<h3 style={{ width: '100%', textAlign: 'right', lineHeight: '56px'}}>{ game.publishedAt ? 'published' : 'pending' }</h3>
 			</Grid>
 			<Grid container item xs={1} justifyContent='flex-end'>
 				<IconButton aria-label="delete">
