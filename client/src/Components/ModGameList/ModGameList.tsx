@@ -18,13 +18,13 @@ const gameList = await getGames();
 const renderGame = (game: any) => {
 	return (
 		<>
-			<Grid container item xs={5}>
+			<Grid container item xs={7}>
 				<h4>{ game.name.toString() }</h4>
 			</Grid>
-			<Grid container item xs={3}>
+			<Grid container item xs={4} justifyContent='flex-end'>
 				<h3 style={{ width: '100%', textAlign: 'right'}}>{ game.publishedAt ? 'published' : 'pending' }</h3>
 			</Grid>
-			<Grid item xs={1}>
+			<Grid container item xs={1} justifyContent='flex-end'>
 				<IconButton aria-label="delete">
 					<Delete />
 				</IconButton>
@@ -40,16 +40,16 @@ function ModGameList(props: Props) {
 
   return (
     <>
-      <Grid container spacing={28}>
-        <Grid container item xs={6}>
+      <Grid container>
+        <Grid container item xs={7}>
           <h3>GAMES</h3>
         </Grid>
-        <Grid container item xs={3}>
+        <Grid container item xs={4}>
           <h3 style={{width: '100%', textAlign: 'right'}}>STATUS</h3>
         </Grid>
       </Grid>
       <hr />
-      <Grid container spacing={30}>
+      <Grid container>
 				{/* @ts-ignore */}
 				{ <> { (gameList.map((game) => renderGame(game))) } </> }
       </Grid>
