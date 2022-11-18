@@ -4,7 +4,7 @@ import { Delete } from '@mui/icons-material';
 import { greenButton } from '../componentStyles';
 
 interface Props {
-	handleCreateNewGame: () => void;
+  handleCreateNewGame: () => void;
 }
 
 function ModGameList(props: Props) {
@@ -17,7 +17,7 @@ function ModGameList(props: Props) {
           <h3>GAMES</h3>
         </Grid>
         <Grid container item xs={3}>
-          <h3 style={{width: '100%', textAlign: 'right'}}>STATUS</h3>
+          <h3 style={{ width: '100%', textAlign: 'right' }}>STATUS</h3>
         </Grid>
       </Grid>
       <hr />
@@ -28,13 +28,18 @@ function ModGameList(props: Props) {
         <Grid container item xs={4}>
           <h3>PENDING</h3>
         </Grid>
-				<Grid item xs={1} >
-					<IconButton aria-label="delete">
-						<Delete />
-					</IconButton>
-				</Grid >
+        <Grid item xs={1}>
+          <IconButton aria-label="delete">
+            <Delete />
+          </IconButton>
+        </Grid>
       </Grid>
-      <Button onClick={props.handleCreateNewGame} sx={greenButton} style={{ position: 'relative', top: 480 }} variant="outlined">
+      <Button
+        onClick={props.handleCreateNewGame}
+        sx={greenButton}
+        style={{ position: 'relative', top: 480 }}
+        variant="outlined"
+      >
         <h3>CREATE A NEW GAME</h3>
       </Button>
     </>
