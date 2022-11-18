@@ -1,14 +1,14 @@
 import React from 'react';
-import { Grid, IconButton, TextField, Button } from '@mui/material';
-import { Delete } from '@mui/icons-material';
-import { greenButton, whiteButton } from '../componentStyles';
+import {Grid, IconButton, TextField, Button} from '@mui/material';
+import {Delete} from '@mui/icons-material';
+import {Link} from 'react-router-dom';
+import {greenButton, whiteButton} from '../componentStyles';
 
 interface Props {
   handleAddNewPhrase: () => void;
 }
 
 function ModAddTopic(props: Props) {
-
   greenButton.width = '100%';
   whiteButton.width = '100%';
 
@@ -25,10 +25,10 @@ function ModAddTopic(props: Props) {
       <hr />
       <Grid container spacing={2}>
         <Grid container item xs={8} direction="column">
-        <h4 onClick={props.handleAddNewPhrase}>HOLIDAY ACTIVITY</h4>
+          <h4 onClick={props.handleAddNewPhrase}>HOLIDAY ACTIVITY</h4>
         </Grid>
         <Grid container item xs={3} direction="column">
-          <h3 style={{ textAlign: 'center' }}>5</h3>
+          <h3 style={{textAlign: 'center'}}>5</h3>
         </Grid>
         <Grid container item xs={1} direction="column">
           <IconButton aria-label="delete">
@@ -39,7 +39,7 @@ function ModAddTopic(props: Props) {
           <h4 onClick={props.handleAddNewPhrase}>1ST WORLD PROBLEMS</h4>
         </Grid>
         <Grid container item xs={3} direction="column">
-          <h3 style={{ textAlign: 'center' }}>5</h3>
+          <h3 style={{textAlign: 'center'}}>5</h3>
         </Grid>
         <Grid container item xs={1} direction="column">
           <IconButton aria-label="delete">
@@ -47,7 +47,7 @@ function ModAddTopic(props: Props) {
           </IconButton>
         </Grid>
       </Grid>
-      <Grid container spacing={2} style={{ position: 'relative', top: 20 }}>
+      <Grid container spacing={2} style={{position: 'relative', top: 20}}>
         <Grid container item xs={9} direction="column">
           <TextField
             fullWidth
@@ -75,9 +75,11 @@ function ModAddTopic(props: Props) {
           </Button>
         </Grid>
       </Grid>
-      <Button sx={whiteButton} style={{ position: 'relative', top: 345 }} variant="outlined">
-        <h3>BACK TO GAMES</h3>
-      </Button>
+      <Link to="/mod">
+        <Button sx={whiteButton} style={{position: 'relative', top: 345}} variant="outlined">
+          <h3>BACK TO GAMES</h3>
+        </Button>
+      </Link>
     </>
   );
 }
