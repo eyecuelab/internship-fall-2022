@@ -17,7 +17,7 @@ export const Content = styled.div`
   color: #363636;
   width: 100%;
   margin: 0%;
-  padding: 3rem;
+  padding: 2.65rem;
   padding-left: 5rem;
   padding-right: 5rem;
   text-align: left;
