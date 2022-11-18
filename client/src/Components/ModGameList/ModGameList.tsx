@@ -28,9 +28,9 @@ const renderGame = (game: any) => {
 			<Grid container item xs={4} justifyContent='flex-end'>
 				<h3 style={{ width: '100%', textAlign: 'right', lineHeight: '56px'}}>{ game.publishedAt ? 'published' : 'pending' }</h3>
 			</Grid>
-			<Grid container item xs={1} justifyContent='flex-end'>
-				<IconButton aria-label="delete">
-					<Delete />
+			<Grid container item xs={1} justifyContent='flex-end' alignItems='flex-center'>
+				<IconButton aria-label="delete" sx={{ height: '3rem' }}>
+					<Delete  sx={{ height: '35px', width: '125%' }}/>
 				</IconButton>
 			</Grid>
 		</>
