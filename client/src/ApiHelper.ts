@@ -19,20 +19,9 @@ const handleResponse = async (response: Response) => {
 };
 
 export const getData = async (endpoint: string) => {
-	const url = `${API_ENDPOINT}${endpoint}`;
-	try {
-  	const response = await fetch(url, { ...BASE_HEADERS, method: 'GET' });
-		if(!response.ok) {
-			throw Error(response.statusText);
-		}
-		const jsonResponse = await response.json();
-		return jsonResponse;
-	} catch(error: any) {
-		return error.message;
-	}
-  // const url = `${API_ENDPOINT}${endpoint}`;
-  // const response = await fetch(url, { ...BASE_HEADERS, method: 'GET' });
-  // return await handleResponse(response);
+  const url = `${API_ENDPOINT}${endpoint}`;
+  const response = await fetch(url, { ...BASE_HEADERS, method: 'GET' });
+  return await handleResponse(response);
 };
 
 export const postData = async (endpoint: string, payload: unknown) => {

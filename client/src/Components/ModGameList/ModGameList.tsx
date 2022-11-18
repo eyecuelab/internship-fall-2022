@@ -8,8 +8,8 @@ interface Props {
   handleCreateNewGame: () => void;
 }
 
-const getGames = async () => {
-  const games = await getData('/games');
+const getGames = () => {
+  const games = getData('/games');
   return games;
 };
 
@@ -39,7 +39,7 @@ function ModGameList(props: Props) {
   console.log('LINE 26: ', gameList);
 
   return (
-    <>
+    <div style={{height: '100%', position: 'relative'}}>
       <Grid container>
         <Grid container item xs={7}>
           <h3>GAMES</h3>
@@ -49,19 +49,20 @@ function ModGameList(props: Props) {
         </Grid>
       </Grid>
       <hr />
-      <Grid container>
+      { <Grid container>
 				{/* @ts-ignore */}
-				{ <> { (gameList.map((game) => renderGame(game))) } </> }
-      </Grid>
+				{ (gameList.map((game) => renderGame(game))) }
+      </Grid> }
       <Button
         onClick={props.handleCreateNewGame}
         sx={greenButton}
-        style={{position: 'relative', top: 480}}
+        style={{ position: 'absolute', bottom: 0, left: 0 }}
         variant="outlined"
       >
         <h3>CREATE A NEW GAME</h3>
       </Button>
-    </>
+			<div style={{height: '5rem'}}/>
+    </div>
   );
 }
 
