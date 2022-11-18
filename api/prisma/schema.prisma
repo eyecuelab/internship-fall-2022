@@ -57,7 +57,7 @@ model Games {
 	name								String						
   rounds              Int
   gameCode            String          	@unique  
-	publishedAt 				DateTime					@default(now())
+	publishedAt 				DateTime?					
   Team                Teams[]
   User                Users[]
   GameTopic           GameTopics[]
