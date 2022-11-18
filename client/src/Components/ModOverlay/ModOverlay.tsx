@@ -4,6 +4,9 @@ import { Link, useLocation } from "react-router-dom";
 import { Grid, Button } from '@mui/material';
 
 function ModOverlay() {
+  const location = useLocation()
+
+  console.log(location.pathname);
   return (
     <Grid
       container
@@ -32,6 +35,7 @@ function ModOverlay() {
           bottom: 100,
         }}
       >
+        {location.pathname == "/mod/topics" &&
         <Button
           sx={{
             height: '5rem',
@@ -39,14 +43,15 @@ function ModOverlay() {
             color: '#363636',
             border: '1px solid #363636',
             borderRadius: '10px',
-            background: '#bbb',
+            background: '#61C14A',
             margin: 'auto',
             display: 'block',
           }}
         >
-          <h3>some text</h3>
+          <h3>Publish</h3>
         </Button>
-        <br />
+        }
+        <br/>
         <Link to= "/mod"> 
           <Button
             sx={{
