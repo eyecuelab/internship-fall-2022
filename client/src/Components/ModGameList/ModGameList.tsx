@@ -8,13 +8,17 @@ interface Props {
   handleCreateNewGame: () => void;
 }
 
+// it is important that the following code is written outside of the component function
+// returns a promise from the API GET route for the /games endpoint
 const getGames = () => {
   const games = getData('/games');
   return games;
 };
 
+// resolves the promise from getGames()
 const gameList = await getGames();
 
+// renders one game ( title + status + trashcan )
 const renderGame = (game: any) => {
 	return (
 		<>
@@ -50,8 +54,8 @@ function ModGameList(props: Props) {
       </Grid>
       <hr />
       { <Grid container>
-				{/* @ts-ignore */}
-				{ (gameList.map((game) => renderGame(game))) }
+				{/* @ts-ignore */} {/* this line ignores errors in the line below and will need to be removed soon*/}
+				{ (gameList.map((game) => renderGame(game))) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
         onClick={props.handleCreateNewGame}
