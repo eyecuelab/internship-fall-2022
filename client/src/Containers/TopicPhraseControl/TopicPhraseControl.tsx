@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModAddTopic from '../../Components/ModAddTopic/ModAddTopic';
 import ModAddPhrase from '../../Components/ModAddPhrase/ModAddPhrase';
