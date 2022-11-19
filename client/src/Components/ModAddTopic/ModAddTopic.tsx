@@ -1,10 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {Grid, IconButton, TextField, Button} from '@mui/material';
-import {Delete} from '@mui/icons-material';
+import {Grid, TextField, Button} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {greenButton, whiteButton} from '../componentStyles';
 import {getData, postData} from '../../ApiHelper';
+import Topic from './Topic';
 
 interface Props {
   handleAddNewPhrase: () => void;
@@ -14,78 +14,40 @@ interface IFormInput {
   name: string;
 }
 
-// it is important that the following code is written outside of the component function
-// returns a promise from the API GET route for the /games endpoint
-// const getTopics = async () => {
-//   const topics = await getData('/topics');
-//   return topics;
-// };
-
-// // resolves the promise from getGames()
-// const topicList = await getTopics();
-
 const renderTopic = (topic: any) => {
   return (
-    <>
-      <Grid container item xs={7}>
-        <h4 style={{lineHeight: '56px'}}>{topic.name.toString()}</h4>
-      </Grid>
-      <Grid container item xs={4} justifyContent="flex-end">
-        <h3 style={{width: '100%', textAlign: 'right', lineHeight: '56px'}}>
-          {topic.publishedAt ? 'published' : '5'}
-        </h3>
-      </Grid>
-      <Grid container item xs={1} justifyContent="flex-end">
-        <IconButton aria-label="delete">
-          <Delete />
-        </IconButton>
-      </Grid>
-    </>
+		<Topic name={topic.name} phrases={topic.phrases} />
   );
 };
 
 function ModAddTopic(props: Props) {
-  const {control, handleSubmit} = useForm<IFormInput>();
-  const [topicList, setTopics] = useState([]);
+  const {control, handleSubmit, reset} = useForm<IFormInput>();
+  const [topics, setTopics] = useState([]);
 
-  // useEffect(() => {
-  //   setTopics(topicList);
-  // }, [topicList]);
-  console.log(topicList);
+	useEffect(() => {
+		getTopicList();
+	}, []);
+
   const addNewTopic: SubmitHandler<IFormInput> = (data: unknown) => {
-    console.log(data);
-    postData('/topics', data);
-    // props.handleAddNewPhrase();
+    postData('/topics', data).then(() => getTopicList());
+		reset((data) => ({ ...data, name: '' }))
   };
 
-  useEffect(() => {
-    const unsubscribe = () => {
-      try {
-        const getTopicList = async () => {
-          const topics = await getData('/topics');
-          setTopics(topics);
-        };
-        getTopicList();
-      } catch(error: unknown) {
-        console.log(error.message);
-      }
-    }
-
-    return unsubscribe();
-  }, []);
+	const getTopicList = async () => {
+		const topicList = await getData('/topics');
+		setTopics(topicList);
+	};
 
   greenButton.width = '100%';
   whiteButton.width = '100%';
 
-  console.log('LINE 26: ', topicList);
-
   return (
-    <>
-      <Grid container spacing={33}>
-        <Grid container item xs={6} direction="column">
+    <div style={{ position: 'relative', height: '100%'}}>
+      <Grid container>
+        <Grid container item xs={7} >
           <h3>TOPICS</h3>
         </Grid>
-        <Grid container item xs={5} direction="column">
+        <Grid container item xs={4} justifyContent='flex-end'>
           <h3>PHRASES</h3>
         </Grid>
       </Grid>
@@ -93,10 +55,8 @@ function ModAddTopic(props: Props) {
 
       {
         <Grid container>
-          {/* @ts-ignore */}{' '}
-          {/* this line ignores errors in the line below and will need to be removed soon*/}
-          {topicList?.map(topic => renderTopic(topic))}{' '}
-          {/* this line renders each game from the database */}
+          {/* @ts-ignore */}
+          {topics?.map(topic => renderTopic(topic))}
         </Grid>
       }
       <form onSubmit={handleSubmit(addNewTopic)}>
@@ -109,9 +69,8 @@ function ModAddTopic(props: Props) {
                 <TextField
                   {...field}
                   fullWidth
-                  id="standard-basic"
+									id="topic-input"
                   variant="standard"
-                  name="name"
                   type="text"
                   multiline
                   InputProps={{
@@ -136,12 +95,13 @@ function ModAddTopic(props: Props) {
           </Grid>
         </Grid>
       </form>
-      <Link to="/mod">
-        <Button sx={whiteButton} style={{position: 'relative', top: 345}} variant="outlined">
+			<div style={{ height: '5rem' }} />
+      <Link to="/mod" style={{ position: 'absolute', bottom: '0', width: '100%' }}>
+        <Button sx={whiteButton} variant="outlined">
           <h3>BACK TO GAMES</h3>
         </Button>
       </Link>
-    </>
+    </div>
   );
 }
 

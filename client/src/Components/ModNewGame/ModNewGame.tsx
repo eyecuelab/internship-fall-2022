@@ -25,7 +25,7 @@ function ModNewGame(props: Props) {
   greenButton.width = '100%';
 
   return (
-    <div style={{ position: 'relative', height: '95%' }}>
+    <div style={{ height: '100%' }}>
       <h3>new game name</h3>
       <br />
       <form onSubmit={handleSubmit(createNewGame)}>
