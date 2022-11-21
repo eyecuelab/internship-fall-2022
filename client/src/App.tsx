@@ -18,7 +18,7 @@ function App() {
         <Route path="/portal" element={<Portal />} />
         <Route path="/game" element={<GameControl />} />
         <Route path="/mod" element={<ModGameControl />} />
-				<Route path="/mod/topics" element={<TopicPhraseControl />} />
+        <Route path="/mod/topics" element={<TopicPhraseControl />} />
       </Routes>
     </Router>
   );
