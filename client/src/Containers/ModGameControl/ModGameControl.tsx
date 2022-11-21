@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import '../../index.css';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModLogin from '../../Components/ModLogin/ModLogin';

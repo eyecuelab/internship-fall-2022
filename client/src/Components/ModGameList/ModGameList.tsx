@@ -1,46 +1,39 @@
-import React from 'react';
-import { Grid, IconButton, Button } from '@mui/material';
-import { Delete } from '@mui/icons-material';
+import React, { useState, useEffect } from 'react';
+import { Grid, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
 import { getData } from '../../ApiHelper';
+import Game from './Game';
 
 interface Props {
   handleCreateNewGame: () => void;
 }
 
-// it is important that the following code is written outside of the component function
-// returns a promise from the API GET route for the /games endpoint
 const getGames = () => {
   const games = getData('/games');
   return games;
 };
 
-// resolves the promise from getGames()
 const gameList = await getGames();
 
-// renders one game ( title + status + trashcan )
 const renderGame = (game: any) => {
 	return (
-		<>
-			<Grid container item xs={7}>
-				<h4 style={{ lineHeight: '56px' }}>{ game.name.toString() }</h4>
-			</Grid>
-			<Grid container item xs={4} justifyContent='flex-end'>
-				<h3 style={{ width: '100%', textAlign: 'right', lineHeight: '56px'}}>{ game.publishedAt ? 'published' : 'pending' }</h3>
-			</Grid>
-			<Grid container item xs={1} justifyContent='flex-end' alignItems='flex-center'>
-				<IconButton aria-label="delete" sx={{ height: '3rem' }}>
-					<Delete  sx={{ height: '35px', width: '125%' }}/>
-				</IconButton>
-			</Grid>
-		</>
+		<Game name={game.name} publishedAt={game.publishedAt} />
 	);
 }
 
 function ModGameList(props: Props) {
-  greenButton.width = '100%';
+	const [games, setGames] = useState([]);
 
-  console.log('LINE 26: ', gameList);
+	useEffect(() => {
+		getGameList();
+	}, []);
+
+	const getGameList = async () => {
+		const gameList = await getData('/games');
+		setGames(gameList);
+	}
+
+  greenButton.width = '100%';
 
   return (
     <div style={{height: '100%', position: 'relative'}}>
@@ -55,7 +48,7 @@ function ModGameList(props: Props) {
       <hr />
       { <Grid container>
 				{/* @ts-ignore */} {/* this line ignores errors in the line below and will need to be removed soon*/}
-				{ (gameList.map((game) => renderGame(game))) } {/* this line renders each game from the database */}
+				{ (games.map((game) => renderGame(game))) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
         onClick={props.handleCreateNewGame}
