@@ -1,11 +1,12 @@
-import { getPhrases, createPhrase } from '../Models/phrases';
+import { getPhrase, createPhrase } from '../Models/phrases';
 import io from '../server';
 import Utility from './Utility';
 
 const phrasesControllers = {
 
   async getPhrase(req: any, res: any) {
-    const phrases = await getPhrases();
+		const { topicId } = req.body;
+    const phrases = await getPhrase(topicId);
     return res.json(phrases);
   },
 

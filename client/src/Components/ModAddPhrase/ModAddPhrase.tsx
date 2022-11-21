@@ -1,13 +1,32 @@
-import React from 'react';
-import { Grid, IconButton, TextField, Button } from '@mui/material';
-import { Delete } from '@mui/icons-material';
+import React, { useState, useEffect } from 'react';
+import { Grid, TextField, Button } from '@mui/material';
 import { greenButton, whiteButton } from '../componentStyles';
+import { getData } from '../../ApiHelper';
+import Phrase from './Phrase';
 
 interface Props {
+	topicName: String,
+	topicId: Number,
 	handleAddNewPhrase: () => void;
 }
 
+const renderPhrase = (phrase: any) => {
+  return (
+		<Phrase name={phrase.name} />
+  );
+};
+
 function ModAddPhrase(props: Props) {
+  const [phrases, setPhrases] = useState([]);
+
+	useEffect(() => {
+		getPhraseList();
+	}, []);
+
+	const getPhraseList = async () => {
+		const phraseList = await getData(`/phrases?topicId=${ props.topicId ? props.topicId : '' }`);
+		setPhrases(phraseList);
+	}
 
   greenButton.width = '100%';
   whiteButton.width = '100%';
@@ -18,29 +37,13 @@ function ModAddPhrase(props: Props) {
         <Grid container item xs={12} direction="column">
           <h3>
             TOPIC:
-            <span className="topicName">HOLIDAY ACTIVITY</span>
+            <span className="topicName">{props.topicName}</span>
           </h3>
         </Grid>
       </Grid>
       <hr />
-      <Grid container spacing={2}>
-        <Grid container item xs={11} direction="column">
-          <h3>DECORATE TREE</h3>
-        </Grid>
-        <Grid container item xs={1} direction="column">
-          <IconButton aria-label="delete">
-            <Delete />
-          </IconButton>
-        </Grid>
-        <Grid container item xs={11} direction="column">
-          <h3>BAKE COOKIES</h3>
-        </Grid>
-        <Grid container item xs={1} direction="column">
-          <IconButton aria-label="delete">
-            <Delete />
-          </IconButton>
-        </Grid>
-      </Grid>
+			{/* @ts-ignore */}
+			{phrases?.map(phrase => renderPhrase(phrase))}
       <Grid container spacing={2} style={{ position: 'relative', top: 20 }}>
         <Grid container item xs={9} direction="column">
           <TextField
