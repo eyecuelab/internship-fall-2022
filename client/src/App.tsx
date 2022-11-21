@@ -8,7 +8,7 @@ import TopicPhraseControl from './Containers/TopicPhraseControl/TopicPhraseContr
 import GameControl from './Containers/GameControl/GameControl';
 import ModNewGame from './Components/ModNewGame/ModNewGame';
 import CardTemplate from './Components/CardTemplate/CardTemplate';
-import './App.css';
+import './App.scss';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
         <Route path="/game" element={<GameControl />} />
         <Route path="/mod" element={<ModGameControl />} />
         <Route path="/mod/topics" element={<TopicPhraseControl />} />
+				<Route path="/mod/game/:code" element={<TopicPhraseControl />} />
       </Routes>
     </Router>
   );

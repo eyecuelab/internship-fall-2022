@@ -8,10 +8,12 @@ import Topic from './Topic';
 
 interface Props {
   handleAddNewPhrase: () => void;
+	gameId: number;
 }
 
 interface IFormInput {
   name: string;
+	gameId: number;
 }
 
 const renderTopic = (topic: any) => {
@@ -21,8 +23,9 @@ const renderTopic = (topic: any) => {
 };
 
 function ModAddTopic(props: Props) {
-  const {control, handleSubmit, reset} = useForm<IFormInput>();
+  const {control, handleSubmit, setValue, reset} = useForm<IFormInput>();
   const [topics, setTopics] = useState([]);
+	setValue('gameId', props.gameId);
 
 	useEffect(() => {
 		getTopicList();
@@ -34,7 +37,7 @@ function ModAddTopic(props: Props) {
   };
 
 	const getTopicList = async () => {
-		const topicList = await getData('/topics');
+		const topicList = await getData(`/topics/${props.gameId}`);
 		setTopics(topicList);
 	};
 

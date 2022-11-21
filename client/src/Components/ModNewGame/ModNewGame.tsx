@@ -13,12 +13,16 @@ interface IFormInput {
   name: string;
 }
 
+type Data = {
+	name: string;
+}
+
 function ModNewGame(props: Props) {
   const { control, handleSubmit } = useForm<IFormInput>();
 
-	const createNewGame: SubmitHandler<IFormInput> = (data: unknown) => {
-		postData('/games', data);
-		console.log(data);
+	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
+		data.name ?
+		postData('/games', data) : console.log('error: no game name');
 		props.handleCreateNewGame();
 	}
 
@@ -41,6 +45,7 @@ function ModNewGame(props: Props) {
 						name="game title"
 						type="text"
 						multiline
+						required
 						InputProps={{
 							style: {
 								fontFamily: 'LuloCleanOneBold',

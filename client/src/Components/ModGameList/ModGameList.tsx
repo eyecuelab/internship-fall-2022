@@ -17,7 +17,7 @@ const gameList = await getGames();
 
 const renderGame = (game: any) => {
 	return (
-		<Game name={game.name} publishedAt={game.publishedAt} />
+		<Game name={game.name} publishedAt={game.publishedAt} id={game.id} />
 	);
 }
 
