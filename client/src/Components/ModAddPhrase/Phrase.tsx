@@ -3,21 +3,22 @@ import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
 interface Props {
-	name: String,
+	name: string,
 }
 
 function Phrase (props: Props) {
 	return (
-		<Grid container spacing={2}>
-			<Grid container item xs={11} direction="column">
-				<h3>{ props.name }</h3>
+		<>
+			<Grid container item xs={7}>
+				<h3 style={{ lineHeight: '3.5rem' }}>{ props.name }</h3>
 			</Grid>
-			<Grid container item xs={1} direction="column">
-				<IconButton aria-label="delete">
-					<Delete />
+			<Grid item xs={4} />
+			<Grid container item xs={1} justifyContent="flex-end">
+				<IconButton aria-label="delete" sx={{ paddingBottom: '0.5rem', maxHeight: '3.5rem' }}>
+					<Delete sx={{height: '2.5rem', width: '2.5rem'}}/>
 				</IconButton>
 			</Grid>
-		</Grid>
+		</>
 	);
 }
 

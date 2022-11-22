@@ -3,7 +3,8 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/topics/:gameId', topicsControllers.getTopic);
+router.get('/topic/:topicId', topicsControllers.getTopic);
+router.get('/topics/:gameId', topicsControllers.getTopics);
 router.post('/topics', topicsControllers.createTopic);
 
 export default router; 

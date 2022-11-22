@@ -1,9 +1,15 @@
-import { getTopics, createTopic } from "../Models/topics";
+import { getTopic, getTopics, createTopic } from "../Models/topics";
 import io from "../server";
 import Utility from "./Utility";
 
 const topicsControllers = {
-  async getTopic(req: any, res: any) {
+	async getTopic(req: any, res: any) {
+		const { topicId } = req.params;
+		const topic = await getTopic(topicId);
+		return res.json(topic);
+	},
+
+  async getTopics(req: any, res: any) {
 		const { gameId } = req.params;
     const topics = await getTopics(gameId);
     return res.json(topics);

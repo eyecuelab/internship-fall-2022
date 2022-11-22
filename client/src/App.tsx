@@ -18,8 +18,8 @@ function App() {
         <Route path="/portal" element={<Portal />} />
         <Route path="/game" element={<GameControl />} />
         <Route path="/mod" element={<ModGameControl />} />
-        <Route path="/mod/topics" element={<TopicPhraseControl />} />
-				<Route path="/mod/game/:code" element={<TopicPhraseControl />} />
+				<Route path="/mod/game/:code" element={<TopicPhraseControl viewPhrases={false}/>} />
+				<Route path="/mod/topic/:topicId" element={<TopicPhraseControl viewPhrases={true}/>} />
       </Routes>
     </Router>
   );

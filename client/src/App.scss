@@ -93,10 +93,12 @@ a {
 	color: inherit;
 	&:hover {
 		color: #363636;
-		text-decoration: underline;
+		text-decoration: none;
 	}
 }
 
-button:focus {
-	outline: none !important;
+button {
+	:focus {
+		outline: none !important;
+	}
 }

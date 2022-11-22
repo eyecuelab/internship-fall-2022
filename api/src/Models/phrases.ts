@@ -10,12 +10,12 @@ type Phrase = {
   topicId: number
 }
 
-export const getPhrase = async (id: number) => {
+export const getPhrase = async (topicId: number) => {
   try {
-		return await prisma.phrases.findUnique({
+		return await prisma.phrases.findMany({
 			where: {
 				// @ts-ignore
-				topicId: Number(id)
+				topicId: Number(topicId)
 			}
 		});
 	} catch(error: unknown) {
@@ -24,12 +24,12 @@ export const getPhrase = async (id: number) => {
 	}
 }
 
-export const createPhrase = async (phraseName: string) => {
+export const createPhrase = async (body: string, topicId: number) => {
   return await prisma.phrases.create({
     data: {
-      body: phraseName,
-			wordCount: Number(phraseName.split(" ").length),
-			topic: { connect: { id: 1 } },
+      body: body,
+			wordCount: Number(body.split(" ").length),
+			topic: { connect: { id: topicId } },
     }
   });
 }

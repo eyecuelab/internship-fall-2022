@@ -15,18 +15,18 @@ const getGames = () => {
 
 const gameList = await getGames();
 
-const renderGame = (game: any) => {
-	return (
-		<Game name={game.name} publishedAt={game.publishedAt} id={game.id} />
-	);
-}
-
 function ModGameList(props: Props) {
 	const [games, setGames] = useState([]);
 
 	useEffect(() => {
 		getGameList();
 	}, []);
+
+	const renderGame = (game: any) => {
+		return (
+			<Game name={game.name} publishedAt={game.publishedAt} id={game.id} />
+		);
+	}
 
 	const getGameList = async () => {
 		const gameList = await getData('/games');
