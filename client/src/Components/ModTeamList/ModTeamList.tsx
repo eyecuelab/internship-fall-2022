@@ -1,6 +1,5 @@
 import React from 'react';
-import Grid from '@mui/material/Grid';
-import Button from '@mui/material/Button';
+import { Grid, Button } from '@mui/material';
 import { whiteButton, redButton } from '../componentStyles';
 
 function TeamList() {

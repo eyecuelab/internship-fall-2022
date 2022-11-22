@@ -1,33 +1,66 @@
-import React from 'react';
-import { Grid, IconButton } from '@mui/material';
-import { Delete } from '@mui/icons-material';
+import React, { useState, useEffect } from 'react';
+import { Grid, Button } from '@mui/material';
+import { greenButton } from '../componentStyles';
+import { getData } from '../../ApiHelper';
+import Game from './Game';
 
-function GameList() {
+interface Props {
+  handleCreateNewGame: () => void;
+}
+
+const getGames = () => {
+  const games = getData('/games');
+  return games;
+};
+
+const gameList = await getGames();
+
+const renderGame = (game: any) => {
+	return (
+		<Game name={game.name} publishedAt={game.publishedAt} />
+	);
+}
+
+function ModGameList(props: Props) {
+	const [games, setGames] = useState([]);
+
+	useEffect(() => {
+		getGameList();
+	}, []);
+
+	const getGameList = async () => {
+		const gameList = await getData('/games');
+		setGames(gameList);
+	}
+
+  greenButton.width = '100%';
+
   return (
-    <>
-      <Grid container spacing={33}>
-        <Grid container item xs={6} direction="column">
+    <div style={{height: '100%', position: 'relative'}}>
+      <Grid container>
+        <Grid container item xs={7}>
           <h3>GAMES</h3>
         </Grid>
-        <Grid container item xs={5} direction="column">
-          <h3>STATUS</h3>
+        <Grid container item xs={4}>
+          <h3 style={{width: '100%', textAlign: 'right'}}>STATUS</h3>
         </Grid>
       </Grid>
       <hr />
-      <Grid container spacing={25}>
-        <Grid container item xs={6} direction="column">
-          <h4>EVENT NAME</h4>
-        </Grid>
-        <Grid container item xs={5} direction="column">
-          <h3>PENDING</h3>
-          <Grid item xs={1} />
-          <IconButton aria-label="delete">
-            <Delete />
-          </IconButton>
-        </Grid>
-      </Grid>
-    </>
+      { <Grid container>
+				{/* @ts-ignore */} {/* this line ignores errors in the line below and will need to be removed soon*/}
+				{ (games.map((game) => renderGame(game))) } {/* this line renders each game from the database */}
+      </Grid> }
+      <Button
+        onClick={props.handleCreateNewGame}
+        sx={greenButton}
+        style={{ position: 'absolute', bottom: 0, left: 0 }}
+        variant="outlined"
+      >
+        <h3>CREATE A NEW GAME</h3>
+      </Button>
+			<div style={{height: '5rem'}}/>
+    </div>
   );
 }
 
-export default GameList;
+export default ModGameList;

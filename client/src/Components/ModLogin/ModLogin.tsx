@@ -2,7 +2,11 @@ import React from 'react';
 import { Card, CardContent, Button } from '@mui/material';
 import { Content, Header } from './styles';
 
-function ModLogin() {
+interface Props {
+	login: () => void;
+}
+
+function ModLogin(props: Props) {
   return (
     <>
       <Header>
@@ -16,7 +20,7 @@ function ModLogin() {
           borderRadius: '15px',
           boxShadow: '0px 0px 75px #000',
           background: '#15586a',
-          backgroundImage: 'url(./public/images/moderator_card_background.png)',
+          backgroundImage: 'url(/public/images/moderator_card_background.png)',
         }}
       >
         <Content style={{ color: '#f9f9f9' }}>
@@ -34,6 +38,7 @@ function ModLogin() {
               <h4>Moderator Login</h4>
               <br />
               <Button
+								onClick={props.login}
                 sx={{
                   height: '5rem',
                   width: '100%',
