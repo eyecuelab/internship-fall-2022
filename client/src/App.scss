@@ -9,12 +9,6 @@
   padding: 1.5em;
   will-change: filter;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-} 
 
 @keyframes logo-spin {
   from {
@@ -40,7 +34,7 @@
 }
 
 html {
-  background-image: url(../images/oranges_background.png);
+  background-image: url(/images/oranges_background.png);
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
@@ -93,4 +87,18 @@ h5 {
 hr {
   margin-top: 1rem;
   margin-bottom: 1.25rem;
+}
+
+a {
+	color: inherit;
+	&:hover {
+		color: #363636;
+		text-decoration: none;
+	}
+}
+
+button {
+	:focus {
+		outline: none !important;
+	}
 }

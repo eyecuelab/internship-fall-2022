@@ -6,26 +6,35 @@ import ModGameList from '../../Components/ModGameList/ModGameList';
 import ModNewGame from '../../Components/ModNewGame/ModNewGame';
 
 function ModGameControl() {
-	const [login, setLogin] = useState(false);
-	const [createNewGameView, setCreateNewGameView] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [createNewGameView, setCreateNewGameView] = useState(false);
 
-	const handleLogin = () => {
-		setLogin(true);
-	}
+  const handleLogin = () => {
+    setLogin(true);
+  };
 
-	const handleCreateNewGame = () => {
-		setCreateNewGameView(!createNewGameView);
-	}
+  const handleCreateNewGame = () => {
+    setCreateNewGameView(!createNewGameView);
+  };
 
-	if (login) {
-		if (!createNewGameView) {
-			return <CardTemplate user="moderator" content={<ModGameList handleCreateNewGame={handleCreateNewGame} />}/>;
-		} else if (createNewGameView) {
-			return <CardTemplate user="moderator" content={<ModNewGame handleCreateNewGame={handleCreateNewGame}/>}/>;
-		}
-	}
-	return <ModLogin login={handleLogin} />;
-	
+  if (login) {
+    if (!createNewGameView) {
+      return (
+        <CardTemplate
+          user="moderator"
+          content={<ModGameList handleCreateNewGame={handleCreateNewGame} />}
+        />
+      );
+    } else {
+      return (
+        <CardTemplate
+          user="moderator"
+          content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
+        />
+      );
+    }
+  }
+  return <ModLogin login={handleLogin} />;
 }
 
 export default ModGameControl;

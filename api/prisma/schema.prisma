@@ -41,7 +41,8 @@ model Topics {
   id                  Int               @id @default(autoincrement())
   name                String
   Phrase              Phrases[]
-  GameTopic           GameTopics[]
+  game                Games             @relation(fields: [gameId], references: [id])
+  gameId              Int
 }
 
 model Phrases {
@@ -57,18 +58,10 @@ model Games {
 	name								String						
   rounds              Int
   gameCode            String          	@unique  
-	publishedAt 				DateTime					@default(now())
+	publishedAt 				DateTime?					
   Team                Teams[]
   User                Users[]
-  GameTopic           GameTopics[]
-}
-
-model GameTopics {
-  id                  Int               @id @default(autoincrement())
-  topic               Topics            @relation(fields: [topicId], references: [id])
-  topicId             Int
-  game                Games             @relation(fields: [gameId], references: [id])
-  gameId              Int
+	Topic								Topics[]
 }
 
 model Rounds {
