@@ -19,17 +19,10 @@ export const createGame = async (name: string) => {
   });
 }
 
-export const deleteGame = async (gameId: number)=>{
-  try{
+export const deleteGame = async (id: number)=>{
   return await prisma.games.delete({
-    where: {id: gameId },
-  });
-  } 
-  catch (e) {
-    if (e instanceof Error){
-      throw (e.message);
-    } else {
-      throw (e);
+    where: {
+      id: Number(id),
     }
-  }
-};
+  });
+}
