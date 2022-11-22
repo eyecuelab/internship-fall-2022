@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
 function Topic (props: any) {
-	const {name, phrases} = props
+	const { name, phrases, id } = props
 
 	return(
 		<>
 			<Grid container item xs={7}>
-				<h4 style={{lineHeight: '3.5rem'}}>{name.toString()}</h4>
+				<Link to={{ pathname:`/mod/topic/${id}` }}><h4 style={{ lineHeight: '3.5rem' }}>{ name.toString() }</h4></Link>
 			</Grid>
 			<Grid container item xs={4} justifyContent="flex-end">
 				<h3 style={{width: '100%', textAlign: 'right', lineHeight: '56px'}}>
