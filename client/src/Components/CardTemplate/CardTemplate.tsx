@@ -45,7 +45,7 @@ function CardTemplate(props: Props) {
         <div style={{position: 'relative'}}>
           <CardMedia
             component="div"
-            sx={{width: 490, minHeight: '101%', height: '101%'}}
+            sx={{  width: 490, minHeight: '101%',height: '101%' }}
             style={{
               minHeight: '101%',
               background: props.user === 'moderator' ? '#15586A' : '#0c114a',
@@ -61,7 +61,8 @@ function CardTemplate(props: Props) {
           </Overlay>
         </div>
         <Content>
-          <CardContent sx={{height: '100%'}}>
+          <CardContent sx={{ width: 700, minHeight: '101%', height: '101%' }}>
+            {/* previously sx={{ width: 100%}} */}
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
             {/* <ModGameList /> */}
