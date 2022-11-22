@@ -65,7 +65,7 @@ function CardTemplate(props: Props) {
             {/* previously sx={{ width: 100%}} */}
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
-            {/* <ModGameList /> */}
+            <ModGameList />
             {/* <ModTeamList /> */}
             {/* <TeamLobby /> */}
             {props.content}
