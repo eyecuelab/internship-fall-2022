@@ -35,14 +35,9 @@ export const createPhrase = async (body: string, topicId: number) => {
 }
 
 export const deletePhrase = async(id: number) => {
-  
   return await prisma.phrases.delete({
-      
       where: {
         id: Number(id), 
-      } ,
-    
+      }
   });
-
-
 }
