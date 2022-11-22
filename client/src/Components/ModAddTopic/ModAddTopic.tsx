@@ -7,22 +7,24 @@ import {getData, postData} from '../../ApiHelper';
 import Topic from './Topic';
 
 interface Props {
-  handleAddNewPhrase: () => void;
+	gameId: number;
 }
 
 interface IFormInput {
   name: string;
+	gameId: number;
 }
 
-const renderTopic = (topic: any) => {
-  return (
-		<Topic name={topic.name} phrases={topic.phrases} />
-  );
-};
-
 function ModAddTopic(props: Props) {
-  const {control, handleSubmit, reset} = useForm<IFormInput>();
+  const {control, handleSubmit, setValue, reset} = useForm<IFormInput>();
   const [topics, setTopics] = useState([]);
+	setValue('gameId', props.gameId);
+
+	const renderTopic = (topic: any) => {
+		return (
+			<Topic name={topic.name} phrases={topic.phrases} gameId={topic.gameId} id={topic.id} />
+		);
+	};
 
 	useEffect(() => {
 		getTopicList();
@@ -34,7 +36,7 @@ function ModAddTopic(props: Props) {
   };
 
 	const getTopicList = async () => {
-		const topicList = await getData('/topics');
+		const topicList = await getData(`/topics/${props.gameId}`);
 		setTopics(topicList);
 	};
 
@@ -52,7 +54,6 @@ function ModAddTopic(props: Props) {
         </Grid>
       </Grid>
       <hr />
-
       {
         <Grid container>
           {/* @ts-ignore */}

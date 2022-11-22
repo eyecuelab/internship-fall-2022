@@ -1,25 +1,23 @@
-import { getPhrases, createPhrase } from '../Models/phrases';
+import { getPhrase, createPhrase } from '../Models/phrases';
 import io from '../server';
 import Utility from './Utility';
 
 const phrasesControllers = {
-
   async getPhrase(req: any, res: any) {
-    const phrases = await getPhrases();
+		const { topicId } = req.params;
+    const phrases = await getPhrase(Number(topicId));
     return res.json(phrases);
   },
 
 	async createPhrase(req: any, res: any) {
-		const { phraseName } = req.body;
+		const { body, topicId } = req.body;
 
-		if (Utility.validateInputs(res, "Invalid body parameters", phraseName)) {
-			const newPhrase = await createPhrase(phraseName);
+		const newPhrase = await createPhrase(body, Number(topicId));
 
-			io.emit("create_phrase", newPhrase.body);
-			res.status(201).json(newPhrase);
-		}
+		io.emit("create_phrase", newPhrase.body);
+		res.status(201).json(newPhrase);
+
 	},
-
 }
 
 export default phrasesControllers;
