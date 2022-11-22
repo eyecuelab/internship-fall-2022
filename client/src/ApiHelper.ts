@@ -21,7 +21,7 @@ const handleResponse = async (response: Response) => {
 export const getData = async (endpoint: string) => {
   const url = `${API_ENDPOINT}${endpoint}`;
   const response = await fetch(url, { ...BASE_HEADERS, method: 'GET' });
-  return await handleResponse(response);
+  return handleResponse(response);
 };
 
 export const postData = async (endpoint: string, payload: unknown) => {
@@ -31,5 +31,10 @@ export const postData = async (endpoint: string, payload: unknown) => {
     method: 'POST',
     body: JSON.stringify(payload),
   });
-  return await handleResponse(response);
+  return handleResponse(response);
 };
+
+// export const deleteData= async (endpoint: string)=>{
+//   const url = `${API_ENDPOINT}${endpoint}`;
+//   const response = 
+// }
