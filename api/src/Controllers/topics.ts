@@ -1,4 +1,4 @@
-import { getTopic, getTopics, createTopic } from "../Models/topics";
+import { getTopic, getTopics, createTopic, deleteTopic } from "../Models/topics";
 import io from "../server";
 import Utility from "./Utility";
 
@@ -25,6 +25,14 @@ const topicsControllers = {
       res.status(201).json(newTopic);
     // }
   },
+
+  async deleteTopic(req: any, res: any) {
+    const { id } = req.params;
+    const destroyTopic = await deleteTopic(id);
+    res.status(200).json({ destroyTopic });
+  },
+
+
 };
 
 export default topicsControllers;
