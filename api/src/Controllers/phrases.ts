@@ -1,4 +1,4 @@
-import { getPhrases, createPhrase } from '../Models/phrases';
+import { deletePhrase, getPhrases, createPhrase } from '../Models/phrases';
 import io from '../server';
 import Utility from './Utility';
 
@@ -20,6 +20,14 @@ const phrasesControllers = {
 		}
 	},
 
+	async deletePhrase(req: any, res: any){
+		const { id } = req.params;
+		const destroyPhrase = await deletePhrase(id);
+		// io.in(gameId.toString()).emit('player_left', deletedPlayer.id);
+		// io.in(gameId.toString()).emit('player_left_chat', deletedPlayer.name);
+		// const players = await getPlayersByGameId(gameId);
+		res.status(200).json({ destroyPhrase })
+	}
 }
 
 export default phrasesControllers;

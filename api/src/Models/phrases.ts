@@ -15,3 +15,16 @@ export const createPhrase = async (phraseName: string) => {
     }
   });
 }
+
+export const deletePhrase = async(id: number) => {
+  
+  return await prisma.phrases.delete({
+      
+      where: {
+        id: Number(id), 
+      } ,
+    
+  });
+
+
+}

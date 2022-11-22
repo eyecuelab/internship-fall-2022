@@ -33,3 +33,8 @@ export const postData = async (endpoint: string, payload: unknown) => {
   });
   return handleResponse(response);
 };
+
+// export const deleteData= async (endpoint: string)=>{
+//   const url = `${API_ENDPOINT}${endpoint}`;
+//   const response = 
+// }
