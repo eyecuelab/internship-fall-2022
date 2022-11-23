@@ -34,9 +34,9 @@
 }
 
 html {
-	background-attachment: fixed;
-	background-size: cover;
-	background-repeat: no-repeat;
+	background-attachment: fixed !important; 
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
 }
 
 @font-face {
