@@ -19,7 +19,6 @@ export const getTopics = async (gameId: number) => {
   try {
 	  return await prisma.topics.findMany({
 			where: {
-				// @ts-ignore
 				gameId: Number(gameId),
 			}
 		});
@@ -33,7 +32,6 @@ export const createTopic = async (topicName: string, gameId: number) => {
   return await prisma.topics.create({
     data: {
       name: topicName,
-			// @ts-ignore
       game: { connect: { id: gameId } }
     }
   });

@@ -4,7 +4,8 @@ import {Link} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {greenButton, whiteButton} from '../componentStyles';
 import {getData, postData, deleteData} from '../../ApiHelper';
-import Topic from './Topic';
+import TopicItem from './TopicItem';
+import { Topic } from '../../Types/Types';
 
 interface Props {
 	gameId: number;
@@ -54,8 +55,7 @@ function ModAddTopic(props: Props) {
       <hr />
       {
         <Grid container>
-          {/* @ts-ignore */}
-          {topics?.map(topic => { return <Topic topic={topic} deleteTopic={deleteTopic} /> })}
+          {topics?.map((topic: Topic) => { return <TopicItem topic={topic} deleteTopic={deleteTopic} /> })}
         </Grid>
       }
       <form onSubmit={handleSubmit(addNewTopic)}>

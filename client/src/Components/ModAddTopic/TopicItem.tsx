@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { Topic } from '../../Types/Types';
 
 interface Props {
-	topic: any,
+	topic: Topic,
 	deleteTopic: (param: number) => void,
 }
 
-function Topic (props: any) {
+function TopicItem (props: Props) {
 	const { topic, deleteTopic } = props
 
 	return(
@@ -30,4 +31,4 @@ function Topic (props: any) {
 	);
 }
 
-export default Topic;
+export default TopicItem;

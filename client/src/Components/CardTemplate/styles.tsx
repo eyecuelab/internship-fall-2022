@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import {Card, CardContent, CardMedia} from '@mui/material';
 import '../../App.scss';
 
 export const Overlay = styled.div`
@@ -28,3 +29,25 @@ export const Header = styled.div`
   text-align: right;
   color: #FFF;
 `;
+
+export const StyledCard = styled(Card)`
+	display: flex;
+	width: 1376px;
+	min-height: 820px;
+	height: fit-content;
+	border-radius: 15px;
+	box-shadow: 0px 0px 75px #000;
+	background: #f6ede9;
+`
+
+export const StyledCardMedia = styled.div`
+	width: 490px;
+	min-height: 101%;
+	height: 101%;
+`
+
+export const StyledCardContent = styled(CardContent)`
+	width: 700px;
+	min-height: 101%;
+	height: 101%;
+`

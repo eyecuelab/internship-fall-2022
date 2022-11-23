@@ -2,7 +2,7 @@ import React from 'react';
 import '../../index.css';
 import { Link, useLocation } from "react-router-dom";
 import { Grid, Button } from '@mui/material';
-import { PropaneSharp } from '@mui/icons-material';
+import { greenButton, redButton } from '../componentStyles';
 
 
 interface Props {
@@ -10,7 +10,11 @@ interface Props {
 }
 
 function ModOverlay(props: Props) {
-  const location = useLocation()
+  const location = useLocation();
+
+	redButton.width = '100%';
+	greenButton.width = '100%';
+	greenButton.marginBottom = '1.5rem';
 
   console.log(location.pathname);
   return (
@@ -43,16 +47,7 @@ function ModOverlay(props: Props) {
       >
         {location.pathname.includes("/mod/topic/") || location.pathname.includes("/mod/game/") &&
         <Button
-          sx={{
-            height: '5rem',
-            width: '100%',
-            color: '#363636',
-            border: '1px solid #363636',
-            borderRadius: '10px',
-            background: '#61C14A',
-            margin: 'auto',
-            display: 'block',
-          }}
+          sx={greenButton}
         >
           <h3>Publish</h3>
         </Button>

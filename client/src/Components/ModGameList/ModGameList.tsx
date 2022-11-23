@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
 import { deleteData, getData } from '../../ApiHelper';
-import Game from './Game';
+import GameItem from './GameItem';
+import { Game } from '../../Types/Types';
 
 interface Props {
   handleCreateNewGame: () => void;
@@ -45,8 +46,7 @@ function ModGameList(props: Props) {
       </Grid>
       <hr />
       { <Grid container>
-				{/* @ts-ignore */} {/* this line ignores errors in the line below and will need to be removed soon*/}
-				{ (games.map((game) => <Game game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
+				{ (games.map((game: Game) => <GameItem game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
         onClick={props.handleCreateNewGame}

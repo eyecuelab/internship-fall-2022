@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModAddTopic from '../../Components/ModAddTopic/ModAddTopic';
 import ModAddPhrase from '../../Components/ModAddPhrase/ModAddPhrase';
@@ -12,6 +12,7 @@ interface Props {
 function TopicPhraseControl(props: Props) {
 	const { code } = useParams();
 
+	document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   if (props.viewPhrases) {
     return (

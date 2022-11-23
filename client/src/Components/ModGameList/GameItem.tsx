@@ -2,9 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { Game } from '../../Types/Types';
 
-function Game (props: any) {
-	// const { name, publishedAt, id } = props;
+interface Props {
+	game: Game,
+	deleteGame: () => void
+}
+
+function GameItem (props: any) {
 	const { game, deleteGame } = props;
 
 	return (
@@ -26,4 +31,4 @@ function Game (props: any) {
 	);
 }
 
-export default Game;
+export default GameItem;
