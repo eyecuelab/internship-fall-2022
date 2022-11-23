@@ -9,6 +9,8 @@ function ModGameControl() {
   const [login, setLogin] = useState(false);
   const [createNewGameView, setCreateNewGameView] = useState(false);
 
+	document.documentElement.style.background = 'url(/images/moderator_background.png)';
+
   const handleLogin = () => {
     setLogin(true);
   };
