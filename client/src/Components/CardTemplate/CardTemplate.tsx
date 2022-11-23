@@ -53,6 +53,9 @@ function CardTemplate(props: Props) {
                 props.user === 'moderator'
                   ? `url(${'/images/moderator_card_background_2.png'})`
                   : `url(${'/images/blueberries_banner.png'})`,
+							backgroundAttachment: 'absolute',
+							backgroundPosition: '16% 95%',
+							backgroundRepeat: 'no-repeat'
             }}
           />
           <Overlay>
