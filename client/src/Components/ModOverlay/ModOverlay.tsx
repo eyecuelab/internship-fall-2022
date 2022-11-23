@@ -6,7 +6,7 @@ import { greenButton, redButton } from '../componentStyles';
 
 
 interface Props {
-  handleLogout: () => void;
+  handleLogout?: () => void;
 }
 
 function ModOverlay(props: Props) {
