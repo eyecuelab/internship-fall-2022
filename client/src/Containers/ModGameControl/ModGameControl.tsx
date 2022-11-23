@@ -36,7 +36,7 @@ function ModGameControl() {
         <CardTemplate
           user="moderator"
           content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay />}
+          overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );
     }
