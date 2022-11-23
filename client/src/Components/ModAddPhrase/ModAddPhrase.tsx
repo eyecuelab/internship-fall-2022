@@ -101,7 +101,7 @@ function ModAddPhrase(props: Props) {
 				</form>
       </Grid>
 			<div style={{ height: '5rem' }} />
-			<Button onClick={() => navigate(-1)} sx={whiteButton} style={{ position: 'absolute', bottom: '0', width: '100%' }} variant="outlined">
+			<Button onClick={() => navigate(-1)} sx={whiteButton} style={{ position: 'absolute', bottom: 8, width: '100%' }} variant="outlined">
 				<h3>BACK TO TOPICS</h3>
 			</Button>
     </div>
