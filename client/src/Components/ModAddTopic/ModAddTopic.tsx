@@ -3,7 +3,7 @@ import {Grid, TextField, Button} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {greenButton, whiteButton} from '../componentStyles';
-import {getData, postData} from '../../ApiHelper';
+import {getData, postData, deleteData} from '../../ApiHelper';
 import Topic from './Topic';
 
 interface Props {
@@ -20,12 +20,6 @@ function ModAddTopic(props: Props) {
   const [topics, setTopics] = useState([]);
 	setValue('gameId', props.gameId);
 
-	const renderTopic = (topic: any) => {
-		return (
-			<Topic name={topic.name} phrases={topic.phrases} gameId={topic.gameId} id={topic.id} />
-		);
-	};
-
 	useEffect(() => {
 		getTopicList();
 	}, []);
@@ -34,6 +28,10 @@ function ModAddTopic(props: Props) {
     postData('/topics', data).then(() => getTopicList());
 		reset((data) => ({ ...data, name: '' }))
   };
+
+	const deleteTopic = (topicId: any) => {
+		deleteData(`/topics/${topicId}`).then(() => getTopicList());
+	}
 
 	const getTopicList = async () => {
 		const topicList = await getData(`/topics/${props.gameId}`);
@@ -57,7 +55,7 @@ function ModAddTopic(props: Props) {
       {
         <Grid container>
           {/* @ts-ignore */}
-          {topics?.map(topic => renderTopic(topic))}
+          {topics?.map(topic => { return <Topic topic={topic} deleteTopic={deleteTopic} /> })}
         </Grid>
       }
       <form onSubmit={handleSubmit(addNewTopic)}>
@@ -96,8 +94,8 @@ function ModAddTopic(props: Props) {
           </Grid>
         </Grid>
       </form>
-			<div style={{ height: '5rem' }} />
-      <Link to="/mod" style={{ position: 'absolute', bottom: '0', width: '100%' }}>
+			<div style={{ height: '5rem', bottom: 8 }} />
+      <Link to="/mod" style={{ position: 'absolute', bottom: 8, width: '100%' }}>
         <Button sx={whiteButton} variant="outlined">
           <h3>BACK TO GAMES</h3>
         </Button>

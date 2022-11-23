@@ -38,3 +38,11 @@ export const createTopic = async (topicName: string, gameId: number) => {
     }
   });
 }
+
+export const deleteTopic = async(id: number) => {
+  return await prisma.topics.delete({
+    where: {
+      id: Number(id),
+    }
+  });
+}

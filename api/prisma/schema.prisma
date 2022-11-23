@@ -41,7 +41,7 @@ model Topics {
   id                  Int               @id @default(autoincrement())
   name                String
   Phrase              Phrases[]
-  game                Games             @relation(fields: [gameId], references: [id])
+  game                Games             @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId              Int
 }
 
@@ -49,7 +49,7 @@ model Phrases {
   id                  Int               @id @default(autoincrement())
   body                String
   wordCount           Int
-  topic               Topics            @relation(fields: [topicId], references: [id])
+  topic               Topics            @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId             Int
 }
 
