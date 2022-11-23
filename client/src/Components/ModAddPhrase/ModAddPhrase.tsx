@@ -3,23 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Grid, TextField, Button } from '@mui/material';
 import { greenButton, whiteButton } from '../componentStyles';
-import { getData, postData } from '../../ApiHelper';
+import { deleteData, getData, postData } from '../../ApiHelper';
 import Phrase from './Phrase';
 
-interface Props {
-
-}
-
+interface Props {}
 interface IFormInput {
   body: string;
 	topicId: number;
 }
-
-const renderPhrase = (phrase: any) => {
-  return (
-		<Phrase name={phrase.body} />
-  );
-};
 
 function ModAddPhrase(props: Props) {
 	const { topicId } = useParams();
@@ -40,6 +31,10 @@ function ModAddPhrase(props: Props) {
     postData('/phrases', data).then(() => getPhraseList());
 		reset((data) => ({ ...data, body: '' }))
   };
+
+	const deletePhrase = (phraseId: any) => {
+		deleteData(`/phrases/${phraseId}`).then(() => getPhraseList());
+	}
 
 	const getPhraseList = async () => {
 		const phraseList = await getData(`/phrases/${Number(topicId)}`);
@@ -64,8 +59,7 @@ function ModAddPhrase(props: Props) {
       <hr />
       {
         <Grid container>
-          {/* @ts-ignore */}
-          {phrases?.map(phrase => renderPhrase(phrase))}
+          {phrases?.map(phrase => { return (<Phrase key={phrase.id} phrase={phrase} deletePhrase={deletePhrase} />) })}
         </Grid>
       }
       <Grid container>

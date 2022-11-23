@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
-import { getData } from '../../ApiHelper';
+import { deleteData, getData } from '../../ApiHelper';
 import Game from './Game';
 
 interface Props {
@@ -22,16 +22,14 @@ function ModGameList(props: Props) {
 		getGameList();
 	}, []);
 
-	const renderGame = (game: any) => {
-		return (
-			<Game name={game.name} publishedAt={game.publishedAt} id={game.id} />
-		);
-	}
-
 	const getGameList = async () => {
 		const gameList = await getData('/games');
 		setGames(gameList);
 	}
+
+  const deleteGame = (gameId: any)=> {
+    deleteData(`/games/${gameId}`).then(()=> getGameList());
+  }
 
   greenButton.width = '100%';
 
@@ -48,17 +46,17 @@ function ModGameList(props: Props) {
       <hr />
       { <Grid container>
 				{/* @ts-ignore */} {/* this line ignores errors in the line below and will need to be removed soon*/}
-				{ (games.map((game) => renderGame(game))) } {/* this line renders each game from the database */}
+				{ (games.map((game) => <Game game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
         onClick={props.handleCreateNewGame}
         sx={greenButton}
-        style={{ position: 'absolute', bottom: 0, left: 0 }}
+        style={{ position: 'absolute', bottom: 8, left: 0 }}
         variant="outlined"
       >
         <h3>CREATE A NEW GAME</h3>
       </Button>
-			<div style={{height: '5rem'}}/>
+			<div style={{height: '5rem', bottom: 8}}/>
     </div>
   );
 }

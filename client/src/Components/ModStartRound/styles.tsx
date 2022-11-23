@@ -1,32 +1,18 @@
 import styled from '@emotion/styled';
 
 export const Container = styled.div`
-  height: 50%;
+  height: 100%;
   width: 100%;
-  display: flex;
-  // padding: 0.5rem;
-`;
-
-export const FlexItem = styled.div`
-  width: 100%;
-  flex-basis: 100%;
-`;
-
-export const GridStyle =styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0;
 `;
 
-export const GridHeader = styled.div`
+export const ButtonContainer = styled.div`
+  height: 100%;
+  width: 100%;
   display: flex;
-  flex: 1 0 auto;
-  align-items: flex-end;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
 `;
-
-export const GridButton = styled.div` 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 16px;
-`
