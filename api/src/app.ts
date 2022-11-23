@@ -15,7 +15,7 @@ app.use(cors({
     'http://localhost:5173',
 		'https://www.thunderclient.com'
   ], 
-  methods: ['GET', 'POST']}));
+  methods: ['GET', 'POST', 'DELETE']}));
 
 app.use(express.json());
 
