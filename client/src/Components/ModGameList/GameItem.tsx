@@ -15,7 +15,7 @@ function GameItem (props: any) {
 	return (
 		<>
 			<Grid container item xs={7}>
-				<Link to={{ pathname:`/mod/game/${game.id}` }}><h4 style={{ lineHeight: '3.5rem' }}>{ game.name.toString() }</h4></Link>
+				<Link to={{ pathname:`/game/${game.id}` }}><h4 style={{ lineHeight: '3.5rem' }}>{ game.name.toString() }</h4></Link>
 			</Grid>
 			<Grid container item xs={4} justifyContent='flex-end'>
 				<h3 style={{ width: '100%', textAlign: 'right', lineHeight: '56px'}}>

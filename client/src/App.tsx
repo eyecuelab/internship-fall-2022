@@ -10,9 +10,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/game" element={<GameControl />} />
-        <Route path="/mod" element={<ModGameControl />} />
-				<Route path="/mod/game/:code" element={<TopicPhraseControl viewPhrases={false}/>} />
-				<Route path="/mod/topic/:topicId" element={<TopicPhraseControl viewPhrases={true}/>} />
+        <Route path="/" element={<ModGameControl />} />
+				<Route path="/game/:code" element={<TopicPhraseControl viewPhrases={false}/>} />
+				<Route path="/topic/:topicId" element={<TopicPhraseControl viewPhrases={true}/>} />
       </Routes>
     </Router>
   );
