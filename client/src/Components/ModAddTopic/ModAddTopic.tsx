@@ -95,7 +95,7 @@ function ModAddTopic(props: Props) {
         </Grid>
       </form>
 			<div style={{ height: '5rem', bottom: 8 }} />
-      <Link to="/mod" style={{ position: 'absolute', bottom: 8, width: '100%' }}>
+      <Link to="/" style={{ position: 'absolute', bottom: 8, width: '100%' }}>
         <Button sx={whiteButton} variant="outlined">
           <h3>BACK TO GAMES</h3>
         </Button>

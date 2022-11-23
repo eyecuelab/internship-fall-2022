@@ -53,7 +53,7 @@ function ModOverlay(props: Props) {
         </Button>
         }
         <br/>
-        <Link to= "/mod"> 
+        <Link to= "/"> 
           <Button
             onClick={props.handleLogout}
             sx={redButton} 
