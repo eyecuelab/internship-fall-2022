@@ -2,28 +2,28 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
+import { Game } from '../../Types/Types';
 
 interface Props {
-	name: string,
-	publishedAt: Date,
-	id: number
+	game: Game,
+	deleteGame: () => void
 }
 
-function GameItem (props: Props) {
-	const { name, publishedAt, id } = props;
+function GameItem (props: any) {
+	const { game, deleteGame } = props;
 
 	return (
 		<>
 			<Grid container item xs={7}>
-				<Link to={{ pathname:`/mod/game/${id}` }}><h4 style={{ lineHeight: '3.5rem' }}>{ name.toString() }</h4></Link>
+				<Link to={{ pathname:`/mod/game/${game.id}` }}><h4 style={{ lineHeight: '3.5rem' }}>{ game.name.toString() }</h4></Link>
 			</Grid>
 			<Grid container item xs={4} justifyContent='flex-end'>
 				<h3 style={{ width: '100%', textAlign: 'right', lineHeight: '56px'}}>
-					{ publishedAt ? 'published' : 'pending' }
+					{ game.publishedAt ? 'published' : 'pending' }
 				</h3>
 			</Grid>
 			<Grid container item xs={1} justifyContent='flex-end'>
-				<IconButton aria-label="delete" sx={{ paddingBottom: '0.5rem', maxHeight: '3.5rem' }}>
+				<IconButton onClick={() => deleteGame(game.id)}aria-label="delete" sx={{ paddingBottom: '0.5rem', maxHeight: '3.5rem' }}>
 					<Delete sx={{height: '2.5rem', width: '2.5rem'}}/>
 				</IconButton>
 			</Grid>

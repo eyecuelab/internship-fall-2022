@@ -5,6 +5,7 @@
 export const whiteButton = {
   height: '5rem',
   width: '',
+  marginBottom: '',
   color: '#363636',
   border: '1px solid #363636',
   backgroundColor: '#f6ede9',
@@ -18,6 +19,7 @@ export const whiteButton = {
 export const redButton = {
   height: '5rem',
   width: '',
+  marginBottom: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
   backgroundColor: '#FC3911',
@@ -31,6 +33,7 @@ export const redButton = {
 export const greenButton = {
   height: '5rem',
   width: '',
+  marginBottom: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
   backgroundColor: '#61C14A',
