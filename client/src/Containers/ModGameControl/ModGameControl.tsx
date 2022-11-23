@@ -14,6 +14,10 @@ function ModGameControl() {
     setLogin(true);
   };
 
+  const handleLogout = () => {
+    setLogin(false);
+  };
+
   const handleCreateNewGame = () => {
     setCreateNewGameView(!createNewGameView);
   };
@@ -24,7 +28,7 @@ function ModGameControl() {
         <CardTemplate
           user="moderator"
           content={<ModGameList handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay />}
+          overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );
     } else {
