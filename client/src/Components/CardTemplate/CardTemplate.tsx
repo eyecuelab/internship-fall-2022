@@ -1,5 +1,4 @@
 import React, {ReactElement, useState} from 'react';
-import {Card, CardContent, CardMedia} from '@mui/material';
 import HaikuForm from '../HaikuForm/HaikuForm';
 import TeamOverlay from '../TeamOverlay/TeamOverlay';
 import ModGameList from '../ModGameList/ModGameList';
@@ -7,7 +6,7 @@ import ModOverlay from '../ModOverlay/ModOverlay';
 import ModTeamList from '../ModTeamList/ModTeamList';
 import TeamLobby from '../TeamLobby/TeamLobby';
 import '../../index.css';
-import {Overlay, Content, Header} from './styles';
+import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent} from './styles';
 
 interface Props {
   user: string;
@@ -31,23 +30,10 @@ function CardTemplate(props: Props) {
       <Header>
         <h4>Eyecue Haicue</h4>
       </Header>
-      <Card
-        sx={{
-          display: 'flex',
-          width: 1376,
-          minHeight: 820,
-          height: 'fit-content',
-          borderRadius: '15px',
-          boxShadow: '0px 0px 75px #000',
-          background: '#f6ede9',
-        }}
-      >
-        <div style={{position: 'relative'}}>
-          <CardMedia
-            component="div"
-            sx={{  width: 490, minHeight: '101%',height: '101%' }}
+      <StyledCard>
+        <div style={{ position: 'relative' }}>
+          <StyledCardMedia
             style={{
-              minHeight: '101%',
               background: props.user === 'moderator' ? '#15586A' : '#0c114a',
               backgroundImage:
                 props.user === 'moderator'
@@ -55,7 +41,7 @@ function CardTemplate(props: Props) {
                   : `url(${'/images/blueberries_banner.png'})`,
 							backgroundAttachment: 'absolute',
 							backgroundPosition: '16% 95%',
-							backgroundRepeat: 'no-repeat'
+							backgroundRepeat: 'no-repeat',
             }}
           />
           <Overlay>
@@ -64,7 +50,7 @@ function CardTemplate(props: Props) {
           </Overlay>
         </div>
         <Content>
-          <CardContent sx={{ width: 700, minHeight: '101%', height: '101%' }}>
+          <StyledCardContent>
             {/* previously sx={{ width: 100%}} */}
             {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
@@ -72,9 +58,9 @@ function CardTemplate(props: Props) {
             {/* <ModTeamList /> */}
             {/* <TeamLobby /> */}
             {props.content}
-          </CardContent>
+          </StyledCardContent>
         </Content>
-      </Card>
+      </StyledCard>
     </>
   );
 }
