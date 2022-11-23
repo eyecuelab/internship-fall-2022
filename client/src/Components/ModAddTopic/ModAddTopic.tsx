@@ -20,12 +20,6 @@ function ModAddTopic(props: Props) {
   const [topics, setTopics] = useState([]);
 	setValue('gameId', props.gameId);
 
-	const renderTopic = (topic: any) => {
-		return (
-			<Topic name={topic.name} phrases={topic.phrases} gameId={topic.gameId} id={topic.id} />
-		);
-	};
-
 	useEffect(() => {
 		getTopicList();
 	}, []);
@@ -57,7 +51,7 @@ function ModAddTopic(props: Props) {
       {
         <Grid container>
           {/* @ts-ignore */}
-          {topics?.map(topic => renderTopic(topic))}
+          {topics?.map(topic => { return <Topic name={topic.name} phrases={topic.phrases} gameId={topic.gameId} id={topic.id} /> })}
         </Grid>
       }
       <form onSubmit={handleSubmit(addNewTopic)}>
