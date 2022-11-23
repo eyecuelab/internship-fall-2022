@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 
-function Game (props: any) {
+interface Props {
+	name: string,
+	publishedAt: Date,
+	id: number
+}
+
+function GameItem (props: Props) {
 	const { name, publishedAt, id } = props;
 
 	return (
@@ -25,4 +31,4 @@ function Game (props: any) {
 	);
 }
 
-export default Game;
+export default GameItem;

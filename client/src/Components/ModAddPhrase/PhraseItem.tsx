@@ -2,13 +2,14 @@ import React from 'react';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
 import { deleteData } from '../../ApiHelper';
+import { Phrase } from '../../Types/Types';
 
 interface Props {
-	phrase: any,
+	phrase: Phrase,
 	deletePhrase: (param: any) => void
 }
 
-function Phrase (props: Props) {
+function PhraseItem (props: Props) {
 	const { phrase, deletePhrase } = props;
 
 	return (
@@ -26,4 +27,4 @@ function Phrase (props: Props) {
 	);
 }
 
-export default Phrase;
+export default PhraseItem;

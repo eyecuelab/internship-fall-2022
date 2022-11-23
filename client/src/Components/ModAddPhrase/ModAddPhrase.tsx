@@ -4,7 +4,8 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Grid, TextField, Button } from '@mui/material';
 import { greenButton, whiteButton } from '../componentStyles';
 import { deleteData, getData, postData } from '../../ApiHelper';
-import Phrase from './Phrase';
+import PhraseItem from './PhraseItem';
+import { Phrase } from '../../Types/Types';
 
 interface Props {}
 interface IFormInput {
@@ -32,7 +33,7 @@ function ModAddPhrase(props: Props) {
 		reset((data) => ({ ...data, body: '' }))
   };
 
-	const deletePhrase = (phraseId: any) => {
+	const deletePhrase = (phraseId: number) => {
 		deleteData(`/phrases/${phraseId}`).then(() => getPhraseList());
 	}
 
@@ -59,7 +60,7 @@ function ModAddPhrase(props: Props) {
       <hr />
       {
         <Grid container>
-          {phrases?.map(phrase => { return (<Phrase key={phrase.id} phrase={phrase} deletePhrase={deletePhrase} />) })}
+          {phrases?.map((phrase: Phrase) => { return (<PhraseItem key={phrase.id} phrase={phrase} deletePhrase={deletePhrase} />) })}
         </Grid>
       }
       <Grid container>
