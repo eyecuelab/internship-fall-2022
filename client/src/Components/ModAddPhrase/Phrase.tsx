@@ -5,7 +5,7 @@ import { deleteData } from '../../ApiHelper';
 
 interface Props {
 	phrase: any,
-	deletePhrase: (phraseId: any) => any
+	deletePhrase: (param: any) => void
 }
 
 function Phrase (props: Props) {
