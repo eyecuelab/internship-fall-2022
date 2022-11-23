@@ -97,7 +97,7 @@ a {
 }
 
 button {
-	:focus {
+	&:focus {
 		outline: none !important;
 	}
 }
