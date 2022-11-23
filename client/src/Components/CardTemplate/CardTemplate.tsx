@@ -12,20 +12,10 @@ import {Overlay, Content, Header} from './styles';
 interface Props {
   user: string;
   content: ReactElement<any, any>;
+  overlay: ReactElement<any, any>;
 }
 
 function CardTemplate(props: Props) {
-  const overlaySwitch = (user: string) => {
-    switch (user) {
-      case 'moderator':
-        return <ModOverlay />;
-      case 'player':
-        return <TeamOverlay />;
-      default:
-        return <TeamOverlay />;
-    }
-  };
-
   return (
     <>
       <Header>
@@ -57,7 +47,7 @@ function CardTemplate(props: Props) {
           />
           <Overlay>
             {/* Components in the Overlay tag will likely be rendered with a switch statement */}
-            {overlaySwitch(props.user)}
+            {props.overlay}
           </Overlay>
         </div>
         <Content>

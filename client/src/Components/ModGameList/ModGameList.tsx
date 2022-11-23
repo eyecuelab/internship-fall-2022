@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
-import { getData } from '../../ApiHelper';
+import { deleteData, getData } from '../../ApiHelper';
 import Game from './Game';
 
 interface Props {
@@ -27,6 +27,10 @@ function ModGameList(props: Props) {
 		setGames(gameList);
 	}
 
+  const deleteGame = (gameId: any)=> {
+    deleteData(`/games/${gameId}`).then(()=> getGameList());
+  }
+
   greenButton.width = '100%';
 
   return (
@@ -42,7 +46,7 @@ function ModGameList(props: Props) {
       <hr />
       { <Grid container>
 				{/* @ts-ignore */} {/* this line ignores errors in the line below and will need to be removed soon*/}
-				{ (games.map((game) => <Game name={game.name} publishedAt={game.publishedAt} id={game.id} />)) } {/* this line renders each game from the database */}
+				{ (games.map((game) => <Game game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
         onClick={props.handleCreateNewGame}

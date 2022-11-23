@@ -2,8 +2,14 @@ import React from 'react';
 import '../../index.css';
 import { Link, useLocation } from "react-router-dom";
 import { Grid, Button } from '@mui/material';
+import { PropaneSharp } from '@mui/icons-material';
 
-function ModOverlay() {
+
+interface Props {
+  handleLogout: () => void;
+}
+
+function ModOverlay(props: Props) {
   const location = useLocation()
 
   console.log(location.pathname);
@@ -35,7 +41,7 @@ function ModOverlay() {
           bottom: 100,
         }}
       >
-        {location.pathname == "/mod/topics" &&
+        {location.pathname.includes("/mod/topic/") || location.pathname.includes("/mod/game/") &&
         <Button
           sx={{
             height: '5rem',
@@ -54,6 +60,7 @@ function ModOverlay() {
         <br/>
         <Link to= "/mod"> 
           <Button
+            onClick={props.handleLogout}
             sx={{
               height: '5rem',
               width: '100%',
