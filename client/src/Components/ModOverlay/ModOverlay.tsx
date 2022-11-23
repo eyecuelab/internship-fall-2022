@@ -35,7 +35,7 @@ function ModOverlay() {
           bottom: 100,
         }}
       >
-        {location.pathname == "/mod/topics" &&
+        {location.pathname.includes("/mod/topic/") || location.pathname.includes("/mod/game/") &&
         <Button
           sx={{
             height: '5rem',
