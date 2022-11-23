@@ -33,6 +33,7 @@ function ModGameList(props: Props) {
   }
 
   greenButton.width = '100%';
+	greenButton.marginBottom = '0px';
 
   return (
     <div style={{height: '100%', position: 'relative'}}>
@@ -46,8 +47,9 @@ function ModGameList(props: Props) {
       </Grid>
       <hr />
       { <Grid container>
-				{ (games.map((game: Game) => <GameItem game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
+				{ (games.map((game: Game) => <GameItem game={game} deleteGame={deleteGame}/>)) }
       </Grid> }
+			<div style={{height: '5rem', bottom: 0}}/>
       <Button
         onClick={props.handleCreateNewGame}
         sx={greenButton}
@@ -56,7 +58,6 @@ function ModGameList(props: Props) {
       >
         <h3>CREATE A NEW GAME</h3>
       </Button>
-			<div style={{height: '5rem', bottom: 8}}/>
     </div>
   );
 }
