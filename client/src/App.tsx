@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ModGameControl from './Containers/ModGameControl/ModGameControl';
@@ -10,12 +10,14 @@ import { client_id } from '../endpoints';
 // dotenv.config();
 
 function App() {
+	const [userData, setUserData] = useState({});
+
   return (
 		<GoogleOAuthProvider clientId={client_id}>
 			<Router>
 				<Routes>
 					<Route path="/game" element={<GameControl />} />
-					<Route path="/" element={<ModGameControl />} />
+					<Route path="/" element={<ModGameControl setUserData={setUserData} userData={userData}/>} />
 					<Route path="/game/:code" element={<TopicPhraseControl viewPhrases={false}/>} />
 					<Route path="/topic/:topicId" element={<TopicPhraseControl viewPhrases={true}/>} />
 				</Routes>
