@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, CardContent, Button } from '@mui/material';
 import { Content, Header } from './styles';
+import LoginHooks from '../../Hooks/LoginHooks';
 
 interface Props {
 	login: () => void;
@@ -33,11 +34,11 @@ function ModLogin(props: Props) {
               height: '100%',
             }}
           >
-            {/* example text, will be dynamically rendered */}
             <div>
               <h4>Moderator Login</h4>
               <br />
-              <Button
+              <LoginHooks />
+              {/* <Button
 								onClick={props.login}
                 sx={{
                   height: '5rem',
@@ -49,7 +50,7 @@ function ModLogin(props: Props) {
                 }}
               >
                 GOOGLE SIGN IN
-              </Button>
+              </Button> */}
             </div>
           </CardContent>
         </Content>
