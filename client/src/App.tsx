@@ -1,15 +1,17 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-// import dotenv from 'dotenv';
+import { GoogleOAuthProvider} from '@react-oauth/google';
 import ModGameControl from './Containers/ModGameControl/ModGameControl';
 import TopicPhraseControl from './Containers/TopicPhraseControl/TopicPhraseControl';
 import GameControl from './Containers/GameControl/GameControl';
 import './App.scss';
+import { client_id } from '../endpoints';
 
 // dotenv.config();
 
 function App() {
   return (
+		<GoogleOAuthProvider clientId={client_id}>
     <Router>
       <Routes>
         <Route path="/game" element={<GameControl />} />
@@ -18,6 +20,7 @@ function App() {
 				<Route path="/topic/:topicId" element={<TopicPhraseControl viewPhrases={true}/>} />
       </Routes>
     </Router>
+		</GoogleOAuthProvider>
   );
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { GoogleLogin } from '@react-oauth/google';
 import { Card, CardContent, Button } from '@mui/material';
 import { Content, Header } from './styles';
 import LoginHooks from '../../Hooks/LoginHooks';
@@ -37,8 +38,14 @@ function ModLogin(props: Props) {
             <div>
               <h4>Moderator Login</h4>
               <br />
-              <LoginHooks />
-              {/* <Button
+              <GoogleLogin
+								onSuccess={credentialResponse => {
+									console.log(credentialResponse);
+								}}
+								onError={() => {
+									console.log('Login Failed');
+								}} />
+              <Button
 								onClick={props.login}
                 sx={{
                   height: '5rem',
@@ -50,7 +57,7 @@ function ModLogin(props: Props) {
                 }}
               >
                 GOOGLE SIGN IN
-              </Button> */}
+              </Button>
             </div>
           </CardContent>
         </Content>
