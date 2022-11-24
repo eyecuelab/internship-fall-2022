@@ -2,7 +2,6 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import { Card, CardContent, Button } from '@mui/material';
 import { Content, Header } from './styles';
-import LoginHooks from '../../Hooks/LoginHooks';
 
 interface Props {
 	login: () => void;
