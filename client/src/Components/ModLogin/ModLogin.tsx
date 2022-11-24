@@ -1,7 +1,8 @@
 import React from 'react';
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from 'jwt-decode';
 import { Card, CardContent, Button } from '@mui/material';
 import { Content, Header } from './styles';
-import LoginHooks from '../../Hooks/LoginHooks';
 
 interface Props {
 	login: () => void;
@@ -37,8 +38,18 @@ function ModLogin(props: Props) {
             <div>
               <h4>Moderator Login</h4>
               <br />
-              <LoginHooks />
-              {/* <Button
+							<GoogleLogin
+								onSuccess={credentialResponse => { 
+									console.log(credentialResponse);
+									let decoded = jwt_decode(credentialResponse.credential);
+									console.log(decoded);
+								}}
+								onError={() => {
+									console.log('Login Failed')
+								}}
+								useOneTap
+							/>
+              <Button
 								onClick={props.login}
                 sx={{
                   height: '5rem',
@@ -50,7 +61,7 @@ function ModLogin(props: Props) {
                 }}
               >
                 GOOGLE SIGN IN
-              </Button> */}
+              </Button>
             </div>
           </CardContent>
         </Content>

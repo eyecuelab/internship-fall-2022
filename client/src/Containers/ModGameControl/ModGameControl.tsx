@@ -7,7 +7,7 @@ import ModNewGame from '../../Components/ModNewGame/ModNewGame';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
 
 function ModGameControl() {
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(false);
   const [createNewGameView, setCreateNewGameView] = useState(false);
 
 	document.documentElement.style.background = 'url(/images/moderator_background.png)';
@@ -17,7 +17,7 @@ function ModGameControl() {
   };
 
   const handleLogout = () => {
-    setLogin(true);
+    setLogin(false);
   };
 
   const handleCreateNewGame = () => {
