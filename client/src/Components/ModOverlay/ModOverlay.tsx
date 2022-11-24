@@ -6,7 +6,7 @@ import { greenButton, redButton } from '../componentStyles';
 
 
 interface Props {
-  handleLogout: () => void;
+  handleLogout?: () => void;
 }
 
 function ModOverlay(props: Props) {
@@ -45,7 +45,7 @@ function ModOverlay(props: Props) {
           bottom: 100,
         }}
       >
-        {location.pathname.includes("/mod/topic/") || location.pathname.includes("/mod/game/") &&
+        {(location.pathname.includes("/topic/") || location.pathname.includes("/game/")) &&
         <Button
           sx={greenButton}
         >
@@ -53,17 +53,10 @@ function ModOverlay(props: Props) {
         </Button>
         }
         <br/>
-        <Link to= "/mod"> 
+        <Link to= "/"> 
           <Button
             onClick={props.handleLogout}
-            sx={{
-              height: '5rem',
-              width: '100%',
-              color: '#363636',
-              border: '1px solid #363636',
-              borderRadius: '10px',
-              background: '#FC3911',
-            }} 
+            sx={redButton} 
           >
             <h3>Logout</h3>
           </Button>

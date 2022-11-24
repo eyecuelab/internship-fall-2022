@@ -33,7 +33,7 @@ function ModGameList(props: Props) {
   }
 
   greenButton.width = '100%';
-	greenButton.marginBottom = '0px';
+	greenButton.marginBottom = '0'
 
   return (
     <div style={{height: '100%', position: 'relative'}}>
