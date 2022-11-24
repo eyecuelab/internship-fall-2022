@@ -1,5 +1,5 @@
 import React from 'react';
-import { GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 import jwt_decode from 'jwt-decode';
 import { Card, CardContent, Button } from '@mui/material';
 import { Content, Header } from './styles';
@@ -9,6 +9,19 @@ interface Props {
 }
 
 function ModLogin(props: Props) {
+
+	const login = useGoogleLogin({
+		onSuccess: async (response) => {
+			console.log(response);
+  		const userData = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+				headers: {
+					'Authorization': `Bearer ${response.access_token}`
+				},
+			});
+			console.log(userData);
+		}
+	})
+
   return (
     <>
       <Header>
@@ -40,9 +53,8 @@ function ModLogin(props: Props) {
               <br />
 							<GoogleLogin
 								onSuccess={credentialResponse => { 
-									console.log(credentialResponse);
 									let decoded = jwt_decode(credentialResponse.credential);
-									console.log(decoded);
+									console.log('USER: ', decoded.email);
 								}}
 								onError={() => {
 									console.log('Login Failed')
@@ -50,7 +62,7 @@ function ModLogin(props: Props) {
 								useOneTap
 							/>
               <Button
-								onClick={props.login}
+								onClick={login}
                 sx={{
                   height: '5rem',
                   width: '100%',
