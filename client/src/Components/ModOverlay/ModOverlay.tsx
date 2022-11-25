@@ -16,7 +16,6 @@ function ModOverlay(props: Props) {
 	greenButton.width = '100%';
 	greenButton.marginBottom = '1.5rem';
 
-  console.log(location.pathname);
   return (
     <Grid
       container

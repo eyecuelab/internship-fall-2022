@@ -18,6 +18,8 @@ function HaikuForm() {
   const { control, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => postData('/haicues', data);
 
+	const roundNum = '2';
+	const topic = 'Holiday Activities';
 	const phrase = ['decorating', 'tree'];
 
 	useEffect(() => {
@@ -25,11 +27,9 @@ function HaikuForm() {
 		phrase.forEach((word, index) => { 
 			findStems(word)
 			.then((response) => {
-				console.log('response: ', response);
 				stemList[index] = (response.meta.stems);
 				// @ts-ignore
 				setStems(stemList);
-				console.log("stems:", stems);
 			});
 		});
 	}, []);
@@ -54,7 +54,7 @@ function HaikuForm() {
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
-      <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
+      <h3>ROUND {roundNum} - {topic}</h3>
       <h1>{phrase.join(' ')}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -3,7 +3,6 @@ export const findStems = (word: string) => {
 	const response = fetch(url, { method: 'GET' })
 	.then(response => response.json())
 	.then(data => {
-		console.log('DATA ', data[0]);
 		return data[0];
 	});
 	return response
@@ -14,7 +13,6 @@ export const compareWords = (stems: string[], words: string[]) => {
 		for (let i=0; i<stems.length; i++) {
 			for (let j=0; j<stems[i].length; j++) {
 				if (words.includes(stems[i][j])) {
-					console.log(words, ' ', stems[i][j], 'false');
 					return false;
 				}
 			}

@@ -20,12 +20,10 @@ function ModAddPhrase(props: Props) {
   const [phrases, setPhrases] = useState([]);
 	const [topicName, setTopicName] = useState("");
 	setValue('topicId', Number(topicId));
-	console.log(props);
 
 	useEffect(() => {
 		getPhraseList();
 		getTopicName();
-		console.log(topicName);
 	}, [topicName]);
 
 	const addNewPhrase: SubmitHandler<IFormInput> = (data: unknown) => {
@@ -40,7 +38,7 @@ function ModAddPhrase(props: Props) {
 	const getPhraseList = async () => {
 		const phraseList = await getData(`/phrases/${Number(topicId)}`);
 		setPhrases(phraseList);
-	}; console.log(phrases);
+	};
 
 	const getTopicName = async () => {
 		const topic = await getData(`/topic/${topicId}`);
