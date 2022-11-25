@@ -60,6 +60,7 @@ function ModLogin(props: Props) {
             <div>
               <h4 style={{textAlign: 'center'}}>Moderator Login</h4>
               <br />
+							{/* @ts-ignore */}
               <Button
 								onClick={login}
                 sx={whiteButton}

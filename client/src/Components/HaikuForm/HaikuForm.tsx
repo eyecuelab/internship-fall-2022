@@ -24,6 +24,7 @@ function HaikuForm() {
 			.then((response) => {
 				console.log('response: ', response);
 				stemList[index] = (response.meta.stems);
+				// @ts-ignore
 				setStems(stemList);
 				console.log("stems:", stems);
 			});
@@ -43,7 +44,6 @@ function HaikuForm() {
             <TextField
 							onChange={(ev) => {
 								const { target: { value }} = ev
-								
 								rhfOnChange(value);
 								compareWords(stems, value?.split(' '));
 							}}
@@ -72,9 +72,13 @@ function HaikuForm() {
         <Controller
           control={control}
           name="line2"
-          render={({ field }) => (
+          render={({ field : { onChange: rhfOnChange} }) => (
             <TextField
-              {...field}
+							onChange={(ev) => {
+								const { target: { value }} = ev
+								rhfOnChange(value);
+								compareWords(stems, value?.split(' '));
+							}}
               fullWidth
               id="standard-basic"
               variant="standard"
@@ -100,9 +104,13 @@ function HaikuForm() {
         <Controller
           control={control}
           name="line3"
-          render={({ field }) => (
+          render={({ field : { onChange: rhfOnChange} }) => (
             <TextField
-              {...field}
+							onChange={(ev) => {
+								const { target: { value }} = ev
+								rhfOnChange(value);
+								compareWords(stems, value?.split(' '));
+							}}
               fullWidth
               id="standard-basic"
               variant="standard"
