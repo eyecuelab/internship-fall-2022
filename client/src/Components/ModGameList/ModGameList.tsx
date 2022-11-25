@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
-import { getData } from '../../ApiHelper';
-import Game from './Game';
+import { deleteData, getData } from '../../ApiHelper';
+import GameItem from './GameItem';
+import { Game } from '../../Types/Types';
 
 interface Props {
   handleCreateNewGame: () => void;
@@ -27,7 +28,12 @@ function ModGameList(props: Props) {
 		setGames(gameList);
 	}
 
+  const deleteGame = (gameId: any)=> {
+    deleteData(`/games/${gameId}`).then(()=> getGameList());
+  }
+
   greenButton.width = '100%';
+	greenButton.marginBottom = '0'
 
   return (
     <div style={{height: '100%', position: 'relative'}}>
@@ -41,8 +47,7 @@ function ModGameList(props: Props) {
       </Grid>
       <hr />
       { <Grid container>
-				{/* @ts-ignore */} {/* this line ignores errors in the line below and will need to be removed soon*/}
-				{ (games.map((game) => <Game name={game.name} publishedAt={game.publishedAt} id={game.id} />)) } {/* this line renders each game from the database */}
+				{ (games.map((game: Game) => <GameItem game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
         onClick={props.handleCreateNewGame}

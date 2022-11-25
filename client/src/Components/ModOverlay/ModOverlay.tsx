@@ -2,9 +2,19 @@ import React from 'react';
 import '../../index.css';
 import { Link, useLocation } from "react-router-dom";
 import { Grid, Button } from '@mui/material';
+import { greenButton, redButton } from '../componentStyles';
 
-function ModOverlay() {
-  const location = useLocation()
+
+interface Props {
+  handleLogout?: () => void;
+}
+
+function ModOverlay(props: Props) {
+  const location = useLocation();
+
+	redButton.width = '100%';
+	greenButton.width = '100%';
+	greenButton.marginBottom = '1.5rem';
 
   console.log(location.pathname);
   return (
@@ -35,33 +45,18 @@ function ModOverlay() {
           bottom: 100,
         }}
       >
-        {location.pathname == "/mod/topics" &&
+        {(location.pathname.includes("/topic/") || location.pathname.includes("/game/")) &&
         <Button
-          sx={{
-            height: '5rem',
-            width: '100%',
-            color: '#363636',
-            border: '1px solid #363636',
-            borderRadius: '10px',
-            background: '#61C14A',
-            margin: 'auto',
-            display: 'block',
-          }}
+          sx={greenButton}
         >
           <h3>Publish</h3>
         </Button>
         }
         <br/>
-        <Link to= "/mod"> 
+        <Link to= "/"> 
           <Button
-            sx={{
-              height: '5rem',
-              width: '100%',
-              color: '#363636',
-              border: '1px solid #363636',
-              borderRadius: '10px',
-              background: '#FC3911',
-            }} 
+            onClick={props.handleLogout}
+            sx={redButton} 
           >
             <h3>Logout</h3>
           </Button>

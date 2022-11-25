@@ -1,6 +1,6 @@
 // const credentials: RequestCredentials = 'include';
 
-export const API_ENDPOINT = 'http://localhost:3000';
+export const API_ENDPOINT = 'https://haicue-api.fly.dev';
 const BASE_HEADERS = {
   headers: {
     'Content-Type': 'application/json',
