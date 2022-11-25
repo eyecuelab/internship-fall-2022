@@ -3,6 +3,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { postData } from '../../ApiHelper';
 import { findStems, compareWords } from './wordValidation'
+import { whiteButton } from '../componentStyles';
 
 interface IFormInput {
   line1: string;
@@ -21,6 +22,8 @@ function HaikuForm() {
 	const roundNum = '2';
 	const topic = 'Holiday Activities';
 	const phrase = ['decorating', 'tree'];
+
+	whiteButton.width = '46%';
 
 	useEffect(() => {
 		const stemList: any[] = [];
@@ -65,8 +68,8 @@ function HaikuForm() {
             <TextField
 							onChange={(ev) => {
 								const { target: { value }} = ev
-								rhfOnChange(value);
-								compareWords(stems, value?.split(' ')) ? 
+								rhfOnChange(value.toLowerCase());
+								compareWords(stems, value?.toLowerCase().split(' ')) ? 
 									displayValidation('line1', '5 Syllables', '#363636') :
 									displayValidation('line1', 'you may not use words in the phrase', 'red')
 							}}
@@ -99,8 +102,8 @@ function HaikuForm() {
             <TextField
 							onChange={(ev) => {
 								const { target: { value }} = ev
-								rhfOnChange(value);
-								compareWords(stems, value?.split(' ')) ? 
+								rhfOnChange(value.toLowerCase());
+								compareWords(stems, value?.toLowerCase().split(' ')) ? 
 									displayValidation('line2', '7 Syllables', '#363636') :
 									displayValidation('line2', 'you may not use words in the phrase', 'red')
 							}}
@@ -133,8 +136,8 @@ function HaikuForm() {
             <TextField
 							onChange={(ev) => {
 								const { target: { value }} = ev
-								rhfOnChange(value);
-								compareWords(stems, value?.split(' ')) ? 
+								rhfOnChange(value.toLowerCase());
+								compareWords(stems, value?.toLowerCase().split(' ')) ? 
 									displayValidation('line3', '5 Syllables', '#363636') :
 									displayValidation('line3', 'you may not use words in the phrase', 'red')
 							}}
@@ -162,16 +165,12 @@ function HaikuForm() {
         </label>
         <div style={{ height: '5rem', width: '100%' }}>
           <Button
-            sx={{
-              height: '5rem',
-              width: '46%',
-              color: '#363636',
-              border: '1px solid #363636',
-              borderRadius: '10px',
+						style={{
               position: 'absolute',
               bottom: 8,
               left: '0',
             }}
+            sx={whiteButton}
             variant="outlined"
             type="submit"
           >
