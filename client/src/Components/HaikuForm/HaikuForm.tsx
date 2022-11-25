@@ -12,6 +12,9 @@ interface IFormInput {
 
 function HaikuForm() {
 	const [stems, setStems] = useState([]);
+	const [lineOne, setLineOne] = useState('5 Syllables');
+	const [lineTwo, setLineTwo] = useState('7 Syllables');
+	const [lineThree, setLineThree] = useState('5 Syllables');
   const { control, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => postData('/haicues', data);
 
@@ -31,6 +34,22 @@ function HaikuForm() {
 		});
 	}, []);
 
+	const displayValidation = ( lineNumber, statusText, color ) => {
+		document.getElementById(lineNumber).style.color = color; 
+		document.getElementById('label'+lineNumber).style.color = color;
+		switch(lineNumber) {
+			case('line1'):
+				setLineOne(statusText);
+				break;
+			case('line2'):
+				setLineTwo(statusText);
+				break;
+			case('line3'):
+				setLineThree(statusText);
+				break;
+		}
+	}
+
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
@@ -45,10 +64,12 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value);
-								compareWords(stems, value?.split(' '));
+								compareWords(stems, value?.split(' ')) ? 
+									displayValidation('line1', '5 Syllables', '#363636') :
+									displayValidation('line1', 'you may not use words in the phrase', 'red')
 							}}
               fullWidth
-              id="standard-basic"
+              id="line1"
               variant="standard"
               name="FiveSyllables"
               type="text"
@@ -67,7 +88,7 @@ function HaikuForm() {
           )}
         />
         <label>
-          <h5>5 Syllables</h5>
+          <h5 id="labelline1">{lineOne}</h5>
         </label>
         <Controller
           control={control}
@@ -77,10 +98,12 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value);
-								compareWords(stems, value?.split(' '));
+								compareWords(stems, value?.split(' ')) ? 
+									displayValidation('line2', '7 Syllables', '#363636') :
+									displayValidation('line2', 'you may not use words in the phrase', 'red')
 							}}
               fullWidth
-              id="standard-basic"
+              id="line2"
               variant="standard"
               name="FiveSyllables"
               type="text"
@@ -99,7 +122,7 @@ function HaikuForm() {
           )}
         />
         <label>
-          <h5>7 Syllables</h5>
+          <h5 id="labelline2">{lineTwo}</h5>
         </label>
         <Controller
           control={control}
@@ -109,10 +132,12 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value);
-								compareWords(stems, value?.split(' '));
+								compareWords(stems, value?.split(' ')) ? 
+									displayValidation('line3', '5 Syllables', '#363636') :
+									displayValidation('line3', 'you may not use words in the phrase', 'red')
 							}}
               fullWidth
-              id="standard-basic"
+              id="line3"
               variant="standard"
               name="FiveSyllables"
               type="text"
@@ -131,7 +156,7 @@ function HaikuForm() {
           )}
         />
         <label>
-          <h5>5 Syllables</h5>
+          <h5 id="labelline3">{lineThree}</h5>
         </label>
         <div style={{ height: '5rem', width: '100%' }}>
           <Button
