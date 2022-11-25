@@ -6,8 +6,13 @@ import ModGameList from '../../Components/ModGameList/ModGameList';
 import ModNewGame from '../../Components/ModNewGame/ModNewGame';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
 
-function ModGameControl() {
-  const [login, setLogin] = useState(true);
+interface Props {
+	setUserData: any;
+	userData: any;
+}
+
+function ModGameControl(props: Props) {
+  const [login, setLogin] = useState(false);
   const [createNewGameView, setCreateNewGameView] = useState(false);
 
 	document.documentElement.style.background = 'url(/images/moderator_background.png)';
@@ -17,7 +22,7 @@ function ModGameControl() {
   };
 
   const handleLogout = () => {
-    setLogin(true);
+    setLogin(false);
   };
 
   const handleCreateNewGame = () => {
@@ -43,7 +48,7 @@ function ModGameControl() {
       );
     }
   }
-  return <ModLogin login={handleLogin} />;
+  return <ModLogin login={handleLogin} setUserData={props.setUserData} userData={props.userData}/>;
 }
 
 export default ModGameControl;
