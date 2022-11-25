@@ -3,7 +3,7 @@ import '../../index.css';
 import { Link, useLocation } from "react-router-dom";
 import { Grid, Button } from '@mui/material';
 import { greenButton, redButton } from '../componentStyles';
-
+import GameInfo from './GameInfo';
 
 interface Props {
   handleLogout?: () => void;
@@ -35,6 +35,7 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
+      <GameInfo />
       <Grid
         item
         xs={12}
