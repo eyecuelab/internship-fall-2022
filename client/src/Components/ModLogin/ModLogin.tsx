@@ -1,6 +1,5 @@
 import React from 'react';
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
-import jwt_decode from 'jwt-decode';
+import { useGoogleLogin } from '@react-oauth/google';
 import { Card, CardContent, Button } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Content, Header } from './styles';
@@ -14,6 +13,7 @@ interface Props {
 
 function ModLogin(props: Props) {
 	whiteButton.width = '100%';
+	whiteButton.padding = '1rem';
 
 	const login = useGoogleLogin({
 		onSuccess: (response) => {
@@ -63,13 +63,15 @@ function ModLogin(props: Props) {
               <Button
 								onClick={login}
                 sx={whiteButton}
-								justifyContent='space-between'
               >
-                <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{margin: '1rem'}}>SIGN IN WITH GOOGLE</h3>
+                <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem', marginTop: '0.5rem'}}>SIGN IN WITH GOOGLE</h3>
               </Button>
 							<br />
 							<br />
 							<button onClick={() => console.log(props.userData)} style={{width: '100%'}}>check user data?</button>
+							<br />
+							<br />
+							<button onClick={props.login} style={{width: '100%'}}>login hook</button>
             </div>
           </CardContent>
         </Content>

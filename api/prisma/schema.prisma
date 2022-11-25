@@ -21,10 +21,12 @@ model Users {
   gameId              Int?
 }
 
-model Roles {
-  id                  Int               @id @default(autoincrement())
-  name                String
-  User                Users[]
+model Moderators {
+	id									Int								@id @default(autoincrement())
+	email								String						@unique
+	games								Games[]?
+	topics							Topics[]?
+	phrases							Phrases[]?
 }
 
 model Teams {
@@ -43,6 +45,8 @@ model Topics {
   Phrase              Phrases[]
   game                Games             @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId              Int
+	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+	moderatorId					Int
 }
 
 model Phrases {
@@ -51,6 +55,8 @@ model Phrases {
   wordCount           Int
   topic               Topics            @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId             Int
+	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+	moderatorId					Int
 }
 
 model Games {
@@ -62,6 +68,8 @@ model Games {
   Team                Teams[]
   User                Users[]
 	Topic								Topics[]
+	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+	moderatorId					Int
 }
 
 model Rounds {
