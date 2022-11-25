@@ -7,8 +7,6 @@ import GameControl from './Containers/GameControl/GameControl';
 import './App.scss';
 import { client_id } from '../endpoints';
 
-// dotenv.config();
-
 function App() {
 	const [userData, setUserData] = useState({});
 

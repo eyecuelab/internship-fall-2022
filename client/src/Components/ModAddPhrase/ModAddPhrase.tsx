@@ -78,6 +78,7 @@ function ModAddPhrase(props: Props) {
 										variant="standard"
 										type="text"
 										multiline
+										required
 										InputProps={{
 											style: {
 												fontFamily: 'LuloCleanOneBold',
