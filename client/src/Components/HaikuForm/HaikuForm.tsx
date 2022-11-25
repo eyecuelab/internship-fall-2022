@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { postData } from '../../ApiHelper';
+import { findStems, compareWords } from './wordValidation'
 
 interface IFormInput {
   line1: string;
@@ -10,21 +11,42 @@ interface IFormInput {
 }
 
 function HaikuForm() {
+	const [stems, setStems] = useState([]);
   const { control, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => postData('/haicues', data);
+
+	const phrase = ['decorating', 'tree'];
+
+	useEffect(() => {
+		const stemList: any[] = [];
+		phrase.forEach((word, index) => { 
+			findStems(word)
+			.then((response) => {
+				console.log('response: ', response);
+				stemList[index] = (response.meta.stems);
+				setStems(stemList);
+				console.log("stems:", stems);
+			});
+		});
+	}, []);
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3>ROUND 2 - HOLIDAY ACTIVITIES</h3>
-      <h1>DECORATING TREE</h1>
+      <h1>{phrase.join(' ')}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           control={control}
           name="line1"
-          render={({ field }) => (
+          render={({ field: { onChange: rhfOnChange } }) => (
             <TextField
-              {...field}
+							onChange={(ev) => {
+								const { target: { value }} = ev
+								
+								rhfOnChange(value);
+								compareWords(stems, value?.split(' '));
+							}}
               fullWidth
               id="standard-basic"
               variant="standard"
@@ -112,9 +134,8 @@ function HaikuForm() {
               border: '1px solid #363636',
               borderRadius: '10px',
               position: 'absolute',
-              bottom: '0',
+              bottom: 8,
               left: '0',
-              marginBottom: 0,
             }}
             variant="outlined"
             type="submit"
