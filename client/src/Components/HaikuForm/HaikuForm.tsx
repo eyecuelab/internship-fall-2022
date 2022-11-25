@@ -34,9 +34,11 @@ function HaikuForm() {
 		});
 	}, []);
 
-	const displayValidation = ( lineNumber, statusText, color ) => {
-		document.getElementById(lineNumber).style.color = color; 
-		document.getElementById('label'+lineNumber).style.color = color;
+	const displayValidation = ( lineNumber: string, statusText: string, color: string ) => {
+		const inputField = document.getElementById(lineNumber);
+		const label = document.getElementById('label'+lineNumber);
+		inputField && (inputField.style.color = color); 
+		label && (label.style.color = color);
 		switch(lineNumber) {
 			case('line1'):
 				setLineOne(statusText);
