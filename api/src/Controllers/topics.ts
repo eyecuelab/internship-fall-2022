@@ -1,6 +1,5 @@
 import { getTopic, getTopics, createTopic, deleteTopic } from "../Models/topics";
 import io from "../server";
-import Utility from "./Utility";
 
 const topicsControllers = {
 	async getTopic(req: any, res: any) {
@@ -16,14 +15,13 @@ const topicsControllers = {
   },
 
   async createTopic(req: any, res: any) {
-    const { name, gameId } = req.body;
+    const { name, gameId, moderatorId } = req.body;
 
-    // if (Utility.validateInputs(res, "Invalid body parameters", name)) {
-      const newTopic = await createTopic(name, gameId);
+		const newTopic = await createTopic(name, gameId, moderatorId);
 
-      io.emit("create_topic", newTopic.name);
-      res.status(201).json(newTopic);
-    // }
+		io.emit("create_topic", newTopic.name);
+		res.status(201).json(newTopic);
+
   },
 
   async deleteTopic(req: any, res: any) {

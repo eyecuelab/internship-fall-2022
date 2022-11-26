@@ -10,11 +10,13 @@ type Phrase = {
   topicId: number
 }
 
-export const getPhrase = async (topicId: number) => {
+export const getPhrase = async (topicId: number, moderatorId: number) => {
   try {
 		return await prisma.phrases.findMany({
 			where: {
-				topicId: Number(topicId)
+				topicId: Number(topicId),
+				// @ts-ignore
+				moderatorId: Number(moderatorId)
 			}
 		});
 	} catch(error: unknown) {
@@ -23,12 +25,14 @@ export const getPhrase = async (topicId: number) => {
 	}
 }
 
-export const createPhrase = async (body: string, topicId: number) => {
+export const createPhrase = async (body: string, topicId: number, moderatorId: number) => {
   return await prisma.phrases.create({
     data: {
       body: body,
 			wordCount: Number(body.split(" ").length),
 			topic: { connect: { id: topicId } },
+			// @ts-ignore
+			moderator: { connect: { id: moderatorId } },
     }
   });
 }
