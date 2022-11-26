@@ -55,6 +55,10 @@ function HaikuForm() {
 		}
 	}
 
+	const disableSubmit = () => {
+		document.getElementById('submitHaiku')?.setAttribute('disabled', 'true');
+	}
+
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3>ROUND {roundNum} - {topic}</h3>
@@ -165,6 +169,7 @@ function HaikuForm() {
         </label>
         <div style={{ height: '5rem', width: '100%' }}>
           <Button
+						id="submitHaiku"
 						style={{
               position: 'absolute',
               bottom: 8,
@@ -173,6 +178,7 @@ function HaikuForm() {
             sx={whiteButton}
             variant="outlined"
             type="submit"
+						disabled={(lineOne !== '5 Syllables') || (lineTwo !== '7 Syllables') || (lineThree !== '5 Syllables')}
           >
             <h3>Submit</h3>
           </Button>
