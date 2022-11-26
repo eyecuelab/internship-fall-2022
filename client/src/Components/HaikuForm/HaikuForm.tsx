@@ -55,10 +55,6 @@ function HaikuForm() {
 		}
 	}
 
-	const disableSubmit = () => {
-		document.getElementById('submitHaiku')?.setAttribute('disabled', 'true');
-	}
-
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3>ROUND {roundNum} - {topic}</h3>
