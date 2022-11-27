@@ -4,7 +4,7 @@ import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
 import { whiteButton, redButton } from '../componentStyles';
 
-function ModStartRound() {
+function ModChooseTopic() {
   whiteButton.width = '100%';
   redButton.width = '100%';
 
@@ -31,4 +31,4 @@ function ModStartRound() {
   );
 }
 
-export default ModStartRound;
+export default ModChooseTopic;
