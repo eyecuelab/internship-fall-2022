@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { postData } from '../../ApiHelper';
-import { findStems, compareWords } from './wordValidation'
+import { findStems, compareWords, haikuCheck } from './validation'
 import { whiteButton } from '../componentStyles';
 
 interface IFormInput {
@@ -71,7 +71,9 @@ function HaikuForm() {
 								rhfOnChange(value.toLowerCase());
 								compareWords(stems, value?.toLowerCase().split(' ')) ? 
 									displayValidation('line1', '5 Syllables', '#363636') :
-									displayValidation('line1', 'you may not use words in the phrase', 'red')
+									displayValidation('line1', 'you may not use words in the phrase', 'red');
+								console.log('VALUE: ', value);
+								console.log(haikuCheck(value, 1));
 							}}
               fullWidth
               id="line1"
