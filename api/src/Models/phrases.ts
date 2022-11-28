@@ -29,6 +29,7 @@ export const createPhrase = async (body: string, topicId: number) => {
       body: body,
 			wordCount: Number(body.split(" ").length),
 			topic: { connect: { id: topicId } },
+			moderator: {connect: { id: 1 }}
     }
   });
 }
