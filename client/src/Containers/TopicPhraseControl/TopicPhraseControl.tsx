@@ -19,7 +19,7 @@ const gameList = await getGames();
 
 function TopicPhraseControl(props: Props) {
   const {code} = useParams();
-  const selectedId = parseInt(code);
+  const selectedId = parseInt(code as string);
   const [theGame, setTheGame] = useState("");
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function TopicPhraseControl(props: Props) {
 
   const getGameList = async () => {
 		const gameLists = await getData('/games');
-    const selectedGame= gameLists.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0].name;
+    const selectedGame= gameLists.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0]?.name;
 		setTheGame(selectedGame);
   }
 
