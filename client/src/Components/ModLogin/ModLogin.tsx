@@ -17,7 +17,6 @@ function ModLogin(props: Props) {
 
 	const login = useGoogleLogin({
 		onSuccess: (response) => {
-			console.log(response);
   		fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
 				headers: {
 					'Authorization': `Bearer ${response.access_token}`
@@ -25,7 +24,6 @@ function ModLogin(props: Props) {
 			})
 			.then(response => response.json())
 			.then(data => {
-				console.log('DATA: ', data)
 				props.setUserData(data);
 			});
 		}
@@ -60,6 +58,7 @@ function ModLogin(props: Props) {
             <div>
               <h4 style={{textAlign: 'center'}}>Moderator Login</h4>
               <br />
+							{/* @ts-ignore */}
               <Button
 								onClick={login}
                 sx={whiteButton}

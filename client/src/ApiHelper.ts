@@ -1,6 +1,7 @@
 // const credentials: RequestCredentials = 'include';
+// export const API_ENDPOINT = 'https://haicue-api.fly.dev';
 
-export const API_ENDPOINT = 'https://haicue-api.fly.dev';
+export const API_ENDPOINT = 'http://localhost:3000';
 const BASE_HEADERS = {
   headers: {
     'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ const handleResponse = async (response: Response) => {
 
 export const getData = async (endpoint: string) => {
   const url = `${API_ENDPOINT}${endpoint}`;
-  const response = await fetch(url, { ...BASE_HEADERS, method: 'GET' });
+  const response = await fetch(url, {...BASE_HEADERS, method: 'GET'});
   return handleResponse(response);
 };
 
@@ -34,7 +35,7 @@ export const postData = async (endpoint: string, payload: unknown) => {
   return handleResponse(response);
 };
 
-export const deleteData= async (endpoint: string)=>{
+export const deleteData = async (endpoint: string) => {
   const url = `${API_ENDPOINT}${endpoint}`;
   const response = await fetch(url, {
     ...BASE_HEADERS,
@@ -51,3 +52,4 @@ export const putData = async (endpoint: string) => {
 	});
 	return handleResponse(response);
   };
+

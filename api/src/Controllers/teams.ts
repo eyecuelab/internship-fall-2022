@@ -1,6 +1,5 @@
 import { getTeams, createTeam } from '../Models/teams';
 import io from '../server';
-import Utility from './Utility';
 
 const teamsControllers = {
 

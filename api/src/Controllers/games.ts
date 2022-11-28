@@ -1,18 +1,17 @@
 import { getGames, createGame, deleteGame, updateGameStatus } from '../Models/games';
 import io from '../server';
-import Utility from './Utility';
 
 const gamesControllers = {
 
   async getGames(req: any, res: any) {
-    const users = await getGames();
-    return res.json(users);
+    const games = await getGames();
+    return res.json(games);
   },
 
 	async createGame(req: any, res: any) {
-		const { name } = req.body;
+		const { name, moderatorId } = req.body;
 
-		const newGame = await createGame(name);
+		const newGame = await createGame(name, moderatorId);
 
 		io.emit("create_game", newGame.id);
 		res.status(201).json(newGame);

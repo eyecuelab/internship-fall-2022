@@ -28,11 +28,12 @@ export const getTopics = async (gameId: number) => {
 	}
 }
 
-export const createTopic = async (topicName: string, gameId: number) => {
+export const createTopic = async (topicName: string, gameId: number, moderatorId: number) => {
   return await prisma.topics.create({
     data: {
       name: topicName,
-      game: { connect: { id: gameId } }
+      game: { connect: { id: gameId } },
+			moderator: { connect: { id: moderatorId } }
     }
   });
 }

@@ -16,7 +16,7 @@ function App() {
 				<Routes>
 					<Route path="/game" element={<GameControl />} />
 					<Route path="/" element={<ModGameControl setUserData={setUserData} userData={userData}/>} />
-					<Route path="/game/:code" element={<TopicPhraseControl viewPhrases={false}/>} />
+					<Route path="/game/:id" element={<TopicPhraseControl viewPhrases={false}/>} />
 					<Route path="/topic/:topicId" element={<TopicPhraseControl viewPhrases={true}/>} />
 				</Routes>
 			</Router>

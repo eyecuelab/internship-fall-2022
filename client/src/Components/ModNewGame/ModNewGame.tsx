@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { postData } from '../../ApiHelper';
+import { whiteButton } from '../componentStyles';
 import '../../index.css';
 
 interface Props {
@@ -11,14 +13,18 @@ interface Props {
 
 interface IFormInput {
   name: string;
+	moderatorId: number;
 }
 
 type Data = {
 	name: string;
+	moderatorId: number;
 }
 
 function ModNewGame(props: Props) {
-  const { control, handleSubmit } = useForm<IFormInput>();
+  const { control, handleSubmit, setValue } = useForm<IFormInput>();
+
+	setValue('moderatorId', 1 /*props.moderatorId*/);
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
 		data.name ?
@@ -27,9 +33,10 @@ function ModNewGame(props: Props) {
 	}
 
   greenButton.width = '100%';
+	whiteButton.width = '100%';
 
   return (
-    <div style={{ height: '100%' }}>
+    <div style={{ position: 'relative', height: '100%' }}>
       <h3>new game name</h3>
       <br />
       <form onSubmit={handleSubmit(createNewGame)}>
@@ -67,6 +74,10 @@ function ModNewGame(props: Props) {
         <h3>Continue</h3>
       </Button>
 			</form>
+			<div style={{ height: '5rem', bottom: 8 }} />
+			<Button onClick={props.handleCreateNewGame} style={{position: 'absolute', bottom: 8, width: '100%'}} sx={whiteButton} variant="outlined">
+				<h3>BACK TO GAMES</h3>
+			</Button>
     </div>
   );
 }

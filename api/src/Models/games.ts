@@ -7,13 +7,14 @@ export const getGames = async () => {
   return await prisma.games.findMany();
 }
 
-export const createGame = async (name: string) => {
+export const createGame = async (name: string, moderatorId: number) => {
   return await prisma.games.create({
     data: {
 			...{
 				name: name,
 				gameCode: GameCode.generate(),
-				rounds: 0
+				rounds: 0,
+				moderator: { connect: { id: moderatorId } }
 			}
     }
   });

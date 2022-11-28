@@ -1,12 +1,15 @@
 import React from 'react';
 import '../../index.css';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
 import { greenButton, redButton } from '../componentStyles';
 import { putData } from '../../ApiHelper';
+import GameInfo from './GameInfo';
+
 
 interface Props {
   handleLogout?: () => void;
+  gameData?: any;
 }
 
 function ModOverlay(props: Props) {
@@ -15,11 +18,10 @@ function ModOverlay(props: Props) {
 		putData(`/games/${gameId}`);
 	}
 
-	redButton.width = '100%';
-	greenButton.width = '100%';
-	greenButton.marginBottom = '1.5rem';
+  redButton.width = '100%';
+  greenButton.width = '100%';
+  greenButton.marginBottom = '1.5rem';
 
-  console.log(location.pathname);
   return (
     <Grid
       container
@@ -38,6 +40,7 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
+      {props.gameData && <GameInfo gameInfo={props.gameData} />}
       <Grid
         item
         xs={12}
