@@ -6,7 +6,7 @@ import { Game } from '../../Types/Types';
 
 interface Props {
   handleCreateNewGame: () => void;
-  handleDeleteGame: ()=> void;
+  handleDeleteGame: (games: Game)=> void;
   games: any;
 }
 

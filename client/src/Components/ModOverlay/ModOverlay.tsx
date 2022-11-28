@@ -7,7 +7,7 @@ import GameInfo from './GameInfo';
 
 interface Props {
   handleLogout?: () => void;
-  gameData: any;
+  gameData?: any;
 }
 
 function ModOverlay(props: Props) {

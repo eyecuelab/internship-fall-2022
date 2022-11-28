@@ -63,6 +63,7 @@ model Rounds {
   id                  Int               @id @default(autoincrement())
   gameId              Int
   topicId             Int
+	startedAt						DateTime?
 }
 
 model Turns {
@@ -90,5 +91,5 @@ model Buzzers {
   id            Int                     @id @default(autoincrement())
   turnId        Int
   teamId        Int
-  buzzAt        DateTime                @default(now())
+  buzzAt        DateTime?
 }
