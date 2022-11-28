@@ -3,7 +3,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { postData } from '../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
-import { whiteButton } from '../componentStyles';
+import { whiteButton, greenButton } from '../componentStyles';
 
 interface IFormInput {
   line1: string;
@@ -16,14 +16,16 @@ function HaikuForm() {
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
+	const [submitState, setSubmitState] = useState(true);
   const { control, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => postData('/haicues', data);
+  const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {console.log(data); postData('/haicues', data)};
 
 	const roundNum = '2';
 	const topic = 'Holiday Activities';
 	const phrase = ['decorating', 'tree'];
 
 	whiteButton.width = '46%';
+	greenButton.width = '46%';
 
 	useEffect(() => {
 		const stemList: any[] = [];
@@ -37,21 +39,56 @@ function HaikuForm() {
 		});
 	}, []);
 
-	const displayValidation = ( lineNumber: string, statusText: string, color: string ) => {
-		const inputField = document.getElementById(lineNumber);
+	const swapLabel = (line: number, status: string) => {
+		switch(line) {
+			case(1):
+				setLineOne(status);
+				break;
+			case(2):
+				setLineTwo(status);
+				break;
+			case(3):
+				setLineThree(status);
+				break;
+		}
+	}
+
+	const displayValidation = ( lineNumber: number, value: string ) => {
+		const inputField = document.getElementById('line'+lineNumber);
 		const label = document.getElementById('label'+lineNumber);
-		inputField && (inputField.style.color = color); 
-		label && (label.style.color = color);
-		switch(lineNumber) {
-			case('line1'):
-				setLineOne(statusText);
-				break;
-			case('line2'):
-				setLineTwo(statusText);
-				break;
-			case('line3'):
-				setLineThree(statusText);
-				break;
+		const submitButton = document.getElementById('submitHaiku');
+		if (!haikuCheck(value, lineNumber)) {
+			setSubmitState(true);
+			inputField && (inputField.style.color = 'red');
+			label && (label.style.color = 'red');
+		}
+		if (!compareWords(stems, value?.toLowerCase().split(' '))) {
+			setSubmitState(true);
+			swapLabel(lineNumber, 'you may not use words in the phrase');
+			inputField && (inputField.style.color = 'red');
+			label && (label.style.color = 'red');
+		}
+		if (compareWords(stems, value?.toLowerCase().split(' ')) && haikuCheck(value, lineNumber)) {
+			console.log('WHY IS MY CODE SO WRETCHED');
+			buttonReady(submitButton);
+			swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
+			inputField && (inputField.style.color = '#363636');
+			label && (label.style.color = '#363636');
+		}
+		if (!haikuCheck(value, lineNumber) && compareWords(stems, value?.toLowerCase().split(' '))) {
+			swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
+		}
+	}
+
+	const buttonReady = (button) => {
+		const line1 = document.getElementById('line1')?.value;
+		const line2 = document.getElementById('line2')?.value;
+		const line3 = document.getElementById('line3')?.value;
+		console.log(line1, line2, line3);
+		if (line1 !== '' && line2 !== '' && line3 !== '') {
+			setSubmitState(false);
+		} else {
+			button.setAttribute('disabled', 'true');
 		}
 	}
 
@@ -69,11 +106,7 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value.toLowerCase());
-								compareWords(stems, value?.toLowerCase().split(' ')) ? 
-									displayValidation('line1', '5 Syllables', '#363636') :
-									displayValidation('line1', 'you may not use words in the phrase', 'red');
-								console.log('VALUE: ', value);
-								console.log(haikuCheck(value, 1));
+								displayValidation(1, value);
 							}}
               fullWidth
               id="line1"
@@ -95,7 +128,7 @@ function HaikuForm() {
           )}
         />
         <label>
-          <h5 id="labelline1">{lineOne}</h5>
+          <h5 id="label1">{lineOne}</h5>
         </label>
         <Controller
           control={control}
@@ -105,9 +138,12 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value.toLowerCase());
+								haikuCheck(value, 2) ?
+									displayValidation(2, value) : 
+									displayValidation(2, value);
 								compareWords(stems, value?.toLowerCase().split(' ')) ? 
-									displayValidation('line2', '7 Syllables', '#363636') :
-									displayValidation('line2', 'you may not use words in the phrase', 'red')
+									displayValidation(2, value) :
+									displayValidation(2, value);
 							}}
               fullWidth
               id="line2"
@@ -129,7 +165,7 @@ function HaikuForm() {
           )}
         />
         <label>
-          <h5 id="labelline2">{lineTwo}</h5>
+          <h5 id="label2">{lineTwo}</h5>
         </label>
         <Controller
           control={control}
@@ -139,9 +175,12 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value.toLowerCase());
+								haikuCheck(value, 3) ?
+									displayValidation(3, value) : 
+									displayValidation(3, value);
 								compareWords(stems, value?.toLowerCase().split(' ')) ? 
-									displayValidation('line3', '5 Syllables', '#363636') :
-									displayValidation('line3', 'you may not use words in the phrase', 'red')
+									displayValidation(3, value) :
+									displayValidation(3, value);
 							}}
               fullWidth
               id="line3"
@@ -163,24 +202,23 @@ function HaikuForm() {
           )}
         />
         <label>
-          <h5 id="labelline3">{lineThree}</h5>
+          <h5 id="label3">{lineThree}</h5>
         </label>
-        <div style={{ height: '5rem', width: '100%' }}>
-          <Button
-						id="submitHaiku"
-						style={{
-              position: 'absolute',
-              bottom: 8,
-              left: '0',
-            }}
-            sx={whiteButton}
-            variant="outlined"
-            type="submit"
-						disabled={(lineOne !== '5 Syllables') || (lineTwo !== '7 Syllables') || (lineThree !== '5 Syllables')}
-          >
-            <h3>Submit</h3>
-          </Button>
-        </div>
+        <div style={{ height: '5rem', width: '100%' }} />
+				<Button
+					id="submitHaiku"
+					style={{
+						position: 'absolute',
+						bottom: 8,
+						left: '0',
+					}}
+					sx={submitState ? whiteButton : greenButton}
+					variant="outlined"
+					type="submit"
+					disabled={submitState}
+				>
+					<h3>Submit</h3>
+				</Button>
       </form>
     </div>
   );

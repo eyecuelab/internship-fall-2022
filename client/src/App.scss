@@ -109,8 +109,7 @@ button {
 	&:focus {
 		outline: none !important;
 	}
-	&:disabled {
-		color: white !important;
-		background-color: #ff0000;
+	&.ready {
+		background-color: green;
 	}
 }

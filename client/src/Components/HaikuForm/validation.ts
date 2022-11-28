@@ -25,7 +25,6 @@ export const haikuCheck = (poem: string, line: number) : boolean => {
 	if (poem.length > 0) {
 		const lineArr = splitLine(poem);
 		if (line === 1 || line === 3) {
-			console.log(lineArr);
 			if (lineCheck(lineArr) != 5) {
 				return false;
 			}
@@ -45,7 +44,6 @@ export const splitLine = (line: string) => {
 export const lineCheck = (line: string[]) => {
   const countArr = line.map((word) => countSyllables(word.replace(/\s/g, '')));
   let sum = countArr.reduce((sum, number) => {
-		console.log('SUM: ', sum, 'NUMBER: ', number);
     return sum + number;
   }, 0);
 	console.log(sum);
@@ -53,12 +51,11 @@ export const lineCheck = (line: string[]) => {
 };
 
 export const countSyllables = (word: string) => {
-	console.log('WORD: ', word);
 	const vowelMatch = word.match(/[aeiouy]+/gi);
 	const edgeCaseMatch = word.match(/(eo|io|ia)/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
 	const lastLetters = [word[word.length - 1]?.toLowerCase(), word[word.length - 2]?.toLowerCase(), word[word.length - 3]?.toLowerCase()];
-	if (lastLetters[0] === 'e' && lastLetters[1] !== 'l') {
+	if (lastLetters[0] === 'e' && (lastLetters[1] !== 'l' || !['a','e','i','o','u'].includes(lastLetters[2]))) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
 		return syllables > 0 ? syllables : 1;
 	} else if ((lastLetters[0] === 'd' && lastLetters[1] === 'e') && (lastLetters[2] !== 't' && lastLetters[2] !== 'd')) {
@@ -67,8 +64,10 @@ export const countSyllables = (word: string) => {
 	} else if (lastLetters.join('') === 'msi') {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 		return syllables > 0 ? syllables : 1;
+	} else if (lastLetters[0] === 's' && lastLetters[1] === 'e') {
+		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
+		return syllables > 0 ? syllables : 1;
 	} else {
-		console.log(word, ' ', word.match(/[aeiou]+/gi));
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
 		return word.replace(/\s/g, '').length > 0 ? syllables : 0;
 	}
