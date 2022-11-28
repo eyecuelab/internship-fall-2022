@@ -54,20 +54,14 @@ export const countSyllables = (word: string) => {
 	const vowelMatch = word.match(/[aeiouy]+/gi);
 	const edgeCaseMatch = word.match(/(eo|io|ia)/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
-	// note: some -tle/-dle words lose a syllable when in the past tense
-	 if (/([^ytd]ed|(?<=[aeiou])[^aeiou]e|^([^l])e|[st]ion|[sz]es|cious)$/i.test(word)) {
+	// note: some -tle/-dle and double-consonan words lose a syllable when in the past tense
+	if (/[^ytd]ed|(?<=[aeiou])[^aeiou]e|^([^l])e|[st]ion|[sz]es|cious$/i.test(word)) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 		return syllables > 0 ? syllables : 1;
-	} else if (/sm|[aeiou]ous$/i.test(word)) {
+	} else if (/sm|[aeiou]ous|[aeiouy]ing$/i.test(word)) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 		return syllables > 0 ? syllables : 1;
 	} else {
-		// for (let i=0; i< negativeExceptions.length; i++) {
-		// 	if (word.endsWith(negativeExceptions[i])) {
-		// 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
-		// 		return syllables > 0 ? syllables : 1;
-		// 	}
-		// }
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
 		return word.replace(/\s/g, '').length > 0 ? syllables : 0;
 	}
