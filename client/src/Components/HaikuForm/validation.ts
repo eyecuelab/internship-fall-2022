@@ -60,11 +60,14 @@ export const countSyllables = (word: string) => {
 	} else if ((lastLetters[0] === 'd' && lastLetters[1] === 'e') && (lastLetters[2] !== 't' && lastLetters[2] !== 'd')) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 		return syllables > 0 ? syllables : 1;
-	} else if (lastLetters[0] === 'm' && lastLetters[1] === 's' && lastLetters[2] === 'i') {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
-		return syllables > 0 ? syllables : 1;
 	} else if (lastLetters[0] === 'n' && lastLetters[1] === 'o' && lastLetters[2] === 'i' && lastLetters[3] === 't') {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
+		return syllables > 0 ? syllables : 1;
+	} else if (lastLetters[0] === 's' && lastLetters[1] === 'e' && lastLetters[2] !== 's') {
+		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
+		return syllables > 0 ? syllables : 1;
+	} else if (lastLetters[0] === 'm' && lastLetters[1] === 's' && lastLetters[2] === 'i') {
+		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 		return syllables > 0 ? syllables : 1;
 	} else {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
