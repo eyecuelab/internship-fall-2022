@@ -11,14 +11,18 @@ interface Props {
 
 interface IFormInput {
   name: string;
+	moderatorId: number;
 }
 
 type Data = {
 	name: string;
+	moderatorId: number;
 }
 
 function ModNewGame(props: Props) {
-  const { control, handleSubmit } = useForm<IFormInput>();
+  const { control, handleSubmit, setValue } = useForm<IFormInput>();
+
+	setValue('moderatorId', 1 /*props.moderatorId*/);
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
 		data.name ?
