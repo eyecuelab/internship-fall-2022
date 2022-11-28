@@ -53,19 +53,19 @@ export const countSyllables = (word: string) => {
 	const vowelMatch = word.match(/[aeiouy]+/gi);
 	const edgeCaseMatch = word.match(/(eo|io|ia)/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
-	const lastLetters = [word[word.length - 1]?.toLowerCase(), word[word.length - 2]?.toLowerCase(), word[word.length - 3]?.toLowerCase()];
+	const lastLetters = word.toLowerCase().split('').reverse().join('');
 	if (lastLetters[0] === 'e' && (lastLetters[1] !== 'l' || !['a','e','i','o','u'].includes(lastLetters[2]))) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
 		return syllables > 0 ? syllables : 1;
 	} else if ((lastLetters[0] === 'd' && lastLetters[1] === 'e') && (lastLetters[2] !== 't' && lastLetters[2] !== 'd')) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 		return syllables > 0 ? syllables : 1;
-	} else if (lastLetters.join('') === 'msi') {
+	} else if (lastLetters[0] === 'm' && lastLetters[1] === 's' && lastLetters[2] === 'i') {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 		return syllables > 0 ? syllables : 1;
-	// } else if (lastLetters[0] === 's' && lastLetters[1] === 'e') {
-	// 	const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
-	// 	return syllables > 0 ? syllables : 1;
+	} else if (lastLetters[0] === 'n' && lastLetters[1] === 'o' && lastLetters[2] === 'i' && lastLetters[3] === 't') {
+		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
+		return syllables > 0 ? syllables : 1;
 	} else {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
 		return word.replace(/\s/g, '').length > 0 ? syllables : 0;

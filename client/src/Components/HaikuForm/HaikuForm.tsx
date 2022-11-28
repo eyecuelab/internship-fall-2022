@@ -56,33 +56,33 @@ function HaikuForm() {
 	const displayValidation = ( lineNumber: number, value: string ) => {
 		const inputField = document.getElementById('line'+lineNumber);
 		const label = document.getElementById('label'+lineNumber);
-		const submitButton = document.getElementById('submitHaiku');
+		const submitButton:HTMLButtonElement = (document.getElementById('submitHaiku') as HTMLButtonElement);
+
 		if (!haikuCheck(value, lineNumber)) {
 			setSubmitState(true);
 			inputField && (inputField.style.color = 'red');
 			label && (label.style.color = 'red');
-		}
-		if (!compareWords(stems, value?.toLowerCase().split(' '))) {
-			setSubmitState(true);
-			swapLabel(lineNumber, 'you may not use words in the phrase');
-			inputField && (inputField.style.color = 'red');
-			label && (label.style.color = 'red');
-		}
-		if (compareWords(stems, value?.toLowerCase().split(' ')) && haikuCheck(value, lineNumber)) {
+			if (compareWords(stems, value?.toLowerCase().split(' '))) {
+				swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
+			} else {
+				swapLabel(lineNumber, 'you may not use words in the phrase');
+			}
+		} else if (compareWords(stems, value?.toLowerCase().split(' '))) {
 			buttonReady(submitButton);
 			swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
 			inputField && (inputField.style.color = '#363636');
 			label && (label.style.color = '#363636');
-		}
-		if (!haikuCheck(value, lineNumber) && compareWords(stems, value?.toLowerCase().split(' '))) {
-			swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
+		} else {
+			swapLabel(lineNumber, 'you may not use words in the phrase');
+			inputField && (inputField.style.color = 'red');
+			label && (label.style.color = 'red');
 		}
 	}
 
-	const buttonReady = (button) => {
-		const line1 = document.getElementById('line1')?.value;
-		const line2 = document.getElementById('line2')?.value;
-		const line3 = document.getElementById('line3')?.value;
+	const buttonReady = (button: HTMLButtonElement) => {
+		const line1 = (document.getElementById('line1') as HTMLInputElement).value;
+		const line2 = (document.getElementById('line2') as HTMLInputElement).value;
+		const line3 = (document.getElementById('line3') as HTMLInputElement).value;
 		if (line1 !== '' && line2 !== '' && line3 !== '') {
 			setSubmitState(false);
 		} else {
