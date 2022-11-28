@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../index.css';
 import { Grid, Button } from '@mui/material';
 import { whiteButton, redButton } from '../componentStyles';
 
@@ -7,6 +8,31 @@ function TeamList() {
   redButton.width = '100%';
   return (
     <>
+      <Grid
+        container
+        direction ="column"
+        justifyContent="space-between"
+        alignItems="center"
+        sx={{
+          height: '100%',
+          width: '100%',
+          margin: 'auto',
+          display: 'block',
+        }}
+      >
+        <Grid item xs={12} md={12} lg={12}>
+
+        </Grid>
+      </Grid>
+
+
+
+
+
+
+
+
+
       <Grid container spacing={2}>
         <Grid container item xs={4} direction="column">
           <h3>GAMES</h3>
@@ -93,7 +119,7 @@ function TeamList() {
       <br />
       <br />
       <br />
-      {/* PUT BUTTONS IN A GRID */}
+
       <Button sx={whiteButton} variant="outlined">
         <h3>EXTENDS 30 SECONDS</h3>
       </Button>

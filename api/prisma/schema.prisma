@@ -10,21 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
-  id                  Int               @id @default(autoincrement())
-  name                String
-  role                Roles             @relation(fields: [roleId], references: [id])
-  roleId              Int
-  team                Teams?            @relation(fields: [teamId], references: [id])
-  teamId              Int?
-  game                Games?            @relation(fields: [gameId], references: [id])
-  gameId              Int?
-}
-
-model Roles {
-  id                  Int               @id @default(autoincrement())
-  name                String
-  User                Users[]
+model Moderators {
+	id									Int								@id @default(autoincrement())
+	email								String						@unique
+	games								Games[]
+	topics							Topics[]
+	phrases							Phrases[]
 }
 
 model Teams {
@@ -34,7 +25,6 @@ model Teams {
   teamScore           Int
   game                Games             @relation(fields: [gameId], references: [id])
   gameId              Int
-  User                Users[]
 }
 
 model Topics {
@@ -43,6 +33,8 @@ model Topics {
   Phrase              Phrases[]
   game                Games             @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId              Int
+	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+	moderatorId					Int
 }
 
 model Phrases {
@@ -51,6 +43,8 @@ model Phrases {
   wordCount           Int
   topic               Topics            @relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId             Int
+	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+	moderatorId					Int
 }
 
 model Games {
@@ -60,8 +54,9 @@ model Games {
   gameCode            String          	@unique  
 	publishedAt 				DateTime?					
   Team                Teams[]
-  User                Users[]
 	Topic								Topics[]
+	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+	moderatorId					Int
 }
 
 model Rounds {

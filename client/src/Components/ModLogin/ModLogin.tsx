@@ -1,13 +1,34 @@
 import React from 'react';
+import { useGoogleLogin } from '@react-oauth/google';
 import { Card, CardContent, Button } from '@mui/material';
+import GoogleIcon from '@mui/icons-material/Google';
 import { Content, Header } from './styles';
-import LoginHooks from '../../Hooks/LoginHooks';
+import { whiteButton } from '../componentStyles';
 
 interface Props {
 	login: () => void;
+	setUserData: (data: any) => void;
+	userData: any;
 }
 
 function ModLogin(props: Props) {
+	whiteButton.width = '100%';
+	whiteButton.padding = '1rem';
+
+	const login = useGoogleLogin({
+		onSuccess: (response) => {
+  		fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+				headers: {
+					'Authorization': `Bearer ${response.access_token}`
+				},
+			})
+			.then(response => response.json())
+			.then(data => {
+				props.setUserData(data);
+			});
+		}
+	})
+
   return (
     <>
       <Header>
@@ -35,22 +56,21 @@ function ModLogin(props: Props) {
             }}
           >
             <div>
-              <h4>Moderator Login</h4>
+              <h4 style={{textAlign: 'center'}}>Moderator Login</h4>
               <br />
-              <LoginHooks />
-              {/* <Button
-								onClick={props.login}
-                sx={{
-                  height: '5rem',
-                  width: '100%',
-                  color: '#363636',
-                  border: '1px solid #363636',
-                  borderRadius: '10px',
-                  background: '#bbb',
-                }}
+							{/* @ts-ignore */}
+              <Button
+								onClick={login}
+                sx={whiteButton}
               >
-                GOOGLE SIGN IN
-              </Button> */}
+                <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem', marginTop: '0.5rem'}}>SIGN IN WITH GOOGLE</h3>
+              </Button>
+							<br />
+							<br />
+							<button onClick={() => console.log(props.userData)} style={{width: '100%'}}>check user data?</button>
+							<br />
+							<br />
+							<button onClick={props.login} style={{width: '100%'}}>login hook</button>
             </div>
           </CardContent>
         </Content>

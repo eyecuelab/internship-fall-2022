@@ -1,23 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../index.css';
+import { deleteData, getData } from '../../ApiHelper';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModLogin from '../../Components/ModLogin/ModLogin';
 import ModGameList from '../../Components/ModGameList/ModGameList';
 import ModNewGame from '../../Components/ModNewGame/ModNewGame';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
 
-function ModGameControl() {
-  const [login, setLogin] = useState(true);
-  const [createNewGameView, setCreateNewGameView] = useState(false);
+const getGames = () => {
+  const games = getData('/games');
+  return games;
+};
 
-	document.documentElement.style.background = 'url(/images/moderator_background.png)';
+const gameList = await getGames();
+
+interface Props {
+	setUserData: any;
+	userData: any;
+}
+
+function ModGameControl(props: Props) {
+  const [login, setLogin] = useState(false);
+  const [createNewGameView, setCreateNewGameView] = useState(false);
+  const [games, setGames] = useState([]);
+
+  useEffect(() => {
+    getGameList();
+  }, []);
+
+  const getGameList = async () => {
+    const gameList = await getData('/games');
+    setGames(gameList);
+  };
+
+  const deleteGame = (gameId: any) => {
+    deleteData(`/games/${gameId}`).then(() => getGameList());
+  };
+
+  document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   const handleLogin = () => {
     setLogin(true);
   };
 
   const handleLogout = () => {
-    setLogin(true);
+    setLogin(false);
   };
 
   const handleCreateNewGame = () => {
@@ -29,7 +56,13 @@ function ModGameControl() {
       return (
         <CardTemplate
           user="moderator"
-          content={<ModGameList handleCreateNewGame={handleCreateNewGame} />}
+          content={
+            <ModGameList
+              handleDeleteGame={deleteGame}
+              games={games}
+              handleCreateNewGame={handleCreateNewGame}
+            />
+          }
           overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );
@@ -43,7 +76,7 @@ function ModGameControl() {
       );
     }
   }
-  return <ModLogin login={handleLogin} />;
+  return <ModLogin login={handleLogin} setUserData={props.setUserData} userData={props.userData}/>;
 }
 
 export default ModGameControl;

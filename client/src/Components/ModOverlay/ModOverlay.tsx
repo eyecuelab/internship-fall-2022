@@ -1,22 +1,22 @@
 import React from 'react';
 import '../../index.css';
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
 import { greenButton, redButton } from '../componentStyles';
-
+import GameInfo from './GameInfo';
 
 interface Props {
   handleLogout?: () => void;
+  gameData: any;
 }
 
 function ModOverlay(props: Props) {
   const location = useLocation();
 
-	redButton.width = '100%';
-	greenButton.width = '100%';
-	greenButton.marginBottom = '1.5rem';
+  redButton.width = '100%';
+  greenButton.width = '100%';
+  greenButton.marginBottom = '1.5rem';
 
-  console.log(location.pathname);
   return (
     <Grid
       container
@@ -35,6 +35,7 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
+      {props.gameData && <GameInfo gameInfo={props.gameData} />}
       <Grid
         item
         xs={12}
@@ -45,19 +46,14 @@ function ModOverlay(props: Props) {
           bottom: 100,
         }}
       >
-        {(location.pathname.includes("/topic/") || location.pathname.includes("/game/")) &&
-        <Button
-          sx={greenButton}
-        >
-          <h3>Publish</h3>
-        </Button>
-        }
-        <br/>
-        <Link to= "/"> 
-          <Button
-            onClick={props.handleLogout}
-            sx={redButton} 
-          >
+        {(location.pathname.includes('/topic/') || location.pathname.includes('/game/')) && (
+          <Button sx={ greenButton }>
+            <h3>Publish</h3>
+          </Button>
+        )}
+        <br />
+        <Link to="/">
+          <Button onClick={props.handleLogout} sx={redButton}>
             <h3>Logout</h3>
           </Button>
         </Link>
