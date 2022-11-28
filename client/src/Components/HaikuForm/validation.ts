@@ -54,18 +54,23 @@ export const countSyllables = (word: string) => {
 	const edgeCaseMatch = word.match(/(eo|io|ia)/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
 	const lastLetters = word.toLowerCase().split('').reverse().join('');
+	// special case for -le words (words like 'apple' are 2 where words like 'smile' are 1)
 	if (lastLetters[0] === 'e' && (lastLetters[1] !== 'l' || !['a','e','i','o','u'].includes(lastLetters[2]))) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
 		return syllables > 0 ? syllables : 1;
+	// special case for -ed words (words like 'busted' are 2 where words like 'furled' are 1)
 	} else if ((lastLetters[0] === 'd' && lastLetters[1] === 'e') && (lastLetters[2] !== 't' && lastLetters[2] !== 'd')) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 		return syllables > 0 ? syllables : 1;
+	// special case for -tion words (the '-ion' in 'lion' is 2 where the '-ion' in 'motion' is 1)
 	} else if (lastLetters[0] === 'n' && lastLetters[1] === 'o' && lastLetters[2] === 'i' && lastLetters[3] === 't') {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
 		return syllables > 0 ? syllables : 1;
+	// special case for -zes/-ses words (words like 'phrases' are 2 where words like 'games' are 1)
 	} else if (lastLetters[0] === 's' && lastLetters[1] === 'e' && (lastLetters[2] !== 's' && lastLetters[2] !== 'z')) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 		return syllables > 0 ? syllables : 1;
+	// special case for '-ism' words (words like 'prism' have an extra syllable that words like 'prisma' do not)
 	} else if (lastLetters[0] === 'm' && lastLetters[1] === 's' && lastLetters[2] === 'i') {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 		return syllables > 0 ? syllables : 1;
