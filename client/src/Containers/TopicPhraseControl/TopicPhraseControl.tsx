@@ -28,7 +28,7 @@ function TopicPhraseControl(props: Props) {
 
   const getGameList = async () => {
 		const gameLists = await getData('/games');
-    const selectedGame= gameLists.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0]?.name;
+    const selectedGame= gameLists.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0];
 		setTheGame(selectedGame);
   }
 
