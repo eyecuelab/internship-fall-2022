@@ -33,7 +33,6 @@ export const createTopic = async (topicName: string, gameId: number, moderatorId
     data: {
       name: topicName,
       game: { connect: { id: gameId } },
-			// @ts-ignore
 			moderator: { connect: { id: moderatorId } }
     }
   });
