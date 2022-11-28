@@ -3,7 +3,9 @@ import '../../index.css';
 import { Link, useLocation } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
 import { greenButton, redButton } from '../componentStyles';
+import { putData } from '../../ApiHelper';
 import GameInfo from './GameInfo';
+
 
 interface Props {
   handleLogout?: () => void;
@@ -11,7 +13,10 @@ interface Props {
 }
 
 function ModOverlay(props: Props) {
-  const location = useLocation();
+    const location = useLocation();
+	const updateGameStatus = (gameId: any) => {
+		putData(`/games/${gameId}`);
+	}
 
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -46,14 +51,22 @@ function ModOverlay(props: Props) {
           bottom: 100,
         }}
       >
-        {(location.pathname.includes('/topic/') || location.pathname.includes('/game/')) && (
-          <Button sx={ greenButton }>
-            <h3>Publish</h3>
-          </Button>
-        )}
-        <br />
-        <Link to="/">
-          <Button onClick={props.handleLogout} sx={redButton}>
+		<Link to= "/"> 
+        {(location.pathname.includes("/topic/") || location.pathname.includes("/game/")) &&
+        <Button
+		onClick={() => updateGameStatus(6)}
+          sx={greenButton}
+        >
+          <h3>Publish</h3>
+        </Button>
+        }
+		</Link>
+        <br/>
+        <Link to= "/"> 
+          <Button
+            onClick={props.handleLogout}
+            sx={redButton} 
+          >
             <h3>Logout</h3>
           </Button>
         </Link>

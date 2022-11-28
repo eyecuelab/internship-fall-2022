@@ -11,7 +11,7 @@ const io = new Server(server, {
       'http://localhost:5173',
 			'https://www.thunderclient.com'
     ],
-    methods: ['GET', 'POST', 'DELETE']
+    methods: ['GET', 'POST', 'DELETE', 'PUT']
   }
 });
 

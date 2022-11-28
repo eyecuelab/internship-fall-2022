@@ -27,3 +27,11 @@ export const deleteGame = async (id: number)=>{
     }
   });
 }
+
+export const updateGameStatus = async (id: number)=>{
+	const now = new Date();
+	return await prisma.games.update({
+	  where: { id: Number(id) },
+	  data: { publishedAt: now }
+	});
+  }
