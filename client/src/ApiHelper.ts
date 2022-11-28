@@ -42,3 +42,12 @@ export const deleteData= async (endpoint: string)=>{
   });
   console.log(handleResponse(response));
 }
+
+export const putData = async (endpoint: string) => {
+	const url = `${API_ENDPOINT}${endpoint}`;
+	const response = await fetch(url, {
+	  ...BASE_HEADERS,
+	  method: 'PUT',
+	});
+	return handleResponse(response);
+  };
