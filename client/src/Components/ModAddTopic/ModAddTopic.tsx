@@ -14,12 +14,14 @@ interface Props {
 interface IFormInput {
   name: string;
 	gameId: number;
+	moderatorId: number;
 }
 
 function ModAddTopic(props: Props) {
   const {control, handleSubmit, setValue, reset} = useForm<IFormInput>();
   const [topics, setTopics] = useState([]);
 	setValue('gameId', props.gameId);
+	setValue('moderatorId', 1);
 
 	useEffect(() => {
 		getTopicList();

@@ -11,6 +11,13 @@ interface Props {}
 interface IFormInput {
   body: string;
 	topicId: number;
+	moderatorId: number;
+}
+
+type Data = {
+  body: string;
+	topicId: number;
+	moderatorId: number;
 }
 
 function ModAddPhrase(props: Props) {
@@ -20,13 +27,14 @@ function ModAddPhrase(props: Props) {
   const [phrases, setPhrases] = useState([]);
 	const [topicName, setTopicName] = useState("");
 	setValue('topicId', Number(topicId));
+	setValue('moderatorId', 1);
 
 	useEffect(() => {
 		getPhraseList();
 		getTopicName();
 	}, [topicName]);
 
-	const addNewPhrase: SubmitHandler<IFormInput> = (data: unknown) => {
+	const addNewPhrase: SubmitHandler<IFormInput> = (data: Data) => {
     postData('/phrases', data).then(() => getPhraseList());
 		reset((data) => ({ ...data, body: '' }))
   };

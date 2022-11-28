@@ -55,7 +55,7 @@ export const countSyllables = (word: string) => {
 	const edgeCaseMatch = word.match(/(eo|io|ia)/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
 	// note: some -tle/-dle and double-consonan words lose a syllable when in the past tense
-	if (/[^ytd]ed|(?<=[aeiou])[^aeiou]e|^([^l])e|[st]ion|[sz]es|cious$/i.test(word)) {
+	if (/[(.){2}].*[^gvnytd]ed$|([aeiou][^aeiou])e$|([^l])e$|[st]ion$|[^sz]es$|cious$/i.test(word)) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 		return syllables > 0 ? syllables : 1;
 	} else if (/sm|[aeiou]ous|[aeiouy]ing$/i.test(word)) {

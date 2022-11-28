@@ -5,7 +5,7 @@ import io from "../server";
 const phrasesControllers = {
   async getPhrase(req: any, res: any) {
     const { topicId, moderatorId } = req.params;
-    const phrases = await getPhrase(Number(topicId), Number(moderatorId));
+    const phrases = await getPhrase(Number(topicId));
     return res.json(phrases);
   },
 

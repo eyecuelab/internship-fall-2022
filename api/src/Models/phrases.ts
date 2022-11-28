@@ -10,13 +10,11 @@ type Phrase = {
   topicId: number
 }
 
-export const getPhrase = async (topicId: number, moderatorId: number) => {
+export const getPhrase = async (topicId: number) => {
   try {
 		return await prisma.phrases.findMany({
 			where: {
 				topicId: Number(topicId),
-				// @ts-ignore
-				moderatorId: Number(moderatorId)
 			}
 		});
 	} catch(error: unknown) {
