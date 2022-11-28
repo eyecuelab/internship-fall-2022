@@ -46,6 +46,7 @@ export const lineCheck = (line: string[]) => {
   let sum = countArr.reduce((sum, number) => {
     return sum + number;
   }, 0);
+	console.log(sum);
   return sum || 0;
 };
 
@@ -53,28 +54,20 @@ export const countSyllables = (word: string) => {
 	const vowelMatch = word.match(/[aeiouy]+/gi);
 	const edgeCaseMatch = word.match(/(eo|io|ia)/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
-	const lastLetters = word.toLowerCase().split('').reverse().join('');
-	// special case for -le words (words like 'apple' are 2 where words like 'smile' are 1)
-	if (lastLetters[0] === 'e' && (lastLetters[1] !== 'l' || !['a','e','i','o','u'].includes(lastLetters[2]))) {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
-		return syllables > 0 ? syllables : 1;
-	// special case for -ed words (words like 'busted' are 2 where words like 'furled' are 1)
-	} else if ((lastLetters[0] === 'd' && lastLetters[1] === 'e') && (lastLetters[2] !== 't' && lastLetters[2] !== 'd')) {
+	// note: some -tle/-dle words lose a syllable when in the past tense
+	 if (/([^ytd]ed|(?<=[aeiou])[^aeiou]e|^([^l])e|[st]ion|[sz]es|cious)$/i.test(word)) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 		return syllables > 0 ? syllables : 1;
-	// special case for -tion words (the '-ion' in 'lion' is 2 where the '-ion' in 'motion' is 1)
-	} else if (lastLetters[0] === 'n' && lastLetters[1] === 'o' && lastLetters[2] === 'i' && lastLetters[3] === 't') {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
-		return syllables > 0 ? syllables : 1;
-	// special case for -zes/-ses words (words like 'phrases' are 2 where words like 'games' are 1)
-	} else if (lastLetters[0] === 's' && lastLetters[1] === 'e' && (lastLetters[2] !== 's' && lastLetters[2] !== 'z')) {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
-		return syllables > 0 ? syllables : 1;
-	// special case for '-ism' words (words like 'prism' have an extra syllable that words like 'prisma' do not)
-	} else if (lastLetters[0] === 'm' && lastLetters[1] === 's' && lastLetters[2] === 'i') {
+	} else if (/sm|[aeiou]ous$/i.test(word)) {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 		return syllables > 0 ? syllables : 1;
 	} else {
+		// for (let i=0; i< negativeExceptions.length; i++) {
+		// 	if (word.endsWith(negativeExceptions[i])) {
+		// 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
+		// 		return syllables > 0 ? syllables : 1;
+		// 	}
+		// }
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
 		return word.replace(/\s/g, '').length > 0 ? syllables : 0;
 	}
