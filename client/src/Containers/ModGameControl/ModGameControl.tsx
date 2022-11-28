@@ -19,21 +19,21 @@ function ModGameControl() {
   const [createNewGameView, setCreateNewGameView] = useState(false);
   const [games, setGames] = useState([]);
 
-	useEffect(() => {
-		getGameList();
-	}, []);
+  useEffect(() => {
+    getGameList();
+  }, []);
 
   const getGameList = async () => {
-		const gameList = await getData('/games');
-		setGames(gameList);
-	}
+    const gameList = await getData('/games');
+    setGames(gameList);
+  };
 
-  const deleteGame = (gameId: any)=> {
-    deleteData(`/games/${gameId}`).then(()=> getGameList());
-  }
+  const deleteGame = (gameId: any) => {
+    deleteData(`/games/${gameId}`).then(() => getGameList());
+  };
 
-	document.documentElement.style.background = 'url(/images/moderator_background.png)';
-  
+  document.documentElement.style.background = 'url(/images/moderator_background.png)';
+
   const handleLogin = () => {
     setLogin(true);
   };
@@ -51,7 +51,13 @@ function ModGameControl() {
       return (
         <CardTemplate
           user="moderator"
-          content={<ModGameList handleDeleteGame ={deleteGame} games= {games} handleCreateNewGame={handleCreateNewGame} />}
+          content={
+            <ModGameList
+              handleDeleteGame={deleteGame}
+              games={games}
+              handleCreateNewGame={handleCreateNewGame}
+            />
+          }
           overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );
