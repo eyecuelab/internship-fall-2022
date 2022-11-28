@@ -46,7 +46,6 @@ export const lineCheck = (line: string[]) => {
   let sum = countArr.reduce((sum, number) => {
     return sum + number;
   }, 0);
-	console.log(sum);
   return sum || 0;
 };
 

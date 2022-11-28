@@ -18,7 +18,7 @@ function HaikuForm() {
 	const [lineThree, setLineThree] = useState('5 Syllables');
 	const [submitState, setSubmitState] = useState(true);
   const { control, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {console.log(data); postData('/haicues', data)};
+  const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {postData('/haicues', data)};
 
 	const roundNum = '2';
 	const topic = 'Holiday Activities';
@@ -69,7 +69,6 @@ function HaikuForm() {
 			label && (label.style.color = 'red');
 		}
 		if (compareWords(stems, value?.toLowerCase().split(' ')) && haikuCheck(value, lineNumber)) {
-			console.log('WHY IS MY CODE SO WRETCHED');
 			buttonReady(submitButton);
 			swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
 			inputField && (inputField.style.color = '#363636');
@@ -84,7 +83,6 @@ function HaikuForm() {
 		const line1 = document.getElementById('line1')?.value;
 		const line2 = document.getElementById('line2')?.value;
 		const line3 = document.getElementById('line3')?.value;
-		console.log(line1, line2, line3);
 		if (line1 !== '' && line2 !== '' && line3 !== '') {
 			setSubmitState(false);
 		} else {
