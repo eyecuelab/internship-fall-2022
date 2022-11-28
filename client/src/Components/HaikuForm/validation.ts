@@ -64,9 +64,9 @@ export const countSyllables = (word: string) => {
 	} else if (lastLetters.join('') === 'msi') {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 		return syllables > 0 ? syllables : 1;
-	} else if (lastLetters[0] === 's' && lastLetters[1] === 'e') {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
-		return syllables > 0 ? syllables : 1;
+	// } else if (lastLetters[0] === 's' && lastLetters[1] === 'e') {
+	// 	const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ); 
+	// 	return syllables > 0 ? syllables : 1;
 	} else {
 		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
 		return word.replace(/\s/g, '').length > 0 ? syllables : 0;
