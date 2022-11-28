@@ -18,8 +18,8 @@ const getGames = () => {
 const gameList = await getGames();
 
 function TopicPhraseControl(props: Props) {
-  const {code} = useParams();
-  const selectedId = parseInt(code as string);
+  const {id} = useParams();
+  const selectedId = parseInt(id as string);
   const [theGame, setTheGame] = useState("");
 
   useEffect(() => {
@@ -48,7 +48,7 @@ function TopicPhraseControl(props: Props) {
       <CardTemplate
         user="moderator"
         overlay={<ModOverlay gameData={theGame} />}
-        content={<ModAddTopic gameId={Number(code)} />}
+        content={<ModAddTopic gameId={Number(id)} />}
       />
     );
   }
