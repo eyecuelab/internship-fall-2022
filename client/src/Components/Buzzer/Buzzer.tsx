@@ -3,7 +3,12 @@ import { Button, Grid } from '@mui/material';
 import socket from '../../Hooks/WebsocketHook';
 import { greenButton, redButton } from '../componentStyles';
 
-function Buzzer () {
+interface Props {
+	roundNumber: number;
+	topic: string;
+}
+
+function Buzzer (props: Props) {
 	const [buzzerState, setBuzzerState] = useState(true);
 
 	greenButton.width = '100%';
@@ -39,7 +44,7 @@ function Buzzer () {
 
 	return (
 		<>
-		<h3>round 2 - holiday activity</h3>
+		<h3>round {props.roundNumber} - {props.topic}</h3>
 		<Grid
 			container
 			alignItems="center"
@@ -51,8 +56,7 @@ function Buzzer () {
 				<Button
 					id='buzzer'
 					onClick={buzzIn}
-					sx={buzzerState ? greenButton : redButton}
-
+					sx={greenButton}
 					disabled={!buzzerState}
 				>
 					<h3>buzz in!</h3>

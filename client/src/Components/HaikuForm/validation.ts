@@ -66,15 +66,13 @@ export const countSyllables = (word: string) => {
 		/ii$/i,
 	];
 	const minusSyllables = [
-		/([^a][^tfp][^td]e[d])$/i,
+		/([^tf][^td]e[d])$/i,
 		/([aeiou][^aeiou])e$/i,
-		/[^u][aeiou]nce$/i,
 		/([^n][^l])e$/i,
 		/[st]ion$/i,
 		/cious$/i,
 		/cial$/i,
 		/elle$/i,
-		/nge$/i,
 	];
 	for (let i=0; i<minusSyllables.length; i++) {
 		if (minusSyllables[i].test(word)) {
