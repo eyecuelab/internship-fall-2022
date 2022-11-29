@@ -2,7 +2,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModAddTopic from '../../Components/ModAddTopic/ModAddTopic';
-import { getData } from '../../ApiHelper';
+import { getData} from '../../ApiHelper';
 import ModAddPhrase from '../../Components/ModAddPhrase/ModAddPhrase';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
 import ModLogin from '../../Components/ModLogin/ModLogin';
@@ -18,8 +18,8 @@ function TopicPhraseControl(props: Props) {
   const [game, setGame] = useState({});
 
   useEffect(() => {
-		getGameList();
-	}, []);
+    getGameList();
+  }, []);
 
   const getGameList = async () => {
 		const game = await getData(`/games/${id}`);
