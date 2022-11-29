@@ -13,7 +13,8 @@ interface Props {
 }
 
 function ModOverlay(props: Props) {
-    const location = useLocation();
+	const location = useLocation();
+
 	const updateGameStatus = (gameId: any) => {
 		putData(`/games/${gameId}`);
 	}
@@ -21,6 +22,8 @@ function ModOverlay(props: Props) {
   redButton.width = '100%';
   greenButton.width = '100%';
   greenButton.marginBottom = '1.5rem';
+
+	console.log(props.gameData);
 
   return (
     <Grid
@@ -54,7 +57,7 @@ function ModOverlay(props: Props) {
 		<Link to= "/"> 
         {(location.pathname.includes("/topic/") || location.pathname.includes("/game/")) &&
         <Button
-		onClick={() => updateGameStatus(6)}
+		onClick={() => updateGameStatus(props.gameData.id)}
           sx={greenButton}
         >
           <h3>Publish</h3>
