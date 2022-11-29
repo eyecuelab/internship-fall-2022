@@ -1,0 +1,73 @@
+import React, { useEffect, useState } from 'react';
+import { Button, Grid } from '@mui/material';
+import socket from '../../Hooks/WebsocketHook';
+import { greenButton, redButton } from '../componentStyles';
+
+function Buzzer () {
+	const [buzzerState, setBuzzerState] = useState(true);
+
+	greenButton.width = '100%';
+	redButton.width = '100%';
+
+	useEffect(() => {
+		socket.on('connection', () => {
+			console.log('socket open');
+		});
+
+		socket.on('buzz', () => {
+			setBuzzerState(false);
+		});
+
+		socket.on('buzzer_refresh', () => {
+			setBuzzerState(true);
+		});
+
+		return () => {
+			socket.off('connection');
+			socket.off('buzz');
+			socket.off('buzzer_refresh');
+		}
+	}, []);
+
+	const buzzIn = () => {
+		socket.emit('buzz');
+	}
+
+	const buzzRefresh = () => {
+		socket.emit('buzzer_refresh');
+	}
+
+	return (
+		<>
+		<h3>round 2 - holiday activity</h3>
+		<Grid
+			container
+			alignItems="center"
+			sx={{ height: '80%', paddingTop: '15%', paddingBottom: '15%' }}
+		>
+			<Grid sx={{width: '100%'}}>
+				<h3>you are guessing...</h3>
+				<br />
+				<Button
+					id='buzzer'
+					onClick={buzzIn}
+					sx={buzzerState ? greenButton : redButton}
+					variant="outlined"
+					disabled={!buzzerState}
+				>
+					<h3>buzz in!</h3>
+				</Button>
+			</Grid>
+		</Grid>
+				<Button
+					onClick={buzzRefresh}
+					sx={redButton}
+					variant="outlined"
+				>
+					<h3>reset buzzer ?</h3>
+				</Button>
+		</>
+	);
+}
+
+export default Buzzer

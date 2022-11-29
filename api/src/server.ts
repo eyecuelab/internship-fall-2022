@@ -1,9 +1,8 @@
 import app from './app';
-import { Socket } from 'socket.io';
+import http from 'http';
+import { Socket, Server } from 'socket.io';
 
-const http = require('http');
 const server = http.createServer(app);
-const { Server } = require('socket.io');
 const io = new Server(server, {
   cors: {
     origin: [
@@ -18,6 +17,14 @@ const io = new Server(server, {
 io.on('connection', (socket : Socket) => {
   console.log('a user connected');
   io.emit('connection');
+
+	socket.on('buzz', () => {
+		io.emit('buzz');
+	});
+
+	socket.on('buzzer_refresh', () => {
+		io.emit('buzzer_refresh')
+	})
 });
 
 export default io;
