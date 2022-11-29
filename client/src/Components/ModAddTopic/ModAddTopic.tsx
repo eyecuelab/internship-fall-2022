@@ -20,10 +20,13 @@ interface IFormInput {
 function ModAddTopic(props: Props) {
   const {control, handleSubmit, setValue, reset} = useForm<IFormInput>();
   const [topics, setTopics] = useState([]);
-	const moderator = JSON.parse(localStorage.getItem('user') as string);
-	console.log('MODERATOR: ', moderator)
+	const user = JSON.parse(localStorage.getItem('user') as string);
+	console.log('user: ', user);
+	getData(`/moderators/${user.email}`).then((moderator) => {
+		console.log(moderator);
+		setValue('moderatorId', moderator.id)
+	})
 	setValue('gameId', props.gameId);
-	setValue('moderatorId', moderator.id);
 
 	useEffect(() => {
 		getTopicList();

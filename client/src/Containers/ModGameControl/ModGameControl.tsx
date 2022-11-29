@@ -20,17 +20,17 @@ function ModGameControl(props: Props) {
 		getGameList();
 	}, []);
 
-	const getGameList = async () => {
+	const getGameList = () => {
 		const user = JSON.parse(localStorage.getItem('user') as string);
 		console.log('USER: ', user);
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
 				console.log('response: ', response);
-				getData(`/games/moderator/${response.id}`).then((data) => {
+				response ? getData(`/games/moderator/${response.id}`).then((data) => {
 					console.log('DATA: ', data);
 					setGames(data);
-				});
+				}) : setGames([]);
 			});
 		} else {
 			setGames([]);
