@@ -6,17 +6,17 @@ import { greenButton, redButton } from '../componentStyles';
 import { putData } from '../../ApiHelper';
 import GameInfo from './GameInfo';
 
-
 interface Props {
   handleLogout?: () => void;
   gameData?: any;
 }
 
 function ModOverlay(props: Props) {
-    const location = useLocation();
-	const updateGameStatus = (gameId: any) => {
-		putData(`/games/${gameId}`);
-	}
+  const location = useLocation();
+
+  const updateGameStatus = (gameId: any) => {
+    putData(`/games/${gameId}`);
+  };
 
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -40,7 +40,7 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
-      {props.gameData && <GameInfo gameInfo={props.gameData} />}
+      {props.gameData && <GameInfo gameInfo={props.gameData.name} />}
       <Grid
         item
         xs={12}
@@ -51,22 +51,16 @@ function ModOverlay(props: Props) {
           bottom: 100,
         }}
       >
-		<Link to= "/"> 
-        {(location.pathname.includes("/topic/") || location.pathname.includes("/game/")) &&
-        <Button
-		onClick={() => updateGameStatus(6)}
-          sx={greenButton}
-        >
-          <h3>Publish</h3>
-        </Button>
-        }
-		</Link>
-        <br/>
-        <Link to= "/"> 
-          <Button
-            onClick={props.handleLogout}
-            sx={redButton} 
-          >
+        <Link to="/">
+          {(location.pathname.includes('/topic/') || location.pathname.includes('/game/')) && (
+            <Button onClick={() => updateGameStatus(props.gameData.id)} sx={greenButton}>
+              <h3>Publish</h3>
+            </Button>
+          )}
+        </Link>
+        <br />
+        <Link to="/">
+          <Button onClick={props.handleLogout} sx={redButton}>
             <h3>Logout</h3>
           </Button>
         </Link>
