@@ -25,6 +25,9 @@ function ModLogin(props: Props) {
 			.then(response => response.json())
 			.then(data => {
 				props.setUserData(data);
+				localStorage.removeItem('user');
+				localStorage.setItem('user', JSON.stringify(data));
+				console.log(JSON.parse(localStorage.getItem('user') as string));
 			});
 		}
 	})

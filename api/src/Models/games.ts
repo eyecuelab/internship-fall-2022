@@ -3,8 +3,12 @@ import GameCode from '../GenerateGameCode';
 
 const prisma = new PrismaClient();
 
-export const getGames = async () => {
-  return await prisma.games.findMany();
+export const getGames = async (moderatorId: number) => {
+  return await prisma.games.findMany({
+		where: {
+			moderatorId: Number(moderatorId)
+		}
+	});
 }
 
 export const createGame = async (name: string, moderatorId: number) => {

@@ -4,7 +4,8 @@ import io from '../server';
 const gamesControllers = {
 
   async getGames(req: any, res: any) {
-    const games = await getGames();
+		const { moderatorId } = req.params;
+    const games = await getGames(moderatorId);
     return res.json(games);
   },
 

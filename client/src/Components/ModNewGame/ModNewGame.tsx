@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { postData } from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import { whiteButton } from '../componentStyles';
 import '../../index.css';
 
@@ -21,10 +21,13 @@ type Data = {
 	moderatorId: number;
 }
 
+const userData = JSON.parse(localStorage.getItem('user') as string);
+const moderator = userData ? await getData(`/moderators/${userData?.email}`) : null;
+
 function ModNewGame(props: Props) {
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
-
-	setValue('moderatorId', 1 /*props.moderatorId*/);
+	console.log('MOD ID: ', moderator.id);
+	setValue('moderatorId', moderator.id);
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
 		data.name ?

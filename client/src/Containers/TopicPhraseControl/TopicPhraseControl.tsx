@@ -10,12 +10,12 @@ interface Props {
   viewPhrases: boolean;
 }
 
-const getGames = () => {
-  const games = getData('/games');
-  return games;
-};
+// const getGames = () => {
+//   const games = getData('/games');
+//   return games;
+// };
 
-const gameList = await getGames();
+// const gameList = await getGames();
 
 function TopicPhraseControl(props: Props) {
   const {id} = useParams();
@@ -27,13 +27,14 @@ function TopicPhraseControl(props: Props) {
 	}, []);
 
   const getGameList = async () => {
-		const gameLists = await getData('/games');
-    const selectedGame= gameLists.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0]?.name;
+		const user = JSON.parse(localStorage.getItem('user') as string);
+		const moderator = await getData(`/moderators/${user.email}`);
+		const gameList = await getData(`/games/${moderator.id}`);
+    const selectedGame= gameList.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0]?.name;
 		setTheGame(selectedGame);
   }
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
-
 
   if (props.viewPhrases) {
     return (

@@ -3,6 +3,7 @@ import haicuesRouter from "./Routes/haicues";
 import topicsRouter from "./Routes/topics";
 import phrasesRouter from "./Routes/phrases";
 import gamesRouter from "./Routes/games";
+import moderatorsRouter from "./Routes/moderators";
 import cors from 'cors';
 import express from 'express';
 
@@ -18,6 +19,6 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use(teamsRouter, haicuesRouter, topicsRouter, phrasesRouter, gamesRouter);
+app.use(teamsRouter, haicuesRouter, topicsRouter, phrasesRouter, gamesRouter, moderatorsRouter);
 
 export default app;
