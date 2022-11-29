@@ -22,13 +22,10 @@ function ModGameControl(props: Props) {
 
 	const getGameList = () => {
 		const user = JSON.parse(localStorage.getItem('user') as string);
-		console.log('USER: ', user);
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
-				console.log('response: ', response);
 				response ? getData(`/games/moderator/${response.id}`).then((data) => {
-					console.log('DATA: ', data);
 					setGames(data);
 				}) : setGames([]);
 			});

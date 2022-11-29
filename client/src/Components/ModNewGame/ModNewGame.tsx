@@ -26,7 +26,6 @@ function ModNewGame(props: Props) {
 	
 	const userData = JSON.parse(localStorage.getItem('user') as string);
 	getData(`/moderators/${userData?.email}`).then((response) => {
-		console.log('RESPONSE: ', response);
 		setValue('moderatorId', response.id);
 	});
 
