@@ -40,7 +40,7 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
-      {props.gameData && <GameInfo gameInfo={props.gameData.name} />}
+      {props.gameData && <GameInfo gameInfo={props.gameData} />}
       <Grid
         item
         xs={12}
