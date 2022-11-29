@@ -20,27 +20,28 @@ const gameList = await getGames();
 function TopicPhraseControl(props: Props) {
   const {id} = useParams();
   const selectedId = parseInt(id as string);
-  const [theGame, setTheGame] = useState("");
+  const [theGame, setTheGame] = useState('');
 
   useEffect(() => {
-		getGameList();
-	}, []);
+    getGameList();
+  }, []);
 
   const getGameList = async () => {
-		const gameLists = await getData('/games');
-    const selectedGame= gameLists.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0];
-		setTheGame(selectedGame);
-  }
+    const gameLists = await getData('/games');
+    const selectedGame = gameLists.filter(
+      (gameList: {id: number | undefined}) => gameList.id === selectedId
+    )[0];
+    setTheGame(selectedGame);
+  };
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
-
 
   if (props.viewPhrases) {
     return (
       <CardTemplate
         user="moderator"
         content={<ModAddPhrase />}
-        overlay={<ModOverlay gameData={theGame}/>}
+        overlay={<ModOverlay gameData={theGame} />}
       />
     );
   } else {

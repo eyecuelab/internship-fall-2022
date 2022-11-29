@@ -40,7 +40,7 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
-      {props.gameData && <GameInfo gameInfo={props.gameData} />}
+      {props.gameData && <GameInfo gameInfo={props.gameData.name} />}
       <Grid
         item
         xs={12}
@@ -53,7 +53,7 @@ function ModOverlay(props: Props) {
       >
         <Link to="/">
           {(location.pathname.includes('/topic/') || location.pathname.includes('/game/')) && (
-            <Button onClick={() => updateGameStatus(6)} sx={greenButton}>
+            <Button onClick={() => updateGameStatus(props.gameData.id)} sx={greenButton}>
               <h3>Publish</h3>
             </Button>
           )}
