@@ -4,6 +4,7 @@ import { Card, CardContent, Button } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Content, Header } from './styles';
 import { whiteButton } from '../componentStyles';
+import { postData } from '../../ApiHelper';
 
 interface Props {
 	setUserData: (data: any) => void;
@@ -26,6 +27,8 @@ function ModLogin(props: Props) {
 				props.setUserData(data);
 				localStorage.removeItem('user');
 				localStorage.setItem('user', JSON.stringify(data));
+				const moderator = JSON.parse(localStorage.getItem('user') as string);
+				postData('/moderators', moderator.email);
 			});
 		}
 	})
