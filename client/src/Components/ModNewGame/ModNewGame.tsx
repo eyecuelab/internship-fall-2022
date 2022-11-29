@@ -21,12 +21,14 @@ type Data = {
 	moderatorId: number;
 }
 
-const userData = JSON.parse(localStorage.getItem('user') as string);
-const moderator = userData ? await getData(`/moderators/${userData?.email}`) : null;
-
 function ModNewGame(props: Props) {
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
-	setValue('moderatorId', moderator.id);
+	
+	const userData = JSON.parse(localStorage.getItem('user') as string);
+	getData(`/moderators/${userData?.email}`).then((response) => {
+		console.log('RESPONSE: ', response);
+		setValue('moderatorId', response.id);
+	});
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
 		postData('/games', data);
