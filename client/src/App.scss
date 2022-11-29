@@ -119,3 +119,15 @@ textarea {
 	line-height: 50px !important;
 	color: #363636;
 }
+
+.bottom {
+	position: absolute !important;
+	bottom: 0.5rem;
+	left: 0;
+	width: 100%;
+}
+
+.spacer {
+	height: 5rem;
+	margin-bottom: 0.5rem;
+}

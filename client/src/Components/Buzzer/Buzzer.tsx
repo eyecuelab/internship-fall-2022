@@ -52,7 +52,7 @@ function Buzzer () {
 					id='buzzer'
 					onClick={buzzIn}
 					sx={buzzerState ? greenButton : redButton}
-					variant="outlined"
+
 					disabled={!buzzerState}
 				>
 					<h3>buzz in!</h3>
@@ -62,7 +62,7 @@ function Buzzer () {
 				<Button
 					onClick={buzzRefresh}
 					sx={redButton}
-					variant="outlined"
+
 				>
 					<h3>reset buzzer ?</h3>
 				</Button>

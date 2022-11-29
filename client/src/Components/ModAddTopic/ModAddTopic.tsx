@@ -93,15 +93,15 @@ function ModAddTopic(props: Props) {
             <h5>20 CHARACTERS MAX</h5>
           </Grid>
           <Grid container item xs={3} direction="column">
-            <Button type="submit" sx={greenButton} variant="outlined">
+            <Button type="submit" sx={greenButton} >
               <h3>ADD</h3>
             </Button>
           </Grid>
         </Grid>
       </form>
-			<div style={{ height: '5rem', bottom: 8 }} />
-      <Link to="/" style={{ position: 'absolute', bottom: 8, width: '100%' }}>
-        <Button sx={whiteButton} variant="outlined">
+			<div className="spacer" />
+      <Link to="/" className="bottom">
+        <Button sx={whiteButton} >
           <h3>BACK TO GAMES</h3>
         </Button>
       </Link>

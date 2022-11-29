@@ -72,12 +72,12 @@ function ModNewGame(props: Props) {
         <h5>15 characters max</h5>
       </label>
       <br />
-      <Button type="submit" sx={greenButton} variant="outlined">
+      <Button type="submit" sx={greenButton} >
         <h3>Continue</h3>
       </Button>
 			</form>
-			<div style={{ height: '5rem', bottom: 8 }} />
-			<Button onClick={props.handleCreateNewGame} style={{position: 'absolute', bottom: 8, width: '100%'}} sx={whiteButton} variant="outlined">
+			<div className="spacer" />
+			<Button onClick={props.handleCreateNewGame} className="bottom" sx={whiteButton} >
 				<h3>BACK TO GAMES</h3>
 			</Button>
     </div>

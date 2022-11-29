@@ -109,11 +109,11 @@ function HaikuForm() {
 								rhfOnChange(value.toLowerCase());
 								displayValidation(1, value);
 							}}
-              fullWidth
               id="line1"
-              variant="standard"
               type="text"
+              fullWidth
               multiline
+              variant="standard"
             />
           )}
         />
@@ -130,11 +130,11 @@ function HaikuForm() {
 								rhfOnChange(value.toLowerCase());
 								displayValidation(2, value);
 							}}
-              fullWidth
               id="line2"
-              variant="standard"
               type="text"
+              fullWidth
               multiline
+              variant="standard"
             />
           )}
         />
@@ -151,11 +151,11 @@ function HaikuForm() {
 								rhfOnChange(value.toLowerCase());
 								displayValidation(3, value);
 							}}
-              fullWidth
               id="line3"
-              variant="standard"
               type="text"
+              fullWidth
               multiline
+              variant="standard"
             />
           )}
         />
@@ -165,12 +165,7 @@ function HaikuForm() {
         <div style={{ height: '5rem', width: '100%' }} />
 				<Button
 					id="submitHaiku"
-					style={{
-						position: 'absolute',
-						bottom: 8,
-						left: '0',
-					}}
-					variant="outlined"
+					className="bottom"
 					type="submit"
 					disabled={submitState}
 					sx={submitState ? whiteButton : greenButton}

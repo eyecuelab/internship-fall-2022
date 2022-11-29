@@ -103,15 +103,15 @@ function ModAddPhrase(props: Props) {
 							<h5>20 CHARACTERS MAX</h5>
 						</Grid>
 						<Grid container item xs={3} direction="column">
-							<Button type="submit" sx={greenButton} variant="outlined">
+							<Button type="submit" sx={greenButton} >
 								<h3>ADD</h3>
 							</Button>
 						</Grid>
 					</Grid>				
 				</form>
       </Grid>
-			<div style={{ height: '5rem', bottom: 8 }} />
-			<Button onClick={() => navigate(-1)} sx={whiteButton} style={{ position: 'absolute', bottom: 8, width: '100%' }} variant="outlined">
+			<div className="spacer" />
+			<Button onClick={() => navigate(-1)} sx={whiteButton} style={{ position: 'absolute', bottom: 8, width: '100%' }} >
 				<h3>BACK TO TOPICS</h3>
 			</Button>
     </div>

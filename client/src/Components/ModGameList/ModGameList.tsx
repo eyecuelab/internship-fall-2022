@@ -56,10 +56,10 @@ function ModGameList(props: Props) {
 				{ (games.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
+				className="bottom"
         onClick={props.handleCreateNewGame}
         sx={greenButton}
-        style={{ position: 'absolute', bottom: 8, left: 0 }}
-        variant="outlined"
+
       >
         <h3>CREATE A NEW GAME</h3>
       </Button>
