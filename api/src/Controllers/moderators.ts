@@ -11,10 +11,7 @@ const moderatorsControllers = {
 
 	async createModerator(req: any, res: any) {
 		const { email } = req.body;
-
 		const newModerator = await createModerator(email);
-
-		io.emit("create_moderator", newModerator.id);
 		res.status(201).json(newModerator);
 	},
 

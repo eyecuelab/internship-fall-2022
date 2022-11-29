@@ -16,12 +16,8 @@ const topicsControllers = {
 
   async createTopic(req: any, res: any) {
     const { name, gameId, moderatorId } = req.body;
-
 		const newTopic = await createTopic(name, gameId, moderatorId);
-
-		io.emit("create_topic", newTopic.name);
 		res.status(201).json(newTopic);
-
   },
 
   async deleteTopic(req: any, res: any) {
