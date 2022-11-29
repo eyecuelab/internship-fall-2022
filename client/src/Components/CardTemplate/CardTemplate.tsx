@@ -1,4 +1,4 @@
-import React, {ReactElement, useState} from 'react';
+import React, {ReactElement} from 'react';
 import HaikuForm from '../HaikuForm/HaikuForm';
 import TeamOverlay from '../TeamOverlay/TeamOverlay';
 import ModGameList from '../ModGameList/ModGameList';
@@ -22,27 +22,13 @@ function CardTemplate(props: Props) {
       </Header>
       <StyledCard>
         <div style={{ position: 'relative' }}>
-          <StyledCardMedia
-            style={{
-              background: props.user === 'moderator' ? '#15586A' : '#0c114a',
-              backgroundImage:
-                props.user === 'moderator'
-                  ? `url(${'/images/moderator_card_background_2.png'})`
-                  : `url(${'/images/blueberries_banner.png'})`,
-							backgroundAttachment: 'absolute',
-							backgroundPosition: '16% 95%',
-							backgroundRepeat: 'no-repeat',
-            }}
-          />
+          <StyledCardMedia />
           <Overlay>
-            {/* Components in the Overlay tag will likely be rendered with a switch statement */}
             {props.overlay}
           </Overlay>
         </div>
         <Content>
           <StyledCardContent>
-            {/* previously sx={{ width: 100%}} */}
-            {/* Components in the CardContent tag will likely be rendered with switch statement */}
             {/* <HaikuForm /> */}
             {/* <ModGameList /> */}
             {/* <ModTeamList /> */}

@@ -109,7 +109,13 @@ button {
 	&:focus {
 		outline: none !important;
 	}
-	&.ready {
-		background-color: green;
-	}
+}
+
+textarea {
+	font-family: LuloCleanOneBold !important;
+	font-style: normal !important;
+	font-weight: 700 !important;
+	font-size: 42px !important;
+	line-height: 50px !important;
+	color: #363636;
 }
