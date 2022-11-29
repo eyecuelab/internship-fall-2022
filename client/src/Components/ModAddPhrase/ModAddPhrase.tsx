@@ -25,9 +25,13 @@ function ModAddPhrase(props: Props) {
 	const navigate = useNavigate();
   const { control, handleSubmit, setValue, reset } = useForm<IFormInput>();
   const [phrases, setPhrases] = useState([]);
-	const [topicName, setTopicName] = useState("");
+	const [topicName, setTopicName] = useState("");	const user = JSON.parse(localStorage.getItem('user') as string);
+	console.log('user: ', user);
+	getData(`/moderators/${user.email}`).then((moderator) => {
+		console.log(moderator);
+		setValue('moderatorId', moderator.id)
+	})
 	setValue('topicId', Number(topicId));
-	setValue('moderatorId', 1);
 
 	useEffect(() => {
 		getPhraseList();

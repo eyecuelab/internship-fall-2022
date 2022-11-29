@@ -2,17 +2,6 @@ import styled from '@emotion/styled';
 import {Card, CardContent} from '@mui/material';
 import '../../App.scss';
 
-let img = '';
-let bg_color = '';
-
-if (localStorage.getItem('user')) { 
-	img = '/images/moderator_card_background_2.png';
-	bg_color = '#15586A';
-} else {
-	img = '/images/blueberries_banner.png';
-	bg_color = '#0c114a';
-}
-
 export const Overlay = styled.div`
   height: 100%;
   width: 88%;

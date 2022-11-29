@@ -28,19 +28,25 @@ function TopicPhraseControl(props: Props) {
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
+  const handleLogout = () => {
+		props.setUserData({});
+		localStorage.clear();
+		window.localStorage.clear();
+  };
+
   if (localStorage.getItem('user')) {
 		if (props.viewPhrases) {
 			return (
 				<CardTemplate
 					content={<ModAddPhrase/>}
-					overlay={<ModOverlay gameData={game}/>}
+					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
 				/>
 			);
 		} else {
 			return (
 				<CardTemplate
-					overlay={<ModOverlay gameData={game} />}
 					content={<ModAddTopic gameId={Number(id)} />}
+					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
 				/>
 			);
 		}

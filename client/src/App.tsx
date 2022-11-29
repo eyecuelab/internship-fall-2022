@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import ModGameControl from './Containers/ModGameControl/ModGameControl';
@@ -9,6 +9,10 @@ import { client_id } from '../endpoints';
 
 function App() {
 	const [userData, setUserData] = useState({});
+
+	useEffect(() => {
+		setUserData(userData);
+	}, []);
 
   return (
 		<GoogleOAuthProvider clientId={client_id}>
