@@ -57,7 +57,7 @@ function ModAddTopic(props: Props) {
       <hr />
       {
         <Grid container>
-          {topics?.map((topic: Topic) => { return <TopicItem topic={topic} deleteTopic={deleteTopic} /> })}
+          {topics?.map((topic: Topic) => { return <TopicItem key={topic.id} topic={topic} deleteTopic={deleteTopic} /> })}
         </Grid>
       }
       <form onSubmit={handleSubmit(addNewTopic)}>
