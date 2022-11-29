@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import '../../index.css';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModLogin from '../../Components/ModLogin/ModLogin';
@@ -6,14 +6,8 @@ import ModGameList from '../../Components/ModGameList/ModGameList';
 import ModNewGame from '../../Components/ModNewGame/ModNewGame';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
 
-const getGames = () => {
-  // return games;
-};
-
-// const gameList = await getGames();
-
 interface Props {
-	setUserData: any;
+	setUserData: Dispatch<SetStateAction<{}>>;
 	userData: any;
 }
 
@@ -42,10 +36,6 @@ function ModGameControl(props: Props) {
   // };
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
-
-  const handleLogin = () => {
-    console.log(JSON.parse(localStorage.getItem('user') as string));
-  };
 
   const handleLogout = () => {
 		props.setUserData({});
@@ -80,7 +70,7 @@ function ModGameControl(props: Props) {
       );
     }
   }
-  return <ModLogin login={handleLogin} setUserData={props.setUserData} userData={props.userData}/>;
+  return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
 }
 
 export default ModGameControl;

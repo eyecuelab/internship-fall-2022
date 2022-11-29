@@ -11,7 +11,7 @@ function GameInfo(props: Props) {
     <Grid item xs={12} md={12} lg={12}>
       <br />
       <h3>game</h3>
-      <h1>{props.gameInfo}</h1>
+      <h1>{props.gameInfo.name}</h1>
       <br />
     </Grid>
   );

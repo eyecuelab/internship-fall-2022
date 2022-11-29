@@ -26,7 +26,6 @@ const moderator = userData ? await getData(`/moderators/${userData?.email}`) : n
 
 function ModNewGame(props: Props) {
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
-	console.log('MOD ID: ', moderator.id);
 	setValue('moderatorId', moderator.id);
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {

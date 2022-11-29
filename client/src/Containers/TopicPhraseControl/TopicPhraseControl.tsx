@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModAddTopic from '../../Components/ModAddTopic/ModAddTopic';
 import { getData } from '../../ApiHelper';
 import ModAddPhrase from '../../Components/ModAddPhrase/ModAddPhrase';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
+import ModLogin from '../../Components/ModLogin/ModLogin';
 
 interface Props {
+	setUserData: Dispatch<SetStateAction<{}>>;
+	userData: any;
   viewPhrases: boolean;
 }
 
@@ -19,40 +22,40 @@ interface Props {
 
 function TopicPhraseControl(props: Props) {
   const {id} = useParams();
-  const selectedId = parseInt(id as string);
-  const [theGame, setTheGame] = useState("");
+  const [game, setGame] = useState({});
 
   useEffect(() => {
 		getGameList();
 	}, []);
 
   const getGameList = async () => {
-		const user = JSON.parse(localStorage.getItem('user') as string);
-		const moderator = await getData(`/moderators/${user.email}`);
-		const gameList = await getData(`/games/${moderator.id}`);
-    const selectedGame= gameList.filter(((gameList: { id: number | undefined; })=>gameList.id===selectedId))[0]?.name;
-		setTheGame(selectedGame);
+		const game = await getData(`/games/${id}`);
+		console.log(game);
+		setGame(game);
   }
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
-  if (props.viewPhrases) {
-    return (
-      <CardTemplate
-        user="moderator"
-        content={<ModAddPhrase />}
-        overlay={<ModOverlay gameData={theGame}/>}
-      />
-    );
-  } else {
-    return (
-      <CardTemplate
-        user="moderator"
-        overlay={<ModOverlay gameData={theGame} />}
-        content={<ModAddTopic gameId={Number(id)} />}
-      />
-    );
-  }
+  if (localStorage.getItem('user')) {
+		if (props.viewPhrases) {
+			return (
+				<CardTemplate
+					user="moderator"
+					content={<ModAddPhrase/>}
+					overlay={<ModOverlay gameData={game}/>}
+				/>
+			);
+		} else {
+			return (
+				<CardTemplate
+					user="moderator"
+					overlay={<ModOverlay gameData={game} />}
+					content={<ModAddTopic gameId={Number(id)} />}
+				/>
+			);
+		}
+	}
+	return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
 }
 
 export default TopicPhraseControl;

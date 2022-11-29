@@ -28,7 +28,7 @@ export type Team = {
 export type Topic = {
 	id: number
   name: string
-  phrases: Phrase[]
+  Phrase: Phrase[]
   game: Game
   gameId: number
 }

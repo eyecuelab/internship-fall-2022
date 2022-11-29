@@ -27,7 +27,7 @@ function ModGameList(props: Props) {
 		const user = JSON.parse(localStorage.getItem('user') as string);
 		if (user) {
 		const moderator = await getData(`/moderators/${user.email}`);
-		const gameList = await getData(`/games/${moderator.id}`);
+		const gameList = await getData(`/games/moderator/${moderator.id}`);
     setGames(gameList);
 		} else {
 			setGames([]);
@@ -53,7 +53,7 @@ function ModGameList(props: Props) {
       </Grid>
       <hr />
       { <Grid container>
-				{ (games.map((game: Game) => <GameItem game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
+				{ (games.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
         onClick={props.handleCreateNewGame}

@@ -1,11 +1,17 @@
-import { getGames, createGame, deleteGame, updateGameStatus } from '../Models/games';
+import { getGameById, getGameByModerator, createGame, deleteGame, updateGameStatus } from '../Models/games';
 import io from '../server';
 
 const gamesControllers = {
 
-  async getGames(req: any, res: any) {
+  async getGameById(req: any, res: any) {
+		const { id } = req.params;
+    const games = await getGameById(id);
+    return res.json(games);
+  },
+
+  async getGameByModerator(req: any, res: any) {
 		const { moderatorId } = req.params;
-    const games = await getGames(moderatorId);
+    const games = await getGameByModerator(moderatorId);
     return res.json(games);
   },
 

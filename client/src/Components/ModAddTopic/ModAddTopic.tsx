@@ -82,6 +82,8 @@ function ModAddTopic(props: Props) {
                       fontWeight: '700',
                       fontSize: '42px',
                       lineHeight: '50px',
+											height: '5rem',
+											width: '95%',
                       color: '#363636',
                     },
                   }}
