@@ -51,19 +51,13 @@ function ModGameControl(props: Props) {
     if (!createNewGameView) {
       return (
         <CardTemplate
-          user="moderator"
-          content={
-            <ModGameList
-              handleCreateNewGame={handleCreateNewGame}
-            />
-          }
+          content={<ModGameList handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );
     } else {
       return (
         <CardTemplate
-          user="moderator"
           content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
         />

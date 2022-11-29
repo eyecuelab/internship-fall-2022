@@ -9,7 +9,6 @@ import '../../index.css';
 import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent} from './styles';
 
 interface Props {
-  user: string;
   content: ReactElement<any, any>;
   overlay: ReactElement<any, any>;
 }

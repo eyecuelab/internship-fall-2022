@@ -40,7 +40,6 @@ function TopicPhraseControl(props: Props) {
 		if (props.viewPhrases) {
 			return (
 				<CardTemplate
-					user="moderator"
 					content={<ModAddPhrase/>}
 					overlay={<ModOverlay gameData={game}/>}
 				/>
@@ -48,7 +47,6 @@ function TopicPhraseControl(props: Props) {
 		} else {
 			return (
 				<CardTemplate
-					user="moderator"
 					overlay={<ModOverlay gameData={game} />}
 					content={<ModAddTopic gameId={Number(id)} />}
 				/>
