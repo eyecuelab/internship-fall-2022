@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { postData } from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import { whiteButton } from '../componentStyles';
 import '../../index.css';
 
@@ -21,14 +21,15 @@ type Data = {
 	moderatorId: number;
 }
 
+const userData = JSON.parse(localStorage.getItem('user') as string);
+const moderator = userData ? await getData(`/moderators/${userData?.email}`) : null;
+
 function ModNewGame(props: Props) {
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
-
-	setValue('moderatorId', 1 /*props.moderatorId*/);
+	setValue('moderatorId', moderator.id);
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
-		data.name ?
-		postData('/games', data) : console.log('error: no game name');
+		postData('/games', data);
 		props.handleCreateNewGame();
 	}
 
@@ -70,12 +71,12 @@ function ModNewGame(props: Props) {
         <h5>15 characters max</h5>
       </label>
       <br />
-      <Button type="submit" sx={greenButton} variant="outlined">
+      <Button type="submit" sx={greenButton} >
         <h3>Continue</h3>
       </Button>
 			</form>
-			<div style={{ height: '5rem', bottom: 8 }} />
-			<Button onClick={props.handleCreateNewGame} style={{position: 'absolute', bottom: 8, width: '100%'}} sx={whiteButton} variant="outlined">
+			<div className="spacer" />
+			<Button onClick={props.handleCreateNewGame} className="bottom" sx={whiteButton} >
 				<h3>BACK TO GAMES</h3>
 			</Button>
     </div>

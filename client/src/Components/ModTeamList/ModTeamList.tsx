@@ -120,12 +120,12 @@ function TeamList() {
       <br />
       <br />
 
-      <Button sx={whiteButton} variant="outlined">
+      <Button sx={whiteButton} >
         <h3>EXTENDS 30 SECONDS</h3>
       </Button>
       <br />
       <br />
-      <Button sx={redButton} variant="outlined">
+      <Button sx={redButton} >
         <h3>END ROUND</h3>
       </Button>
     </>

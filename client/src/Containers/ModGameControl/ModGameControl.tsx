@@ -1,82 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../index.css';
-import { deleteData, getData } from '../../ApiHelper';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModLogin from '../../Components/ModLogin/ModLogin';
 import ModGameList from '../../Components/ModGameList/ModGameList';
 import ModNewGame from '../../Components/ModNewGame/ModNewGame';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
-
-const getGames = () => {
-  const games = getData('/games');
-  return games;
-};
-
-const gameList = await getGames();
+import { getData } from '../../ApiHelper';
 
 interface Props {
-	setUserData: any;
+	setUserData: Dispatch<SetStateAction<{}>>;
 	userData: any;
 }
 
 function ModGameControl(props: Props) {
-  const [login, setLogin] = useState(false);
   const [createNewGameView, setCreateNewGameView] = useState(false);
-  const [games, setGames] = useState([]);
+	const [games, setGames] = useState([]);
 
-  useEffect(() => {
-    getGameList();
-  }, []);
+	useEffect(() => {
+		getGameList();
+	}, []);
 
-  const getGameList = async () => {
-    const gameList = await getData('/games');
+	const getGameList = async () => {
+		const user = JSON.parse(localStorage.getItem('user') as string);
+		if (user) {
+		const moderator = await getData(`/moderators/${user.email}`);
+		const gameList = await getData(`/games/moderator/${moderator.id}`);
     setGames(gameList);
-  };
-
-  const deleteGame = (gameId: any) => {
-    deleteData(`/games/${gameId}`).then(() => getGameList());
-  };
+		} else {
+			setGames([]);
+		}
+	}
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
-  const handleLogin = () => {
-    setLogin(true);
-  };
-
   const handleLogout = () => {
-    setLogin(false);
+		props.setUserData({});
+		localStorage.clear();
+		window.localStorage.clear();
   };
 
   const handleCreateNewGame = () => {
     setCreateNewGameView(!createNewGameView);
   };
 
-  if (login) {
+  if (localStorage.getItem('user')) {
     if (!createNewGameView) {
       return (
         <CardTemplate
-          user="moderator"
-          content={
-            <ModGameList
-              handleDeleteGame={deleteGame}
-              games={games}
-              handleCreateNewGame={handleCreateNewGame}
-            />
-          }
+          content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );
     } else {
       return (
         <CardTemplate
-          user="moderator"
           content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );
     }
   }
-  return <ModLogin login={handleLogin} setUserData={props.setUserData} userData={props.userData}/>;
+  return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
 }
 
 export default ModGameControl;

@@ -20,6 +20,9 @@ export const getTopics = async (gameId: number) => {
 	  return await prisma.topics.findMany({
 			where: {
 				gameId: Number(gameId),
+			},
+			include: {
+				Phrase: true,
 			}
 		});
 	} catch(error: unknown) {

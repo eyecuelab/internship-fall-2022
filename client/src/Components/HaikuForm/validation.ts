@@ -52,17 +52,40 @@ export const lineCheck = (line: string[]) => {
 
 export const countSyllables = (word: string) => {
 	const vowelMatch = word.match(/[aeiouy]+/gi);
-	const edgeCaseMatch = word.match(/(eo|io|ia)/gi);
+	const edgeCaseMatch = word.match(/(eo|io|ia)+/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
-	// note: some -tle/-dle and double-consonan words lose a syllable when in the past tense
-	if (/(([^(.){2}].*ed$)([^lgvnytd]e[ds]$))|([aeiou][^aeiou])e$|([^l])e$|[st]ion$|cious$|cial$/gi.test(word)) {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
-		return syllables > 0 ? syllables : 1;
-	} else if (/sm|[aeiou]ous|[aeiouy]ing$/i.test(word)) {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
-		return syllables > 0 ? syllables : 1;
-	} else {
-		const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
-		return word.replace(/\s/g, '').length > 0 ? syllables : 0;
-	}
+	const plusSyllables = [
+		/sm$/i,
+		/[aeiou]ous$/i,
+		/[aeiouy]ing$/i,
+		/[^l]lien$/i,
+		/[^aeiou]ie$/i,
+		/uity$/i,
+		/thm$/i,
+		/gean$/i,
+		/ii$/i,
+	];
+	const minusSyllables = [
+		/([^tf][^td]e[d])$/i,
+		/([aeiou][^aeiou])e$/i,
+		/([^n][^l])e$/i,
+		/[st]ion$/i,
+		/cious$/i,
+		/cial$/i,
+		/elle$/i,
+	];
+	for (let i=0; i<minusSyllables.length; i++) {
+		if (minusSyllables[i].test(word)) {
+			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
+			return syllables > 0 ? syllables : 1;
+		}
+	} 
+	for (let i=0; i<plusSyllables.length; i++) {
+		if (plusSyllables[i].test(word)) {
+			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
+			return syllables > 0 ? syllables : 1;
+		}
+	} 
+	const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
+	return word.replace(/\s/g, '').length > 0 ? syllables : 0;
 };

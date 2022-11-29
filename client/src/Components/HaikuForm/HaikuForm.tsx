@@ -58,16 +58,19 @@ function HaikuForm() {
 		const label = document.getElementById('label'+lineNumber);
 		const submitButton:HTMLButtonElement = (document.getElementById('submitHaiku') as HTMLButtonElement);
 
-		if (!haikuCheck(value, lineNumber)) {
+		const validHaiku = haikuCheck(value, lineNumber);
+		const validWords = compareWords(stems, value?.toLowerCase().split(' '));
+
+		if (!validHaiku) {
 			setSubmitState(true);
 			inputField && (inputField.style.color = 'red');
 			label && (label.style.color = 'red');
-			if (compareWords(stems, value?.toLowerCase().split(' '))) {
+			if (validWords) {
 				swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
 			} else {
 				swapLabel(lineNumber, 'you may not use words in the phrase');
 			}
-		} else if (compareWords(stems, value?.toLowerCase().split(' '))) {
+		} else if (validWords) {
 			buttonReady(submitButton);
 			swapLabel(lineNumber, (lineNumber === 2 ? '7 Syllables' : '5 Syllables'));
 			inputField && (inputField.style.color = '#363636');
@@ -106,22 +109,11 @@ function HaikuForm() {
 								rhfOnChange(value.toLowerCase());
 								displayValidation(1, value);
 							}}
-              fullWidth
               id="line1"
-              variant="standard"
-              name="FiveSyllables"
               type="text"
+              fullWidth
               multiline
-              InputProps={{
-                style: {
-                  fontFamily: 'LuloCleanOneBold',
-                  fontStyle: 'normal',
-                  fontWeight: '700',
-                  fontSize: '42px',
-                  lineHeight: '50px',
-                  color: '#363636',
-                },
-              }}
+              variant="standard"
             />
           )}
         />
@@ -136,29 +128,13 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value.toLowerCase());
-								haikuCheck(value, 2) ?
-									displayValidation(2, value) : 
-									displayValidation(2, value);
-								compareWords(stems, value?.toLowerCase().split(' ')) ? 
-									displayValidation(2, value) :
-									displayValidation(2, value);
+								displayValidation(2, value);
 							}}
-              fullWidth
               id="line2"
-              variant="standard"
-              name="FiveSyllables"
               type="text"
+              fullWidth
               multiline
-              InputProps={{
-                style: {
-                  fontFamily: 'LuloCleanOneBold',
-                  fontStyle: 'normal',
-                  fontWeight: '700',
-                  fontSize: '42px',
-                  lineHeight: '50px',
-                  color: '#363636',
-                },
-              }}
+              variant="standard"
             />
           )}
         />
@@ -173,29 +149,13 @@ function HaikuForm() {
 							onChange={(ev) => {
 								const { target: { value }} = ev
 								rhfOnChange(value.toLowerCase());
-								haikuCheck(value, 3) ?
-									displayValidation(3, value) : 
-									displayValidation(3, value);
-								compareWords(stems, value?.toLowerCase().split(' ')) ? 
-									displayValidation(3, value) :
-									displayValidation(3, value);
+								displayValidation(3, value);
 							}}
-              fullWidth
               id="line3"
-              variant="standard"
-              name="FiveSyllables"
               type="text"
+              fullWidth
               multiline
-              InputProps={{
-                style: {
-                  fontFamily: 'LuloCleanOneBold',
-                  fontStyle: 'normal',
-                  fontWeight: '700',
-                  fontSize: '42px',
-                  lineHeight: '50px',
-                  color: '#363636',
-                },
-              }}
+              variant="standard"
             />
           )}
         />
@@ -205,15 +165,10 @@ function HaikuForm() {
         <div style={{ height: '5rem', width: '100%' }} />
 				<Button
 					id="submitHaiku"
-					style={{
-						position: 'absolute',
-						bottom: 8,
-						left: '0',
-					}}
-					sx={submitState ? whiteButton : greenButton}
-					variant="outlined"
+					className="bottom"
 					type="submit"
 					disabled={submitState}
+					sx={submitState ? whiteButton : greenButton}
 				>
 					<h3>Submit</h3>
 				</Button>

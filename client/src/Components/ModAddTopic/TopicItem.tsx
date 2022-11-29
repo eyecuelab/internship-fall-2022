@@ -19,7 +19,7 @@ function TopicItem (props: Props) {
 			</Grid>
 			<Grid container item xs={4} justifyContent="flex-end">
 				<h3 style={{width: '100%', textAlign: 'right', lineHeight: '56px'}}>
-					{ topic.phrases ? topic.phrases.length : '0' }
+					{ topic.Phrase ? topic.Phrase.length : '0' }
 				</h3>
 			</Grid>
 			<Grid container item xs={1} justifyContent="flex-end" alignItems='space-around'>

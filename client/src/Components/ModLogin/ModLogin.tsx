@@ -6,7 +6,6 @@ import { Content, Header } from './styles';
 import { whiteButton } from '../componentStyles';
 
 interface Props {
-	login: () => void;
 	setUserData: (data: any) => void;
 	userData: any;
 }
@@ -25,6 +24,8 @@ function ModLogin(props: Props) {
 			.then(response => response.json())
 			.then(data => {
 				props.setUserData(data);
+				localStorage.removeItem('user');
+				localStorage.setItem('user', JSON.stringify(data));
 			});
 		}
 	})
@@ -68,9 +69,6 @@ function ModLogin(props: Props) {
 							<br />
 							<br />
 							<button onClick={() => console.log(props.userData)} style={{width: '100%'}}>check user data?</button>
-							<br />
-							<br />
-							<button onClick={props.login} style={{width: '100%'}}>login hook</button>
             </div>
           </CardContent>
         </Content>

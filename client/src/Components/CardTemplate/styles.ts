@@ -1,6 +1,17 @@
 import styled from '@emotion/styled';
-import {Card, CardContent, CardMedia} from '@mui/material';
+import {Card, CardContent} from '@mui/material';
 import '../../App.scss';
+
+let img = '';
+let bg_color = '';
+
+if (localStorage.getItem('user')) { 
+	img = '/images/moderator_card_background_2.png';
+	bg_color = '#15586A';
+} else {
+	img = '/images/blueberries_banner.png';
+	bg_color = '#0c114a';
+}
 
 export const Overlay = styled.div`
   height: 100%;
@@ -44,6 +55,11 @@ export const StyledCardMedia = styled.div`
 	width: 490px;
 	min-height: 101%;
 	height: 101%;
+	background: ${localStorage.getItem('user') ? '#15586a' : '#0c114a'};
+	background-image: url(${localStorage.getItem('user') ? '/images/moderator_card_background_2.png' : '/images/blueberries_banner.png'});
+	background-attachment: absolute;
+	background-position: 16% 95%;
+	background-repeat: no-repeat;
 `
 
 export const StyledCardContent = styled(CardContent)`

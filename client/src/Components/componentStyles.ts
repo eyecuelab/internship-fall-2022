@@ -1,7 +1,3 @@
-// const sm = '18%';
-// const md = '46%';
-// const lg = '100%';
-
 export const whiteButton = {
   height: '5rem',
   width: '',
@@ -14,6 +10,10 @@ export const whiteButton = {
 	':hover': {
 		background: '#e6ddd9',
 		border: '1px solid #262626'
+	},
+	':disabled': {
+		color: '#3636365',
+		backgroundColor: '#0000'
 	}
 };
 
@@ -29,6 +29,10 @@ export const redButton = {
 	':hover': {
 		background: '#ec2901',
 		border: '1px solid #262626'
+	},
+	':disabled': {
+		color: '#3636365',
+		backgroundColor: '#0000'
 	}
 };
 
@@ -44,6 +48,10 @@ export const greenButton = {
 	':hover': {
 		background: '#51b13a',
 		border: '1px solid #262626'
+	},
+	':disabled': {
+		color: '#3636365',
+		backgroundColor: '#0000'
 	}
 };
 
@@ -59,5 +67,9 @@ export const blackButton = {
 	':hover': {
 		background: '#51b13a',
 		border: '1px solid #262626'
+	},
+	':disabled': {
+		color: '#3636365',
+		backgroundColor: '#0000'
 	}
 };

@@ -57,7 +57,7 @@ function ModAddTopic(props: Props) {
       <hr />
       {
         <Grid container>
-          {topics?.map((topic: Topic) => { return <TopicItem topic={topic} deleteTopic={deleteTopic} /> })}
+          {topics?.map((topic: Topic) => { return <TopicItem key={topic.id} topic={topic} deleteTopic={deleteTopic} /> })}
         </Grid>
       }
       <form onSubmit={handleSubmit(addNewTopic)}>
@@ -82,6 +82,8 @@ function ModAddTopic(props: Props) {
                       fontWeight: '700',
                       fontSize: '42px',
                       lineHeight: '50px',
+											height: '5rem',
+											width: '95%',
                       color: '#363636',
                     },
                   }}
@@ -91,15 +93,15 @@ function ModAddTopic(props: Props) {
             <h5>20 CHARACTERS MAX</h5>
           </Grid>
           <Grid container item xs={3} direction="column">
-            <Button type="submit" sx={greenButton} variant="outlined">
+            <Button type="submit" sx={greenButton} >
               <h3>ADD</h3>
             </Button>
           </Grid>
         </Grid>
       </form>
-			<div style={{ height: '5rem', bottom: 8 }} />
-      <Link to="/" style={{ position: 'absolute', bottom: 8, width: '100%' }}>
-        <Button sx={whiteButton} variant="outlined">
+			<div className="spacer" />
+      <Link to="/" className="bottom">
+        <Button sx={whiteButton} >
           <h3>BACK TO GAMES</h3>
         </Button>
       </Link>
