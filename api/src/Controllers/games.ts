@@ -11,7 +11,7 @@ const gamesControllers = {
 
   async getGameByModerator(req: any, res: any) {
 		const { moderatorId } = req.params;
-    const games = await getGameByModerator(moderatorId);
+    const games = await getGameByModerator(Number(moderatorId));
     return res.json(games);
   },
 

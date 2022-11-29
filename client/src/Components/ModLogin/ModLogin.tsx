@@ -24,11 +24,11 @@ function ModLogin(props: Props) {
 			})
 			.then(response => response.json())
 			.then(data => {
-				props.setUserData(data);
 				localStorage.removeItem('user');
 				localStorage.setItem('user', JSON.stringify(data));
 				const moderator = JSON.parse(localStorage.getItem('user') as string);
-				postData('/moderators', moderator.email);
+				postData('/moderators', { email: moderator.email });
+				props.setUserData(data);
 			});
 		}
 	})
