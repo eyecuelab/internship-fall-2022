@@ -3,39 +3,22 @@ import { Grid, Button } from '@mui/material';
 import { greenButton } from '../componentStyles';
 import GameItem from './GameItem';
 import { Game } from '../../Types/Types';
-import { getData, deleteData } from '../../ApiHelper';
+import { deleteData } from '../../ApiHelper';
 
 interface Props {
+	gameList: Game[];
+	getGameList: any;
   handleCreateNewGame: () => void;
 }
 
-// const getGames = () => {
-//   const games = getData('/games');
-//   return games;
-// };
-
-// const gameList = await getGames();
-
 function ModGameList(props: Props) {
-	const [games, setGames] = useState([]);
 
 	useEffect(() => {
-		getGameList();
+		props.getGameList();
 	}, []);
 
-	const getGameList = async () => {
-		const user = JSON.parse(localStorage.getItem('user') as string);
-		if (user) {
-		const moderator = await getData(`/moderators/${user.email}`);
-		const gameList = await getData(`/games/moderator/${moderator.id}`);
-    setGames(gameList);
-		} else {
-			setGames([]);
-		}
-	}
-
   const deleteGame = (gameId: any)=> {
-    deleteData(`/games/${gameId}`).then(()=> getGameList());
+    deleteData(`/games/${gameId}`).then(() => props.getGameList());
   }
 
   greenButton.width = '100%';
@@ -53,7 +36,7 @@ function ModGameList(props: Props) {
       </Grid>
       <hr />
       { <Grid container>
-				{ (games.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
+				{ (props.gameList.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
       <Button
 				className="bottom"

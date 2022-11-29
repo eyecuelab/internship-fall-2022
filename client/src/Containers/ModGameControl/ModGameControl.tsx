@@ -1,10 +1,11 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../index.css';
 import CardTemplate from '../../Components/CardTemplate/CardTemplate';
 import ModLogin from '../../Components/ModLogin/ModLogin';
 import ModGameList from '../../Components/ModGameList/ModGameList';
 import ModNewGame from '../../Components/ModNewGame/ModNewGame';
 import ModOverlay from '../../Components/ModOverlay/ModOverlay';
+import { getData } from '../../ApiHelper';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -12,28 +13,23 @@ interface Props {
 }
 
 function ModGameControl(props: Props) {
-  // const [login, setLogin] = useState(false);
   const [createNewGameView, setCreateNewGameView] = useState(false);
-  // const [games, setGames] = useState([]);
+	const [games, setGames] = useState([]);
 
-  // useEffect(() => {
-  //   getGameList();
-  // }, []);
+	useEffect(() => {
+		getGameList();
+	}, []);
 
-  // const getGameList = async () => {
-	// 	const moderator = JSON.parse(localStorage.getItem('user') as string);
-	// 	if (moderator) {
-	// 	const moderatorId = await getData(`/moderators/${moderator.email}`);
-	// 	const gameList = await getData(`/games/${moderatorId}`);
-  //   setGames(gameList);
-	// 	} else {
-	// 		setGames([]);
-	// 	}
-  // };
-
-  // const deleteGame = (gameId: any) => {
-  //   deleteData(`/games/${gameId}`).then(() => getGameList());
-  // };
+	const getGameList = async () => {
+		const user = JSON.parse(localStorage.getItem('user') as string);
+		if (user) {
+		const moderator = await getData(`/moderators/${user.email}`);
+		const gameList = await getData(`/games/moderator/${moderator.id}`);
+    setGames(gameList);
+		} else {
+			setGames([]);
+		}
+	}
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
@@ -51,7 +47,7 @@ function ModGameControl(props: Props) {
     if (!createNewGameView) {
       return (
         <CardTemplate
-          content={<ModGameList handleCreateNewGame={handleCreateNewGame} />}
+          content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
         />
       );

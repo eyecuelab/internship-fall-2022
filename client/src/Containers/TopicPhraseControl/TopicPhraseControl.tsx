@@ -13,13 +13,6 @@ interface Props {
   viewPhrases: boolean;
 }
 
-// const getGames = () => {
-//   const games = getData('/games');
-//   return games;
-// };
-
-// const gameList = await getGames();
-
 function TopicPhraseControl(props: Props) {
   const {id} = useParams();
   const [game, setGame] = useState({});

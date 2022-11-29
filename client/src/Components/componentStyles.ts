@@ -1,7 +1,3 @@
-// const sm = '18%';
-// const md = '46%';
-// const lg = '100%';
-
 export const whiteButton = {
   height: '5rem',
   width: '',
