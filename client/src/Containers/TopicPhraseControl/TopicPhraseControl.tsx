@@ -23,7 +23,6 @@ function TopicPhraseControl(props: Props) {
 
   const getGameList = async () => {
 		const game = await getData(`/games/${id}`);
-		console.log(game);
 		setGame(game);
   }
 

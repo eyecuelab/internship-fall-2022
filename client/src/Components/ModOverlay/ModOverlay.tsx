@@ -23,8 +23,6 @@ function ModOverlay(props: Props) {
   greenButton.width = '100%';
   greenButton.marginBottom = '1.5rem';
 
-	console.log(props.gameData);
-
   return (
     <Grid
       container

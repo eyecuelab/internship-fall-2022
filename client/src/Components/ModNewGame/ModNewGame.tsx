@@ -29,8 +29,7 @@ function ModNewGame(props: Props) {
 	setValue('moderatorId', moderator.id);
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
-		data.name ?
-		postData('/games', data) : console.log('error: no game name');
+		postData('/games', data);
 		props.handleCreateNewGame();
 	}
 

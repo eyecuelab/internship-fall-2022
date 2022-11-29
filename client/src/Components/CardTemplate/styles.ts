@@ -55,7 +55,7 @@ export const StyledCardMedia = styled.div`
 	width: 490px;
 	min-height: 101%;
 	height: 101%;
-	background: #15586A;
+	background: ${localStorage.getItem('user') ? '#15586a' : '#0c114a'};
 	background-image: url(${localStorage.getItem('user') ? '/images/moderator_card_background_2.png' : '/images/blueberries_banner.png'});
 	background-attachment: absolute;
 	background-position: 16% 95%;
