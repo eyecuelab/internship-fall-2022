@@ -87,7 +87,7 @@ export const countSyllables = (word: string) => {
 		/ii$/i,
 	];
 	const minusSyllables = [
-		/[^(tf)|(a-z){2}][^td]e[d]$/i,
+		/[^(tfk)|(bb)|(pp)|(gg)|(dd)|(zz)][^td]e[d]$/i,
 		/[aeiou][^aeiou]e$/i,
 		/[^n][^(l)|(ph)]e$/i,
 		/[st]ion$/i,
