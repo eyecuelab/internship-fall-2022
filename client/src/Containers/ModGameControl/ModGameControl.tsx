@@ -2,7 +2,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../index.css';
 import CardTemplate from '../../Components/CardTemplate';
 import ModLogin from '../../Components/Moderators/Login';
-import ModGameList from '../../Components/Moderators/GameList/ModGameList';
+import ModGameList from '../../Components/Moderators/GameList';
 import ModNewGame from '../../Components/Moderators/NewGame';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import { getData } from '../../ApiHelper';

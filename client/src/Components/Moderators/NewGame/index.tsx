@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Grid } from '@mui/material';
 import { greenButton } from '../../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { getData, postData } from '../../../ApiHelper';
@@ -39,6 +39,7 @@ function ModNewGame(props: Props) {
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
+		<Grid container>
       <h3>new game name</h3>
       <br />
       <form onSubmit={handleSubmit(createNewGame)}>
@@ -67,6 +68,7 @@ function ModNewGame(props: Props) {
 			<Button onClick={props.handleCreateNewGame} className="bottom" sx={whiteButton} >
 				<h3>BACK TO GAMES</h3>
 			</Button>
+		</Grid>
     </div>
   );
 }

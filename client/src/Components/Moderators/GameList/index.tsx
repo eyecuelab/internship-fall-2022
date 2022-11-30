@@ -1,50 +1,52 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Grid, IconButton } from '@mui/material';
-import { Delete } from '@mui/icons-material';
+import React, { useState, useEffect } from 'react';
+import { Grid, Button } from '@mui/material';
+import { greenButton } from '../../componentStyles';
+import GameItem from './GameItem';
 import { Game } from '../../../Types/Types';
+import { deleteData } from '../../../ApiHelper';
 
 interface Props {
-  game: Game;
-  deleteGame: (param: number) => void;
+	gameList: Game[];
+	getGameList: any;
+  handleCreateNewGame: () => void;
 }
 
-function GameItem(props: Props) {
-  const {game, deleteGame} = props;
+function ModGameList(props: Props) {
+
+	useEffect(() => {
+		props.getGameList();
+	}, []);
+
+  const deleteGame = (gameId: any)=> {
+    deleteData(`/games/${gameId}`).then(() => props.getGameList());
+  }
+
+  greenButton.width = '100%';
 
   return (
-    <>
-      {/* {game.publishedAt ? ( */}
+    <div style={{position: 'relative', height: '100%'}}>
+      <Grid container>
         <Grid container item xs={7}>
-          <Link to={{pathname: game.publishedAt ? `/game/${game.id}/round` : `/game/${game.id}`}}>
-            <h4 style={{lineHeight: '3.5rem'}}>{game.name.toString()}</h4>
-          </Link>
+          <h3>GAMES</h3>
         </Grid>
-      {/* ) 
-       : (
-        <Grid container item xs={7}>
-          <Link to={{pathname: `/game/${game.id}`}}>
-            <h4 style={{lineHeight: '3.5rem'}}>{game.name.toString()}</h4>
-          </Link>
+        <Grid container item xs={4}>
+          <h3 style={{width: '100%', textAlign: 'right'}}>STATUS</h3>
         </Grid>
-      )} */}
-
-      <Grid container item xs={4} justifyContent="flex-end">
-        <h3 style={{width: '100%', textAlign: 'right', lineHeight: '56px'}}>
-          {game.publishedAt ? 'published' : 'pending'}
-        </h3>
       </Grid>
-      <Grid container item xs={1} justifyContent="flex-end">
-        <IconButton
-          onClick={() => deleteGame(game.id)}
-          aria-label="delete"
-          sx={{paddingBottom: '0.5rem', maxHeight: '3.5rem'}}
-        >
-          <Delete sx={{height: '2.5rem', width: '2.5rem'}} />
-        </IconButton>
-      </Grid>
-    </>
+      <hr />
+      { <Grid container>
+				{ (props.gameList.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
+      </Grid> }
+			<div className="spacer" />
+      <Button
+				className="bottom"
+        onClick={props.handleCreateNewGame}
+        sx={greenButton}
+      >
+        <h3>CREATE A NEW GAME</h3>
+      </Button>
+    </div>
   );
 }
 
-export default GameItem;
+export default ModGameList;
