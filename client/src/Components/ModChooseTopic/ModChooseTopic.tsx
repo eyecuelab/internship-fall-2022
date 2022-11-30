@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../index.css';
+import { Grid, Button } from '@mui/material';
+import TopicItem from './TopicItem';
+import { Game } from '../../Types/Types';
 import { Container, ButtonContainer } from './styles';
-import { Button } from '@mui/material';
 import { whiteButton, redButton } from '../componentStyles';
 
-function ModChooseTopic() {
+interface Props {
+	gameList: Game[];
+	getGameList: any;
+  handleCreateNewGame: () => void;
+}
+
+
+function ModChooseTopic(props: Props) {
   whiteButton.width = '100%';
   redButton.width = '100%';
+
+  useEffect(() => {
+		console.log(props.gameList);
+	}, []);
 
   return (
     <>
@@ -15,9 +28,9 @@ function ModChooseTopic() {
           <h3>choose a new round topic</h3>
           <hr />
           <br />
-          <Button sx={whiteButton}>
-            <h3>phrase to be passed</h3>
-          </Button>
+          { <Grid container>
+				{ (props.gameList.map((game: Game) => <TopicItem key={game.id} game={game} />)) }
+      </Grid> }
           <br />
           <br />
         </div>
