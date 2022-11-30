@@ -27,9 +27,9 @@ function ModAddPhrase(props: Props) {
   const [phrases, setPhrases] = useState([]);
 	const [topicName, setTopicName] = useState("");	const user = JSON.parse(localStorage.getItem('user') as string);
 	getData(`/moderators/${user.email}`).then((moderator) => {
-		setValue('moderatorId', moderator.id)
-	})
-	setValue('topicId', Number(topicId));
+		setValue('moderatorId', moderator.id);
+		setValue('topicId', Number(topicId));
+	});
 
 	useEffect(() => {
 		getPhraseList();
@@ -82,23 +82,9 @@ function ModAddPhrase(props: Props) {
 									<TextField
 										{...field}
 										fullWidth
-										id="topic-input"
 										variant="standard"
-										type="text"
 										multiline
 										required
-										InputProps={{
-											style: {
-												fontFamily: 'LuloCleanOneBold',
-												fontStyle: 'normal',
-												fontWeight: '700',
-												fontSize: '42px',
-												lineHeight: '50px',
-												height: '5rem',
-												width: '95%',
-												color: '#363636',
-											},
-										}}
 									/>
 								)}
 							/>

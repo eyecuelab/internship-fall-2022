@@ -21,10 +21,11 @@ function ModAddTopic(props: Props) {
   const {control, handleSubmit, setValue, reset} = useForm<IFormInput>();
   const [topics, setTopics] = useState([]);
 	const user = JSON.parse(localStorage.getItem('user') as string);
+
 	getData(`/moderators/${user.email}`).then((moderator) => {
-		setValue('moderatorId', moderator.id)
-	})
-	setValue('gameId', props.gameId);
+		setValue('moderatorId', moderator.id);
+		setValue('gameId', props.gameId);
+	});
 
 	useEffect(() => {
 		getTopicList();
@@ -73,23 +74,9 @@ function ModAddTopic(props: Props) {
                 <TextField
                   {...field}
                   fullWidth
-									id="topic-input"
                   variant="standard"
-                  type="text"
                   multiline
 									required
-                  InputProps={{
-                    style: {
-                      fontFamily: 'LuloCleanOneBold',
-                      fontStyle: 'normal',
-                      fontWeight: '700',
-                      fontSize: '42px',
-                      lineHeight: '50px',
-											height: '5rem',
-											width: '95%',
-                      color: '#363636',
-                    },
-                  }}
                 />
               )}
             />

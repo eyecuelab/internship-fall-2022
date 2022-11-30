@@ -23,8 +23,8 @@ type Data = {
 
 function ModNewGame(props: Props) {
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
-	
 	const userData = JSON.parse(localStorage.getItem('user') as string);
+
 	getData(`/moderators/${userData?.email}`).then((response) => {
 		setValue('moderatorId', response.id);
 	});
@@ -49,22 +49,9 @@ function ModNewGame(props: Props) {
 					<TextField
 						{...field}
 						fullWidth
-						id="standard-basic"
 						variant="standard"
-						name="game title"
-						type="text"
 						multiline
 						required
-						InputProps={{
-							style: {
-								fontFamily: 'LuloCleanOneBold',
-								fontStyle: 'normal',
-								fontWeight: '700',
-								fontSize: '42px',
-								lineHeight: '50px',
-								color: '#363636',
-							},
-						}}
 					/>
 				)}
 			/>
