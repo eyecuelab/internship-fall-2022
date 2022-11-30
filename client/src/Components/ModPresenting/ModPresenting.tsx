@@ -20,6 +20,7 @@ function ModPresenting(props: Props) {
           <h3>*insert team name*</h3>
           <h1>*insert topic*</h1>
           <br />
+          <br />
           <h3>line *insert line #*</h3>
           <h1>*Haiku line x*</h1>
         </div>

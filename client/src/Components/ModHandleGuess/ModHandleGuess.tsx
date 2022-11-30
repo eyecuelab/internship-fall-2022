@@ -21,6 +21,7 @@ function ModHandleGuess(props: Props) {
           <h3>*insert team name*</h3>
           <h1>*insert topic*</h1>
           <br />
+          <br />
           <h3>buzzer pressed!</h3>
           <h1>*insert team*</h1>
         </div>
