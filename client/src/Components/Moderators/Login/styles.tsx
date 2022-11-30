@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import '../../App.scss';
+import '../../../App.scss';
 
 export const Content = styled.div`
   color: #363636;

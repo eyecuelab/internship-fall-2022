@@ -5,7 +5,7 @@ import { greenButton } from '../../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { getData, postData } from '../../../ApiHelper';
 import { whiteButton } from '../../componentStyles';
-import '../../..index.css';
+import '../../../index.css';
 
 interface Props {
 	handleCreateNewGame: () => void;
@@ -59,11 +59,11 @@ function ModNewGame(props: Props) {
         <h5>15 characters max</h5>
       </label>
       <br />
+			<div className="spacer" />
       <Button type="submit" sx={greenButton} >
         <h3>Continue</h3>
       </Button>
 			</form>
-			<div className="spacer" />
 			<Button onClick={props.handleCreateNewGame} className="bottom" sx={whiteButton} >
 				<h3>BACK TO GAMES</h3>
 			</Button>

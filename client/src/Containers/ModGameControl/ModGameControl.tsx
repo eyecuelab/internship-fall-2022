@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import '../../../index.css';
+import '../../index.css';
 import CardTemplate from '../../Components/CardTemplate';
 import ModLogin from '../../Components/Moderators/Login';
 import ModGameList from '../../Components/Moderators/GameList/ModGameList';

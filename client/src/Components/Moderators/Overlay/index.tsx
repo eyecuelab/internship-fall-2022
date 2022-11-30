@@ -20,7 +20,6 @@ function ModOverlay(props: Props) {
 
   redButton.width = '100%';
   greenButton.width = '100%';
-  greenButton.marginBottom = '1.5rem';
 
   return (
     <Grid
