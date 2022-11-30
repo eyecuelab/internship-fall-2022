@@ -17,8 +17,8 @@ function ModGameControl(props: Props) {
 	const [games, setGames] = useState([]);
 
 	useEffect(() => {
-		props.setUserData(props.userData);
 		getGameList();
+		props.setUserData(props.userData);
 	}, []);
 
 	const getGameList = () => {
@@ -53,6 +53,8 @@ function ModGameControl(props: Props) {
         <CardTemplate
           content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     } else {
@@ -60,6 +62,8 @@ function ModGameControl(props: Props) {
         <CardTemplate
           content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     }

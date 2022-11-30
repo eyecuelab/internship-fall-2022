@@ -40,6 +40,8 @@ function TopicPhraseControl(props: Props) {
 				<CardTemplate
 					content={<ModAddPhrase/>}
 					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
 				/>
 			);
 		} else {
@@ -47,6 +49,8 @@ function TopicPhraseControl(props: Props) {
 				<CardTemplate
 					content={<ModAddTopic gameId={Number(id)} />}
 					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
 				/>
 			);
 		}
