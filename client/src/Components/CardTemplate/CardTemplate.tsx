@@ -5,6 +5,8 @@ import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent
 interface Props {
   content: ReactElement<any, any>;
   overlay?: ReactElement<any, any>;
+	bgUrl?: string;
+	color?: string;
 }
 
 function CardTemplate(props: Props) {
@@ -15,7 +17,7 @@ function CardTemplate(props: Props) {
       </Header>
       <StyledCard>
         <div style={{ position: 'relative' }}>
-          <StyledCardMedia />
+          <StyledCardMedia bgUrl={props.bgUrl} color={props.color}/>
           <Overlay>
             {props.overlay}
           </Overlay>

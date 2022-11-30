@@ -2,26 +2,6 @@ import styled from '@emotion/styled';
 import {Card, CardContent} from '@mui/material';
 import '../../App.scss';
 
-let color = '';
-let bgUrl = '';
-
-if (localStorage.getItem('user')) {
-	color = '#15586a';
-	bgUrl = '/images/moderator_card_background_2.png';
-} else {
-	const team = JSON.parse(localStorage.getItem('team') as string);
-	switch(team) {
-		case('blueberry'):
-			color = '#0c114a';
-			bgUrl = '/images/blueberries_banner.png';
-			break;
-		default:
-			color = '#0c114a';
-			bgUrl = '/images/blueberries_banner.png';
-			break;
-	}
-}
-
 export const Overlay = styled.div`
   height: 100%;
   width: 88%;
@@ -64,8 +44,8 @@ export const StyledCardMedia = styled.div`
 	width: 490px;
 	min-height: 101%;
 	height: 101%;
-	background: ${color};
-	background-image: linear-gradient(to bottom, ${color+'ff'}, ${color+'00'}), url(${bgUrl});
+	background: ${props => props.color};
+	background-image: linear-gradient(to bottom, ${props => props.color+'ff'}, ${props => props.color+'00'}), url(${props => props.bgUrl});
 	background-attachment: absolute;
 	background-position: 16% 95%;
 	background-repeat: no-repeat;
