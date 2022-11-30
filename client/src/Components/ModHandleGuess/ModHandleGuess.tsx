@@ -4,7 +4,12 @@ import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
 import { whiteButton, greenButton, redButton } from '../componentStyles';
 
-function ModHandleGuess() {
+interface Props {
+  handleSwitch?: () => void;
+  gameData?: any;
+}
+
+function ModHandleGuess(props: Props) {
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -20,14 +25,14 @@ function ModHandleGuess() {
           <h1>*insert team*</h1>
         </div>
         <ButtonContainer>
-          <Button sx={greenButton}>
+          <Button onClick={props.handleSwitch}  sx={greenButton}>
             <h3>reward points</h3>
           </Button>
-          <Button sx={whiteButton}>
+          <Button onClick={props.handleSwitch} sx={whiteButton}>
             <h3>dismiss guess</h3>
           </Button>
           <br />
-          <Button sx={redButton}>
+          <Button onClick={props.handleSwitch} sx={redButton}>
             <h3>end round</h3>
           </Button>
         </ButtonContainer>
