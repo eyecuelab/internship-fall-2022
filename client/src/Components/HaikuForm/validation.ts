@@ -109,6 +109,7 @@ export const countSyllables = (inputWord: string) => {
 		// /[st]ion$/i,
 		/cious$/i,
 		/[ct]ial$/i,
+		/iate$/i,
 		/elle$/i,
 		/nce$/i,
 		/iage/i,
@@ -116,6 +117,7 @@ export const countSyllables = (inputWord: string) => {
 	const doubleMinusSyllables = [
 		/^(fore[^bhfqsv])/i,
 		/rriage$/i,
+		/[^g]giate/,
 	];
 	for (let i=0; i<doubleMinusSyllables.length; i++) {
 		if (doubleMinusSyllables[i].test(word)) {
