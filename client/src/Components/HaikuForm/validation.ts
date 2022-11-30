@@ -94,22 +94,24 @@ export const countSyllables = (word: string) => {
 		/cious$/i,
 		/cial$/i,
 		/elle$/i,
+		/nce$/i,
 	];
 	for (let i=0; i<exceptionWords.length; i++) {
-		// console.log('KEY: ', Object.keys(exceptionWords[i]));
-		// console.log('Value: ', Object.values(exceptionWords)[i]);
 		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
+			console.log();
 			return Object.values(exceptionWords[i])[0];
 		}
 	}
 	for (let i=0; i<minusSyllables.length; i++) {
 		if (minusSyllables[i].test(word)) {
+			console.log(minusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}
 	} 
 	for (let i=0; i<plusSyllables.length; i++) {
 		if (plusSyllables[i].test(word)) {
+			console.log(plusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}
