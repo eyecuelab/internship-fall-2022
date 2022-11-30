@@ -52,7 +52,7 @@ export const lineCheck = (line: string[]) => {
 
 export const countSyllables = (word: string) => {
 	const vowelMatch = word.match(/[aeiouy]+/gi);
-	const edgeCaseMatch = word.match(/(eo|io|ia)+/gi);
+	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia)+/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
 	const exceptionWords = [
 		{'abalone': 3},
@@ -68,6 +68,7 @@ export const countSyllables = (word: string) => {
 		{'machete': 3},
 		{'maybe': 2},
 		{'people': 2},
+		{'pilates': 3},
 		{'recipe': 2},
 		{'sesame': 3},
 		{'shoreline': 2},
@@ -85,12 +86,22 @@ export const countSyllables = (word: string) => {
 		/thm$/i,
 		/gean$/i,
 		/ii$/i,
+		/([^t][^hs](ea)|(oa)|(ua))ted$/i,
+		// /^io/i,
+		// /io$/i,
+		/[^ts]io[n]/gi,
+		/yal$/i
 	];
 	const minusSyllables = [
-		/[^(tfk)|(bb)|(pp)|(gg)|(dd)|(zz)][^td]e[d]$/i,
-		/[aeiou][^aeiou]e$/i,
-		/[^n][^(l)|(ph)]e$/i,
-		/[st]ion$/i,
+		/[^(kft)][^dfty]ed$/i,
+		/thed$/i,
+		// /[ff|bb|gg|pp|zz]ed/,
+		/[^aeiou][aeiou][^aeiou]e$/i,
+		/[^ilr][aeiou][^aeiouy]e[ds]$/i,
+		/[ilr][aeiou][^aeiou]es$/i,
+		/[^n|aeiou][^(l)|(hp)]e$/i,
+		// /[st]ions$/i,
+		// /[st]ion$/i,
 		/cious$/i,
 		/cial$/i,
 		/elle$/i,
