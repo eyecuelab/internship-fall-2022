@@ -2,14 +2,14 @@ import React, {ReactElement} from 'react';
 import '../../index.css';
 import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent} from './styles';
 
-interface Props {
+type CardTemplateProps = {
   content: ReactElement<any, any>;
   overlay?: ReactElement<any, any>;
 	bgUrl?: string;
 	color?: string;
 }
 
-function CardTemplate(props: Props) {
+function CardTemplate(props: CardTemplateProps) {
   return (
     <>
       <Header>
@@ -17,7 +17,6 @@ function CardTemplate(props: Props) {
       </Header>
       <StyledCard>
         <div style={{ position: 'relative' }}>
-					{/* @ts-ignore */}
           <StyledCardMedia bgUrl={props.bgUrl} color={props.color}/>
           <Overlay>
             {props.overlay}
@@ -32,5 +31,7 @@ function CardTemplate(props: Props) {
     </>
   );
 }
+
+export type{CardTemplateProps}
 
 export default CardTemplate;

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../index.css';
 import { Grid, Button } from '@mui/material';
-import { whiteButton, redButton } from '../componentStyles';
+import { whiteButton, redButton } from '../../componentStyles';
 
 function TeamList() {
   whiteButton.width = '100%';

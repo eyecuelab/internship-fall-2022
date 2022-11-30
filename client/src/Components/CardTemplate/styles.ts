@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import {Card, CardContent} from '@mui/material';
+import type {CardTemplateProps} from '.';
 import '../../App.scss';
 
 export const Overlay = styled.div`
@@ -40,7 +41,7 @@ export const StyledCard = styled(Card)`
 	background: #f6ede9;
 `
 
-export const StyledCardMedia = styled.div`
+export const StyledCardMedia = styled.div<Pick<CardTemplateProps, "bgUrl" | "color">>`
 	width: 490px;
 	min-height: 101%;
 	height: 101%;

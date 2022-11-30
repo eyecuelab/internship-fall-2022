@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { TextField, Button } from '@mui/material';
-import { greenButton } from '../componentStyles';
+import { greenButton } from '../../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { getData, postData } from '../../ApiHelper';
-import { whiteButton } from '../componentStyles';
+import { getData, postData } from '../../../ApiHelper';
+import { whiteButton } from '../../componentStyles';
 import '../../index.css';
 
 interface Props {

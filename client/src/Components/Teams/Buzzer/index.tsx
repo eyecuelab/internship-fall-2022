@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Grid } from '@mui/material';
-import socket from '../../Hooks/WebsocketHook';
-import { greenButton, redButton } from '../componentStyles';
+import socket from '../../../Hooks/WebsocketHook';
+import { greenButton, redButton } from '../../componentStyles';
 
 interface Props {
 	roundNumber: number;

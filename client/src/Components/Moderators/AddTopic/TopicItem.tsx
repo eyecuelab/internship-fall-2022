@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { Topic } from '../../Types/Types';
+import { Topic } from '../../../Types/Types';
 
 interface Props {
 	topic: Topic,

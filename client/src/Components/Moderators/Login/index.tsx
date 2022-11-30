@@ -3,8 +3,8 @@ import { useGoogleLogin } from '@react-oauth/google';
 import { Card, CardContent, Button } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Content, Header } from './styles';
-import { whiteButton } from '../componentStyles';
-import { getData, postData } from '../../ApiHelper';
+import { whiteButton } from '../../componentStyles';
+import { getData, postData } from '../../../ApiHelper';
 
 interface Props {
 	setUserData: (data: any) => void;

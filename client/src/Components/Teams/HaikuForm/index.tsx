@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
-import { postData } from '../../ApiHelper';
+import { postData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
-import { whiteButton, greenButton } from '../componentStyles';
+import { whiteButton, greenButton } from '../../componentStyles';
 
 interface IFormInput {
   line1: string;

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
-import CardTemplate from '../../Components/CardTemplate/CardTemplate';
-import ModAddTopic from '../../Components/ModAddTopic/ModAddTopic';
+import CardTemplate from '../../Components/CardTemplate';
+import ModAddTopic from '../../Components/Moderators/AddTopic';
 import { getData} from '../../ApiHelper';
-import ModAddPhrase from '../../Components/ModAddPhrase/ModAddPhrase';
-import ModOverlay from '../../Components/ModOverlay/ModOverlay';
-import ModLogin from '../../Components/ModLogin/ModLogin';
+import ModAddPhrase from '../../Components/Moderators/AddPhrase';
+import ModOverlay from '../../Components/Moderators/Overlay';
+import ModLogin from '../../Components/Moderators/Login';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;

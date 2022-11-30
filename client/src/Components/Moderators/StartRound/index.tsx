@@ -2,7 +2,7 @@ import React from 'react';
 import '../../index.css';
 import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
-import { whiteButton, greenButton, redButton } from '../componentStyles';
+import { whiteButton, greenButton, redButton } from '../../componentStyles';
 
 function ModStartRound() {
   whiteButton.width = '100%';

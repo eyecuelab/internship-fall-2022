@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import '../../index.css';
-import CardTemplate from '../../Components/CardTemplate/CardTemplate';
-import TeamLobby from '../../Components/TeamLobby/TeamLobby';
-import Buzzer from '../../Components/Buzzer/Buzzer';
-import HaikuForm from '../../Components/HaikuForm/HaikuForm';
-import TeamOverlay from '../../Components/TeamOverlay/TeamOverlay';
+import CardTemplate from '../../Components/CardTemplate';
+import TeamLobby from '../../Components/Teams/Lobby';
+import Buzzer from '../../Components/Teams/Buzzer';
+import HaikuForm from '../../Components/Teams/HaikuForm';
+import TeamOverlay from '../../Components/Teams/Overlay';
 
 function GameControl() {
 	window.localStorage.clear();
@@ -32,11 +32,11 @@ function GameControl() {
 	document.documentElement.style.backgroundImage = 'url(/images/oranges_background.png)';
 
   return (
-	<CardTemplate 
-		content={ <HaikuForm /> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
-		overlay={<TeamOverlay />} 
-		bgUrl={bgUrl}
-		color={color}
+		<CardTemplate 
+			content={ <HaikuForm /> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
+			overlay={<TeamOverlay />} 
+			bgUrl={bgUrl}
+			color={color}
 		/>
 	);
 }

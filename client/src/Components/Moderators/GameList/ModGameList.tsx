@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
-import { greenButton } from '../componentStyles';
-import GameItem from './GameItem';
-import { Game } from '../../Types/Types';
-import { deleteData } from '../../ApiHelper';
+import { greenButton } from '../../componentStyles';
+import GameItem from '.';
+import { Game } from '../../../Types/Types';
+import { deleteData } from '../../../ApiHelper';
 
 interface Props {
 	gameList: Game[];

@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {Grid, TextField, Button} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
-import {greenButton, whiteButton} from '../componentStyles';
-import {getData, postData, deleteData} from '../../ApiHelper';
+import {greenButton, whiteButton} from '../../componentStyles';
+import {getData, postData, deleteData} from '../../../ApiHelper';
 import TopicItem from './TopicItem';
-import { Topic } from '../../Types/Types';
+import { Topic } from '../../../Types/Types';
 
 interface Props {
 	gameId: number;

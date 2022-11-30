@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { Game } from '../../Types/Types';
+import { Game } from '../../../Types/Types';
 
 interface Props {
 	game: Game,

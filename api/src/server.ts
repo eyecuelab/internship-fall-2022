@@ -24,7 +24,7 @@ io.on('connection', (socket : Socket) => {
 
 	socket.on('buzzer_refresh', () => {
 		io.emit('buzzer_refresh')
-	})
+	});
 });
 
 export default io;

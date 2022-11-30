@@ -2,8 +2,8 @@ import React from 'react';
 import '../../index.css';
 import { Link, useLocation } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
-import { greenButton, redButton } from '../componentStyles';
-import { putData } from '../../ApiHelper';
+import { greenButton, redButton } from '../../componentStyles';
+import { putData } from '../../../ApiHelper';
 import GameInfo from './GameInfo';
 
 interface Props {

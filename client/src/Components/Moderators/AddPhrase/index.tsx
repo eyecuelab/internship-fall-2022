@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Grid, TextField, Button } from '@mui/material';
-import { greenButton, whiteButton } from '../componentStyles';
-import { deleteData, getData, postData } from '../../ApiHelper';
+import { greenButton, whiteButton } from '../../componentStyles';
+import { deleteData, getData, postData } from '../../../ApiHelper';
 import PhraseItem from './PhraseItem';
-import { Phrase } from '../../Types/Types';
+import { Phrase } from '../../../Types/Types';
 
 interface Props {}
 interface IFormInput {
