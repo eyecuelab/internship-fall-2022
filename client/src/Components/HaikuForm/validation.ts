@@ -93,8 +93,9 @@ export const countSyllables = (word: string) => {
 		/yal$/i
 	];
 	const minusSyllables = [
-		/[^(kft)][^dfty]ed$/i,
+		/([^d][^kftzd][^dfty]|[ff])ed$/i,
 		/thed$/i,
+		/^(fore[^v])/i,
 		// /[ff|bb|gg|pp|zz]ed/,
 		/[^aeiou][aeiou][^aeiou]e$/i,
 		/[^ilr][aeiou][^aeiouy]e[ds]$/i,
@@ -103,10 +104,20 @@ export const countSyllables = (word: string) => {
 		// /[st]ions$/i,
 		// /[st]ion$/i,
 		/cious$/i,
-		/cial$/i,
+		/[ct]ial$/i,
 		/elle$/i,
 		/nce$/i,
 	];
+	const doubleMinusSyllables = [
+		/^(fore[^bhfqsv])/i,
+	];
+	for (let i=0; i<doubleMinusSyllables.length; i++) {
+		if (doubleMinusSyllables[i].test(word)) {
+			console.log(doubleMinusSyllables[i])
+			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ) - 1;
+			return syllables > 0 ? syllables : 1;
+		}
+	}
 	for (let i=0; i<exceptionWords.length; i++) {
 		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
 			console.log();
