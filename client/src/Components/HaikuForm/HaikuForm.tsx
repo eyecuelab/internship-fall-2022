@@ -95,8 +95,8 @@ function HaikuForm() {
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
-      <h3>ROUND {roundNum} - {topic}</h3>
-      <h1>{phrase.join(' ')}</h1>
+      <h3 className="fade-in-down">ROUND {roundNum} - {topic}</h3>
+      <h1 className="fade-in-left">{phrase.join(' ')}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
