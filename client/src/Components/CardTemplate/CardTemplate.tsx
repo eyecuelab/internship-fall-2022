@@ -4,7 +4,7 @@ import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent
 
 interface Props {
   content: ReactElement<any, any>;
-  overlay: ReactElement<any, any>;
+  overlay?: ReactElement<any, any>;
 }
 
 function CardTemplate(props: Props) {
