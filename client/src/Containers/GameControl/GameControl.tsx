@@ -9,7 +9,7 @@ import TeamOverlay from '../../Components/TeamOverlay/TeamOverlay';
 function GameControl() {
 	document.documentElement.style.backgroundImage = 'url(/images/oranges_background.png)';
 
-  return <CardTemplate content={ <Buzzer roundNumber={2} topic={'holiday activity'} /> }  overlay={<TeamOverlay />}/>;
+  return <CardTemplate content={ <HaikuForm /> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } overlay={<TeamOverlay />}/>;
 }
 
 export default GameControl;

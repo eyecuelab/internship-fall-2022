@@ -17,6 +17,7 @@ function ModGameControl(props: Props) {
 	const [games, setGames] = useState([]);
 
 	useEffect(() => {
+		props.setUserData(props.userData);
 		getGameList();
 	}, []);
 
