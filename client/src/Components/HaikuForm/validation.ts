@@ -50,7 +50,8 @@ export const lineCheck = (line: string[]) => {
   return sum || 0;
 };
 
-export const countSyllables = (word: string) => {
+export const countSyllables = (inputWord: string) => {
+	const word = inputWord.replace(/[^a-z]/gi, '')
 	const vowelMatch = word.match(/[aeiouy]+/gi);
 	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia)+/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
@@ -139,5 +140,5 @@ export const countSyllables = (word: string) => {
 		}
 	} 
 	const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length : 0 );
-	return word.replace(/\s/g, '').length > 0 ? syllables : 0;
+	return word.length > 0 ? syllables : 0;
 };
