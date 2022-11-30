@@ -24,7 +24,7 @@ function ModLogin(props: Props) {
 			})
 			.then(response => response.json())
 			.then(data => {
-				localStorage.removeItem('user');
+				localStorage.clear();
 				localStorage.setItem('user', JSON.stringify(data));
 				const user = JSON.parse(localStorage.getItem('user') as string);
 				getData(`/moderators/${user.email}`).then((moderator) => {
