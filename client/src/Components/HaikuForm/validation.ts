@@ -60,6 +60,7 @@ export const countSyllables = (inputWord: string) => {
 		{'adobe': 3},
 		{'acreage': 3},
 		{'anemone': 4},
+		{'baleful' : 2},
 		{'cafe': 2},
 		{'crooked': 2},
 		{'guacamole': 4},
@@ -100,18 +101,21 @@ export const countSyllables = (inputWord: string) => {
 		/^(fore[^v])/i,
 		// /[ff|bb|gg|pp|zz]ed/,
 		/[^aeiou][aeiou][^aeiou]e$/i,
-		/[^ilr][aeiou][^aeiouy]e[ds]$/i,
-		/[ilr][aeiou][^aeiou]es$/i,
+		/[^ilrbs][aeiou][^aeiouycg]e[ds]$/i,
+		/[ilrb][aeiou][^aeioucg]es$/i,
 		/[^n|aeiou][^(l)|(hp)]e$/i,
+		/[aeiou][^aeiou]e[^rd]/gi,
 		// /[st]ions$/i,
 		// /[st]ion$/i,
 		/cious$/i,
 		/[ct]ial$/i,
 		/elle$/i,
 		/nce$/i,
+		/iage/i,
 	];
 	const doubleMinusSyllables = [
 		/^(fore[^bhfqsv])/i,
+		/rriage$/i,
 	];
 	for (let i=0; i<doubleMinusSyllables.length; i++) {
 		if (doubleMinusSyllables[i].test(word)) {
