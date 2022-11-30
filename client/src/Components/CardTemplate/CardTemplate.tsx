@@ -17,6 +17,7 @@ function CardTemplate(props: Props) {
       </Header>
       <StyledCard>
         <div style={{ position: 'relative' }}>
+					{/* @ts-ignore */}
           <StyledCardMedia bgUrl={props.bgUrl} color={props.color}/>
           <Overlay>
             {props.overlay}
