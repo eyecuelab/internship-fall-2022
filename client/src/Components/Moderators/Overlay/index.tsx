@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../index.css';
+import '../../../index.css';
 import { Link, useLocation } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
 import { greenButton, redButton } from '../../componentStyles';

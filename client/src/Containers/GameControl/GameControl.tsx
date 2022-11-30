@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../../index.css';
+import '../../../index.css';
 import CardTemplate from '../../Components/CardTemplate';
 import TeamLobby from '../../Components/Teams/Lobby';
 import Buzzer from '../../Components/Teams/Buzzer';

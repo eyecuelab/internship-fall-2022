@@ -5,7 +5,7 @@ import { greenButton } from '../../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { getData, postData } from '../../../ApiHelper';
 import { whiteButton } from '../../componentStyles';
-import '../../index.css';
+import '../../..index.css';
 
 interface Props {
 	handleCreateNewGame: () => void;

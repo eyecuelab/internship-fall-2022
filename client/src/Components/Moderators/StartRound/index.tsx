@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../index.css';
+import '../../../index.css';
 import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
 import { whiteButton, greenButton, redButton } from '../../componentStyles';

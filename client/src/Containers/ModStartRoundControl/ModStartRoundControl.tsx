@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../../index.css';
-import CardTemplate from '../../Components/CardTemplate';
-import ModLogin from '../../Components/Moderators/Login';
-import ModGameList from '../../Components/Moderators/GameList/ModGameList';
-import ModNewGame from '../../Components/Moderators/NewGame';
-import ModOverlay from '../../Components/Moderators/Overlay';
+import CardTemplate from '../../Components/CardTemplate/CardTemplate';
+import ModChooseTopic from '../../Components/ModChooseTopic/ModChooseTopic';
+import ModStartRound from '../../Components/ModStartRound/ModStartRound';
+import ModOverlay from '../../Components/ModOverlay/ModOverlay';
+import ModLogin from '../../Components/ModLogin/ModLogin';
 import { getData } from '../../ApiHelper';
 
 interface Props {
@@ -12,13 +12,12 @@ interface Props {
 	userData: any;
 }
 
-function ModGameControl(props: Props) {
+function ModStartRoundControl(props: Props) {
   const [createNewGameView, setCreateNewGameView] = useState(false);
 	const [games, setGames] = useState([]);
 
 	useEffect(() => {
 		getGameList();
-		props.setUserData(props.userData);
 	}, []);
 
 	const getGameList = () => {
@@ -51,19 +50,15 @@ function ModGameControl(props: Props) {
     if (!createNewGameView) {
       return (
         <CardTemplate
-          content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
+          content={<ModChooseTopic gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
-					bgUrl='/images/moderator_card_background_2.png'
-					color='#15586a'
         />
       );
     } else {
       return (
         <CardTemplate
-          content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
+          content={<ModStartRound />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
-					bgUrl='/images/moderator_card_background_2.png'
-					color='#15586a'
         />
       );
     }
@@ -71,4 +66,4 @@ function ModGameControl(props: Props) {
   return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
 }
 
-export default ModGameControl;
+export default ModStartRoundControl;

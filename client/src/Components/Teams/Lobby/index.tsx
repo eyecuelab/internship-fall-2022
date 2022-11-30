@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid } from '@mui/material';
-import '../../index.css';
+import '../../../index.css';
 
 function TeamLobby() {
   return (

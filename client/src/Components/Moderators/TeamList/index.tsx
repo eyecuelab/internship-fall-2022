@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../index.css';
+import '../../../index.css';
 import { Grid, Button } from '@mui/material';
 import { whiteButton, redButton } from '../../componentStyles';
 
