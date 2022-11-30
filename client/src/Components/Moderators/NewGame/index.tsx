@@ -41,7 +41,7 @@ function ModNewGame(props: Props) {
     <div style={{ position: 'relative', height: '100%' }}>
 		<Grid container>
       <h3>new game name</h3>
-      <br />
+			<div className="spacer" />
       <form onSubmit={handleSubmit(createNewGame)}>
 			<Controller
 				control={control}
@@ -60,11 +60,11 @@ function ModNewGame(props: Props) {
         <h5>15 characters max</h5>
       </label>
       <br />
-			<div className="spacer" />
       <Button type="submit" sx={greenButton} >
         <h3>Continue</h3>
       </Button>
 			</form>
+			<div className="spacer" />
 			<Button onClick={props.handleCreateNewGame} className="bottom" sx={whiteButton} >
 				<h3>BACK TO GAMES</h3>
 			</Button>
