@@ -51,7 +51,7 @@ function ModAddTopic(props: Props) {
   return (
     <div style={{ position: 'relative', height: '100%'}}>
       <Grid container>
-        <Grid container item xs={7} >
+        <Grid item xs={7} >
           <h3>TOPICS</h3>
         </Grid>
         <Grid container item xs={4} justifyContent='flex-end'>
@@ -59,11 +59,9 @@ function ModAddTopic(props: Props) {
         </Grid>
       </Grid>
       <hr />
-      {
-        <Grid container>
-          {topics?.map((topic: Topic) => { return <TopicItem key={topic.id} topic={topic} deleteTopic={deleteTopic} /> })}
-        </Grid>
-      }
+			<Grid container>
+				{topics?.map((topic: Topic) => { return <TopicItem key={topic.id} topic={topic} deleteTopic={deleteTopic} /> })}
+			</Grid>
       <form onSubmit={handleSubmit(addNewTopic)}>
         <Grid container spacing={2} style={{position: 'relative', top: 20}}>
           <Grid container item xs={9} direction="column">

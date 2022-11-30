@@ -13,7 +13,7 @@ function TopicItem (props: Props) {
 	const { topic, deleteTopic } = props
 
 	return(
-		<React.Fragment key = '{topic.id}'>
+		<>
 			<Grid container item xs={7}>
 				<Link to={{ pathname:`/topic/${topic.id}` }}><h4 style={{ lineHeight: '3.5rem' }}>{ topic.name.toString() }</h4></Link>
 			</Grid>
@@ -27,7 +27,7 @@ function TopicItem (props: Props) {
 					<Delete sx={{height: '2.5rem', width: '2.5rem'}}/>
 				</IconButton>
 			</Grid>
-		</React.Fragment>
+		</>
 	);
 }
 
