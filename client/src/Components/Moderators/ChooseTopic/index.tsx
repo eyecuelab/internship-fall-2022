@@ -27,9 +27,11 @@ function ModChooseTopic(props: Props) {
           <h3>choose a new round topic</h3>
           <hr />
           <br />
+          
           { <Grid container>
-				{ (props.gameList.map((game: Game) => <TopicItem key={game.id} game={game} />)) }
+				{ (props.gameList.map((game: Game) => <Grid item xs={12}><TopicItem key={game.id} game={game} /><br /><br /></Grid>)) }
       </Grid> }
+      
           <br />
           <br />
         </div>

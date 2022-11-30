@@ -52,6 +52,8 @@ function ModStartRoundControl(props: Props) {
         <CardTemplate
           content={<ModChooseTopic gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
+          bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     } else {
@@ -59,6 +61,8 @@ function ModStartRoundControl(props: Props) {
         <CardTemplate
           content={<ModStartRound />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
+          bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     }
