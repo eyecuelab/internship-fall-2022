@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../index.css';
-import CardTemplate from '../../Components/CardTemplate/CardTemplate';
-import ModChooseTopic from '../../Components/ModChooseTopic/ModChooseTopic';
-import ModStartRound from '../../Components/ModStartRound/ModStartRound';
-import ModOverlay from '../../Components/ModOverlay/ModOverlay';
-import ModLogin from '../../Components/ModLogin/ModLogin';
+import CardTemplate from '../../Components/CardTemplate';
+import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
+import ModStartRound from '../../Components/Moderators/StartRound';
+import ModOverlay from '../../Components/Moderators/Overlay';
+import ModLogin from '../../Components/Moderators/Login';
 import { getData } from '../../ApiHelper';
 
 interface Props {

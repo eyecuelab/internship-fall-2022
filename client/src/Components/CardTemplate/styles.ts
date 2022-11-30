@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import {Card, CardContent} from '@mui/material';
+import type {CardTemplateProps} from '.';
 import '../../App.scss';
 
 export const Overlay = styled.div`
@@ -40,12 +41,12 @@ export const StyledCard = styled(Card)`
 	background: #f6ede9;
 `
 
-export const StyledCardMedia = styled.div`
+export const StyledCardMedia = styled.div<Pick<CardTemplateProps, "bgUrl" | "color">>`
 	width: 490px;
 	min-height: 101%;
 	height: 101%;
-	background: ${localStorage.getItem('user') ? '#15586a' : '#0c114a'};
-	background-image: url(${localStorage.getItem('user') ? '/images/moderator_card_background_2.png' : '/images/blueberries_banner.png'});
+	background: ${props => props.color};
+	background-image: linear-gradient(to bottom, ${props => props.color+'ff'}, ${props => props.color+'00'}), url(${props => props.bgUrl});
 	background-attachment: absolute;
 	background-position: 16% 95%;
 	background-repeat: no-repeat;

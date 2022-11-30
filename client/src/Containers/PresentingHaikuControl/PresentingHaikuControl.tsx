@@ -1,11 +1,11 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
-import CardTemplate from '../../Components/CardTemplate/CardTemplate';
+import CardTemplate from '../../Components/CardTemplate';
 import { getData } from '../../ApiHelper';
-import ModPresenting from '../../Components/ModPresenting/ModPresenting';
-import ModHandleGuess from '../../Components/ModHandleGuess/ModHandleGuess';
-import ModOverlay from '../../Components/ModOverlay/ModOverlay';
-import ModLogin from '../../Components/ModLogin/ModLogin';
+import ModPresenting from '../../Components/Moderators/Presenting';
+import ModHandleGuess from '../../Components/Moderators/HandleGuess';
+import ModOverlay from '../../Components/Moderators/Overlay';
+import ModLogin from '../../Components/Moderators/Login';
 // do I need ModLogin?
 
 interface Props {

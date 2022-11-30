@@ -1,7 +1,7 @@
 export const whiteButton = {
   height: '5rem',
   width: '',
-  marginBottom: '1rem',
+  marginBottom: '',
 	padding: '',
   color: '#363636',
   border: '1px solid #363636',

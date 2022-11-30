@@ -122,12 +122,49 @@ textarea {
 
 .bottom {
 	position: absolute !important;
-	bottom: 0.5rem;
+	bottom: 0.75rem;
 	left: 0;
 	width: 100%;
 }
 
 .spacer {
 	height: 5rem;
-	margin-bottom: 0.5rem;
+	// margin-bottom: 0.5rem;
+}
+
+.fade-in-down {
+	animation: fadeInDown 1s ease-out;
+}
+
+@keyframes fadeInDown {
+	0% {transform: translateY(-100%)}
+	0% {opacity:0;}
+	100% {transform: translateY(0%)}
+	100% {opacity:1;}
+}
+
+.fade-in-left {
+	animation: fadeInLeft 2s ease-out;
+}
+
+@keyframes fadeInLeft {
+	0% {transform: translateX(-10%)}
+	0% {opacity:0;}
+	60% {transform: translateX(-10%)}
+	60% {opacity:0;}
+	100% {transform: translateX(0%)}
+	100% {opacity:1;}
+}
+
+.fade-in-up {
+	animation: fadeInUp 4s ease-out;
+}
+
+@keyframes fadeInUp {
+	0% {transform: translateY(100%)}
+	0% {opacity:0;}
+	70% {transform: translateY(100%)}
+	70% {opacity:0;}
+	100% {transform: translateY(0%)}
+	100% {opacity:1;}
 }

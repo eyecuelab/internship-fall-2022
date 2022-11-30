@@ -1,5 +1,4 @@
 import { getGameById, getGameByModerator, createGame, deleteGame, updateGameStatus } from '../Models/games';
-import io from '../server';
 
 const gamesControllers = {
 

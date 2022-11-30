@@ -1,10 +1,10 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../index.css';
-import CardTemplate from '../../Components/CardTemplate/CardTemplate';
-import ModLogin from '../../Components/ModLogin/ModLogin';
-import ModGameList from '../../Components/ModGameList/ModGameList';
-import ModNewGame from '../../Components/ModNewGame/ModNewGame';
-import ModOverlay from '../../Components/ModOverlay/ModOverlay';
+import CardTemplate from '../../Components/CardTemplate';
+import ModLogin from '../../Components/Moderators/Login';
+import ModGameList from '../../Components/Moderators/GameList/ModGameList';
+import ModNewGame from '../../Components/Moderators/NewGame';
+import ModOverlay from '../../Components/Moderators/Overlay';
 import { getData } from '../../ApiHelper';
 
 interface Props {
@@ -18,6 +18,7 @@ function ModGameControl(props: Props) {
 
 	useEffect(() => {
 		getGameList();
+		props.setUserData(props.userData);
 	}, []);
 
 	const getGameList = () => {
@@ -52,6 +53,8 @@ function ModGameControl(props: Props) {
         <CardTemplate
           content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     } else {
@@ -59,6 +62,8 @@ function ModGameControl(props: Props) {
         <CardTemplate
           content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     }
