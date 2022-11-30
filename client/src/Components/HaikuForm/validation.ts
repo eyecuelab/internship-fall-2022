@@ -54,6 +54,27 @@ export const countSyllables = (word: string) => {
 	const vowelMatch = word.match(/[aeiouy]+/gi);
 	const edgeCaseMatch = word.match(/(eo|io|ia)+/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
+	const exceptionWords = [
+		{'abalone': 3},
+		{'adobe': 3},
+		{'acreage': 3},
+		{'anemone': 4},
+		{'cafe': 2},
+		{'crooked': 2},
+		{'guacamole': 4},
+		{'hyperbole': 4},
+		{'jukebox': 2},
+		{'karate': 3},
+		{'machete': 3},
+		{'maybe': 2},
+		{'people': 2},
+		{'recipe': 2},
+		{'sesame': 3},
+		{'shoreline': 2},
+		{'simile': 3},
+		{'tamale': 3},
+		{'yosemite': 4},
+	];
 	const plusSyllables = [
 		/sm$/i,
 		/[aeiou]ous$/i,
@@ -66,14 +87,21 @@ export const countSyllables = (word: string) => {
 		/ii$/i,
 	];
 	const minusSyllables = [
-		/([^tf][^td]e[d])$/i,
-		/([aeiou][^aeiou])e$/i,
-		/([^n][^l])e$/i,
+		/[^tf][^td]e[d]$/i,
+		/[aeiou][^aeiou]e$/i,
+		/[^n][^(l)|(ph)]e$/i,
 		/[st]ion$/i,
 		/cious$/i,
 		/cial$/i,
 		/elle$/i,
 	];
+	for (let i=0; i<exceptionWords.length; i++) {
+		// console.log('KEY: ', Object.keys(exceptionWords[i]));
+		// console.log('Value: ', Object.values(exceptionWords)[i]);
+		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
+			return Object.values(exceptionWords[i])[0];
+		}
+	}
 	for (let i=0; i<minusSyllables.length; i++) {
 		if (minusSyllables[i].test(word)) {
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
