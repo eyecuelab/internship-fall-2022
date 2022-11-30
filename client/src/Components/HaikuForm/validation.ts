@@ -104,7 +104,7 @@ export const countSyllables = (inputWord: string) => {
 		/[^ilrbs][aeiou][^aeiouycg]e[ds]$/i,
 		/[ilrb][aeiou][^aeioucg]es$/i,
 		/[^n|aeiou][^(l)|(hp)]e$/i,
-		/[aeiou][^aeiou]e[^rd]/gi,
+		/[aeiou][^aeiou]e[^rd]$/i,
 		// /[st]ions$/i,
 		// /[st]ion$/i,
 		/cious$/i,
