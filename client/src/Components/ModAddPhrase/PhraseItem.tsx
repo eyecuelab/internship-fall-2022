@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, IconButton } from '@mui/material';
 import { Delete } from '@mui/icons-material';
-import { deleteData } from '../../ApiHelper';
 import { Phrase } from '../../Types/Types';
 
 interface Props {

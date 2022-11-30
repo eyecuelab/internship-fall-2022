@@ -66,38 +66,34 @@ function ModAddPhrase(props: Props) {
         </Grid>
       </Grid>
       <hr />
-      {
-        <Grid container>
-          {phrases?.map((phrase: Phrase) => { return (<PhraseItem key={phrase.id} phrase={phrase} deletePhrase={deletePhrase} />) })}
-        </Grid>
-      }
-      <Grid container>
-				<form onSubmit={handleSubmit(addNewPhrase)}>
-					<Grid container spacing={2} style={{position: 'relative', top: 20}}>
-						<Grid container item xs={9} direction="column">
-							<Controller
-								control={control}
-								name="body"
-								render={({field}) => (
-									<TextField
-										{...field}
-										fullWidth
-										variant="standard"
-										multiline
-										required
-									/>
-								)}
-							/>
-							<h5>20 CHARACTERS MAX</h5>
-						</Grid>
-						<Grid container item xs={3} direction="column">
-							<Button type="submit" sx={greenButton} >
-								<h3>ADD</h3>
-							</Button>
-						</Grid>
-					</Grid>				
-				</form>
-      </Grid>
+			<Grid container>
+				{phrases?.map((phrase: Phrase) => { return (<PhraseItem key={phrase.id} phrase={phrase} deletePhrase={deletePhrase} />) })}
+			</Grid>
+			<form onSubmit={handleSubmit(addNewPhrase)}>
+				<Grid container spacing={2} style={{position: 'relative', top: 20}}>
+					<Grid container item xs={9} direction="column">
+						<Controller
+							control={control}
+							name="body"
+							render={({field}) => (
+								<TextField
+									{...field}
+									fullWidth
+									variant="standard"
+									multiline
+									required
+								/>
+							)}
+						/>
+						<h5>20 CHARACTERS MAX</h5>
+					</Grid>
+					<Grid container item xs={3} direction="column">
+						<Button type="submit" sx={greenButton} >
+							<h3>ADD</h3>
+						</Button>
+					</Grid>
+				</Grid>				
+			</form>
 			<div className="spacer" />
 			<Button onClick={() => navigate(-1)} sx={whiteButton} style={{ position: 'absolute', bottom: 8, width: '100%' }} >
 				<h3>BACK TO TOPICS</h3>
