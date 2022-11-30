@@ -45,7 +45,6 @@ export const StyledCardMedia = styled.div`
 	min-height: 101%;
 	height: 101%;
 	background: ${props => props.color};
-	${/* @ts-ignore */ 0 }
 	background-image: linear-gradient(to bottom, ${props => props.color+'ff'}, ${props => props.color+'00'}), url(${props => props.bgUrl});
 	background-attachment: absolute;
 	background-position: 16% 95%;
