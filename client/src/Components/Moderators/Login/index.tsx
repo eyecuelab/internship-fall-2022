@@ -14,6 +14,7 @@ interface Props {
 function ModLogin(props: Props) {
 	whiteButton.width = '100%';
 	whiteButton.padding = '1rem';
+	whiteButton.height = '5rem';
 
 	const login = useGoogleLogin({
 		onSuccess: (response) => {
@@ -61,18 +62,15 @@ function ModLogin(props: Props) {
               height: '100%',
             }}
           >
-            <div>
+            <div style={{width: '45%'}}>
               <h4 style={{textAlign: 'center'}}>Moderator Login</h4>
               <br />
-              <Button
+              <DogEarButton
 								onClick={login as MouseEventHandler<any>}
                 style={whiteButton}
               >
-                <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem', marginTop: '0.5rem'}}>SIGN IN WITH GOOGLE</h3>
-              </Button>
-							<br />
-							<br />
-							<button onClick={() => console.log(props.userData)} style={{width: '100%'}}>check user data?</button>
+                <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem'}}>SIGN IN WITH GOOGLE</h3>
+              </DogEarButton>
             </div>
           </CardContent>
         </Content>

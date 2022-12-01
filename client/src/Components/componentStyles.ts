@@ -8,11 +8,8 @@ export const whiteButton = {
   color: '#363636',
   border: '1px solid #363636',
   background: '#e2ddd9',
-  borderRadius: '10px',
-	':hover': {
-		background: '#e6ddd9',
-		border: '1px solid #262626'
-	},
+	display: 'flex',
+	alignItems: 'center'
 };
 
 export const redButton = {
@@ -23,11 +20,6 @@ export const redButton = {
   color: '#FFFFFF',
   border: '1px solid #363636',
   background: '#FC3911',
-  borderRadius: '10px',
-	':hover': {
-		background: '#ec2901',
-		border: '1px solid #262626'
-	},
 };
 
 export const greenButton = {
@@ -37,10 +29,6 @@ export const greenButton = {
 	padding: '',
   color: '#fff',
   background: '#61C14A',
-	':hover': {
-		background: '#51b13a',
-		border: '1px solid #262626'
-	},
 };
 
 export const blackButton = {
@@ -51,11 +39,6 @@ export const blackButton = {
   color: '#FFFFFF',
   border: '1px solid #363636',
   background: '#61C14A',
-  borderRadius: '10px',
-	':hover': {
-		background: '#51b13a',
-		border: '1px solid #262626'
-	},
 };
 
 const dogEared = corners(round, round, round, chamfer).size(25);

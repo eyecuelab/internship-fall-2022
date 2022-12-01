@@ -108,8 +108,10 @@ a {
 
 button {
 	border: none !important;
+	transition: transform 90ms ease-in-out;
 	&:hover {
 		cursor: pointer;
+		transform: scale(0.98);
 	}
 	&:focus {
 		outline: none !important;

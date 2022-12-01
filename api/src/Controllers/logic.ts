@@ -18,7 +18,7 @@ const logicControllers = {
 
 	async buzzerRefresh (req: any, res: any) {
 		const { gameId } = req.body;
-//		io.except(['buzzed_user1', 'buzzed_user2', 'etc...']).emit('buzzer_refresh');
+		io.except(['buzzed_user1', 'buzzed_user2', 'etc...']).emit('buzzer_refresh');
 	}
 }
 
