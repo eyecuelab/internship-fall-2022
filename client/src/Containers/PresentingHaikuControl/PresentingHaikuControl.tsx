@@ -33,19 +33,27 @@ function PresentingHaikuControl(props: Props) {
     setBuzzedIn(!buzzedIn);
   };
 
+  const passedInfo ={h3: "round", h1: "*pass round*"};
+
+  const passedInfo2= {h3: "teams left", h1:"pass #"}
+
   if (localStorage.getItem('user')) {
     if (buzzedIn) {
       return (
         <CardTemplate
           content={<ModHandleGuess handleSwitch={handleBuzzToggle} />}
           overlay={<ModOverlay gameData={game} />}
+          bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     } else {
       return (
         <CardTemplate
           content={<ModPresenting handleSwitch={handleBuzzToggle} />}
-          overlay={<ModOverlay gameData={game} />}
+          overlay={<ModOverlay gameData={passedInfo} gameDataTwo={passedInfo2}/>}
+          bgUrl='/images/moderator_card_background_2.png'
+					color='#15586a'
         />
       );
     }

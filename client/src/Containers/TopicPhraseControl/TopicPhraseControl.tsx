@@ -35,7 +35,7 @@ function TopicPhraseControl(props: Props) {
   };
 
 	const passedInfo ={h3: "game", h1: game.name};
-	console.log(passedInfo)
+	
 	
 
   if (localStorage.getItem('user')) {
