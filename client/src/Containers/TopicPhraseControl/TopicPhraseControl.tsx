@@ -34,12 +34,14 @@ function TopicPhraseControl(props: Props) {
 		window.localStorage.clear();
   };
 
+	const passedInfo ={h3: "game", ...game};
+
   if (localStorage.getItem('user')) {
 		if (props.viewPhrases) {
 			return (
 				<CardTemplate
 					content={<ModAddPhrase/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
@@ -48,7 +50,7 @@ function TopicPhraseControl(props: Props) {
 			return (
 				<CardTemplate
 					content={<ModAddTopic gameId={Number(id)} />}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo}  handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
