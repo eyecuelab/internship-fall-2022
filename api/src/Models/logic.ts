@@ -6,5 +6,5 @@ export const emitStartRound = (gameId: number) => {
 }
 
 export const emitTimerTick = (gameId: number, timeRemaining: number) => {
-	io.in(gameId.toString()).emit('tick', timeRemaining);
+	io.emit('tick', timeRemaining); //.in(gameId.toString())
 }

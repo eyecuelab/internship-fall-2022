@@ -6,7 +6,8 @@ const ROUND_TIME = 300;
 const logicControllers = {
 	async startRound (req: any, res: any) {
 		const { gameId } = req.body;
-		await startThisRound(gameId);
+		startThisRound(gameId);
+		res.json(200);
 	},
 
 	async addRoundTime (req: any, res: any) {
@@ -20,7 +21,7 @@ export default logicControllers;
 
 let timeRemaining = ROUND_TIME;
 
-const startThisRound = async (gameId: number) => {
+const startThisRound = (gameId: number) => {
 	const intervalId = setInterval(async () => {
 		emitTimerTick(gameId, timeRemaining);
 		if (timeRemaining === 0) {
