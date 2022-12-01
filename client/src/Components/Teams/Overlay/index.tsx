@@ -7,7 +7,7 @@ interface Props {
 }
 
 function TeamOverlay(props: Props) {
-	const [time, setTime] = useState(300);
+	const [time, setTime] = useState(180);
 	const { setSubmitState } = props;
 
 	useEffect(() => {
