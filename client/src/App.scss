@@ -119,6 +119,10 @@ button {
 	&:disabled {
 		background-color: #0001 !important;
 		color: #36363670 !important;
+		&:hover {
+			transform: none;
+			cursor: default;
+		}
 	}
 }
 
