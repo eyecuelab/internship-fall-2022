@@ -38,7 +38,7 @@ function TeamOverlay() {
       <h1>3</h1>
       <br />
       <h3>Timer</h3>
-      <h1>{timer.minutes}:{timer.seconds}</h1>
+      <h1 style={timer.minutes < 1 ? {color: 'red'} : {color: '#fff'}}>{timer.minutes}:{timer.seconds}</h1>
     </>
   );
 }
