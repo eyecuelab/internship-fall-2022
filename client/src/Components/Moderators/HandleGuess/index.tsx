@@ -29,6 +29,7 @@ function ModHandleGuess(props: Props) {
           <Button onClick={props.handleSwitch}  sx={greenButton}>
             <h3>reward points</h3>
           </Button>
+          <br/>
           <Button onClick={props.handleSwitch} sx={whiteButton}>
             <h3>dismiss guess</h3>
           </Button>

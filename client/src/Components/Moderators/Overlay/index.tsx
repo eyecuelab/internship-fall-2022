@@ -1,9 +1,9 @@
 import React from 'react';
 import '../../../index.css';
-import { Link, useLocation } from 'react-router-dom';
-import { Grid, Button } from '@mui/material';
-import { greenButton, redButton } from '../../componentStyles';
-import { putData } from '../../../ApiHelper';
+import {Link, useLocation} from 'react-router-dom';
+import {Grid, Button} from '@mui/material';
+import {greenButton, redButton} from '../../componentStyles';
+import {putData} from '../../../ApiHelper';
 import GameInfo from './GameInfo';
 
 interface Props {
@@ -39,7 +39,8 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
-      {props.gameData && <GameInfo gameInfo={props.gameData} />}
+      {props.gameData && <GameInfo h1Input={props.gameData.textOne} h3Input={props.gameData.labelOne}/>}
+      {props.gameData && <GameInfo h1Input={props.gameData.textTwo} h3Input={props.gameData.labelTwo}/>}
       <Grid
         item
         xs={12}
@@ -57,6 +58,7 @@ function ModOverlay(props: Props) {
             </Button>
           )}
         </Link>
+        <br />
         <br />
         <Link to="/">
           <Button onClick={props.handleLogout} sx={redButton}>
