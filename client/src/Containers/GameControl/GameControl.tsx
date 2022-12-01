@@ -5,6 +5,7 @@ import TeamLobby from '../../Components/Teams/Lobby';
 import Buzzer from '../../Components/Teams/Buzzer';
 import HaikuForm from '../../Components/Teams/HaikuForm';
 import TeamOverlay from '../../Components/Teams/Overlay';
+import socket from '../../Hooks/WebsocketHook';
 
 function GameControl() {
 	window.localStorage.clear();

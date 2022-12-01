@@ -3,8 +3,15 @@ import '../../../index.css';
 import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
 import { whiteButton, greenButton, redButton } from '../../componentStyles';
+import { postData } from '../../../ApiHelper';
 
 function ModStartRound() {
+	const gameId = Number(localStorage.getItem('gameId'));
+
+	const startRound = () => {
+		postData('/start', gameId);
+	}
+
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -19,7 +26,7 @@ function ModStartRound() {
           <br />
         </div>
         <ButtonContainer>
-          <Button sx={greenButton}>
+          <Button onClick={startRound} sx={greenButton}>
             <h3>start round</h3>
           </Button>
           <br />
