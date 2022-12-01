@@ -34,7 +34,8 @@ function TopicPhraseControl(props: Props) {
 		window.localStorage.clear();
   };
 
-	const passedInfo ={h3: "game", h1: game.name};
+	const passedInfo ={labelOne: "game", textOne: game.name};
+	
 	
 	
 
