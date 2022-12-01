@@ -39,7 +39,7 @@ export const deleteData = async (endpoint: string) => {
     ...BASE_HEADERS,
     method: 'DELETE',
   });
-  console.log(handleResponse(response));
+	return handleResponse(response);
 };
 
 export const putData = async (endpoint: string) => {
