@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TextField, Button, Grid } from '@mui/material';
 import { greenButton } from '../../componentStyles';
@@ -9,6 +9,7 @@ import '../../../index.css';
 
 interface Props {
 	handleCreateNewGame: () => void;
+	getGameList: any;
 }
 
 interface IFormInput {
@@ -24,6 +25,10 @@ type Data = {
 function ModNewGame(props: Props) {
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
 	const userData = JSON.parse(localStorage.getItem('user') as string);
+
+	useEffect(() => {
+		props.getGameList();
+	}, []);
 
 	getData(`/moderators/${userData?.email}`).then((response) => {
 		setValue('moderatorId', response.id);
