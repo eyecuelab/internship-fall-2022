@@ -79,6 +79,30 @@ export const countSyllables = (inputWord: string) => {
 		{'wicked': 2},
 		{'yosemite': 4},
 	];
+	const doubleMinusSyllables = [
+		/^(fore[^bfhqsv])/i,
+		/rriage$/i,
+		/[^g]giate/,
+	];
+	const minusSyllables = [
+		/([^d][^dfktz][^dfty]|[ff])ed$/i,
+		/thed$/i,
+		/^(fore[^v])/i,
+		// /[ff|bb|gg|pp|zz]ed/,
+		/[^aeiou][aeiou][^aeiou]e$/i,
+		/[^bcilnrs][aeiou][^aeiouycgz]e[ds]$/i,
+		/[bilr][aeiou][^aeioucgz]es$/i,
+		/[^n|aeiou][^(l)|(hp)]e$/i,
+		/[aeiou][^aeiouz]e[^rd]$/i,
+		// /[st]ions$/i,
+		// /[st]ion$/i,
+		/cious$/i,
+		/[ct]ial$/i,
+		/iate$/i,
+		/elle$/i,
+		/nce$/i,
+		/iage/i,
+	];
 	const plusSyllables = [
 		/sm$/i,
 		/[aeiou]ous$/i,
@@ -94,30 +118,6 @@ export const countSyllables = (inputWord: string) => {
 		// /io$/i,
 		// /[^ts]io[n]/gi,
 		/yal$/i
-	];
-	const minusSyllables = [
-		/([^d][^kftzd][^dfty]|[ff])ed$/i,
-		/thed$/i,
-		/^(fore[^v])/i,
-		// /[ff|bb|gg|pp|zz]ed/,
-		/[^aeiou][aeiou][^aeiou]e$/i,
-		/[^bcilnrs][aeiou][^aeiouycg]e[ds]$/i,
-		/[ilrb][aeiou][^aeioucg]es$/i,
-		/[^n|aeiou][^(l)|(hp)]e$/i,
-		/[aeiou][^aeiou]e[^rd]$/i,
-		// /[st]ions$/i,
-		// /[st]ion$/i,
-		/cious$/i,
-		/[ct]ial$/i,
-		/iate$/i,
-		/elle$/i,
-		/nce$/i,
-		/iage/i,
-	];
-	const doubleMinusSyllables = [
-		/^(fore[^bhfqsv])/i,
-		/rriage$/i,
-		/[^g]giate/,
 	];
 	for (let i=0; i<exceptionWords.length; i++) {
 		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
