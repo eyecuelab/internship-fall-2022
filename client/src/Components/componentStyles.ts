@@ -22,7 +22,7 @@ export const redButton = {
 	padding: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
-  backgroundColor: '#FC3911',
+  background: '#FC3911',
   borderRadius: '10px',
 	':hover': {
 		background: '#ec2901',
@@ -50,7 +50,7 @@ export const blackButton = {
 	padding: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
-  backgroundColor: '#61C14A',
+  background: '#61C14A',
   borderRadius: '10px',
 	':hover': {
 		background: '#51b13a',

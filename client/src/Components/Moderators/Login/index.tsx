@@ -64,12 +64,12 @@ function ModLogin(props: Props) {
             <div>
               <h4 style={{textAlign: 'center'}}>Moderator Login</h4>
               <br />
-              <DogEarButton
+              <Button
 								onClick={login as MouseEventHandler<any>}
                 style={whiteButton}
               >
                 <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem', marginTop: '0.5rem'}}>SIGN IN WITH GOOGLE</h3>
-              </DogEarButton>
+              </Button>
 							<br />
 							<br />
 							<button onClick={() => console.log(props.userData)} style={{width: '100%'}}>check user data?</button>

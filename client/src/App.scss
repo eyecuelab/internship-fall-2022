@@ -108,6 +108,9 @@ a {
 
 button {
 	border: none !important;
+	&:hover {
+		cursor: pointer;
+	}
 	&:focus {
 		outline: none !important;
 	}

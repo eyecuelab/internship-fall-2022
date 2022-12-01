@@ -58,6 +58,7 @@ function ModOverlay(props: Props) {
           )}
         </Link>
         <br />
+        <br />
         <Link to="/">
           <DogEarButton onClick={props.handleLogout} style={redButton}>
             <h3>Logout</h3>
