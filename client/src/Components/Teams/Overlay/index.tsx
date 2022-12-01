@@ -7,7 +7,7 @@ interface Props {
 }
 
 function TeamOverlay(props: Props) {
-	const [time, setTime] = useState(180);
+	const [time, setTime] = useState(300);
 	const { setSubmitState } = props;
 
 	useEffect(() => {
@@ -21,7 +21,7 @@ function TeamOverlay(props: Props) {
 
 		return () => {
 			socket.off('connection');
-			socket.off('tick');
+			// socket.off('tick');
 		}
 	}, []);
 
