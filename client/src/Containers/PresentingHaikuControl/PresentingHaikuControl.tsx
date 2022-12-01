@@ -33,9 +33,8 @@ function PresentingHaikuControl(props: Props) {
     setBuzzedIn(!buzzedIn);
   };
 
-  const passedInfo ={h3: "round", h1: "*pass round*"};
+  const passedInfo ={labelOne: "round", textOne: "*pass round*", labelTwo: "teams left", textTwo:"pass #"};
 
-  const passedInfo2= {h3: "teams left", h1:"pass #"}
 
   if (localStorage.getItem('user')) {
     if (buzzedIn) {
@@ -51,7 +50,7 @@ function PresentingHaikuControl(props: Props) {
       return (
         <CardTemplate
           content={<ModPresenting handleSwitch={handleBuzzToggle} />}
-          overlay={<ModOverlay gameData={passedInfo} gameDataTwo={passedInfo2}/>}
+          overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />
