@@ -1,7 +1,7 @@
 import { emitTimerTick } from "../Models/logic";
 import io from "../server";
 
-const ROUND_TIME = 60;
+const ROUND_TIME = 300;
 
 const logicControllers = {
 	async startRound (req: any, res: any) {

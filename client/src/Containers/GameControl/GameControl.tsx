@@ -10,6 +10,8 @@ import socket from '../../Hooks/WebsocketHook';
 function GameControl() {
 	window.localStorage.clear();
 	const [team, setTeam] = useState('');
+	const [submitState, setSubmitState] = useState(true);
+	console.log('from control: ', submitState);
 
 	useEffect(() => {
 		setTeam('blueberry');
@@ -34,8 +36,8 @@ function GameControl() {
 
   return (
 		<CardTemplate 
-			content={ <HaikuForm /> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
-			overlay={<TeamOverlay />} 
+			content={<HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
+			overlay={<TeamOverlay setSubmitState={setSubmitState}/>} 
 			bgUrl={bgUrl}
 			color={color}
 		/>

@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import socket from '../../../Hooks/WebsocketHook';
 import '../../../index.css';
 
-function TeamOverlay() {
+interface Props {
+	setSubmitState: Dispatch<SetStateAction<boolean>>;
+}
+
+function TeamOverlay(props: Props) {
 	const [time, setTime] = useState(300);
+	const { setSubmitState } = props;
 
 	useEffect(() => {
 		socket.on('connection', () => {
@@ -23,6 +28,10 @@ function TeamOverlay() {
 	const formatTimer = (timer: number) => {
 		const minutes = Math.floor(timer / 60);
 		const seconds = timer - minutes * 60;
+
+		if (timer === 0) { 
+			setSubmitState(true); 
+		}
 
 		return {'minutes': minutes, 'seconds': seconds.toLocaleString('en-US', {minimumIntegerDigits:2})};
 	}

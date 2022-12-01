@@ -1,9 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { postData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
 import { whiteButton, greenButton } from '../../componentStyles';
+
+interface Props {
+	submitState: boolean;
+	setSubmitState: Dispatch<SetStateAction<boolean>>;
+}
 
 interface IFormInput {
   line1: string;
@@ -11,14 +16,15 @@ interface IFormInput {
   line3: string;
 }
 
-function HaikuForm() {
+function HaikuForm(props: Props) {
 	const [stems, setStems] = useState([]);
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
-	const [submitState, setSubmitState] = useState(true);
+	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {postData('/haicues', data)};
+	console.log('from haiku: ', submitState);
 
 	const roundNum = '2';
 	const topic = 'Holiday Activities';
@@ -89,7 +95,7 @@ function HaikuForm() {
 		if (line1 !== '' && line2 !== '' && line3 !== '') {
 			setSubmitState(false);
 		} else {
-			button.setAttribute('disabled', 'true');
+			setSubmitState(true);
 		}
 	}
 
