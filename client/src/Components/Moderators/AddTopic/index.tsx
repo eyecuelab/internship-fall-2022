@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Grid, TextField, Button} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
-import {greenButton, whiteButton} from '../../componentStyles';
+import {DogEarButton, greenButton, whiteButton} from '../../componentStyles';
 import {getData, postData, deleteData} from '../../../ApiHelper';
 import TopicItem from './TopicItem';
 import { Topic } from '../../../Types/Types';
@@ -81,17 +81,17 @@ function ModAddTopic(props: Props) {
             <h5>20 CHARACTERS MAX</h5>
           </Grid>
           <Grid container item xs={3} direction="column">
-            <Button type="submit" sx={greenButton} >
+            <DogEarButton type="submit" style={greenButton} >
               <h3>ADD</h3>
-            </Button>
+            </DogEarButton>
           </Grid>
         </Grid>
       </form>
 			<div className="spacer" />
       <Link to="/" className="bottom">
-        <Button sx={whiteButton} >
+        <DogEarButton style={whiteButton} >
           <h3>BACK TO GAMES</h3>
-        </Button>
+        </DogEarButton>
       </Link>
     </div>
   );

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import {Card, CardContent} from '@mui/material';
+import corners, { chamfered } from 'corners';
 import type {CardTemplateProps} from '.';
 import '../../App.scss';
 

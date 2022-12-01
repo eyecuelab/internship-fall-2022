@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { Grid, TextField, Button } from '@mui/material';
-import { greenButton, whiteButton } from '../../componentStyles';
+import { DogEarButton, greenButton, whiteButton } from '../../componentStyles';
 import { deleteData, getData, postData } from '../../../ApiHelper';
 import PhraseItem from './PhraseItem';
 import { Phrase } from '../../../Types/Types';
@@ -88,16 +88,16 @@ function ModAddPhrase(props: Props) {
 						<h5>20 CHARACTERS MAX</h5>
 					</Grid>
 					<Grid container item xs={3} direction="column">
-						<Button type="submit" sx={greenButton} >
+						<DogEarButton type="submit" style={greenButton} >
 							<h3>ADD</h3>
-						</Button>
+						</DogEarButton>
 					</Grid>
 				</Grid>				
 			</form>
 			<div className="spacer" />
-			<Button onClick={() => navigate(-1)} sx={whiteButton} style={{ position: 'absolute', bottom: 8, width: '100%' }} >
+			<DogEarButton className="bottom" onClick={() => navigate(-1)} style={whiteButton} >
 				<h3>BACK TO TOPICS</h3>
-			</Button>
+			</DogEarButton>
     </div>
   );
 }

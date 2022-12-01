@@ -2,6 +2,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+	zoom: 0.8;
 }
 
 .logo {
@@ -106,8 +107,13 @@ a {
 }
 
 button {
+	border: none !important;
 	&:focus {
 		outline: none !important;
+	}
+	&:disabled {
+		background-color: #0001 !important;
+		color: #36363670 !important;
 	}
 }
 

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { useGoogleLogin } from '@react-oauth/google';
 import { Card, CardContent, Button } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Content, Header } from './styles';
-import { whiteButton } from '../../componentStyles';
+import { DogEarButton, whiteButton } from '../../componentStyles';
 import { getData, postData } from '../../../ApiHelper';
 
 interface Props {
@@ -64,13 +64,12 @@ function ModLogin(props: Props) {
             <div>
               <h4 style={{textAlign: 'center'}}>Moderator Login</h4>
               <br />
-							{/* @ts-ignore */}
-              <Button
-								onClick={login}
-                sx={whiteButton}
+              <DogEarButton
+								onClick={login as MouseEventHandler<any>}
+                style={whiteButton}
               >
                 <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem', marginTop: '0.5rem'}}>SIGN IN WITH GOOGLE</h3>
-              </Button>
+              </DogEarButton>
 							<br />
 							<br />
 							<button onClick={() => console.log(props.userData)} style={{width: '100%'}}>check user data?</button>

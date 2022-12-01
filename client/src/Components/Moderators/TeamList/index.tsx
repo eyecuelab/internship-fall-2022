@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../index.css';
 import { Grid, Button } from '@mui/material';
-import { whiteButton, redButton } from '../../componentStyles';
+import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 function TeamList() {
   whiteButton.width = '100%';
@@ -24,15 +24,6 @@ function TeamList() {
 
         </Grid>
       </Grid>
-
-
-
-
-
-
-
-
-
       <Grid container spacing={2}>
         <Grid container item xs={4} direction="column">
           <h3>GAMES</h3>
@@ -120,14 +111,14 @@ function TeamList() {
       <br />
       <br />
 
-      <Button sx={whiteButton} >
+      <DogEarButton style={whiteButton} >
         <h3>EXTENDS 30 SECONDS</h3>
-      </Button>
+      </DogEarButton>
       <br />
       <br />
-      <Button sx={redButton} >
+      <DogEarButton style={redButton} >
         <h3>END ROUND</h3>
-      </Button>
+      </DogEarButton>
     </>
   );
 }

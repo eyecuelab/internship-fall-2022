@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../index.css';
 import { Link, useLocation } from 'react-router-dom';
 import { Grid, Button } from '@mui/material';
-import { greenButton, redButton } from '../../componentStyles';
+import { DogEarButton, greenButton, redButton } from '../../componentStyles';
 import { putData } from '../../../ApiHelper';
 import GameInfo from './GameInfo';
 
@@ -52,16 +52,16 @@ function ModOverlay(props: Props) {
       >
         <Link to="/">
           {(location.pathname.includes('/topic/') || location.pathname.includes('/game/')) && (
-            <Button onClick={() => updateGameStatus(props.gameData.id)} sx={greenButton}>
+            <DogEarButton onClick={() => updateGameStatus(props.gameData.id)} style={greenButton}>
               <h3>Publish</h3>
-            </Button>
+            </DogEarButton>
           )}
         </Link>
         <br />
         <Link to="/">
-          <Button onClick={props.handleLogout} sx={redButton}>
+          <DogEarButton onClick={props.handleLogout} style={redButton}>
             <h3>Logout</h3>
-          </Button>
+          </DogEarButton>
         </Link>
       </Grid>
     </Grid>

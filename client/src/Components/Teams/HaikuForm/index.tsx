@@ -3,7 +3,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { postData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
-import { whiteButton, greenButton } from '../../componentStyles';
+import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
 
 interface Props {
 	submitState: boolean;
@@ -168,15 +168,15 @@ function HaikuForm(props: Props) {
           <h5 id="label3">{lineThree}</h5>
         </label>
         <div style={{ height: '5rem', width: '100%' }} />
-				<Button
+				<DogEarButton
 					id="submitHaiku"
 					className="bottom"
 					type="submit"
 					disabled={submitState}
-					sx={submitState ? whiteButton : greenButton}
+					style={greenButton}
 				>
 					<h3>Submit</h3>
-				</Button>
+				</DogEarButton>
       </form>
     </div>
   );

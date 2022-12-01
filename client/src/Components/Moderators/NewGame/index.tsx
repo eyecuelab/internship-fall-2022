@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TextField, Button, Grid } from '@mui/material';
-import { greenButton } from '../../componentStyles';
+import { DogEarButton, greenButton } from '../../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { getData, postData } from '../../../ApiHelper';
 import { whiteButton } from '../../componentStyles';
@@ -65,14 +65,14 @@ function ModNewGame(props: Props) {
         <h5>15 characters max</h5>
       </label>
       <br />
-      <Button type="submit" sx={greenButton} >
+      <DogEarButton type="submit" style={greenButton} >
         <h3>Continue</h3>
-      </Button>
+      </DogEarButton>
 			</form>
 			<div className="spacer" />
-			<Button onClick={props.handleCreateNewGame} className="bottom" sx={whiteButton} >
+			<DogEarButton onClick={props.handleCreateNewGame} className="bottom" style={whiteButton} >
 				<h3>BACK TO GAMES</h3>
-			</Button>
+			</DogEarButton>
 		</Grid>
     </div>
   );

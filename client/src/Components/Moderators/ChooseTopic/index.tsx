@@ -4,7 +4,7 @@ import { Grid, Button } from '@mui/material';
 import TopicItem from './TopicItem';
 import { Game } from '../../../Types/Types';
 import { Container, ButtonContainer } from './styles';
-import { whiteButton, redButton } from '../../componentStyles';
+import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 interface Props {
 	gameList: Game[];
@@ -36,9 +36,9 @@ function ModChooseTopic(props: Props) {
           <br />
         </div>
         <ButtonContainer>
-          <Button sx={redButton}>
+          <DogEarButton style={redButton}>
             <h3>end game</h3>
-          </Button>
+          </DogEarButton>
         </ButtonContainer>
       </Container>
     </>
