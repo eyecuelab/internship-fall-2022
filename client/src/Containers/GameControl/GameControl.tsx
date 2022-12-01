@@ -5,10 +5,12 @@ import TeamLobby from '../../Components/Teams/Lobby';
 import Buzzer from '../../Components/Teams/Buzzer';
 import HaikuForm from '../../Components/Teams/HaikuForm';
 import TeamOverlay from '../../Components/Teams/Overlay';
+import socket from '../../Hooks/WebsocketHook';
 
 function GameControl() {
 	window.localStorage.clear();
 	const [team, setTeam] = useState('');
+	const [submitState, setSubmitState] = useState(true);
 
 	useEffect(() => {
 		setTeam('blueberry');
@@ -33,8 +35,8 @@ function GameControl() {
 
   return (
 		<CardTemplate 
-			content={ <HaikuForm /> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
-			overlay={<TeamOverlay />} 
+			content={<HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
+			overlay={<TeamOverlay setSubmitState={setSubmitState}/>} 
 			bgUrl={bgUrl}
 			color={color}
 		/>

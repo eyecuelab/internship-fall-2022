@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from '@mui/material';
-import { greenButton } from '../../componentStyles';
+import { DogEarButton, greenButton } from '../../componentStyles';
 import GameItem from './GameItem';
 import { Game } from '../../../Types/Types';
 import { deleteData } from '../../../ApiHelper';
@@ -14,6 +14,7 @@ interface Props {
 function ModGameList(props: Props) {
 
 	useEffect(() => {
+		console.log('got the games');
 		props.getGameList();
 	}, []);
 
@@ -38,13 +39,13 @@ function ModGameList(props: Props) {
 				{ (props.gameList.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
 			<div className="spacer" />
-      <Button
+      <DogEarButton
 				className="bottom"
         onClick={props.handleCreateNewGame}
-        sx={greenButton}
+        style={greenButton}
       >
         <h3>CREATE A NEW GAME</h3>
-      </Button>
+      </DogEarButton>
     </div>
   );
 }

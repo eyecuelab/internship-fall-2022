@@ -16,15 +16,16 @@ model Moderators {
 	games								Games[]
 	topics							Topics[]
 	phrases							Phrases[]
+	socketId						String?
 }
 
 model Teams {
   id                  Int               @id @default(autoincrement())
   teamName            String
-  teamLeaderId        Int
   teamScore           Int
   game                Games             @relation(fields: [gameId], references: [id])
   gameId              Int
+	socketId						String?
 }
 
 model Topics {

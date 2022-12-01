@@ -1,3 +1,5 @@
+import corners, { chamfer, chamfered, round } from "corners";
+
 export const whiteButton = {
   height: '5rem',
   width: '',
@@ -5,16 +7,7 @@ export const whiteButton = {
 	padding: '',
   color: '#363636',
   border: '1px solid #363636',
-  backgroundColor: '#f6ede9',
-  borderRadius: '10px',
-	':hover': {
-		background: '#e6ddd9',
-		border: '1px solid #262626'
-	},
-	':disabled': {
-		color: '#3636365',
-		backgroundColor: '#0000'
-	}
+  background: '#e2ddd9',
 };
 
 export const redButton = {
@@ -24,16 +17,7 @@ export const redButton = {
 	padding: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
-  backgroundColor: '#FC3911',
-  borderRadius: '10px',
-	':hover': {
-		background: '#ec2901',
-		border: '1px solid #262626'
-	},
-	':disabled': {
-		color: '#3636365',
-		backgroundColor: '#0000'
-	}
+  background: '#FC3911',
 };
 
 export const greenButton = {
@@ -41,18 +25,8 @@ export const greenButton = {
   width: '',
   marginBottom: '',
 	padding: '',
-  color: '#FFFFFF',
-  border: '1px solid #363636',
-  backgroundColor: '#61C14A',
-  borderRadius: '10px',
-	':hover': {
-		background: '#51b13a',
-		border: '1px solid #262626'
-	},
-	':disabled': {
-		color: '#3636365',
-		backgroundColor: '#0000'
-	}
+  color: '#fff',
+  background: '#61C14A',
 };
 
 export const blackButton = {
@@ -62,14 +36,8 @@ export const blackButton = {
 	padding: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
-  backgroundColor: '#61C14A',
-  borderRadius: '10px',
-	':hover': {
-		background: '#51b13a',
-		border: '1px solid #262626'
-	},
-	':disabled': {
-		color: '#3636365',
-		backgroundColor: '#0000'
-	}
+  background: '#61C14A',
 };
+
+const dogEared = corners(round, round, round, chamfer).size(25);
+export const DogEarButton = dogEared.button;

@@ -49,13 +49,14 @@ function TeamList(props: Props) {
 				{teams?.map((team: Team) => { return <TeamItem key={team.id} team={team} /> })}
 			</Grid>
         <ButtonContainer>
-          <Button sx={whiteButton}>
+          <DogEarButton style={whiteButton} >
             <h3>EXTENDS 30 SECONDS</h3>
-          </Button>
+          </DogEarButton>
           <br />
-          <Button sx={redButton}>
+          <br />
+          <DogEarButton style={redButton} >
             <h3>END ROUND</h3>
-          </Button>
+          </DogEarButton>
         </ButtonContainer>
       </Container>
     </>

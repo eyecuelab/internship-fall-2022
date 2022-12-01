@@ -6,6 +6,9 @@ export const getModerators = async (email: string) => {
   return await prisma.moderators.findUnique({
 		where: {
 			email: email,
+		},
+		include: {
+			games: true
 		}
 	});
 }

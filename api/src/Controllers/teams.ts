@@ -1,18 +1,22 @@
-import { getTeams, createTeam } from '../Models/teams';
-import io from '../server';
+import { getTeamsByGame, createTeam, getTeamById } from '../Models/teams';
 
 const teamsControllers = {
-
-  async getTeam(req: any, res: any) {
-    const teams = await getTeams();
+  async getTeams(req: any, res: any) {
+		const { gameId } = req.params;
+    const teams = await getTeamsByGame(gameId);
     return res.json(teams);
   },
 
-	async createTeam(req: any, res: any) {
-		const { teamName } = req.body;
-			const newTeam = await createTeam(teamName);
-			res.status(201).json(newTeam);
+	async getOneTeam(req: any, res: any) {
+		const { teamId } = req.params;
+		const team = await getTeamById(teamId);
+		return res.json(team);
+	},
 
+	async createTeam(req: any, res: any) {
+		const { teamName, gameId } = req.body;
+			const newTeam = await createTeam(teamName, gameId);
+			res.status(201).json(newTeam);
 	},
 }
 

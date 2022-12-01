@@ -1,9 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
 import { postData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
-import { whiteButton, greenButton } from '../../componentStyles';
+import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
+
+interface Props {
+	submitState: boolean;
+	setSubmitState: Dispatch<SetStateAction<boolean>>;
+}
 
 interface IFormInput {
   line1: string;
@@ -11,12 +16,12 @@ interface IFormInput {
   line3: string;
 }
 
-function HaikuForm() {
+function HaikuForm(props: Props) {
 	const [stems, setStems] = useState([]);
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
-	const [submitState, setSubmitState] = useState(true);
+	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {postData('/haicues', data)};
 
@@ -89,7 +94,7 @@ function HaikuForm() {
 		if (line1 !== '' && line2 !== '' && line3 !== '') {
 			setSubmitState(false);
 		} else {
-			button.setAttribute('disabled', 'true');
+			setSubmitState(true);
 		}
 	}
 
@@ -163,15 +168,15 @@ function HaikuForm() {
           <h5 id="label3">{lineThree}</h5>
         </label>
         <div style={{ height: '5rem', width: '100%' }} />
-				<Button
+				<DogEarButton
 					id="submitHaiku"
 					className="bottom"
 					type="submit"
 					disabled={submitState}
-					sx={submitState ? whiteButton : greenButton}
+					style={greenButton}
 				>
 					<h3>Submit</h3>
-				</Button>
+				</DogEarButton>
       </form>
     </div>
   );

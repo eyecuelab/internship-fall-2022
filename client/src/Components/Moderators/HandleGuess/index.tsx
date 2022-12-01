@@ -2,7 +2,7 @@ import React from 'react';
 import '../../../index.css';
 import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
-import { whiteButton, greenButton, redButton } from '../../componentStyles';
+import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 
 interface Props {
   handleSwitch?: () => void;
@@ -26,17 +26,16 @@ function ModHandleGuess(props: Props) {
           <h1>*insert team*</h1>
         </div>
         <ButtonContainer>
-          <Button onClick={props.handleSwitch}  sx={greenButton}>
+          <DogEarButton onClick={props.handleSwitch}  style={greenButton}>
             <h3>reward points</h3>
-          </Button>
-          <br/>
-          <Button onClick={props.handleSwitch} sx={whiteButton}>
+          </DogEarButton>
+          <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
             <h3>dismiss guess</h3>
-          </Button>
+          </DogEarButton>
           <br />
-          <Button onClick={props.handleSwitch} sx={redButton}>
+          <DogEarButton onClick={props.handleSwitch} style={redButton}>
             <h3>end round</h3>
-          </Button>
+          </DogEarButton>
         </ButtonContainer>
       </Container>
     </>

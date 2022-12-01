@@ -2,17 +2,47 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getTeams = async () => {
-  return await prisma.teams.findMany();
+export const getTeamsByGame = async (gameId: number) => {
+  return await prisma.teams.findMany({
+		where: {
+			gameId: gameId
+		}
+	});
 }
 
-export const createTeam = async (teamName: string, /*teamLeaderId: number*/) => {
+export const getTeamById = async (teamId: number) => {
+	return await prisma.teams.findUnique({
+		where: {
+			id: teamId
+		}
+	});
+}
+
+export const createTeam = async (teamName: string, gameId: number) => {
   return await prisma.teams.create({
     data: {
       teamName: teamName,
-      teamLeaderId: 1,
       teamScore: 0,
-      game: { connect: { id: 1 } }
+      game: { connect: { id: gameId } }
     }
   });
+}
+
+export const setTeamSocketId = async (teamId: number, socketId: string) => {
+	try {
+		return await prisma.teams.update({
+			where: { id: teamId },
+			data: {
+				socketId: socketId
+			}
+		});
+	} catch (error) {
+		throw error;
+	}
+}
+
+export const getTeamBySocketId = async (socketId: string) => {
+	return await prisma.teams.findFirst({
+		where: { socketId: socketId }
+	})
 }

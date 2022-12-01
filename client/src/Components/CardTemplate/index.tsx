@@ -1,4 +1,5 @@
 import React, {ReactElement} from 'react';
+import ReactConfetti from 'react-confetti';
 import '../../index.css';
 import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent} from './styles';
 
@@ -12,6 +13,9 @@ type CardTemplateProps = {
 function CardTemplate(props: CardTemplateProps) {
   return (
     <>
+		{console.log('width: ', window.outerWidth)}
+		{console.log('height: ', window.outerHeight)}
+			{/* <ReactConfetti width={window.outerWidth*1.2} height={window.outerHeight*1.2} numberOfPieces={750} gravity={0.15} recycle={false} style={{margin:'auto'}}/> */}
       <Header>
         <h4>Eyecue Haicue</h4>
       </Header>

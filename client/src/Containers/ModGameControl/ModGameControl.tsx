@@ -6,6 +6,7 @@ import ModGameList from '../../Components/Moderators/GameList';
 import ModNewGame from '../../Components/Moderators/NewGame';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import { getData } from '../../ApiHelper';
+import { Game } from '../../Types/Types';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -14,7 +15,7 @@ interface Props {
 
 function ModGameControl(props: Props) {
   const [createNewGameView, setCreateNewGameView] = useState(false);
-	const [games, setGames] = useState([]);
+	const [games, setGames] = useState<Game[]>([]);
 
 	useEffect(() => {
 		getGameList();
@@ -22,16 +23,16 @@ function ModGameControl(props: Props) {
 	}, []);
 
 	const getGameList = () => {
+		setGames([]);
 		const user = JSON.parse(localStorage.getItem('user') as string);
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
-				response ? getData(`/games/moderator/${response.id}`).then((data) => {
-					setGames(data);
-				}) : setGames([]);
+				console.log(response);
+				setGames([...response.games])
 			});
 		} else {
-			setGames([]);
+			setGames([...[]]);
 		}
 	}
 
@@ -60,7 +61,7 @@ function ModGameControl(props: Props) {
     } else {
       return (
         <CardTemplate
-          content={<ModNewGame handleCreateNewGame={handleCreateNewGame} />}
+          content={<ModNewGame getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
           overlay={<ModOverlay handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'

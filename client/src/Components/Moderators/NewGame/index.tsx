@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TextField, Button, Grid } from '@mui/material';
-import { greenButton } from '../../componentStyles';
+import { DogEarButton, greenButton } from '../../componentStyles';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { getData, postData } from '../../../ApiHelper';
 import { whiteButton } from '../../componentStyles';
@@ -9,6 +9,7 @@ import '../../../index.css';
 
 interface Props {
 	handleCreateNewGame: () => void;
+	getGameList: any;
 }
 
 interface IFormInput {
@@ -24,6 +25,10 @@ type Data = {
 function ModNewGame(props: Props) {
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
 	const userData = JSON.parse(localStorage.getItem('user') as string);
+
+	useEffect(() => {
+		props.getGameList();
+	}, []);
 
 	getData(`/moderators/${userData?.email}`).then((response) => {
 		setValue('moderatorId', response.id);
@@ -60,14 +65,14 @@ function ModNewGame(props: Props) {
         <h5>15 characters max</h5>
       </label>
       <br />
-      <Button type="submit" sx={greenButton} >
+      <DogEarButton type="submit" style={greenButton} >
         <h3>Continue</h3>
-      </Button>
+      </DogEarButton>
 			</form>
 			<div className="spacer" />
-			<Button onClick={props.handleCreateNewGame} className="bottom" sx={whiteButton} >
+			<DogEarButton onClick={props.handleCreateNewGame} className="bottom" style={whiteButton} >
 				<h3>BACK TO GAMES</h3>
-			</Button>
+			</DogEarButton>
 		</Grid>
     </div>
   );

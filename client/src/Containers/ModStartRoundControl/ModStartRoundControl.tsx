@@ -15,6 +15,7 @@ interface Props {
 function ModStartRoundControl(props: Props) {
   const [createNewGameView, setCreateNewGameView] = useState(false);
 	const [games, setGames] = useState([]);
+	localStorage.setItem('gameId', '1');
 
 	useEffect(() => {
 		getGameList();
