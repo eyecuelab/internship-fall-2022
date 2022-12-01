@@ -8,8 +8,6 @@ export const whiteButton = {
   color: '#363636',
   border: '1px solid #363636',
   background: '#e2ddd9',
-	display: 'flex',
-	alignItems: 'center'
 };
 
 export const redButton = {

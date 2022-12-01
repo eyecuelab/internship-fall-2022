@@ -69,7 +69,7 @@ function ModLogin(props: Props) {
 								onClick={login as MouseEventHandler<any>}
                 style={whiteButton}
               >
-                <GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem'}}>SIGN IN WITH GOOGLE</h3>
+                <div style={{display: 'flex', alignItems: 'center'}}><GoogleIcon sx={{fontSize:'3rem'}} /><h3 style={{marginLeft: '2rem'}}>SIGN IN WITH GOOGLE</h3></div>
               </DogEarButton>
             </div>
           </CardContent>
