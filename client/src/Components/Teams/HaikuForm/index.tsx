@@ -24,7 +24,6 @@ function HaikuForm(props: Props) {
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
   const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {postData('/haicues', data)};
-	console.log('from haiku: ', submitState);
 
 	const roundNum = '2';
 	const topic = 'Holiday Activities';

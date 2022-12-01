@@ -11,7 +11,6 @@ function GameControl() {
 	window.localStorage.clear();
 	const [team, setTeam] = useState('');
 	const [submitState, setSubmitState] = useState(true);
-	console.log('from control: ', submitState);
 
 	useEffect(() => {
 		setTeam('blueberry');

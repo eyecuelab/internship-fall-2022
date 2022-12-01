@@ -126,7 +126,7 @@ export const countSyllables = (inputWord: string) => {
 	}
 	for (let i=0; i<doubleMinusSyllables.length; i++) {
 		if (doubleMinusSyllables[i].test(word)) {
-			console.log('double minus: ',doubleMinusSyllables[i])
+			console.log('double minus: ',doubleMinusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ) - 1;
 			return syllables > 0 ? syllables : 1;
 		}

@@ -12,8 +12,8 @@ const logicControllers = {
 
 	async addRoundTime (req: any, res: any) {
 		const { gameId } = req.body;
-
-		await addTime(gameId)
+		await addTime(gameId);
+		res.json(200);
 	}
 }
 
@@ -37,5 +37,11 @@ const startThisRound = (gameId: number) => {
 }
 
 const addTime = async (gameId: number) => {
-	timeRemaining += 30;
+	if (timeRemaining === 0) {
+		timeRemaining = 30;
+		startThisRound(gameId);
+	} else {
+		timeRemaining += 30;
+		startThisRound(gameId);
+	}
 }
