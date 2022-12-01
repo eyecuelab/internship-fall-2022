@@ -1,7 +1,7 @@
 import io from "../server";
 
 export const emitStartRound = (gameId: number) => {
-	const timer = 300;
+	const timer = 180;
 	io.in(gameId.toString()).emit('start_round', timer);
 }
 

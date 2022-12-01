@@ -1,7 +1,7 @@
 import { emitTimerTick } from "../Models/logic";
 import io from "../server";
 
-const ROUND_TIME = 300;
+const ROUND_TIME = 180;
 
 const logicControllers = {
 	async startRound (req: any, res: any) {
@@ -18,7 +18,7 @@ const logicControllers = {
 
 	async buzzerRefresh (req: any, res: any) {
 		const { gameId } = req.body;
-		io.except(['buzzed_user1', 'buzzed_user2', 'etc...']).emit('buzzer_refresh');
+//		io.except(['buzzed_user1', 'buzzed_user2', 'etc...']).emit('buzzer_refresh');
 	}
 }
 
@@ -44,9 +44,8 @@ const startThisRound = (gameId: number) => {
 const addTime = async (gameId: number) => {
 	if (timeRemaining === 0) {
 		timeRemaining = 30;
-		startThisRound(gameId);
 	} else {
 		timeRemaining += 30;
-		startThisRound(gameId);
 	}
+	startThisRound(gameId);
 }
