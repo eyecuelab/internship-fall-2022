@@ -92,7 +92,7 @@ export const countSyllables = (inputWord: string) => {
 		/([^t][^hs](ea)|(oa)|(ua))ted$/i,
 		// /^io/i,
 		// /io$/i,
-		/[^ts]io[n]/gi,
+		// /[^ts]io[n]/gi,
 		/yal$/i
 	];
 	const minusSyllables = [
@@ -101,7 +101,7 @@ export const countSyllables = (inputWord: string) => {
 		/^(fore[^v])/i,
 		// /[ff|bb|gg|pp|zz]ed/,
 		/[^aeiou][aeiou][^aeiou]e$/i,
-		/[^ilrbsc][aeiou][^aeiouycg]e[ds]$/i,
+		/[^bcilnrs][aeiou][^aeiouycg]e[ds]$/i,
 		/[ilrb][aeiou][^aeioucg]es$/i,
 		/[^n|aeiou][^(l)|(hp)]e$/i,
 		/[aeiou][^aeiou]e[^rd]$/i,
@@ -119,29 +119,28 @@ export const countSyllables = (inputWord: string) => {
 		/rriage$/i,
 		/[^g]giate/,
 	];
+	for (let i=0; i<exceptionWords.length; i++) {
+		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
+			return Object.values(exceptionWords[i])[0];
+		}
+	}
 	for (let i=0; i<doubleMinusSyllables.length; i++) {
 		if (doubleMinusSyllables[i].test(word)) {
-			console.log(doubleMinusSyllables[i])
+			console.log('double minus: ',doubleMinusSyllables[i])
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ) - 1;
 			return syllables > 0 ? syllables : 1;
 		}
 	}
-	for (let i=0; i<exceptionWords.length; i++) {
-		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
-			console.log();
-			return Object.values(exceptionWords[i])[0];
-		}
-	}
 	for (let i=0; i<minusSyllables.length; i++) {
 		if (minusSyllables[i].test(word)) {
-			console.log(minusSyllables[i]);
+			console.log('single minus: ', minusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}
 	} 
 	for (let i=0; i<plusSyllables.length; i++) {
 		if (plusSyllables[i].test(word)) {
-			console.log(plusSyllables[i]);
+			console.log('plus: ', plusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}
