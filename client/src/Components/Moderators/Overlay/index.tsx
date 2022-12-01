@@ -9,7 +9,7 @@ import GameInfo from './GameInfo';
 interface Props {
   handleLogout?: () => void;
   gameData?: any;
-  gameData2?: any;
+  gameDataTwo?: any;
 }
 
 function ModOverlay(props: Props) {
@@ -41,7 +41,7 @@ function ModOverlay(props: Props) {
         <br />
       </Grid>
       {props.gameData && <GameInfo h1Input={props.gameData.name} h3Input={props.gameData.h3}/>}
-      {props.gameData2 && <GameInfo h1Input={props.gameData2} h3Input={"game"}/>}
+      {props.gameData2 && <GameInfo h1Input={props.gameDataTwo} h3Input={"game"}/>}
       <Grid
         item
         xs={12}
