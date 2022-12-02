@@ -5,6 +5,7 @@ import TeamLobby from '../../Components/Teams/Lobby';
 import Buzzer from '../../Components/Teams/Buzzer';
 import HaikuForm from '../../Components/Teams/HaikuForm';
 import TeamOverlay from '../../Components/Teams/Overlay';
+import Score from '../../Components/Teams/Score';
 import socket from '../../Hooks/WebsocketHook';
 
 function GameControl() {
@@ -35,8 +36,8 @@ function GameControl() {
 
   return (
 		<CardTemplate 
-			content={<HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
-			overlay={<TeamOverlay setSubmitState={setSubmitState}/>} 
+			content={ <HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> /* <Score /> */ /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
+			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
 			bgUrl={bgUrl}
 			color={color}
 		/>
