@@ -33,7 +33,7 @@ function ModStartRound(props: Props) {
           <DogEarButton onClick={startRound} style={greenButton}>
             <h3>start round</h3>
           </DogEarButton>
-          <DogEarButton sx={whiteButton} onClick={props.handleSwitch}>
+          <DogEarButton style={whiteButton} onClick={props.handleSwitch}>
 
             <h3>back to selection</h3>
           </DogEarButton>

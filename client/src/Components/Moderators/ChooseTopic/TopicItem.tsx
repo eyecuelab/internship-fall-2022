@@ -16,7 +16,7 @@ function TopicItem(props: Props) {
 
   return (
     <>
-        <DogEarButton sx={whiteButton} onClick={handleSwitch}>
+        <DogEarButton style={whiteButton} onClick={handleSwitch}>
           <h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
         </DogEarButton>
     </>

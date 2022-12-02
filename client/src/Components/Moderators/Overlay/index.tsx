@@ -38,7 +38,6 @@ function ModOverlay(props: Props) {
       <Grid item xs={12} md={12} lg={12}>
         <h3>Team</h3>
         <h1>MODS</h1>
-        <br />
       </Grid>
       {props.gameData && <GameInfo h1Input={props.gameData.textOne} h3Input={props.gameData.labelOne}/>}
       {props.gameData && <GameInfo h1Input={props.gameData.textTwo} h3Input={props.gameData.labelTwo}/>}
@@ -53,7 +52,7 @@ function ModOverlay(props: Props) {
         }}
       >
         <Link to="/">
-          {(location.pathname.includes('/topic/') || location.pathname.includes('/game/')) && (
+          {(location.pathname.includes('/topic/') || location.pathname.includes('/gameinfo/')) && (
             <DogEarButton onClick={() => updateGameStatus(props.gameId)} style={greenButton}>
               <h3>Publish</h3>
             </DogEarButton>

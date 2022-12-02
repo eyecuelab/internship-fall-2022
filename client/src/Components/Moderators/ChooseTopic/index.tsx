@@ -48,7 +48,6 @@ function ModChooseTopic(props: Props) {
         <div>
           <h3>choose a new round topic</h3>
           <hr />
-          <br />
 
           {
             <Grid container>
@@ -63,7 +62,7 @@ function ModChooseTopic(props: Props) {
       <Link to="/" className="bottom">
         {' '}
         {/* FIX THIS ROUTE */}
-        <DogEarButton sx={redButton}>
+        <DogEarButton style={redButton}>
           <h3>end game</h3>
         </DogEarButton>
       </Link>
