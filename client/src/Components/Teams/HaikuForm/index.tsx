@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { TextField, Button } from '@mui/material';
+import { TextField } from '@mui/material';
 import { getData, postData, putData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
 import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
@@ -14,6 +14,13 @@ interface IFormInput {
   line1: string;
   line2: string;
   line3: string;
+}
+
+type Data = {
+
+	line1: string,
+	line2: string,
+	line3: string,
 }
 
 function HaikuForm(props: Props) {
@@ -45,7 +52,7 @@ function HaikuForm(props: Props) {
 	const roundId = 1;
 	const teamId = 1;
 
-  const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {
+  const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
 		getData(`/haicues/${roundId}/${teamId}`).then((response) => {
 			console.log('RESPONSE: ', response.id);
 			if (response.id) {
