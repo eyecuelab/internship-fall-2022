@@ -5,7 +5,6 @@ import {getData} from '../../ApiHelper';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import TeamList from '../../Components/Moderators/TeamList';
 import ModLogin from '../../Components/Moderators/Login';
-import { NightShelter } from '@mui/icons-material';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
