@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid} from '@mui/material';
 import { Team } from '../../../Types/Types';
-import { Haicue } from '../../../Types/Types';
 
 interface Props {
 	team: Team,
@@ -9,7 +8,6 @@ interface Props {
 
 function TeamItem (props: Props) {
 	const { team } = props
-	const { haicue } = props
 
 	return(
 		<>
