@@ -9,7 +9,6 @@ import { Team } from '../../../Types/Types';
 import TeamItem from './TeamItem';
 
 interface Props {
-//   handleSwitch?: () => void;
   gameId: number;
 	presentingState: boolean;
 	setPresentingState: Dispatch<SetStateAction<boolean>>;
@@ -64,9 +63,11 @@ function TeamList(props: Props) {
           <DogEarButton onClick={() => extendTime()} style={whiteButton} >
             <h3>EXTENDS 30 SECONDS</h3>
           </DogEarButton>
+		  <Link to={`/game/${props.gameId}/round`}>
           <DogEarButton style={redButton} >
             <h3>END ROUND</h3>
           </DogEarButton>
+		  </Link>
         </ButtonContainer>
       </Container>
     </>
