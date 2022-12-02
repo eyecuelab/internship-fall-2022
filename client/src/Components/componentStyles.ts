@@ -36,7 +36,7 @@ export const blackButton = {
 	padding: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
-  background: '#61C14A',
+  background: '#363636',
 };
 
 const dogEared = corners(round, round, round, chamfer).size(25);
