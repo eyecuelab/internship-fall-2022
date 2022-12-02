@@ -5,6 +5,7 @@ import {Grid, Button} from '@mui/material';
 import {DogEarButton, greenButton, redButton, blackButton} from '../../componentStyles';
 import {putData} from '../../../ApiHelper';
 import GameInfo from './GameInfo';
+// import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 interface Props {
   handleLogout?: () => void;
@@ -18,6 +19,15 @@ function ModOverlay(props: Props) {
   const updateGameStatus = (gameId: any) => {
     putData(`/games/${gameId}`);
   };
+
+  const codeToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(`www.haicue.com/game/${props.gameData.gameCode}`);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      alert('Failed to copy: ');
+    }
+  }
 
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -81,7 +91,7 @@ function ModOverlay(props: Props) {
         <br />
         <br />
         {props.gameData.labelOne== "round" && 
-            <DogEarButton onClick={props.handleLogout} style={blackButton}>
+            <DogEarButton onClick={codeToClipboard} style={blackButton}>
               <h3>player url</h3>
             </DogEarButton>
           }
