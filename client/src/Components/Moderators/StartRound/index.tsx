@@ -5,7 +5,11 @@ import { Button } from '@mui/material';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 import { postData } from '../../../ApiHelper';
 
-function ModStartRound() {
+interface Props {
+  handleSwitch: () => void;
+}
+
+function ModStartRound(props: Props) {
 	const gameId = Number(localStorage.getItem('gameId'));
 
 	const startRound = () => {
@@ -29,7 +33,8 @@ function ModStartRound() {
           <DogEarButton onClick={startRound} style={greenButton}>
             <h3>start round</h3>
           </DogEarButton>
-          <DogEarButton style={whiteButton}>
+          <DogEarButton sx={whiteButton} onClick={props.handleSwitch}>
+
             <h3>back to selection</h3>
           </DogEarButton>
           <DogEarButton style={redButton}>
