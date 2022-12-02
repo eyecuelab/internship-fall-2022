@@ -9,6 +9,7 @@ import GameInfo from './GameInfo';
 interface Props {
   handleLogout?: () => void;
   gameData?: any;
+  gameId?: any;
 }
 
 function ModOverlay(props: Props) {
@@ -53,7 +54,7 @@ function ModOverlay(props: Props) {
       >
         <Link to="/">
           {(location.pathname.includes('/topic/') || location.pathname.includes('/game/')) && (
-            <DogEarButton onClick={() => updateGameStatus(props.gameData.id)} style={greenButton}>
+            <DogEarButton onClick={() => updateGameStatus(props.gameId)} style={greenButton}>
               <h3>Publish</h3>
             </DogEarButton>
           )}
