@@ -53,7 +53,6 @@ function TeamList(props: Props) {
             <h3>EXTENDS 30 SECONDS</h3>
           </DogEarButton>
           <br />
-          <br />
           <DogEarButton style={redButton} >
             <h3>END ROUND</h3>
           </DogEarButton>

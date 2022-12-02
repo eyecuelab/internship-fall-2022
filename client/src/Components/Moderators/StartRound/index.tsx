@@ -29,11 +29,9 @@ function ModStartRound() {
           <DogEarButton onClick={startRound} style={greenButton}>
             <h3>start round</h3>
           </DogEarButton>
-          <br />
           <DogEarButton style={whiteButton}>
             <h3>back to selection</h3>
           </DogEarButton>
-          <br />
           <DogEarButton style={redButton}>
             <h3>end game</h3>
           </DogEarButton>
