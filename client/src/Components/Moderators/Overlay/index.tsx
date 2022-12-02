@@ -5,7 +5,7 @@ import {Grid, Button} from '@mui/material';
 import {DogEarButton, greenButton, redButton, blackButton} from '../../componentStyles';
 import {putData} from '../../../ApiHelper';
 import GameInfo from './GameInfo';
-// import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 interface Props {
   handleLogout?: () => void;
@@ -91,9 +91,17 @@ function ModOverlay(props: Props) {
         <br />
         <br />
         {props.gameData.labelOne== "round" && 
-            <DogEarButton onClick={codeToClipboard} style={blackButton}>
-              <h3>player url</h3>
-            </DogEarButton>
+            // <DogEarButton onClick={codeToClipboard} style={blackButton}>
+            //   <h3>player url</h3>
+            // </DogEarButton>
+          <Button 
+            variant="contained" 
+            onClick={codeToClipboard} 
+            endIcon={<ContentCopyIcon />} 
+            sx={blackButton}
+            >
+            <h3>player url</h3>
+          </Button>
           }
       </Grid>
     </Grid>
