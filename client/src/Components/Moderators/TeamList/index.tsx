@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../../../index.css';
 import {Grid, Button} from '@mui/material';
-import {whiteButton, redButton} from '../../componentStyles';
+import {whiteButton, redButton, DogEarButton} from '../../componentStyles';
 import {Container, ButtonContainer} from './styles';
 import {getData} from '../../../ApiHelper';
 import { Team } from '../../../Types/Types';

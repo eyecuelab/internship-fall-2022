@@ -6,6 +6,7 @@ import { getData} from '../../ApiHelper';
 import ModAddPhrase from '../../Components/Moderators/AddPhrase';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
+import { Game } from '../../Types/Types';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -15,7 +16,7 @@ interface Props {
 
 function TopicPhraseControl(props: Props) {
   const {id} = useParams();
-  const [game, setGame] = useState({});
+  const [game, setGame] = useState<Game>();
 
   useEffect(() => {
     getGameList();
@@ -34,7 +35,7 @@ function TopicPhraseControl(props: Props) {
 		window.localStorage.clear();
   };
 
-	const passedInfo ={labelOne: "game", textOne: game.name};
+	const passedInfo ={labelOne: "game", textOne: game?.name};
 	
 
   if (localStorage.getItem('user')) {
