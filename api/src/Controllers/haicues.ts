@@ -1,4 +1,4 @@
-import { getHaicues, createHaicues, updateHaicue } from '../Models/haicues';
+import { getHaicues, getOneHaicue, getRoundHaicues, createHaicues, updateHaicue } from '../Models/haicues';
 import io from '../server';
 
 const haicuesControllers = {
@@ -7,6 +7,18 @@ const haicuesControllers = {
     const haicues = await getHaicues();
     return res.json(haicues);
   },
+
+	async getHaicueById(req: any, res: any) {
+		const { id } = req.params;
+		const haicue = await getOneHaicue(id);
+		return res.json(haicue);
+	},
+
+	async getHaicuesByRound(req: any, res: any) {
+		const { id } = req.params;
+		const haicues = await getRoundHaicues(id);
+		return res.json(haicues);
+	},
 
 	async createHaicue(req: any, res: any) {
 		const { line1, line2, line3 } = req.body;
