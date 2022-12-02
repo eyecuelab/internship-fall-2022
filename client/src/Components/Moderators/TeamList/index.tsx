@@ -27,7 +27,6 @@ function TeamList(props: Props) {
 	};
 
 	const extendTime = () => {
-		console.log(props.gameId);
 		postData(`/addTime`, [props.gameId]);
 	}
 
