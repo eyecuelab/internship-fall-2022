@@ -41,7 +41,7 @@ function PresentingHaikuControl(props: Props) {
       return (
         <CardTemplate
           content={<ModHandleGuess handleSwitch={handleBuzzToggle} />}
-          overlay={<ModOverlay gameData={game} />}
+          overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />

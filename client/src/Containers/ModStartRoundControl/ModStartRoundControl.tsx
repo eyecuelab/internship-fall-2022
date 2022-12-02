@@ -47,12 +47,15 @@ function ModStartRoundControl(props: Props) {
     setCreateNewGameView(!createNewGameView);
   };
 
+  const passedInfo ={labelOne: "round", textOne: "1"};
+	
+
   if (localStorage.getItem('user')) {
     if (!createNewGameView) {
       return (
         <CardTemplate
           content={<ModChooseTopic gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={handleLogout} />}
+          overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
           bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />
