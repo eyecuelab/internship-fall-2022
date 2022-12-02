@@ -53,7 +53,7 @@ export const lineCheck = (line: string[]) => {
 export const countSyllables = (inputWord: string) => {
 	const word = inputWord.replace(/[^a-z]/gi, '')
 	const vowelMatch = word.match(/[aeiouy]+/gi);
-	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia|iu)+/gi);
+	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia|iu|^io)+/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
 	const exceptionWords = [
 		{'abalone': 3},
