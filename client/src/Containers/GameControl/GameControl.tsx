@@ -12,22 +12,24 @@ import { useParams } from 'react-router-dom';
 import { Game } from '../../Types/Types';
 
 function GameControl() {
-	window.localStorage.clear();
+	window.localStorage.removeItem('user');
 	const { code } = useParams();
 	const [team, setTeam] = useState('');
-	const [submitState, setSubmitState] = useState(true);
 	const [game, setGame] = useState<Game>();
+	const [submitState, setSubmitState] = useState(true);
 
-	const findGame = async () => {
-		const thisGame = await getData(`/games/room/${code}`);
-		setGame(thisGame);
+	const findGame = () => {
+		getData(`/games/room/${code}`).then((response) => {
+			setGame(response);
+			localStorage.setItem('game', JSON.stringify(response));
+		})
 	}
 
 	useEffect(() => {
 		findGame();
 		setTeam('blueberry');
 		localStorage.setItem('team', team);
-		localStorage.setItem('game', JSON.stringify(game));
+		// localStorage.setItem('game', JSON.stringify(game));
 	}, []);
 
 	let bgUrl = '';
