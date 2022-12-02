@@ -67,6 +67,7 @@ export const countSyllables = (inputWord: string) => {
 		{'hyperbole': 4},
 		{'jukebox': 2},
 		{'karate': 3},
+		{'lingerie': 3},
 		{'machete': 3},
 		{'maybe': 2},
 		{'people': 2},
