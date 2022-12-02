@@ -1,8 +1,8 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import {Link} from 'react-router-dom';
-import {Grid, Button} from '@mui/material';
-import {whiteButton} from '../../componentStyles';
 import {Topic} from '../../../Types/Types';
+import {Button} from '@mui/material';
+import {DogEarButton, whiteButton} from '../../componentStyles';
 
 interface Props {
   topic: Topic;
@@ -16,19 +16,11 @@ function TopicItem(props: Props) {
 
   return (
     <>
-        <Button sx={whiteButton} onClick={handleSwitch}>
+        <DogEarButton sx={whiteButton} onClick={handleSwitch}>
           <h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
-        </Button>
-				<br />
-				<br />
+        </DogEarButton>
     </>
   );
 }
 
 export default TopicItem;
-
-{
-  /* <Grid container item xs={7}>
-<Link to={{ pathname:`/topic/${topic.id}` }}><h4 style={{ lineHeight: '3.5rem' }}>{ topic.name.toString() }</h4></Link>
-</Grid> */
-}

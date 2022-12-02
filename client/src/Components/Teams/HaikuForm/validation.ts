@@ -53,7 +53,7 @@ export const lineCheck = (line: string[]) => {
 export const countSyllables = (inputWord: string) => {
 	const word = inputWord.replace(/[^a-z]/gi, '')
 	const vowelMatch = word.match(/[aeiouy]+/gi);
-	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia|iu)+/gi);
+	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia|iu|^io)+/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
 	const exceptionWords = [
 		{'abalone': 3},
@@ -67,6 +67,7 @@ export const countSyllables = (inputWord: string) => {
 		{'hyperbole': 4},
 		{'jukebox': 2},
 		{'karate': 3},
+		{'lingerie': 3},
 		{'machete': 3},
 		{'maybe': 2},
 		{'people': 2},
@@ -75,36 +76,29 @@ export const countSyllables = (inputWord: string) => {
 		{'sesame': 3},
 		{'shoreline': 2},
 		{'simile': 3},
+		{'soiree': 2},
 		{'tamale': 3},
 		{'wicked': 2},
 		{'yosemite': 4},
 	];
-	const plusSyllables = [
-		/sm$/i,
-		/[aeiou]ous$/i,
-		/[aeiouy]ing$/i,
-		/[^l]lien$/i,
-		/[^aeiou]ie$/i,
-		/uity$/i,
-		/thm$/i,
-		/gean$/i,
-		/ii$/i,
-		/([^t][^hs](ea)|(oa)|(ua))ted$/i,
-		// /^io/i,
-		// /io$/i,
-		/[^ts]io[n]/gi,
-		/yal$/i
+	const doubleMinusSyllables = [
+		/^(fore[^bfhqsv])/i,
+		/rriage$/i,
+		/[^g]giate/,
+		/[au]gue[ds]$/i,
 	];
 	const minusSyllables = [
-		/([^d][^kftzd][^dfty]|[ff])ed$/i,
+		/([^d][^dfktz][^dftuy]|[ff])ed$/i,
+		/[io]gue[ds]$/i,
 		/thed$/i,
 		/^(fore[^v])/i,
 		// /[ff|bb|gg|pp|zz]ed/,
+		/^[aeiou][^aeiou]e$/i,
 		/[^aeiou][aeiou][^aeiou]e$/i,
-		/[^ilrbsc][aeiou][^aeiouycg]e[ds]$/i,
-		/[ilrb][aeiou][^aeioucg]es$/i,
-		/[^n|aeiou][^(l)|(hp)]e$/i,
-		/[aeiou][^aeiou]e[^rd]$/i,
+		/[^bcilnrs][aeiou][^aeiouycgz]e[ds]$/i,
+		/[bilr][aeiou][^aeioucgz]es$/i,
+		/[^nc|aeiou][^(l)|(hp)]e$/i,
+		/[aeiou][^aeiouz]e[^rd]$/i,
 		// /[st]ions$/i,
 		// /[st]ion$/i,
 		/cious$/i,
@@ -114,34 +108,44 @@ export const countSyllables = (inputWord: string) => {
 		/nce$/i,
 		/iage/i,
 	];
-	const doubleMinusSyllables = [
-		/^(fore[^bhfqsv])/i,
-		/rriage$/i,
-		/[^g]giate/,
+	const plusSyllables = [
+		/sm$/i,
+		/[aeiou]ous$/i,
+		/[aeiouy]ing$/i,
+		/[^l]lien$/i,
+		/[aeiou][^aeiou][aeiou][^aeiou]ie$/i,
+		/uity$/i,
+		/thm$/i,
+		/gean$/i,
+		/ii$/i,
+		/([^t][^hs](ea)|(oa)|(ua))ted$/i,
+		// /^io/i,
+		// /io$/i,
+		// /[^ts]io[n]/gi,
+		/yal$/i
 	];
+	for (let i=0; i<exceptionWords.length; i++) {
+		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
+			return Object.values(exceptionWords[i])[0];
+		}
+	}
 	for (let i=0; i<doubleMinusSyllables.length; i++) {
 		if (doubleMinusSyllables[i].test(word)) {
-			console.log(doubleMinusSyllables[i])
+			console.log('double minus: ',doubleMinusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ) - 1;
 			return syllables > 0 ? syllables : 1;
 		}
 	}
-	for (let i=0; i<exceptionWords.length; i++) {
-		if (Object.keys(exceptionWords[i])[0] === word.toLowerCase()) {
-			console.log();
-			return Object.values(exceptionWords[i])[0];
-		}
-	}
 	for (let i=0; i<minusSyllables.length; i++) {
 		if (minusSyllables[i].test(word)) {
-			console.log(minusSyllables[i]);
+			console.log('single minus: ', minusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}
 	} 
 	for (let i=0; i<plusSyllables.length; i++) {
 		if (plusSyllables[i].test(word)) {
-			console.log(plusSyllables[i]);
+			console.log('plus: ', plusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}

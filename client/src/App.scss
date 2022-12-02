@@ -2,6 +2,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+	zoom: 0.8;
 }
 
 .logo {
@@ -57,6 +58,16 @@ h1 {
   margin: 0.25rem;
 }
 
+h2 {
+	font-family: LuloCleanOne;
+  font-size: 20rem;
+  line-height: 20rem;
+  font-weight: 400;
+	margin: 0;
+	margin-left: 2.5rem;
+	margin-bottom: -5rem;
+}
+
 h3 {
   font-family: LuloCleanOne;
   font-size: 25px;
@@ -106,8 +117,23 @@ a {
 }
 
 button {
+	border: none !important;
+	margin-top: 1rem;
+	transition: transform 90ms ease-in-out;
+	&:hover {
+		cursor: pointer;
+		transform: scale(0.98);
+	}
 	&:focus {
 		outline: none !important;
+	}
+	&:disabled {
+		background-color: #0001 !important;
+		color: #36363670 !important;
+		&:hover {
+			transform: none;
+			cursor: default;
+		}
 	}
 }
 
@@ -122,7 +148,7 @@ textarea {
 
 .bottom {
 	position: absolute !important;
-	bottom: 0.75rem;
+	bottom: 0rem;
 	left: 0;
 	width: 100%;
 }

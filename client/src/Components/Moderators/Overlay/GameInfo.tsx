@@ -3,15 +3,16 @@ import '../../../index.css';
 import { Grid } from '@mui/material';
 
 interface Props {
-  gameInfo: any;
+  h3Input: any;
+  h1Input: any;
 }
 
 function GameInfo(props: Props) {
   return (
-    <Grid item xs={12} md={12} lg={12}>
+    <Grid item key={props.h1Input} xs={12} md={12} lg={12}>
       <br />
-      <h3>game</h3>
-      <h1>{props.gameInfo.name}</h1>
+      <h3>{props.h3Input}</h3>
+      <h1>{props.h1Input}</h1>
       <br />
     </Grid>
   );

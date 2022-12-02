@@ -14,9 +14,12 @@ interface Props {
 }
 
 function ModStartRoundControl(props: Props) {
+
   const {id} = useParams();
   const [game, setGame] = useState({});
   const [selectedTopic, setSelectedTopic] = useState(false)
+	localStorage.setItem('gameId', '1');
+
 
   useEffect(() => {
     getGameList();

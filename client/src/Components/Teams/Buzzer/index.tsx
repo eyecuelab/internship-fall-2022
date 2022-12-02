@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Grid } from '@mui/material';
 import socket from '../../../Hooks/WebsocketHook';
-import { greenButton, redButton } from '../../componentStyles';
+import { DogEarButton, greenButton, redButton } from '../../componentStyles';
 
 interface Props {
 	roundNumber: number;
@@ -53,23 +53,22 @@ function Buzzer (props: Props) {
 			<Grid sx={{width: '100%'}}>
 				<h3>you are guessing...</h3>
 				<br />
-				<Button
+				<DogEarButton
 					id='buzzer'
 					onClick={buzzIn}
-					sx={greenButton}
+					style={greenButton}
 					disabled={!buzzerState}
 				>
 					<h3>buzz in!</h3>
-				</Button>
+				</DogEarButton>
 			</Grid>
 		</Grid>
-				<Button
+				<DogEarButton
 					onClick={buzzRefresh}
-					sx={redButton}
-
+					style={redButton}
 				>
 					<h3>reset buzzer ?</h3>
-				</Button>
+				</DogEarButton>
 		</>
 	);
 }

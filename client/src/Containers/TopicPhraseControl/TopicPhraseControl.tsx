@@ -6,6 +6,7 @@ import { getData} from '../../ApiHelper';
 import ModAddPhrase from '../../Components/Moderators/AddPhrase';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
+import { Game } from '../../Types/Types';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -15,7 +16,7 @@ interface Props {
 
 function TopicPhraseControl(props: Props) {
   const {id} = useParams();
-  const [game, setGame] = useState({});
+  const [game, setGame] = useState<Game>();
 
   useEffect(() => {
     getGameList();
@@ -34,12 +35,15 @@ function TopicPhraseControl(props: Props) {
 		window.localStorage.clear();
   };
 
+	const passedInfo ={labelOne: "game", textOne: game?.name};
+	
+
   if (localStorage.getItem('user')) {
 		if (props.viewPhrases) {
 			return (
 				<CardTemplate
 					content={<ModAddPhrase/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo}  gameId={Number(id)} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
@@ -48,7 +52,7 @@ function TopicPhraseControl(props: Props) {
 			return (
 				<CardTemplate
 					content={<ModAddTopic gameId={Number(id)} />}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo}  handleLogout={handleLogout}  gameId={Number(id)} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>

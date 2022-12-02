@@ -3,7 +3,8 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/teams', teamsControllers.getTeam);
+router.get('/teams/game/:gameId', teamsControllers.getTeams);
+router.get('/teams/:id', teamsControllers.getOneTeam);
 router.post('/teams', teamsControllers.createTeam);
 
 export default router; 

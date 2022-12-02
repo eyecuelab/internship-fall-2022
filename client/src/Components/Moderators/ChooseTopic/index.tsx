@@ -2,10 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {Grid, TextField, Button, Container} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
-import {redButton, whiteButton} from '../../componentStyles';
 import {getData} from '../../../ApiHelper';
 import TopicItem from './TopicItem';
 import {Topic} from '../../../Types/Types';
+import { Container, ButtonContainer } from './styles';
+import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
+
 
 interface Props {
   gameId: number;
@@ -55,18 +57,15 @@ function ModChooseTopic(props: Props) {
               })}
             </Grid>
           }
-
-          <br />
-          <br />
         </div>
       </Container>
       <div className="spacer" />
       <Link to="/" className="bottom">
         {' '}
         {/* FIX THIS ROUTE */}
-        <Button sx={redButton}>
+        <DogEarButton sx={redButton}>
           <h3>end game</h3>
-        </Button>
+        </DogEarButton>
       </Link>
     </div>
   );

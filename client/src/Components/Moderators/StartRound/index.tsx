@@ -2,13 +2,19 @@ import React from 'react';
 import '../../../index.css';
 import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
-import { whiteButton, greenButton, redButton } from '../../componentStyles';
+import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
+import { postData } from '../../../ApiHelper';
 
 interface Props {
   handleSwitch: () => void;
 }
 
 function ModStartRound(props: Props) {
+	const gameId = Number(localStorage.getItem('gameId'));
+
+	const startRound = () => {
+		postData('/start', gameId);
+	}
 
   whiteButton.width = '100%';
   redButton.width = '100%';
@@ -24,17 +30,16 @@ function ModStartRound(props: Props) {
           <br />
         </div>
         <ButtonContainer>
-          <Button sx={greenButton}>
+          <DogEarButton onClick={startRound} style={greenButton}>
             <h3>start round</h3>
-          </Button>
-          <br />
-          <Button sx={whiteButton} onClick={props.handleSwitch}>
+          </DogEarButton>
+          <DogEarButton sx={whiteButton} onClick={props.handleSwitch}>
+
             <h3>back to selection</h3>
-          </Button>
-          <br />
-          <Button sx={redButton}>
+          </DogEarButton>
+          <DogEarButton style={redButton}>
             <h3>end game</h3>
-          </Button>
+          </DogEarButton>
         </ButtonContainer>
       </Container>
     </>

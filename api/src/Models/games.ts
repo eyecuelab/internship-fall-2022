@@ -14,6 +14,18 @@ export const getGameById = async (id: number) => {
 	});
 }
 
+export const getGameByCode = async (code: string) => {
+	return await prisma.games.findUnique({
+		where: {
+			gameCode: code
+		},
+		include: {
+			Topic: true,
+			Team: true,
+		}
+	});
+}
+
 export const getGameByModerator = async (moderatorId: number) => {
   return await prisma.games.findMany({
 		where: {
@@ -49,7 +61,7 @@ export const deleteGame = async (id: number)=>{
 export const updateGameStatus = async (id: number)=>{
 	const now = new Date();
 	return await prisma.games.update({
-	  where: { id: Number(id) },
-	  data: { publishedAt: now }
+		where: { id: Number(id) },
+		data: { publishedAt: now }
 	});
   }

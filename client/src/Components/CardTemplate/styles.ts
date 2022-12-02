@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import {Card, CardContent} from '@mui/material';
+import corners, { chamfered } from 'corners';
 import type {CardTemplateProps} from '.';
 import '../../App.scss';
 
@@ -54,6 +55,8 @@ export const StyledCardMedia = styled.div<Pick<CardTemplateProps, "bgUrl" | "col
 
 export const StyledCardContent = styled(CardContent)`
 	width: 700px;
-	min-height: 101%;
-	height: 101%;
+	min-height: 102.2%;
+	height: 102.2%;
+	padding-top: 0;
+	padding-bottom: 0;
 `
