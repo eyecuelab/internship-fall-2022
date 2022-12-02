@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { TextField, Button } from '@mui/material';
-import { postData } from '../../../ApiHelper';
+import { getData, postData, putData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
 import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
 
@@ -23,8 +23,6 @@ function HaikuForm(props: Props) {
 	const [lineThree, setLineThree] = useState('5 Syllables');
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
-  const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {postData('/haicues', data)};
-
 	const roundNum = '2';
 	const topic = 'Holiday Activities';
 	const phrase = ['decorating', 'tree'];
@@ -43,6 +41,22 @@ function HaikuForm(props: Props) {
 			});
 		});
 	}, []);
+
+	const roundId = 1;
+	const teamId = 1;
+
+  const onSubmit: SubmitHandler<IFormInput> = (data: unknown) => {
+		getData(`/haicues/${roundId}/${teamId}`).then((response) => {
+			console.log('RESPONSE: ', response.id);
+			if (response.id) {
+				console.log('if');
+				putData('/haicues', {'id': Number(response.id), 'line1': data.line1, 'line2': data.line2, 'line3': data.line3})
+			} else {
+				console.log('else');
+				postData('/haicues', data);
+			}
+		});
+	};
 
 	const swapLabel = (line: number, status: string) => {
 		switch(line) {

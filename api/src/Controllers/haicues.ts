@@ -8,9 +8,9 @@ const haicuesControllers = {
     return res.json(haicues);
   },
 
-	async getHaicueById(req: any, res: any) {
-		const { id } = req.params;
-		const haicue = await getOneHaicue(id);
+	async getHaicueByTeamRound(req: any, res: any) {
+		const { roundId, teamId } = req.params;
+		const haicue = await getOneHaicue(roundId, teamId);
 		return res.json(haicue);
 	},
 
@@ -28,8 +28,8 @@ const haicuesControllers = {
 	},
 
 	async resubmitHaicue(req: any, res: any) {
-		const { haicueId, line1, line2, line3 } = req.body;
-		const haicue = await updateHaicue(haicueId, line1, line2, line3);
+		const { id, line1, line2, line3 } = req.body;
+		const haicue = await updateHaicue(id, line1, line2, line3);
 		res.status(201).json(haicue);
 	}
 

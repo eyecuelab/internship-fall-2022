@@ -6,10 +6,11 @@ export const getHaicues = async () => {
 	return await prisma.haicues.findMany();
 }
 
-export const getOneHaicue = async (id: number) => {
-	return await prisma.haicues.findUnique({
+export const getOneHaicue = async (roundId: number, teamId: number) => {
+	return await prisma.haicues.findFirstOrThrow({
 		where: {
-			id: id,
+			teamId: Number(teamId),
+			roundId: Number(roundId),
 		}
 	});
 }
@@ -37,7 +38,7 @@ export const createHaicues = async (roundNum: number, team: number, line1: strin
 export const updateHaicue = async (id: number, line1: string, line2: string, line3: string) => {
 	return await prisma.haicues.update({
 		where: {
-			id: id,
+			id: Number(id),
 		},
 		data: {
 			line1: line1,
