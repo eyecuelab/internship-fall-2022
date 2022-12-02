@@ -42,12 +42,10 @@ const startThisRound = (gameId: number) => {
 }
 
 const addTime = async (gameId: number) => {
-	console.log(timeRemaining);
 	if (timeRemaining === 0) {
 		timeRemaining = 30;
 	} else {
 		timeRemaining += 30;
 	}
-	console.log(timeRemaining);
 	startThisRound(gameId);
 }
