@@ -76,6 +76,7 @@ export const countSyllables = (inputWord: string) => {
 		{'sesame': 3},
 		{'shoreline': 2},
 		{'simile': 3},
+		{'soiree': 2},
 		{'tamale': 3},
 		{'wicked': 2},
 		{'yosemite': 4},
