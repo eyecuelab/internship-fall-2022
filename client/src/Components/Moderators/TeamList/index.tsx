@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import '../../../index.css';
 import { Link } from 'react-router-dom';
 import {Grid, Button} from '@mui/material';
-import {DogEarButton, whiteButton, redButton} from '../../componentStyles';
+import {DogEarButton, whiteButton, redButton, greenButton} from '../../componentStyles';
 import {Container, ButtonContainer} from './styles';
 import {getData, postData} from '../../../ApiHelper';
 import { Team } from '../../../Types/Types';
@@ -10,7 +10,9 @@ import TeamItem from './TeamItem';
 
 interface Props {
 //   handleSwitch?: () => void;
-  	gameId: number;
+  gameId: number;
+	presentingState: boolean;
+	setPresentingState: Dispatch<SetStateAction<boolean>>;
 }
 
 function TeamList(props: Props) {
@@ -54,10 +56,14 @@ function TeamList(props: Props) {
 				{teams?.map((team: Team) => { return <TeamItem key={team.id} team={team} /> })}
 			</Grid>
         <ButtonContainer>
+		<Link to={`/game/${props.gameId}/presenting`}>
+		      {props.presentingState ? <DogEarButton style={greenButton} >
+            <h3>Start Reading</h3>
+          </DogEarButton> : null }
+		  </Link>
           <DogEarButton onClick={() => extendTime()} style={whiteButton} >
             <h3>EXTENDS 30 SECONDS</h3>
           </DogEarButton>
-          <br />
           <DogEarButton style={redButton} >
             <h3>END ROUND</h3>
           </DogEarButton>
@@ -68,3 +74,4 @@ function TeamList(props: Props) {
 }
 
 export default TeamList;
+
