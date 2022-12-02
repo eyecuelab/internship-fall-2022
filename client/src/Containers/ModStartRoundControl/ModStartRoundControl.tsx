@@ -1,40 +1,37 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
-import '../../index.css';
+import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
-import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModStartRound from '../../Components/Moderators/StartRound';
+import { getData} from '../../ApiHelper';
+import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
-import { getData } from '../../ApiHelper';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
 	userData: any;
+  viewPhrases: boolean;
 }
 
 function ModStartRoundControl(props: Props) {
-  const [createNewGameView, setCreateNewGameView] = useState(false);
-	const [games, setGames] = useState([]);
+  const {id} = useParams();
+  const [game, setGame] = useState({});
+  const [selectedTopic, setSelectedTopic] = useState(false)
 
-	useEffect(() => {
-		getGameList();
-	}, []);
+  useEffect(() => {
+    getGameList();
+  }, []);
 
-	const getGameList = () => {
-		const user = JSON.parse(localStorage.getItem('user') as string);
-		if (user) {
-		getData(`/moderators/${user.email}`)
-			.then((response) => {
-				response ? getData(`/games/moderator/${response.id}`).then((data) => {
-					setGames(data);
-				}) : setGames([]);
-			});
-		} else {
-			setGames([]);
-		}
-	}
+  const getGameList = async () => {
+		const game = await getData(`/games/${id}`);
+		setGame(game);
+  }
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
+
+  const handleSelectedTopic = () => {
+    setSelectedTopic(!selectedTopic);
+  };
 
   const handleLogout = () => {
 		props.setUserData({});
@@ -42,32 +39,28 @@ function ModStartRoundControl(props: Props) {
 		window.localStorage.clear();
   };
 
-  const handleCreateNewGame = () => {
-    setCreateNewGameView(!createNewGameView);
-  };
-
   if (localStorage.getItem('user')) {
-    if (!createNewGameView) {
-      return (
-        <CardTemplate
-          content={<ModChooseTopic gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={handleLogout} />}
-          bgUrl='/images/moderator_card_background_2.png'
+		if (selectedTopic) {
+			return (
+				<CardTemplate
+        content={<ModStartRound handleSwitch={handleSelectedTopic}/>}
+					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
-        />
-      );
-    } else {
-      return (
-        <CardTemplate
-          content={<ModStartRound />}
-          overlay={<ModOverlay handleLogout={handleLogout} />}
-          bgUrl='/images/moderator_card_background_2.png'
+				/>
+			);
+		} else {
+			return (
+				<CardTemplate
+          content={<ModChooseTopic gameId={Number(id)} handleSwitch={handleSelectedTopic}/>}
+					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
-        />
-      );
-    }
-  }
-  return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
+				/>
+			);
+		}
+	}
+	return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
 }
 
 export default ModStartRoundControl;

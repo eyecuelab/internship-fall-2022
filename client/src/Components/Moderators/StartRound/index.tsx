@@ -4,7 +4,12 @@ import { Container, ButtonContainer } from './styles';
 import { Button } from '@mui/material';
 import { whiteButton, greenButton, redButton } from '../../componentStyles';
 
-function ModStartRound() {
+interface Props {
+  handleSwitch: () => void;
+}
+
+function ModStartRound(props: Props) {
+
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -23,7 +28,7 @@ function ModStartRound() {
             <h3>start round</h3>
           </Button>
           <br />
-          <Button sx={whiteButton}>
+          <Button sx={whiteButton} onClick={props.handleSwitch}>
             <h3>back to selection</h3>
           </Button>
           <br />
