@@ -7,9 +7,9 @@ import HaikuForm from '../../Components/Teams/HaikuForm';
 import TeamOverlay from '../../Components/Teams/Overlay';
 import Score from '../../Components/Teams/Score';
 import socket from '../../Hooks/WebsocketHook';
-import { getData } from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import { useParams } from 'react-router-dom';
-import { Game } from '../../Types/Types';
+import { Game, Team } from '../../Types/Types';
 
 function GameControl() {
 	window.localStorage.removeItem('user');
@@ -17,6 +17,29 @@ function GameControl() {
 	const [team, setTeam] = useState('');
 	const [game, setGame] = useState<Game>();
 	const [submitState, setSubmitState] = useState(true);
+	const teams = ['apple','blueberry','cherry','kiwi','lemon','peach','pear','strawberry'];
+	
+	const assignTeam = () => {
+		if (!localStorage.getItem('team')) {
+			getData(`/games/room/${code}`).then((response) => {
+				setGame(response);
+				localStorage.setItem('game', JSON.stringify(response));
+				console.log(response);
+				const setTeams = new Set(response.Team.map((a: Team) => a.teamName));
+				let thisTeam = teams[Math.floor(Math.random() * 8)];
+				if (!(setTeams.size === 8)) {
+					while (setTeams.has(thisTeam)) {
+						thisTeam = teams[Math.floor(Math.random() * 8)];
+						console.log('shit');
+					}
+					console.log(thisTeam);
+					setTeam(thisTeam);
+					postData('/teams', {teamName: thisTeam, gameId: response.id});
+					localStorage.setItem('team', thisTeam);
+				}
+			});
+		}
+	}
 
 	const findGame = () => {
 		getData(`/games/room/${code}`).then((response) => {
@@ -27,21 +50,20 @@ function GameControl() {
 
 	useEffect(() => {
 		findGame();
+		localStorage.getItem('team') ? null : assignTeam();
 		setTeam('blueberry');
-		localStorage.setItem('team', team);
 		// localStorage.setItem('game', JSON.stringify(game));
 	}, []);
 
-	let bgUrl = '';
 	let color = '';
+
+	const bgUrl = `/images/${team}_banner.png`;
 
 	switch (team) {
 		case('blueberry'):
-			bgUrl = '/images/blueberry_banner.png';
 			color = '#0c114a';
 			break;
 		default:
-			bgUrl = '/images/apple_banner.png';
 			color: '#f00';
 			break;
 	}

@@ -19,6 +19,7 @@ function ModGameControl(props: Props) {
 
 	useEffect(() => {
 		getGameList();
+		getGameList();
 		props.setUserData(props.userData);
 	}, []);
 
