@@ -81,6 +81,7 @@ function ModAddPhrase(props: Props) {
 									fullWidth
 									variant="standard"									
 									required
+									inputProps={{maxLength: 20}}
 								/>
 							)}
 						/>
