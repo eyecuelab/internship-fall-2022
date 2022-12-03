@@ -9,6 +9,7 @@ interface Props {
 function TeamOverlay(props: Props) {
 	const [time, setTime] = useState(300);
 	const { setSubmitState } = props;
+	const teamData = JSON.parse(localStorage.getItem('team') as string);
 
 	useEffect(() => {
 		socket.on('connection', () => {
@@ -41,10 +42,10 @@ function TeamOverlay(props: Props) {
   return (
     <>
       <h3>Team</h3>
-      <h1>BLUEBERRY</h1>
+      <h1>{teamData?.teamName}</h1>
       <br />
       <h3>Points</h3>
-      <h1>3</h1>
+      <h1>{teamData?.teamScore}</h1>
       <br />
       <h3>Timer</h3>
       <h1 style={timer.minutes < 1 ? {color: 'red'} : {color: '#fff'}}>{timer.minutes}:{timer.seconds}</h1>

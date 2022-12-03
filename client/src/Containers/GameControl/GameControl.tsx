@@ -14,49 +14,82 @@ import { Game, Team } from '../../Types/Types';
 function GameControl() {
 	window.localStorage.removeItem('user');
 	const { code } = useParams();
-	const [team, setTeam] = useState('');
+	const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
 	const [game, setGame] = useState<Game>();
+	const [color, setColor] = useState('#888');
+	const [readyPhase, setReadyPhase] = useState(false);
+	const [brainstorming, setBrainstorming] = useState(false);
 	const [submitState, setSubmitState] = useState(true);
+	const colors = {apple: '#0A1031', blueberry: '#0c114a', cherry: '#C70009', kiwi: '#61750D', lemon: '#105839', peach: '#DF9190', pear: '#CDA70D', strawberry: '#D00D0A'}
 
 	useEffect(() => {
-		const unsubscribe = () => {
-			getData(`/games/room/${code}`)
-			.then((response) => {
-				localStorage.setItem('game', JSON.stringify(response));
-				console.log(response);
-				if (!localStorage.getItem('team')) {
-					postData('/teams', { gameId: response.id })
-					.then((data) => {
-						console.log(data);
-						localStorage.setItem('team', JSON.stringify(data));
-					});
-				}
-			});
-		}
-
-		return unsubscribe();
+		console.log('useEffect')
+		getData(`/games/room/${code?.toUpperCase()}`)
+		.then((response) => {
+			localStorage.setItem('game', JSON.stringify(response));
+			setGame(response);
+			console.log('RESPONSE: ', response);
+			console.log('GAME: ', game);
+			if (!localStorage.getItem('team')) {
+				postData('/teams', { gameId: response.id })
+				.then((data) => {
+					console.log(data);
+					setTeam(data);
+					localStorage.setItem('team', JSON.stringify(data));
+					setColor(eval(`colors.${data.teamName}`));
+				});
+			} else {
+				const teamData = JSON.parse(localStorage.getItem('team') as string);
+				setTeam(teamData);
+				setColor(eval(`colors.${teamData.teamName}`));
+			}
+		});
 	}, []);
 
-	let color = '';
+	useEffect(() => {
+		socket.on('connection', () => {
+			console.log('socket open');
+		});
 
-	const bgUrl = `/images/${team}_banner.png`;
+		socket.on('start_game', () => {
+			setReadyPhase(true);
+		});
 
-	switch (team) {
-		case('blueberry'):
-			color = '#0c114a';
-			break;
-		default:
-			color: '#f00';
-			break;
-	}
+		socket.on('start_round', () => {
+			setBrainstorming(true);
+		});
+
+		socket.on('start_guessing', () => {
+
+		});
+
+		socket.on('end_round', () => {
+
+		});
+
+		return () => {
+			socket.off('connection');
+			socket.off('start_game');
+			socket.off('start_round');
+			socket.off('start_guessing');
+			socket.off('end_round');
+		}
+	})
+
+	const bgUrl = `/images/${team?.teamName}_banner.png`;
 
 	document.documentElement.style.backgroundImage = 'url(/images/oranges_background.png)';
 
   return (
 		<>
-		<button onClick={() => console.log(game)} >{game?.gameCode}</button>
 		<CardTemplate 
-			content={ <HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> /* <Score /> */ /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
+			content={ 
+				brainstorming ? 
+					<HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> 
+				: <TeamLobby team={team} phase={readyPhase}/> 
+				/* <Score /> */ 
+				/* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ 
+			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
 			bgUrl={bgUrl}
 			color={color}

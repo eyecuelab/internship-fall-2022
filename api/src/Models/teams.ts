@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Teams } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -47,18 +47,18 @@ export const randomlyGenerateTeam = () => {
 
 export const setUniqueTeam = async (gameId: number) => {
   const maxNumOfTeams = 5;
-  const getTeamsInGame = await getTeamsByGame(gameId);
+  const teamsInGame = await getTeamsByGame(gameId);
   let uniqueTeam = randomlyGenerateTeam();
 
   const teamAlreadyAssigned = (name: string) => {
-    return getTeamsInGame.some((team: any) => team.teamName === name)
+    return teamsInGame.some((team: Teams) => team.teamName === name)
   }
 
   while (teamAlreadyAssigned(uniqueTeam)) {
     uniqueTeam = randomlyGenerateTeam();
     if (!teamAlreadyAssigned) {
 			return uniqueTeam;
-    } else if (teamAlreadyAssigned(uniqueTeam) && maxNumOfTeams === getTeamsInGame.length) {
+    } else if (teamAlreadyAssigned(uniqueTeam) && maxNumOfTeams === teamsInGame.length) {
       return uniqueTeam;
     }
   }

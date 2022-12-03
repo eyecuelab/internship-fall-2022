@@ -17,7 +17,6 @@ interface IFormInput {
 }
 
 type Data = {
-
 	line1: string,
 	line2: string,
 	line3: string,
