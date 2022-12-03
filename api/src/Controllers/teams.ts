@@ -1,4 +1,4 @@
-import { getTeamsByGame, setUniqueTeam, getTeamById } from '../Models/teams';
+import { getTeamsByGame, setUniqueTeam, getTeamById, createTeam } from '../Models/teams';
 
 const teamsControllers = {
   async getTeams(req: any, res: any) {
@@ -15,7 +15,7 @@ const teamsControllers = {
 
 	async createUniqueTeam(req: any, res: any) {
 		const { gameId } = req.body;
-			const newTeam = await setUniqueTeam(gameId);
+			const newTeam = await createTeam(gameId);
 			res.status(201).json(newTeam);
 	},
 }

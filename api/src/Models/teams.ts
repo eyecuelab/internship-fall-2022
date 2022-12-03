@@ -18,7 +18,17 @@ export const getTeamById = async (teamId: number) => {
 	});
 }
 
-export const createTeam = async (teamName: string, gameId: number) => {
+export const getTeamNameByGame = async (name: string, gameId: number) => {
+	return await prisma.teams.findFirst({
+		where: {
+			teamName: name,
+			gameId: gameId,
+		}
+	});
+}
+
+export const createTeam = async (gameId: number) => {
+	const teamName = await setUniqueTeam(gameId)
   return await prisma.teams.create({
     data: {
       teamName: teamName,
@@ -46,17 +56,13 @@ export const setUniqueTeam = async (gameId: number) => {
 
   while (teamAlreadyAssigned(uniqueTeam)) {
     uniqueTeam = randomlyGenerateTeam();
-		console.log('while');
     if (!teamAlreadyAssigned) {
-			console.log('line 52 assign team: ', uniqueTeam);
-			createTeam(uniqueTeam, gameId);
-			return 0;
+			return uniqueTeam;
     } else if (teamAlreadyAssigned(uniqueTeam) && maxNumOfTeams === getTeamsInGame.length) {
-      return 0;
+      return uniqueTeam;
     }
   }
-	console.log('line 59 assign team: ', uniqueTeam);
-	createTeam(uniqueTeam, gameId);
+	return uniqueTeam;
 }
 
 export const setTeamSocketId = async (teamId: number, socketId: string) => {

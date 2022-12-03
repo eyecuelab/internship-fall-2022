@@ -17,25 +17,24 @@ function GameControl() {
 	const [team, setTeam] = useState('');
 	const [game, setGame] = useState<Game>();
 	const [submitState, setSubmitState] = useState(true);
-	const teams = ['apple','blueberry','cherry','kiwi','lemon','peach','pear','strawberry'];
-	
-	// const findGame = () => {
-	// 	getData(`/games/room/${code}`).then((response) => {
-	// 		setGame(response);
-	// 		localStorage.setItem('game', JSON.stringify(response));
-	// 	})
-	// }
 
 	useEffect(() => {
-		getData(`/games/room/${code}`).then((response) => {
-		setGame(response);
-		localStorage.setItem('game', JSON.stringify(response));
-		console.log(response);
-		if (!localStorage.getItem('team')) {
-				postData('/teams', { gameId: response.id });
-				localStorage.setItem('team', JSON.stringify(response));
-			}
-		});
+		const unsubscribe = () => {
+			getData(`/games/room/${code}`)
+			.then((response) => {
+				localStorage.setItem('game', JSON.stringify(response));
+				console.log(response);
+				if (!localStorage.getItem('team')) {
+					postData('/teams', { gameId: response.id })
+					.then((data) => {
+						console.log(data);
+						localStorage.setItem('team', JSON.stringify(data));
+					});
+				}
+			});
+		}
+
+		return unsubscribe();
 	}, []);
 
 	let color = '';
