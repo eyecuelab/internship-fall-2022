@@ -73,7 +73,6 @@ function ModAddTopic(props: Props) {
                   {...field}
                   fullWidth
                   variant="standard"
-                  multiline
 									required
                 />
               )}

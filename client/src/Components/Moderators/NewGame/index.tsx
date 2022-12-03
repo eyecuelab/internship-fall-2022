@@ -47,7 +47,7 @@ function ModNewGame(props: Props) {
 		<Grid container>
       <h3>new game name</h3>
 			<div className="spacer" />
-      <form onSubmit={handleSubmit(createNewGame)}>
+      <form id='form' onSubmit={handleSubmit(createNewGame)}>
 			<Controller
 				control={control}
 				name="name"
@@ -56,7 +56,6 @@ function ModNewGame(props: Props) {
 						{...field}
 						fullWidth
 						variant="standard"
-						multiline
 						required
 					/>
 				)}
