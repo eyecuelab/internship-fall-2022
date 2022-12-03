@@ -19,40 +19,23 @@ function GameControl() {
 	const [submitState, setSubmitState] = useState(true);
 	const teams = ['apple','blueberry','cherry','kiwi','lemon','peach','pear','strawberry'];
 	
-	const assignTeam = () => {
-		if (!localStorage.getItem('team')) {
-			getData(`/games/room/${code}`).then((response) => {
-				setGame(response);
-				localStorage.setItem('game', JSON.stringify(response));
-				console.log(response);
-				const setTeams = new Set(response.Team.map((a: Team) => a.teamName));
-				let thisTeam = teams[Math.floor(Math.random() * 8)];
-				if (!(setTeams.size === 8)) {
-					while (setTeams.has(thisTeam)) {
-						thisTeam = teams[Math.floor(Math.random() * 8)];
-						console.log('shit');
-					}
-					console.log(thisTeam);
-					setTeam(thisTeam);
-					postData('/teams', {teamName: thisTeam, gameId: response.id});
-					localStorage.setItem('team', thisTeam);
-				}
-			});
-		}
-	}
-
-	const findGame = () => {
-		getData(`/games/room/${code}`).then((response) => {
-			setGame(response);
-			localStorage.setItem('game', JSON.stringify(response));
-		})
-	}
+	// const findGame = () => {
+	// 	getData(`/games/room/${code}`).then((response) => {
+	// 		setGame(response);
+	// 		localStorage.setItem('game', JSON.stringify(response));
+	// 	})
+	// }
 
 	useEffect(() => {
-		findGame();
-		localStorage.getItem('team') ? null : assignTeam();
-		setTeam('blueberry');
-		// localStorage.setItem('game', JSON.stringify(game));
+		getData(`/games/room/${code}`).then((response) => {
+		setGame(response);
+		localStorage.setItem('game', JSON.stringify(response));
+		console.log(response);
+		if (!localStorage.getItem('team')) {
+				postData('/teams', { gameId: response.id });
+				localStorage.setItem('team', JSON.stringify(response));
+			}
+		});
 	}, []);
 
 	let color = '';
