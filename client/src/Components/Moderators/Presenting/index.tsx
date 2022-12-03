@@ -5,20 +5,23 @@ import { Button } from '@mui/material';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 interface Props {
   handleSwitch?: () => void;
-  gameData?: any;
+  gameData?: any
+  haikuData?:any
+  ;
 }
 
 function ModPresenting(props: Props) {
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
+  console.log(props.haikuData)
 
   return (
     <>
       <Container>
         <div>
-          <h3>*insert team name*</h3>
-          <h1>*insert topic*</h1>
+          <h3>team</h3>
+          <h1>insert topic info</h1>
           <br />
           <br />
           <h3>line *insert line #*</h3>
