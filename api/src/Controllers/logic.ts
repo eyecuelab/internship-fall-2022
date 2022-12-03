@@ -3,8 +3,11 @@ import io from "../server";
 
 const ROUND_TIME = 300;
 
+let gameStart = false;
+
 const logicControllers = {
 	async startRound (req: any, res: any) {
+		gameStart = false;
 		const { gameId } = req.body;
 		startThisRound(gameId);
 		res.json(200);
@@ -27,6 +30,7 @@ export default logicControllers;
 let timeRemaining = ROUND_TIME;
 
 const startThisRound = (gameId: number) => {
+	gameStart = true;
 	const intervalId = setInterval(async () => {
 		emitTimerTick(gameId, timeRemaining);
 		if (timeRemaining === 0) {
@@ -47,5 +51,5 @@ const addTime = async (gameId: number) => {
 	} else {
 		timeRemaining += 30;
 	}
-	startThisRound(gameId);
+	gameStart ? null : startThisRound(gameId);
 }
