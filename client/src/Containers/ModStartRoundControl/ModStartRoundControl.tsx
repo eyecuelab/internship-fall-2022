@@ -42,12 +42,14 @@ function ModStartRoundControl(props: Props) {
 		window.localStorage.clear();
   };
 
+  const passedInfo ={labelOne: "round", textOne: "1"};
+	
   if (localStorage.getItem('user')) {
 		if (selectedTopic) {
 			return (
 				<CardTemplate
         content={<ModStartRound handleSwitch={handleSelectedTopic}/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+          overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
@@ -56,7 +58,7 @@ function ModStartRoundControl(props: Props) {
 			return (
 				<CardTemplate
           content={<ModChooseTopic gameId={Number(id)} handleSwitch={handleSelectedTopic}/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+          overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>

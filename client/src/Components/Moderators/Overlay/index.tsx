@@ -1,10 +1,12 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import '../../../index.css';
 import {Link, useLocation} from 'react-router-dom';
-import {Grid} from '@mui/material';
-import {DogEarButton, greenButton, redButton} from '../../componentStyles';
+
+import {Grid, Button} from '@mui/material';
+import {DogEarButton, greenButton, redButton, blackButton} from '../../componentStyles';
 import {putData} from '../../../ApiHelper';
 import GameInfo from './GameInfo';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
@@ -53,8 +55,18 @@ function ModOverlay(props: Props) {
     putData(`/games/${gameId}`);
   };
 
+  const codeToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(`www.haicue.com/game/${props.gameData.gameCode}`);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      alert('Failed to copy: ');
+    }
+  };
+
   redButton.width = '100%';
   greenButton.width = '100%';
+  blackButton.width = '100%';
 
   return (
     <Grid
@@ -73,13 +85,15 @@ function ModOverlay(props: Props) {
         <h3>Team</h3>
         <h1>MODS</h1>
       </Grid>
-      {props.gameData && (
+
+      {props.gameData ? (
         <GameInfo h1Input={props.gameData.textOne} h3Input={props.gameData.labelOne} />
-      )}
-      {location.pathname.includes('/brainstorming') ? <><h3>timer</h3><h1>{timer.minutes}:{timer.seconds}</h1></> : 
-      props.gameData && (
+      ) : null}
+
+      {location.pathname.includes('/brainstorming') ? (<><h3>timer</h3><h1>{timer.minutes}:{timer.seconds}</h1></>) : (props.gameData ? (
         <GameInfo h1Input={props.gameData.textTwo} h3Input={props.gameData.labelTwo} />
-      )}
+      ) : null)}
+
       <Grid
         item
         xs={12}
@@ -91,17 +105,36 @@ function ModOverlay(props: Props) {
         }}
       >
         <Link to="/">
-          {(location.pathname.includes('/topic/') || location.pathname.includes('/gameinfo/')) && (
-            <DogEarButton onClick={() => updateGameStatus(props.gameId)} style={greenButton}>
-              <h3>Publish</h3>
+          {props.gameData.labelOne == 'game' ? (
+            <>
+              <DogEarButton onClick={() => updateGameStatus(props.gameId)} style={greenButton}>
+                <h3>Publish</h3>
+              </DogEarButton>
+              <br />
+              <br />
+              <DogEarButton onClick={props.handleLogout} style={redButton}>
+                <h3>Logout</h3>
+              </DogEarButton>
+            </>
+          ) : null}
+
+          {location.pathname == '/' ? (
+            <DogEarButton onClick={props.handleLogout} style={redButton}>
+              <h3>Logout</h3>
             </DogEarButton>
-          )}
+          ) : null}
         </Link>
-        <Link to="/">
-          <DogEarButton onClick={props.handleLogout} style={redButton}>
-            <h3>Logout</h3>
+        <br />
+        <br />
+        {props.gameData.labelOne == 'round' ? (
+          <DogEarButton onClick={codeToClipboard} style={blackButton}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+              <h3 style={{marginLeft: '2rem'}}>player url</h3>{' '}
+              <ContentCopyIcon sx={{fontSize: '3rem'}} />
+            </div>
           </DogEarButton>
-        </Link>
+        ) : null
+        }
       </Grid>
     </Grid>
   );
