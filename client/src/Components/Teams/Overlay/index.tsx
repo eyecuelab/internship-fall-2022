@@ -21,7 +21,7 @@ function TeamOverlay(props: Props) {
 
 		return () => {
 			socket.off('connection');
-			// socket.off('tick');
+			socket.off('tick');
 		}
 	}, []);
 
