@@ -27,13 +27,11 @@ function ModOverlay(props: Props) {
     } catch (err) {
       alert('Failed to copy: ');
     }
-  }
+  };
 
   redButton.width = '100%';
   greenButton.width = '100%';
   blackButton.width = '100%';
-
-  console.log(props.gameData.labelOne)
 
   return (
     <Grid
@@ -53,12 +51,15 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
         <br />
       </Grid>
-      {props.gameData && (
+
+      {props.gameData ? (
         <GameInfo h1Input={props.gameData.textOne} h3Input={props.gameData.labelOne} />
-      )}
-      {props.gameData && (
+      ) : null}
+
+      {props.gameData ? (
         <GameInfo h1Input={props.gameData.textTwo} h3Input={props.gameData.labelTwo} />
-      )}
+      ) : null}
+
       <Grid
         item
         xs={12}
@@ -70,7 +71,7 @@ function ModOverlay(props: Props) {
         }}
       >
         <Link to="/">
-          {props.gameData.labelOne == "game" && 
+          {props.gameData.labelOne == 'game' ? (
             <>
               <DogEarButton onClick={() => updateGameStatus(props.gameId)} style={greenButton}>
                 <h3>Publish</h3>
@@ -81,28 +82,34 @@ function ModOverlay(props: Props) {
                 <h3>Logout</h3>
               </DogEarButton>
             </>
-          }
-          {location.pathname == '/' && 
+          ) : null}
+
+          {location.pathname == '/' ? (
             <DogEarButton onClick={props.handleLogout} style={redButton}>
               <h3>Logout</h3>
             </DogEarButton>
-          }
+          ) : null}
         </Link>
         <br />
         <br />
-        {props.gameData.labelOne== "round" && 
-            // <DogEarButton onClick={codeToClipboard} style={blackButton}>
-            //   <h3>player url</h3>
-            // </DogEarButton>
-          <Button 
-            variant="contained" 
-            onClick={codeToClipboard} 
-            endIcon={<ContentCopyIcon />} 
-            sx={blackButton}
-            >
-            <h3>player url</h3>
-          </Button>
-          }
+        {props.gameData.labelOne == 'round' ? (
+          <DogEarButton onClick={codeToClipboard} style={blackButton}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+              <h3 style={{marginLeft: '2rem'}}>player url</h3>{' '}
+              <ContentCopyIcon sx={{fontSize: '3rem'}} />
+            </div>
+          </DogEarButton>
+        ) : null
+
+        // <Button
+        //   variant="contained"
+        //   onClick={codeToClipboard}
+        //   endIcon={<ContentCopyIcon sx={{fontSize: "5rem"}}/>}
+        //   sx={blackButton}
+        //   >
+        //   <h3>player url</h3>
+        // </Button> :null
+        }
       </Grid>
     </Grid>
   );
