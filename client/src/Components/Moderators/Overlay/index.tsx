@@ -42,10 +42,7 @@ function ModOverlay(props: Props) {
     if (timer === 0) {
       // @ts-ignore
       props.setPresentingState(true);
-    } else {
-      // @ts-ignore
-      props.setPresentingState(false);
-    }
+    } 
 
     return {minutes: minutes, seconds: seconds.toLocaleString('en-US', {minimumIntegerDigits: 2})};
   };
