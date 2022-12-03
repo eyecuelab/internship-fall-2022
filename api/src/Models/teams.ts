@@ -59,7 +59,7 @@ export const setUniqueTeam = async (gameId: number) => {
     if (!teamAlreadyAssigned) {
 			return uniqueTeam;
     } else if (teamAlreadyAssigned(uniqueTeam) && maxNumOfTeams === teamsInGame.length) {
-      return uniqueTeam;
+      return 'sixth team';
     }
   }
 	return uniqueTeam;
