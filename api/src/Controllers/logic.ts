@@ -49,7 +49,6 @@ const addTime = async (gameId: number) => {
 	if (timeRemaining === 0) {
 		timeRemaining = 30;
 	} else {
-		timeRemaining += 30;
+		gameStart ? timeRemaining += 30 : null;
 	}
-	gameStart ? null : startThisRound(gameId);
 }
