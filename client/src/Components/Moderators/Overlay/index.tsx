@@ -110,8 +110,6 @@ function ModOverlay(props: Props) {
               <DogEarButton onClick={() => updateGameStatus(props.gameId)} style={greenButton}>
                 <h3>Publish</h3>
               </DogEarButton>
-              <br />
-              <br />
               <DogEarButton onClick={props.handleLogout} style={redButton}>
                 <h3>Logout</h3>
               </DogEarButton>
@@ -124,8 +122,6 @@ function ModOverlay(props: Props) {
             </DogEarButton>
           ) : null}
         </Link>
-        <br />
-        <br />
         {props.gameData.labelOne == 'round' ? (
           <DogEarButton onClick={codeToClipboard} style={blackButton}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
