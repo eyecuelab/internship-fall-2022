@@ -15,10 +15,11 @@ function GameControl() {
 	window.localStorage.removeItem('user');
 	const { code } = useParams();
 	const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
-	const [game, setGame] = useState<Game>();
+	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
 	const [color, setColor] = useState('#888');
 	const [readyPhase, setReadyPhase] = useState(false);
 	const [brainstorming, setBrainstorming] = useState(false);
+	const [guessing, setGuessing] = useState(false);
 	const [submitState, setSubmitState] = useState(true);
 	const colors = {apple: '#0A1031', blueberry: '#0c114a', cherry: '#C70009', kiwi: '#61750D', lemon: '#105839', peach: '#DF9190', pear: '#CDA70D', strawberry: '#D00D0A'}
 
@@ -60,11 +61,10 @@ function GameControl() {
 		});
 
 		socket.on('start_guessing', () => {
-
+			setGuessing(true);
 		});
 
 		socket.on('end_round', () => {
-
 		});
 
 		return () => {
@@ -80,15 +80,21 @@ function GameControl() {
 
 	document.documentElement.style.backgroundImage = 'url(/images/oranges_background.png)';
 
+	if (readyPhase) {
+		document.getElementById('phase-down')?.classList.add('fade-in-down');
+		document.getElementById('phase-left')?.classList.add('fade-in-left');
+	}
+
   return (
 		<>
 		<CardTemplate 
 			content={ 
-				brainstorming ? 
+				guessing ? 
+				<Buzzer roundNumber={2} topic={'holiday activity'} /> : 
+				( brainstorming ? 
 					<HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> 
-				: <TeamLobby team={team} phase={readyPhase}/> 
+				: <TeamLobby game={game} team={team} phase={readyPhase}/> )
 				/* <Score /> */ 
-				/* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ 
 			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
 			bgUrl={bgUrl}
