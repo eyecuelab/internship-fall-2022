@@ -48,7 +48,8 @@ function ModGameControl(props: Props) {
     setCreateNewGameView(!createNewGameView);
   };
 
-	const passedInfo ={labelOne: " ", textOne: " "};
+	const passedInfo= {labelOne: " ", textOne: ""}
+
 	
 
   if (localStorage.getItem('user')) {
@@ -56,7 +57,7 @@ function ModGameControl(props: Props) {
       return (
         <CardTemplate
           content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={handleLogout} gameData ={passedInfo}/>}
+          overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout}/>}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />
@@ -65,7 +66,7 @@ function ModGameControl(props: Props) {
       return (
         <CardTemplate
           content={<ModNewGame getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={handleLogout} />}
+          overlay={<ModOverlay handleLogout={handleLogout} gameData={passedInfo}/>}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />

@@ -64,7 +64,7 @@ function ModStartRoundControl(props: Props) {
       return (
         <CardTemplate
           content={<ModStartRound />}
-          overlay={<ModOverlay handleLogout={handleLogout} />}
+          overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
           bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />
