@@ -42,11 +42,12 @@ export const deleteData = async (endpoint: string) => {
 	return handleResponse(response);
 };
 
-export const putData = async (endpoint: string) => {
+export const putData = async (endpoint: string, payload?: unknown) => {
   const url = `${API_ENDPOINT}${endpoint}`;
   const response = await fetch(url, {
     ...BASE_HEADERS,
     method: 'PUT',
+		body: JSON.stringify(payload),
   });
   return handleResponse(response);
 };

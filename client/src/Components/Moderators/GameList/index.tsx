@@ -16,6 +16,7 @@ function ModGameList(props: Props) {
 	useEffect(() => {
 		console.log('got the games');
 		props.getGameList();
+		props.getGameList();
 	}, []);
 
   const deleteGame = (gameId: any)=> {
@@ -36,7 +37,7 @@ function ModGameList(props: Props) {
       </Grid>
       <hr />
       { <Grid container>
-				{ (props.gameList.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
+				{ (props.gameList?.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
       </Grid> }
 			<div className="spacer" />
       <DogEarButton

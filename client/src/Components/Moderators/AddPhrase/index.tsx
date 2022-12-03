@@ -79,8 +79,7 @@ function ModAddPhrase(props: Props) {
 								<TextField
 									{...field}
 									fullWidth
-									variant="standard"
-									multiline
+									variant="standard"									
 									required
 								/>
 							)}

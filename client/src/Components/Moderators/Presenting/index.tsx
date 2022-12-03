@@ -28,7 +28,6 @@ function ModPresenting(props: Props) {
           <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
             <h3>advance haicue clue</h3>
           </DogEarButton>
-          <br />
           <DogEarButton onClick={props.handleSwitch} style={redButton}>
             <h3>end round</h3>
           </DogEarButton>

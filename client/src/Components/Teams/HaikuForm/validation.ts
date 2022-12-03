@@ -53,7 +53,7 @@ export const lineCheck = (line: string[]) => {
 export const countSyllables = (inputWord: string) => {
 	const word = inputWord.replace(/[^a-z]/gi, '')
 	const vowelMatch = word.match(/[aeiouy]+/gi);
-	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia|iu)+/gi);
+	const edgeCaseMatch = word.match(/(eo|[^t]io[^n]|ia|iu|^io)+/gi);
 	const edgeCaseNum = edgeCaseMatch ? edgeCaseMatch.length : 0;
 	const exceptionWords = [
 		{'abalone': 3},
@@ -67,6 +67,7 @@ export const countSyllables = (inputWord: string) => {
 		{'hyperbole': 4},
 		{'jukebox': 2},
 		{'karate': 3},
+		{'lingerie': 3},
 		{'machete': 3},
 		{'maybe': 2},
 		{'people': 2},
@@ -75,6 +76,7 @@ export const countSyllables = (inputWord: string) => {
 		{'sesame': 3},
 		{'shoreline': 2},
 		{'simile': 3},
+		{'soiree': 2},
 		{'tamale': 3},
 		{'wicked': 2},
 		{'yosemite': 4},
@@ -83,9 +85,11 @@ export const countSyllables = (inputWord: string) => {
 		/^(fore[^bfhqsv])/i,
 		/rriage$/i,
 		/[^g]giate/,
+		/[au]gue[ds]$/i,
 	];
 	const minusSyllables = [
-		/([^d][^dfktz][^dfty]|[ff])ed$/i,
+		/([^d][^dfktz][^dftuy]|[ff])ed$/i,
+		/[io]gue[ds]$/i,
 		/thed$/i,
 		/^(fore[^v])/i,
 		// /[ff|bb|gg|pp|zz]ed/,
@@ -93,7 +97,7 @@ export const countSyllables = (inputWord: string) => {
 		/[^aeiou][aeiou][^aeiou]e$/i,
 		/[^bcilnrs][aeiou][^aeiouycgz]e[ds]$/i,
 		/[bilr][aeiou][^aeioucgz]es$/i,
-		/[^n|aeiou][^(l)|(hp)]e$/i,
+		/[^nc|aeiou][^(l)|(hp)]e$/i,
 		/[aeiou][^aeiouz]e[^rd]$/i,
 		// /[st]ions$/i,
 		// /[st]ion$/i,

@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../../index.css';
-import { Container, ButtonContainer } from './styles';
-import { Button } from '@mui/material';
+import { Container, ButtonContainer, TeamAvatar } from './styles';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 
 interface Props {
@@ -20,10 +19,11 @@ function ModHandleGuess(props: Props) {
         <div>
           <h3>*insert team name*</h3>
           <h1>*insert topic*</h1>
-          <br />
-          <br />
+					<br />
+					<br />
           <h3>buzzer pressed!</h3>
           <h1>*insert team*</h1>
+					<TeamAvatar src={`/images/${'blueberry'}_icon.png`}/>
         </div>
         <ButtonContainer>
           <DogEarButton onClick={props.handleSwitch}  style={greenButton}>
@@ -33,7 +33,6 @@ function ModHandleGuess(props: Props) {
           <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
             <h3>dismiss guess</h3>
           </DogEarButton>
-          <br />
           <DogEarButton onClick={props.handleSwitch} style={redButton}>
             <h3>end round</h3>
           </DogEarButton>

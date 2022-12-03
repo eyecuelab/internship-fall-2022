@@ -16,7 +16,7 @@ function GameItem(props: Props) {
     <>
       {/* {game.publishedAt ? ( */}
         <Grid container item xs={7}>
-          <Link to={{pathname: game.publishedAt ? `/game/${game.id}/round` : `/game/${game.id}`}}>
+          <Link to={{pathname: game.publishedAt ? `/game/${game.id}/round` : `/gameinfo/${game.id}`}}>
             <h4 style={{lineHeight: '3.5rem'}}>{game.name.toString()}</h4>
           </Link>
         </Grid>

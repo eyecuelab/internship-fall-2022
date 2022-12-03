@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 export const getTeamsByGame = async (gameId: number) => {
   return await prisma.teams.findMany({
 		where: {
-			gameId: gameId
+			gameId: Number(gameId)
 		}
 	});
 }
@@ -13,7 +13,7 @@ export const getTeamsByGame = async (gameId: number) => {
 export const getTeamById = async (teamId: number) => {
 	return await prisma.teams.findUnique({
 		where: {
-			id: teamId
+			id: Number(teamId)
 		}
 	});
 }
