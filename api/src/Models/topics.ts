@@ -31,6 +31,22 @@ export const getTopics = async (gameId: number) => {
 	}
 }
 
+export const getRoundTopic = async (roundId: number) => {
+  try {
+	  return await prisma.topics.findUnique({
+			where: {
+				roundId: Number(roundId),
+			},
+			include: {
+				Phrase: true,
+			}
+		});
+	} catch(error: unknown) {
+		if (error instanceof Error)
+		throw error.message;
+	}
+}
+
 export const createTopic = async (topicName: string, gameId: number, moderatorId: number) => {
   return await prisma.topics.create({
     data: {

@@ -36,6 +36,8 @@ model Topics {
   gameId              Int
 	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
 	moderatorId					Int
+	round								Rounds?						
+	roundId							Int?							@unique
 }
 
 model Phrases {
@@ -63,7 +65,8 @@ model Games {
 model Rounds {
   id                  Int               @id @default(autoincrement())
   gameId              Int
-  topicId             Int
+	topic								Topics						@relation(fields: [topicId], references: [id])
+  topicId             Int								@unique
 	startedAt						DateTime?
 }
 

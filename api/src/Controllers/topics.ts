@@ -1,4 +1,4 @@
-import { getTopic, getTopics, createTopic, deleteTopic } from "../Models/topics";
+import { getTopic, getTopics, getRoundTopic, createTopic, deleteTopic } from "../Models/topics";
 import io from "../server";
 
 const topicsControllers = {
@@ -13,6 +13,11 @@ const topicsControllers = {
     const topics = await getTopics(gameId);
     return res.json(topics);
   },
+
+	async getTopicByRound(req: any, res: any) {
+		const { roundId } = req.params;
+		const topic = await getRoundTopic(roundId);
+	},
 
   async createTopic(req: any, res: any) {
     const { name, gameId, moderatorId } = req.body;
