@@ -6,6 +6,7 @@ import { getData, putData} from '../../ApiHelper';
 import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
+import { Game, Topic } from '../../Types/Types';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -14,9 +15,9 @@ interface Props {
 }
 
 function ModStartRoundControl(props: Props) {
-
   const {id} = useParams();
-  const [game, setGame] = useState({});
+  const [game, setGame] = useState<Game>({});
+	const [topic, setTopic] = useState<Topic>();
   const [selectedTopic, setSelectedTopic] = useState(false)
 	localStorage.setItem('gameId', '1');
 
@@ -27,7 +28,6 @@ function ModStartRoundControl(props: Props) {
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
 		});
-		
   }, []);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
@@ -36,7 +36,6 @@ function ModStartRoundControl(props: Props) {
     setSelectedTopic(!selectedTopic);
   };
 
-	const [topic, setTopic] = useState();
 
   const handleLogout = () => {
 		props.setUserData({});
