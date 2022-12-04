@@ -10,37 +10,23 @@ import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 
 interface Props {
-  gameId: number;
   setTopic: () => void;
   handleSwitch: () => void;
 }
 
-interface IFormInput {
-  name: string;
-  gameId: number;
-  moderatorId: number;
-}
-
 function ModChooseTopic(props: Props) {
-  const {setValue} = useForm<IFormInput>();
+	const { id } = useParams();
   const [topics, setTopics] = useState([]);
 	const [round, setRound] = useState(localStorage.getItem('round'));
   const user = JSON.parse(localStorage.getItem('user') as string);
 
   useEffect(() => {
-
-    getData(`/topics/game/${props.gameId}`).then((response) => {
+    getData(`/topics/game/${id}`).then((response) => {
 			setTopics(response);
 			for(let i=0; i<response.length; i++) {
 				document.getElementById(`topic${response[i].id}`)?.setAttribute('disabled', 'true');
 			}
 		});
-
-		getData(`/moderators/${user.email}`).then(moderator => {
-			setValue('moderatorId', moderator.id);
-			setValue('gameId', props.gameId);
-		});
-
   }, []);
 
   redButton.width = '100%';

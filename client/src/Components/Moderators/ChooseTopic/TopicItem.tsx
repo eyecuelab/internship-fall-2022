@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction} from 'react';
+import React, {Dispatch, SetStateAction, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Round, Topic} from '../../../Types/Types';
 import {Button} from '@mui/material';
@@ -25,9 +25,9 @@ function TopicItem(props: Props) {
 
   return (
     <>
-        <DogEarButton style={whiteButton} onClick={handleSetTopic}>
-          <h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
-        </DogEarButton>
+			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={handleSetTopic} disabled={topic.roundId ? true : false}>
+				<h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
+			</DogEarButton>
     </>
   );
 }
