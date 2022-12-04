@@ -57,6 +57,17 @@ export const createTopic = async (topicName: string, gameId: number, moderatorId
   });
 }
 
+export const updateTopicRound = async (topicId: number, roundId: number) => {
+	return await prisma.topics.update({
+		where: {
+			id: Number(topicId)
+		},
+		data: {
+			roundId: Number(roundId)
+		}
+	})
+}
+
 export const deleteTopic = async(id: number) => {
   return await prisma.topics.delete({
     where: {
