@@ -16,11 +16,20 @@ interface Props {
 
 function TeamList(props: Props) {
 	const [teams, setTeams] = useState([]);
+	const [teamArr, setTeamArr] = useState({});
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
 		getTeamList();
+		getTeamStatus();
 	}, []);
+
+	// if (!props.presentingState){
+	// 	setInterval(() => {
+	// 		getTeamList();
+	// 		console.log ('here');
+	//   	}, 10000);
+	// }
 
 	const getTeamList = async () => {
 		const TeamList = await getData(`/teams/game/${props.gameId}`);
@@ -30,6 +39,22 @@ function TeamList(props: Props) {
 	const extendTime = () => {
 		postData(`/addTime`, [props.gameId]);
 	}
+
+	const getTeamStatus = async () => {
+		var teamArr = new Array;
+		getData(`/rounds/games/${props.gameId}`).then((round) => {
+			getData(`/haicues/round/${round[0].id}`).then((haicues) => {
+				for (let i = 0; i < haicues.length; i++) {
+					teamArr.push(haicues[i].teamId);
+				}
+				setTeamArr(teamArr);
+				
+				if (teamArr.length === teams.length) {
+					props.setPresentingState(true);
+				} 
+			});
+		})
+	  };
 
   whiteButton.width = '100%';
   redButton.width = '100%';
@@ -52,7 +77,7 @@ function TeamList(props: Props) {
           <hr />
         </div>
 		<Grid container>
-				{teams?.map((team: Team) => { return <TeamItem key={team.id} team={team} /> })}
+				{teams?.map((team: Team) => { return <TeamItem key={team.id} team={team} teamArr={teamArr} /> })}
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${props.gameId}/presenting`}>
