@@ -69,6 +69,7 @@ model Rounds {
   gameId              Int
 	topic								Topics						@relation(fields: [topicId], references: [id])
   topicId             Int								@unique
+	Turns								Turns[]
 	startedAt						DateTime?
 }
 
@@ -78,6 +79,7 @@ model Turns {
   performingTeamScore Int
   guessingTeamId      Int
   guessingTeamScore   Int
+	Round								Rounds?						@relation(fields: [roundId], references: [id])
   roundId             Int
   currentLineNumber   Int               @default(0)
 }
