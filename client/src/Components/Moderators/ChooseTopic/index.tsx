@@ -56,7 +56,7 @@ function ModChooseTopic(props: Props) {
           {
             <Grid container>
               {topics?.map((topic: Topic) => {
-                return <TopicItem id={`topic${topic.id}`} key={topic.id} topic={topic} handleSwitch={props.handleSwitch}/>;
+                return <TopicItem key={topic.id} topic={topic} handleSwitch={props.handleSwitch}/>;
               })}
             </Grid>
           }

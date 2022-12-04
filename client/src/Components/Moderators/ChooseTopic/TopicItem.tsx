@@ -8,12 +8,11 @@ import { round } from 'corners';
 
 interface Props {
   topic: Topic;
-	round: number;
 	handleSwitch: Dispatch<SetStateAction<boolean>>;
 }
 
 function TopicItem(props: Props) {
-  const {topic, round, handleSwitch} = props;
+  const {topic, handleSwitch} = props;
 
 	const selectTopic = () => {
 		console.log('GAME ID: ', topic.gameId);
@@ -34,7 +33,7 @@ function TopicItem(props: Props) {
 
   return (
     <>
-			<DogEarButton style={whiteButton} onClick={selectTopic}>
+			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={selectTopic}>
 				<h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
 			</DogEarButton>
     </>
