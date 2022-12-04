@@ -58,12 +58,14 @@ model Games {
 	publishedAt 				DateTime?					
   Team                Teams[]
 	Topic								Topics[]
+	Rounds							Rounds[]
 	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
 	moderatorId					Int
 }
 
 model Rounds {
   id                  Int               @id @default(autoincrement())
+	game								Games?						@relation(fields: [gameId], references: [id])
   gameId              Int
 	topic								Topics						@relation(fields: [topicId], references: [id])
   topicId             Int								@unique

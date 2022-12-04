@@ -65,7 +65,7 @@ export const updateTopicRound = async (topicId: number, roundId: number) => {
 		data: {
 			roundId: Number(roundId)
 		}
-	})
+	});
 }
 
 export const deleteTopic = async(id: number) => {
