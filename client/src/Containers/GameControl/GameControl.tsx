@@ -9,13 +9,14 @@ import Score from '../../Components/Teams/Score';
 import socket from '../../Hooks/WebsocketHook';
 import { getData, postData } from '../../ApiHelper';
 import { useParams } from 'react-router-dom';
-import { Game, Team } from '../../Types/Types';
+import { Game, Team, Topic } from '../../Types/Types';
 
 function GameControl() {
 	window.localStorage.removeItem('user');
 	const { code } = useParams();
 	const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
 	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
+	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
 	const [color, setColor] = useState('#888');
 	const [readyPhase, setReadyPhase] = useState(false);
 	const [brainstorming, setBrainstorming] = useState(false);
@@ -45,6 +46,11 @@ function GameControl() {
 				setColor(eval(`colors.${teamData.teamName}`));
 			}
 		});
+
+		getData(`/topic/round/${game.rounds}`).then((topic) => {
+			setTopic(topic);
+			localStorage.setItem('topic', JSON.stringify(topic));
+		})
 	}, []);
 
 	useEffect(() => {
@@ -92,7 +98,7 @@ function GameControl() {
 				guessing ? 
 				<Buzzer roundNumber={2} topic={'holiday activity'} /> : 
 				( brainstorming ? 
-					<HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> 
+					<HaikuForm topic={topic} submitState={submitState} setSubmitState={setSubmitState}/> 
 				: <TeamLobby game={game} team={team} phase={readyPhase}/> )
 				/* <Score /> */ 
 			} 
