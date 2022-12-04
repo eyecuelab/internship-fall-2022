@@ -7,52 +7,100 @@ import HaikuForm from '../../Components/Teams/HaikuForm';
 import TeamOverlay from '../../Components/Teams/Overlay';
 import Score from '../../Components/Teams/Score';
 import socket from '../../Hooks/WebsocketHook';
-import { getData } from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import { useParams } from 'react-router-dom';
-import { Game } from '../../Types/Types';
+import { Game, Team, Topic } from '../../Types/Types';
 
 function GameControl() {
 	window.localStorage.removeItem('user');
 	const { code } = useParams();
-	const [team, setTeam] = useState('');
-	const [game, setGame] = useState<Game>();
+	const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
+	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
+	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
+	const [color, setColor] = useState('#888');
+	const [readyPhase, setReadyPhase] = useState(false);
+	const [brainstorming, setBrainstorming] = useState(false);
+	const [guessing, setGuessing] = useState(false);
 	const [submitState, setSubmitState] = useState(true);
-
-	const findGame = () => {
-		getData(`/games/room/${code}`).then((response) => {
-			setGame(response);
-			localStorage.setItem('game', JSON.stringify(response));
-		})
-	}
+	const colors = {apple: '#0A1031', blueberry: '#0c114a', cherry: '#C70009', kiwi: '#61750D', lemon: '#105839', peach: '#DF9190', pear: '#CDA70D', strawberry: '#D00D0A'}
 
 	useEffect(() => {
-		findGame();
-		setTeam('blueberry');
-		localStorage.setItem('team', team);
-		// localStorage.setItem('game', JSON.stringify(game));
-	}, []);
+		getData(`/games/room/${code?.toUpperCase()}`)
+		.then((response) => {
+			localStorage.setItem('game', JSON.stringify(response));
+			setGame(response);
+			if (brainstorming) { 
+				console.log('TOPIC: ', response.Rounds.slice(-1)[0]);
+				getData(`/topics/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
+					setTopic(topic);
+					localStorage.setItem('topic', JSON.stringify(topic));
+				});
+			}
+			if (!localStorage.getItem('team')) {
+				postData('/teams', { gameId: response.id })
+				.then((data) => {
+					setTeam(data);
+					localStorage.setItem('team', JSON.stringify(data));
+					setColor(eval(`colors.${data.teamName}`));
+				});
+			} else {
+				const teamData = JSON.parse(localStorage.getItem('team') as string);
+				setTeam(teamData);
+				setColor(eval(`colors.${teamData.teamName}`));
+			}
+		});
 
-	let bgUrl = '';
-	let color = '';
+	}, [brainstorming]);
 
-	switch (team) {
-		case('blueberry'):
-			bgUrl = '/images/blueberry_banner.png';
-			color = '#0c114a';
-			break;
-		default:
-			bgUrl = '/images/apple_banner.png';
-			color: '#f00';
-			break;
-	}
+	useEffect(() => {
+		socket.on('connection', () => {
+			console.log('socket open');
+		});
+
+		socket.on('start_game', () => {
+			setReadyPhase(true);
+		});
+
+		socket.on('start_round', () => {
+			setBrainstorming(true);
+		});
+
+		socket.on('start_guessing', () => {
+			setGuessing(true);
+		});
+
+		socket.on('end_round', () => {
+		});
+
+		return () => {
+			socket.off('connection');
+			socket.off('start_game');
+			socket.off('start_round');
+			socket.off('start_guessing');
+			socket.off('end_round');
+		}
+	})
+
+	const bgUrl = `/images/${team?.teamName}_banner.png`;
 
 	document.documentElement.style.backgroundImage = 'url(/images/oranges_background.png)';
 
+	if (readyPhase) {
+		document.getElementById('phase-down')?.classList.add('fade-in-down');
+		document.getElementById('phase-left')?.classList.add('fade-in-left');
+	}
+
   return (
 		<>
-		<button onClick={() => console.log(game)} >{game?.gameCode}</button>
 		<CardTemplate 
-			content={ <HaikuForm submitState={submitState} setSubmitState={setSubmitState}/> /* <Score /> */ /* <TeamLobby /> */ /* <Buzzer roundNumber={2} topic={'holiday activity'} /> */ } 
+			content={ 
+				guessing ? 
+				<Buzzer roundNumber={2} topic={'holiday activity'} /> : 
+				( brainstorming ? 
+					<HaikuForm topic={topic} submitState={submitState} setSubmitState={setSubmitState}/> 
+				: <TeamLobby game={game} team={team} phase={readyPhase}/> )
+				/* <Score /> */ 
+			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
 			bgUrl={bgUrl}
 			color={color}

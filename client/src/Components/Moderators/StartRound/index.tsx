@@ -1,19 +1,44 @@
-import React from 'react';
+import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import '../../../index.css';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Container, ButtonContainer } from './styles';
+import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import { Button } from '@mui/material';
+import {Topic} from '../../../Types/Types';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
-import { postData } from '../../../ApiHelper';
+import { postData, getData, putData } from '../../../ApiHelper';
+import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
-  handleSwitch: () => void;
+  topic: Topic;
+  handleSwitch: Dispatch<SetStateAction<boolean>>;
 }
 
 function ModStartRound(props: Props) {
-	const gameId = Number(localStorage.getItem('gameId'));
+	const { topic, handleSwitch} = props;
+  const { id } = useParams();
+  const {setValue} = useForm<IFormInput>();
+  const [topics, setTopics] = useState([]);
+  const user = JSON.parse(localStorage.getItem('user') as string);
 
-	const startRound = () => {
-		postData('/start', gameId);
+  useEffect(() => {
+    getTopicList();
+  }, []);
+
+  const getTopicList = async () => {
+    getData(`/topics/game/${id}`).then((response) => {
+			setTopics(response);
+		});
+  };
+
+	const selectTopic = () => {
+		postData('/addRound', { gameId: id, topicId: topic.id}).then(() => {
+			getData(`/games/${id}`).then((data) => {
+				localStorage.setItem('game', data);
+				putData('/topics/', { topicId: topic.id, roundId: data.Rounds.slice(-1)[0].id });
+				postData('/startGame', { gameId: id });
+			});
+		});
 	}
 
   whiteButton.width = '100%';
@@ -26,15 +51,14 @@ function ModStartRound(props: Props) {
         <div>
           <h3>round *insert number* topic</h3>
           <hr />
-          <h1>*insert topic*</h1>
+          <h1>{topic.name}</h1>
           <br />
         </div>
         <ButtonContainer>
-          <DogEarButton onClick={startRound} style={greenButton}>
+          <DogEarButton style={greenButton} onClick={selectTopic}>
             <h3>start round</h3>
           </DogEarButton>
-          <DogEarButton style={whiteButton} onClick={props.handleSwitch}>
-
+          <DogEarButton style={whiteButton} onClick={handleSwitch}>
             <h3>back to selection</h3>
           </DogEarButton>
           <DogEarButton style={redButton}>

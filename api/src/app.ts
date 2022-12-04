@@ -4,6 +4,7 @@ import topicsRouter from "./Routes/topics";
 import phrasesRouter from "./Routes/phrases";
 import gamesRouter from "./Routes/games";
 import moderatorsRouter from "./Routes/moderators";
+import roundsRouter from "./Routes/rounds";
 import logicRouter from "./Routes/logic";
 import cors from 'cors';
 import express from 'express';
@@ -27,6 +28,7 @@ app.use(
 	phrasesRouter,
 	gamesRouter,
 	moderatorsRouter,
+	roundsRouter,
 	logicRouter
 );
 

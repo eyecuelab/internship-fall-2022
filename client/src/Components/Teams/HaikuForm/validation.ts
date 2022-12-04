@@ -88,9 +88,10 @@ export const countSyllables = (inputWord: string) => {
 		/[au]gue[ds]$/i,
 	];
 	const minusSyllables = [
-		/([^d][^dfktz][^dftuy]|[ff])ed$/i,
+		/([^d][^bdfktz][^dfltuy]|[ff])ed$/i,
 		/[io]gue[ds]$/i,
 		/thed$/i,
+		/eday$/i,
 		/^(fore[^v])/i,
 		// /[ff|bb|gg|pp|zz]ed/,
 		/^[aeiou][^aeiou]e$/i,
@@ -110,7 +111,7 @@ export const countSyllables = (inputWord: string) => {
 	];
 	const plusSyllables = [
 		/sm$/i,
-		/[aeiou]ous$/i,
+		/[^t][aeiou]ous$/i,
 		/[aeiouy]ing$/i,
 		/[^l]lien$/i,
 		/[aeiou][^aeiou][aeiou][^aeiou]ie$/i,

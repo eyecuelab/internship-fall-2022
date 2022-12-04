@@ -4,8 +4,10 @@ import { TextField } from '@mui/material';
 import { getData, postData, putData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
 import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
+import { Topic } from '../../../Types/Types';
 
 interface Props {
+	topic: Topic;
 	submitState: boolean;
 	setSubmitState: Dispatch<SetStateAction<boolean>>;
 }
@@ -17,7 +19,6 @@ interface IFormInput {
 }
 
 type Data = {
-
 	line1: string,
 	line2: string,
 	line3: string,
@@ -28,25 +29,33 @@ function HaikuForm(props: Props) {
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
+	const [phrase, setPhrase] = useState(['', '']);
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
 	const roundNum = '2';
-	const topic = 'Holiday Activities';
-	const phrase = ['decorating', 'tree'];
+	// const topic = 'Holiday Activities';
+	// const phrase = ['decorating', 'tree'];
 
 	whiteButton.width = '46%';
 	greenButton.width = '46%';
 
 	useEffect(() => {
 		const stemList: any[] = [];
-		phrase.forEach((word, index) => { 
-			findStems(word)
-			.then((response) => {
-				stemList[index] = (response.meta.stems);
-				// @ts-ignore
-				setStems(stemList);
+		console.log('props.topic', props.topic);
+		getData(`/phrases/one/${props.topic.id}`).then((response) => {
+			console.log('phrase: ', response)
+			setPhrase(response.split(' '));
+			localStorage.setItem('phrase', JSON.stringify(response));
+			response.split(' ').forEach((word: string, index: number) => { 
+				findStems(word)
+				.then((data) => {
+					stemList[index] = (data.meta.stems);
+					// @ts-ignore
+					setStems(stemList);
+				});
 			});
 		});
+
 	}, []);
 
 	const roundId = 1;
@@ -54,12 +63,9 @@ function HaikuForm(props: Props) {
 
   const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
 		getData(`/haicues/${roundId}/${teamId}`).then((response) => {
-			console.log('RESPONSE: ', response.id);
 			if (response.id) {
-				console.log('if');
 				putData('/haicues', {'id': Number(response.id), 'line1': data.line1, 'line2': data.line2, 'line3': data.line3})
 			} else {
-				console.log('else');
 				postData('/haicues', data);
 			}
 		});
@@ -121,7 +127,7 @@ function HaikuForm(props: Props) {
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
-      <h3 className="fade-in-down">ROUND {roundNum} - {topic}</h3>
+      <h3 className="fade-in-down">ROUND {roundNum} - {}</h3>
       <h1 className="fade-in-left">{phrase.join(' ')}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>

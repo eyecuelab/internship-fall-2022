@@ -15,7 +15,7 @@ interface Props {
 function BrainstormingPhaseControl(props: Props) {
   const {id} = useParams();
   const [game, setGame] = useState({});
-  const [presentingState, setPresentingState] = useState(false);
+  const [presenting, setPresenting] = useState(false);
 
   useEffect(() => {
     getGameList();
@@ -33,8 +33,8 @@ function BrainstormingPhaseControl(props: Props) {
   if (localStorage.getItem('user')) {
   return (
     <CardTemplate
-      content={<TeamList gameId={Number(id)} presentingState={presentingState} setPresentingState={setPresentingState}/>}
-      overlay={<ModOverlay gameData={passedInfo} presentingState={presentingState} setPresentingState={setPresentingState} />}
+      content={<TeamList gameId={Number(id)} presenting={presenting} setPresenting={setPresenting}/>}
+      overlay={<ModOverlay gameData={passedInfo} presenting={presenting} setPresenting={setPresenting} />}
       bgUrl="/images/moderator_card_background_2.png"
       color="#15586a"
     />

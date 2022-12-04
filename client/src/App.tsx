@@ -25,7 +25,7 @@ function App() {
 					<Route path="/" element={<ModGameControl setUserData={setUserData} userData={userData}/>} />
 					<Route path="/gameinfo/:id" element={<TopicPhraseControl setUserData={setUserData} userData={userData} viewPhrases={false}/>} />
 					<Route path="/topic/:topicId" element={<TopicPhraseControl setUserData={setUserData} userData={userData} viewPhrases={true}/>} />
-					<Route path="/game/:id/round" element={<ModStartRoundControl setUserData={setUserData} userData={userData}/>} />
+					<Route path="/game/:id/round" element={<ModStartRoundControl setUserData={setUserData} userData={userData} viewPhrases={false}/>} />
 					<Route path="/game/:id/presenting" element={<PresentingHaikuControl setUserData={setUserData} userData={userData} />} />
 					<Route path="/game/:id/brainstorming" element={<BrainstormingPhaseControl setUserData={setUserData} userData={userData} />} />
 				</Routes>

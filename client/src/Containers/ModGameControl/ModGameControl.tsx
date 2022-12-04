@@ -19,6 +19,7 @@ function ModGameControl(props: Props) {
 
 	useEffect(() => {
 		getGameList();
+		getGameList();
 		props.setUserData(props.userData);
 	}, []);
 
@@ -28,7 +29,6 @@ function ModGameControl(props: Props) {
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
-				console.log(response);
 				setGames([...response.games])
 			});
 		} else {

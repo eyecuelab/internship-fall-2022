@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Grid, TextField, Button} from '@mui/material';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
 import {getData} from '../../../ApiHelper';
 import TopicItem from './TopicItem';
@@ -10,34 +10,24 @@ import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 
 interface Props {
-  gameId: number;
+  setTopic: () => void;
   handleSwitch: () => void;
 }
 
-interface IFormInput {
-  name: string;
-  gameId: number;
-  moderatorId: number;
-}
-
 function ModChooseTopic(props: Props) {
-  const {setValue} = useForm<IFormInput>();
+	const { id } = useParams();
   const [topics, setTopics] = useState([]);
+	const [round, setRound] = useState(localStorage.getItem('round'));
   const user = JSON.parse(localStorage.getItem('user') as string);
 
-  getData(`/moderators/${user.email}`).then(moderator => {
-    setValue('moderatorId', moderator.id);
-    setValue('gameId', props.gameId);
-  });
-
   useEffect(() => {
-    getTopicList();
+    getData(`/topics/game/${id}`).then((response) => {
+			setTopics(response);
+			for(let i=0; i<response.length; i++) {
+				document.getElementById(`topic${response[i].id}`)?.setAttribute('disabled', 'true');
+			}
+		});
   }, []);
-
-  const getTopicList = async () => {
-    const topicList = await getData(`/topics/${props.gameId}`);
-    setTopics(topicList);
-  };
 
   redButton.width = '100%';
   whiteButton.width = '100%';
@@ -52,7 +42,7 @@ function ModChooseTopic(props: Props) {
           {
             <Grid container>
               {topics?.map((topic: Topic) => {
-                return <TopicItem key={topic.name} topic={topic} handleSwitch={props.handleSwitch}/>;
+                return <TopicItem key={topic.id} topic={topic} setTopic={props.setTopic} handleSwitch={props.handleSwitch}/>;
               })}
             </Grid>
           }
