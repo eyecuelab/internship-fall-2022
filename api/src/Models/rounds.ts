@@ -10,3 +10,15 @@ export const addRound = async (gameId: number, topicId: number) => {
 		}
 	});
 }
+
+export const getCurRoundIdByGameId = async (gameId: number) => {
+	return await prisma.rounds.findMany({
+		where: {
+			gameId: Number(gameId)
+		},
+		orderBy: {
+			id: 'desc',
+		},
+		take: 1
+	});
+}
