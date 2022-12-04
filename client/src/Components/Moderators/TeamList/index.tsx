@@ -7,6 +7,7 @@ import {Container, ButtonContainer} from './styles';
 import {getData, postData} from '../../../ApiHelper';
 import { Team } from '../../../Types/Types';
 import TeamItem from './TeamItem';
+import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
   gameId: number;
@@ -21,15 +22,15 @@ function TeamList(props: Props) {
 
 	useEffect(() => {
 		getTeamList();
-		getTeamStatus();
-	}, []);
 
-	// if (!props.presentingState){
-	// 	setInterval(() => {
-	// 		getTeamList();
-	// 		console.log ('here');
-	//   	}, 10000);
-	// }
+		socket.on('submit', () => {
+			getTeamStatus();
+		});
+
+		return () => {
+      socket.off('submit');
+    };
+	}, []);
 
 	const getTeamList = async () => {
 		const TeamList = await getData(`/teams/game/${props.gameId}`);
@@ -89,7 +90,11 @@ function TeamList(props: Props) {
             <h3>EXTENDS 30 SECONDS</h3>
           </DogEarButton>
 		  <Link to={`/game/${props.gameId}/round`}>
-          <DogEarButton style={redButton} >
+          <DogEarButton
+		  	style={redButton}
+			// TODO(weijwang): for debug only, remove later
+			// onMouseOver={() => socket.emit('submit')}
+			>
             <h3>END ROUND</h3>
           </DogEarButton>
 		  </Link>
