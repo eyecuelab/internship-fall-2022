@@ -41,7 +41,7 @@ function ModAddTopic(props: Props) {
 	}
 
 	const getTopicList = async () => {
-		const topicList = await getData(`/topics/${props.gameId}`);
+		const topicList = await getData(`/topics/game/${props.gameId}`);
 		setTopics(topicList);
 	};
 
