@@ -14,7 +14,7 @@ interface Props {
 }
 
 function PresentingHaikuControl(props: Props) {
-  const {id} = useParams();
+  const { id } = useParams();
   const [game, setGame] = useState({});
   const [buzzedIn, setBuzzedIn] = useState(false);
   const [haiku, setHaiku] = useState({});
@@ -24,13 +24,14 @@ function PresentingHaikuControl(props: Props) {
     getHaikuList();
   }, []);
 
-  const getHaikuList = async ()=> {
-    const haikus = await getData("/haicues/1/1")
-    setHaiku(haikus)
-  }
+  const getHaikuList = async () => {
+    const haikus = await getData('/haicues/1/1');
+    // hardcoded-should be '/haicues/${roundId}/${teamId }'
+    setHaiku(haikus);
+  };
 
   const getGameList = async () => {
-    const game = await getData(`/games/${id}`);
+    const game = await getData(`/games/${ id }`);
     setGame(game);
   };
 
@@ -48,7 +49,8 @@ function PresentingHaikuControl(props: Props) {
     gameCode: game.gameCode,
   };
 
-  if (localStorage.getItem('user')) {1
+  if (localStorage.getItem('user')) {
+    1;
     if (buzzedIn) {
       return (
         <CardTemplate
@@ -61,7 +63,9 @@ function PresentingHaikuControl(props: Props) {
     } else {
       return (
         <CardTemplate
-          content={<ModPresenting handleSwitch={handleBuzzToggle} haikuData={haiku} gameData={game}/>}
+          content={
+            <ModPresenting handleSwitch={handleBuzzToggle} haikuData={haiku} gameData={game} />
+          }
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
           color="#15586a"
