@@ -4,8 +4,10 @@ import { TextField } from '@mui/material';
 import { getData, postData, putData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
 import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
+import { Topic } from '../../../Types/Types';
 
 interface Props {
+	topic: Topic;
 	submitState: boolean;
 	setSubmitState: Dispatch<SetStateAction<boolean>>;
 }
@@ -27,25 +29,32 @@ function HaikuForm(props: Props) {
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
+	const [phrase, setPhrase] = useState(JSON.parse(localStorage.getItem('phrase') as string).body.split(' '));
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
 	const roundNum = '2';
 	const topic = 'Holiday Activities';
-	const phrase = ['decorating', 'tree'];
+	// const phrase = ['decorating', 'tree'];
 
 	whiteButton.width = '46%';
 	greenButton.width = '46%';
 
 	useEffect(() => {
 		const stemList: any[] = [];
-		phrase.forEach((word, index) => { 
-			findStems(word)
-			.then((response) => {
-				stemList[index] = (response.meta.stems);
-				// @ts-ignore
-				setStems(stemList);
+
+		getData(`/phrases/one/${props.topic.id}`).then((response) => {
+			setPhrase(response.split(' '));
+			localStorage.setItem('phrase', JSON.stringify(response));
+			response.split(' ').forEach((word: string, index: number) => { 
+				findStems(word)
+				.then((data) => {
+					stemList[index] = (data.meta.stems);
+					// @ts-ignore
+					setStems(stemList);
+				});
 			});
 		});
+
 	}, []);
 
 	const roundId = 1;
