@@ -29,11 +29,11 @@ function HaikuForm(props: Props) {
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
-	const [phrase, setPhrase] = useState(JSON.parse(localStorage.getItem('phrase') as string).body.split(' '));
+	const [phrase, setPhrase] = useState(['', '']);
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
 	const roundNum = '2';
-	const topic = 'Holiday Activities';
+	// const topic = 'Holiday Activities';
 	// const phrase = ['decorating', 'tree'];
 
 	whiteButton.width = '46%';
@@ -41,8 +41,9 @@ function HaikuForm(props: Props) {
 
 	useEffect(() => {
 		const stemList: any[] = [];
-
+		console.log('props.topic', props.topic);
 		getData(`/phrases/one/${props.topic.id}`).then((response) => {
+			console.log('phrase: ', response)
 			setPhrase(response.split(' '));
 			localStorage.setItem('phrase', JSON.stringify(response));
 			response.split(' ').forEach((word: string, index: number) => { 
@@ -126,7 +127,7 @@ function HaikuForm(props: Props) {
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
-      <h3 className="fade-in-down">ROUND {roundNum} - {topic}</h3>
+      <h3 className="fade-in-down">ROUND {roundNum} - {}</h3>
       <h1 className="fade-in-left">{phrase.join(' ')}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
