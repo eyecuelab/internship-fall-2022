@@ -28,7 +28,7 @@ app.use(
 	phrasesRouter,
 	gamesRouter,
 	moderatorsRouter,
-	roundsRouter
+	roundsRouter,
 	logicRouter
 );
 
