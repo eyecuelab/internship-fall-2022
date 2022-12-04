@@ -17,6 +17,7 @@ const topicsControllers = {
 	async getTopicByRound(req: any, res: any) {
 		const { roundId } = req.params;
 		const topic = await getRoundTopic(roundId);
+		return res.json(topic);
 	},
 
   async createTopic(req: any, res: any) {

@@ -24,7 +24,6 @@ function ModStartRoundControl(props: Props) {
 
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
-			console.log('GAME: ', response);
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
 		});

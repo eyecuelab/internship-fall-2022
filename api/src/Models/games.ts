@@ -23,6 +23,7 @@ export const getGameByCode = async (code: string) => {
 		include: {
 			Topic: true,
 			Team: true,
+			Rounds: true,
 		}
 	});
 }

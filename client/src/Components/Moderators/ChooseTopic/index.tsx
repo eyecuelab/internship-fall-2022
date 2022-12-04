@@ -39,7 +39,6 @@ function ModChooseTopic(props: Props) {
 		getData(`/moderators/${user.email}`).then(moderator => {
 			setValue('moderatorId', moderator.id);
 			setValue('gameId', props.gameId);
-			// console.log('ROUND: ', JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1));
 		});
 
   }, []);

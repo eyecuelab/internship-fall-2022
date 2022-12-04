@@ -25,17 +25,19 @@ function GameControl() {
 	const colors = {apple: '#0A1031', blueberry: '#0c114a', cherry: '#C70009', kiwi: '#61750D', lemon: '#105839', peach: '#DF9190', pear: '#CDA70D', strawberry: '#D00D0A'}
 
 	useEffect(() => {
-		console.log('useEffect')
 		getData(`/games/room/${code?.toUpperCase()}`)
 		.then((response) => {
-			localStorage.setItem('game', JSON.stringify(response));
+			localStorage.setItem('game', response);
 			setGame(response);
-			console.log('RESPONSE: ', response);
-			console.log('GAME: ', game);
+			if (brainstorming) { 
+				getData(`/topic/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
+					setTopic(topic);
+					localStorage.setItem('topic', JSON.stringify(topic));
+				});
+			}
 			if (!localStorage.getItem('team')) {
 				postData('/teams', { gameId: response.id })
 				.then((data) => {
-					console.log(data);
 					setTeam(data);
 					localStorage.setItem('team', JSON.stringify(data));
 					setColor(eval(`colors.${data.teamName}`));
@@ -47,10 +49,6 @@ function GameControl() {
 			}
 		});
 
-		getData(`/topic/round/${game.rounds}`).then((topic) => {
-			setTopic(topic);
-			localStorage.setItem('topic', JSON.stringify(topic));
-		})
 	}, []);
 
 	useEffect(() => {

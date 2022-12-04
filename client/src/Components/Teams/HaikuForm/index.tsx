@@ -62,12 +62,9 @@ function HaikuForm(props: Props) {
 
   const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
 		getData(`/haicues/${roundId}/${teamId}`).then((response) => {
-			console.log('RESPONSE: ', response.id);
 			if (response.id) {
-				console.log('if');
 				putData('/haicues', {'id': Number(response.id), 'line1': data.line1, 'line2': data.line2, 'line3': data.line3})
 			} else {
-				console.log('else');
 				postData('/haicues', data);
 			}
 		});

@@ -28,7 +28,6 @@ function ModOverlay(props: Props) {
 
     socket.on('tick', (timeInterval: number) => {
       setTime(timeInterval);
-      console.log(timeInterval);
     });
 
     return () => {
@@ -58,9 +57,8 @@ function ModOverlay(props: Props) {
   const codeToClipboard = async () => {
     try {
       await navigator.clipboard.writeText(`www.haicue.com/game/${props.gameData.gameCode}`);
-      console.log('Content copied to clipboard');
     } catch (err) {
-      alert('Failed to copy: ');
+      console.log('Failed to copy: ');
     }
   };
 
