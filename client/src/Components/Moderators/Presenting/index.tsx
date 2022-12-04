@@ -13,7 +13,7 @@ function ModPresenting(props: Props) {
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
-  console.log(props.haikuData);
+  console.log(props.gameData);
   const [lineNumber, setLineNumber] = useState(1);
 
   const lineAdvancer = () => {
@@ -42,6 +42,9 @@ function ModPresenting(props: Props) {
           </h1>
         </div>
         <ButtonContainer>
+        <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
+            <h3>fake buzzer</h3>
+          </DogEarButton>
           <DogEarButton onClick={lineAdvancer} style={whiteButton}>
             <h3>advance haicue clue</h3>
           </DogEarButton>

@@ -16,7 +16,6 @@ function ModGameList(props: Props) {
 	useEffect(() => {
 		console.log('got the games');
 		props.getGameList();
-		props.getGameList();
 	}, []);
 
   const deleteGame = (gameId: any)=> {
