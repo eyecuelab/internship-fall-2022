@@ -31,6 +31,8 @@ export type Topic = {
   Phrase: Phrase[]
   game: Game
   gameId: number
+	round: Round
+	roundId: number
 }
 
 export type Phrase = {
