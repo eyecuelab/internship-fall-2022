@@ -27,10 +27,11 @@ function GameControl() {
 	useEffect(() => {
 		getData(`/games/room/${code?.toUpperCase()}`)
 		.then((response) => {
-			localStorage.setItem('game', response);
+			localStorage.setItem('game', JSON.stringify(response));
 			setGame(response);
 			if (brainstorming) { 
-				getData(`/topic/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
+				console.log('TOPIC: ', response.Rounds.slice(-1)[0]);
+				getData(`/topics/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
 					setTopic(topic);
 					localStorage.setItem('topic', JSON.stringify(topic));
 				});
@@ -49,7 +50,7 @@ function GameControl() {
 			}
 		});
 
-	}, []);
+	}, [brainstorming]);
 
 	useEffect(() => {
 		socket.on('connection', () => {

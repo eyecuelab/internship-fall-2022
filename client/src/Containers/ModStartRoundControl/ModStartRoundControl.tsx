@@ -19,7 +19,6 @@ function ModStartRoundControl(props: Props) {
   const [game, setGame] = useState<Game>({});
 	const [topic, setTopic] = useState<Topic>();
   const [selectedTopic, setSelectedTopic] = useState(false)
-	localStorage.setItem('gameId', '1');
 
 
   useEffect(() => {
@@ -48,7 +47,7 @@ function ModStartRoundControl(props: Props) {
 		if (selectedTopic) {
 			return (
 				<CardTemplate
-        content={<ModStartRound topic={topic} gameId={Number(id)} handleSwitch={handleSelectedTopic}/>}
+        content={<ModStartRound topic={topic} handleSwitch={handleSelectedTopic}/>}
 					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
@@ -57,7 +56,7 @@ function ModStartRoundControl(props: Props) {
 		} else {
 			return (
 				<CardTemplate
-          content={<ModChooseTopic setTopic={setTopic} gameId={Number(id)} handleSwitch={handleSelectedTopic}/>}
+          content={<ModChooseTopic setTopic={setTopic} handleSwitch={handleSelectedTopic}/>}
 					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
