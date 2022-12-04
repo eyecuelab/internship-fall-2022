@@ -22,19 +22,21 @@ function ModStartRoundControl(props: Props) {
 
 
   useEffect(() => {
-    getGameList();
+    getData(`/games/${id}`).then((response) => {
+			console.log('GAME: ', response);
+			setGame(response);
+			localStorage.setItem('game', JSON.stringify(response));
+			localStorage.setItem('round', JSON.stringify(response.Rounds[response.Rounds.length-1]));
+		});
   }, []);
-
-  const getGameList = async () => {
-		const game = await getData(`/games/${id}`);
-		setGame(game);
-  }
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   const handleSelectedTopic = () => {
     setSelectedTopic(!selectedTopic);
   };
+
+	const [topic, setTopic] = useState();
 
   const handleLogout = () => {
 		props.setUserData({});
@@ -46,7 +48,7 @@ function ModStartRoundControl(props: Props) {
 		if (selectedTopic) {
 			return (
 				<CardTemplate
-        content={<ModStartRound handleSwitch={handleSelectedTopic}/>}
+        content={<ModStartRound topic={topic} gameId={Number(id)} handleSwitch={handleSelectedTopic}/>}
 					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
@@ -55,7 +57,7 @@ function ModStartRoundControl(props: Props) {
 		} else {
 			return (
 				<CardTemplate
-          content={<ModChooseTopic gameId={Number(id)} handleSwitch={handleSelectedTopic}/>}
+          content={<ModChooseTopic setTopic={setTopic} gameId={Number(id)} handleSwitch={handleSelectedTopic}/>}
 					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'

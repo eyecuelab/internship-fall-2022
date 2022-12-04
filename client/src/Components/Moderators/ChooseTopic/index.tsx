@@ -11,6 +11,7 @@ import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 interface Props {
   gameId: number;
+  setTopic: () => void;
   handleSwitch: () => void;
 }
 
@@ -52,7 +53,7 @@ function ModChooseTopic(props: Props) {
           {
             <Grid container>
               {topics?.map((topic: Topic) => {
-                return <TopicItem key={topic.name} topic={topic} handleSwitch={props.handleSwitch}/>;
+                return <TopicItem key={topic.name} topic={topic} handleSwitch={props.handleSwitch} setTopic={props.setTopic}/>;
               })}
             </Grid>
           }
