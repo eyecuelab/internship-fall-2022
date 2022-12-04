@@ -18,7 +18,7 @@ export const getOneHaicue = async (roundId: number, teamId: number) => {
 export const getRoundHaicues = async (id: number) => {
 	return await prisma.haicues.findMany({
 		where: {
-			roundId: id
+			roundId: Number(id)
 		}
 	});
 }
