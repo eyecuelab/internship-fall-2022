@@ -44,7 +44,7 @@ export type Phrase = {
 export type Game = {
 	id: number
 	name: string				
-  round: number
+  rounds: number
   gameCode: string
 	publishedAt: Date					
   Teams: Team[]

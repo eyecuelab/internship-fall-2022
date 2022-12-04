@@ -1,10 +1,19 @@
-import { emitTimerTick } from "../Models/logic";
+import { startThisGame, emitTimerTick, startGuessingPhase } from "../Models/logic";
 import io from "../server";
 
 const ROUND_TIME = 300;
+let timeStart = false;
 
 const logicControllers = {
-	async startRound (req: any, res: any) {
+	async startGame (req: any, res: any) {
+		const { gameId } = req.body;
+		startThisGame(gameId);
+		setTimeout(() =>startThisRound(gameId), 5000);
+		res.json(200);
+	},
+	
+	async startTime (req: any, res: any) {
+		timeStart = false;
 		const { gameId } = req.body;
 		startThisRound(gameId);
 		res.json(200);
@@ -13,6 +22,13 @@ const logicControllers = {
 	async addRoundTime (req: any, res: any) {
 		const { gameId } = req.body;
 		await addTime(gameId);
+		res.json(200);
+	},
+
+	async startGuessing (req: any, res: any) {
+		const { gameId } = req.body;
+		timeRemaining = 0;
+		await startGuessingPhase(gameId);
 		res.json(200);
 	},
 
@@ -27,6 +43,7 @@ export default logicControllers;
 let timeRemaining = ROUND_TIME;
 
 const startThisRound = (gameId: number) => {
+	timeStart = true;
 	const intervalId = setInterval(async () => {
 		emitTimerTick(gameId, timeRemaining);
 		if (timeRemaining === 0) {
@@ -45,7 +62,6 @@ const addTime = async (gameId: number) => {
 	if (timeRemaining === 0) {
 		timeRemaining = 30;
 	} else {
-		timeRemaining += 30;
+		timeStart ? timeRemaining += 30 : null;
 	}
-	startThisRound(gameId);
 }

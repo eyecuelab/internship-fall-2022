@@ -29,6 +29,7 @@ function ModHandleGuess(props: Props) {
           <DogEarButton onClick={props.handleSwitch}  style={greenButton}>
             <h3>reward points</h3>
           </DogEarButton>
+          <br />
           <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
             <h3>dismiss guess</h3>
           </DogEarButton>

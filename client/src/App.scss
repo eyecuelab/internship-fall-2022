@@ -137,13 +137,17 @@ button {
 	}
 }
 
-textarea {
+input, textarea {
 	font-family: LuloCleanOneBold !important;
 	font-style: normal !important;
 	font-weight: 700 !important;
 	font-size: 42px !important;
 	line-height: 50px !important;
 	color: #363636;
+}
+
+input {
+	margin-top: 1.75rem !important;
 }
 
 .bottom {

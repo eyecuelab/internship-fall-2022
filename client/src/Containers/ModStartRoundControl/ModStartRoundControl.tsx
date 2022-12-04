@@ -2,7 +2,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
 import ModStartRound from '../../Components/Moderators/StartRound';
-import { getData} from '../../ApiHelper';
+import { getData, putData} from '../../ApiHelper';
 import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
@@ -22,12 +22,12 @@ function ModStartRoundControl(props: Props) {
 
 
   useEffect(() => {
-    getData(`/games/${id}`).then((response) => {
+		getData(`/games/${id}`).then((response) => {
 			console.log('GAME: ', response);
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
-			localStorage.setItem('round', JSON.stringify(response.Rounds[response.Rounds.length-1]));
 		});
+		
   }, []);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
@@ -44,6 +44,8 @@ function ModStartRoundControl(props: Props) {
 		window.localStorage.clear();
   };
 
+  const passedInfo ={labelOne: "round", textOne: "1"};
+	
   if (localStorage.getItem('user')) {
 		if (selectedTopic) {
 			return (

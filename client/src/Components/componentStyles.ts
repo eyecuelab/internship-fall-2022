@@ -1,4 +1,6 @@
 import corners, { chamfer, chamfered, round } from "corners";
+import {Button} from '@mui/material';
+
 
 export const whiteButton = {
   height: '5rem',
@@ -36,8 +38,12 @@ export const blackButton = {
 	padding: '',
   color: '#FFFFFF',
   border: '1px solid #363636',
-  background: '#61C14A',
+  background: '#363636',
 };
+
+    
+
+
 
 const dogEared = corners(round, round, round, chamfer).size(25);
 export const DogEarButton = dogEared.button;

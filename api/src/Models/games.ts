@@ -10,6 +10,7 @@ export const getGameById = async (id: number) => {
 		},
 		include: {
 			Topic: true,
+			Rounds: true,
 		}
 	});
 }

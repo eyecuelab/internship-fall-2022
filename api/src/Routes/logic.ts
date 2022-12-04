@@ -3,7 +3,9 @@ import logicControllers from "../Controllers/logic";
 
 const router = express.Router();
 
-router.post('/start', logicControllers.startRound);
+router.post('/startGame', logicControllers.startGame);
+// router.post('/startTime', logicControllers.startTime);
+router.post('/startGuessing', logicControllers.startGuessing);
 router.post('/addTime', logicControllers.addRoundTime);
 // router.post('/buzzerRefresh', logicControllers.buzzerRefresh);
 
