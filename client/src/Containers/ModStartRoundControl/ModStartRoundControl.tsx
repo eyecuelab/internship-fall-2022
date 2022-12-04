@@ -26,8 +26,8 @@ function ModStartRoundControl(props: Props) {
 			console.log('GAME: ', response);
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
-			localStorage.setItem('round', JSON.stringify(response.rounds));
 		});
+		
   }, []);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';

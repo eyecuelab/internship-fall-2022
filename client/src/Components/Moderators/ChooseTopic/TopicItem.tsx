@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {Round, Topic} from '../../../Types/Types';
 import {Button} from '@mui/material';
 import {DogEarButton, whiteButton} from '../../componentStyles';
-import { putData } from '../../../ApiHelper';
+import { getData, postData, putData } from '../../../ApiHelper';
 import { round } from 'corners';
 
 interface Props {
@@ -16,8 +16,18 @@ function TopicItem(props: Props) {
   const {topic, round, handleSwitch} = props;
 
 	const selectTopic = () => {
-		putData('/topics/', { topicId: topic.id, roundId: round });
-		handleSwitch;
+		console.log('GAME ID: ', topic.gameId);
+		console.log('TOPIC ID: ', topic.id);
+		postData('/addRound', { gameId: topic.gameId, topicId: topic.id}).then(() => {
+			getData(`/games/${topic.gameId}`).then((data) => {
+				console.log('data: ', data)
+				localStorage.setItem('game', data);
+				const round = data.Rounds.slice(-1);
+				console.log('ROUND?: ', data.Rounds.slice(-1)[0]);
+				putData('/topics/', { topicId: topic.id, roundId: data.Rounds.slice(-1)[0].id });
+				handleSwitch(true);
+			});
+		});
 	}
 
 	whiteButton.width = '100%';

@@ -26,20 +26,22 @@ function ModChooseTopic(props: Props) {
 	const [round, setRound] = useState(localStorage.getItem('round'));
   const user = JSON.parse(localStorage.getItem('user') as string);
 
-  getData(`/moderators/${user.email}`).then(moderator => {
-    setValue('moderatorId', moderator.id);
-    setValue('gameId', props.gameId);
-		setRound(localStorage.getItem('round'));
-  });
-
   useEffect(() => {
-    getTopicList();
-  }, []);
 
-  const getTopicList = async () => {
-    const topicList = await getData(`/topics/game/${props.gameId}`);
-    setTopics(topicList);
-  };
+    getData(`/topics/game/${props.gameId}`).then((response) => {
+			setTopics(response);
+			for(let i=0; i<response.length; i++) {
+				document.getElementById(`topic${response[i].id}`)?.setAttribute('disabled', 'true');
+			}
+		});
+
+		getData(`/moderators/${user.email}`).then(moderator => {
+			setValue('moderatorId', moderator.id);
+			setValue('gameId', props.gameId);
+			// console.log('ROUND: ', JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1));
+		});
+
+  }, []);
 
   redButton.width = '100%';
   whiteButton.width = '100%';
@@ -54,7 +56,7 @@ function ModChooseTopic(props: Props) {
           {
             <Grid container>
               {topics?.map((topic: Topic) => {
-                return <TopicItem key={topic.name} topic={topic} round={round} handleSwitch={props.handleSwitch}/>;
+                return <TopicItem id={`topic${topic.id}`} key={topic.id} topic={topic} handleSwitch={props.handleSwitch}/>;
               })}
             </Grid>
           }
