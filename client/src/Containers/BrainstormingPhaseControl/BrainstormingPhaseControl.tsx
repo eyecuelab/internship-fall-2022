@@ -28,7 +28,7 @@ function BrainstormingPhaseControl(props: Props) {
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
-  const passedInfo = {textOne: game.rounds, labelOne: 'round'}
+  const passedInfo = {textOne: game.Rounds.length, labelOne: 'round'}
 
   if (localStorage.getItem('user')) {
   return (

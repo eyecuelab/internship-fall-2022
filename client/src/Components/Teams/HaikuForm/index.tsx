@@ -43,10 +43,10 @@ function HaikuForm(props: Props) {
 		const stemList: any[] = [];
 		console.log('props.topic', props.topic);
 		getData(`/phrases/one/${props.topic.id}`).then((response) => {
-			console.log('phrase: ', response)
-			setPhrase(response.split(' '));
+			console.log('phrase: ', response);
+			setPhrase(response.body.split(' '));
 			localStorage.setItem('phrase', JSON.stringify(response));
-			response.split(' ').forEach((word: string, index: number) => { 
+			response.body.split(' ').forEach((word: string, index: number) => { 
 				findStems(word)
 				.then((data) => {
 					stemList[index] = (data.meta.stems);
