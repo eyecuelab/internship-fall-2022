@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": ["src", "../api/src/GenerateTeam.ts"],
   "references": [{"path": "./tsconfig.node.json"}]
 }

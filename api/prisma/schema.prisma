@@ -23,8 +23,9 @@ model Teams {
   id                  Int               @id @default(autoincrement())
   teamName            String
   teamScore           Int
-  game                Games             @relation(fields: [gameId], references: [id])
+  game                Games             @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId              Int
+	phrases							Phrases[]
 	socketId						String?
 }
 
@@ -36,6 +37,8 @@ model Topics {
   gameId              Int
 	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
 	moderatorId					Int
+	round								Rounds?						
+	roundId							Int?							@unique
 }
 
 model Phrases {
@@ -46,6 +49,8 @@ model Phrases {
   topicId             Int
 	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
 	moderatorId					Int
+	team								Teams?						@relation(fields: [teamId], references: [id])
+	teamId							Int?
 }
 
 model Games {
@@ -56,14 +61,18 @@ model Games {
 	publishedAt 				DateTime?					
   Team                Teams[]
 	Topic								Topics[]
+	Rounds							Rounds[]
 	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
 	moderatorId					Int
 }
 
 model Rounds {
   id                  Int               @id @default(autoincrement())
+	game								Games?						@relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId              Int
-  topicId             Int
+	topic								Topics						@relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topicId             Int								@unique
+	Turns								Turns[]
 	startedAt						DateTime?
 }
 
@@ -73,6 +82,7 @@ model Turns {
   performingTeamScore Int
   guessingTeamId      Int
   guessingTeamScore   Int
+	Round								Rounds?						@relation(fields: [roundId], references: [id])
   roundId             Int
   currentLineNumber   Int               @default(0)
 }

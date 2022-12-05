@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Teams } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -21,7 +21,17 @@ export const getTeamById = async (teamId: number) => {
 	});
 }
 
-export const createTeam = async (teamName: string, gameId: number) => {
+export const getTeamNameByGame = async (name: string, gameId: number) => {
+	return await prisma.teams.findFirst({
+		where: {
+			teamName: name,
+			gameId: gameId,
+		}
+	});
+}
+
+export const createTeam = async (gameId: number) => {
+	const teamName = await setUniqueTeam(gameId)
   return await prisma.teams.create({
     data: {
       teamName: teamName,
@@ -29,6 +39,33 @@ export const createTeam = async (teamName: string, gameId: number) => {
       game: { connect: { id: gameId } }
     }
   });
+}
+
+export const randomlyGenerateTeam = () => {
+	const teams = ['apple', 'blueberry', 'cherry', 'kiwi', 'lemon', 'peach', 'pear', 'strawberry']
+  let randomIndex = Math.floor(Math.random() * 8);
+  const teamName = teams[randomIndex];
+  return teamName;
+}
+
+export const setUniqueTeam = async (gameId: number) => {
+  const maxNumOfTeams = 5;
+  const teamsInGame = await getTeamsByGame(gameId);
+  let uniqueTeam = randomlyGenerateTeam();
+
+  const teamAlreadyAssigned = (name: string) => {
+    return teamsInGame.some((team: Teams) => team.teamName === name)
+  }
+
+  while (teamAlreadyAssigned(uniqueTeam)) {
+    uniqueTeam = randomlyGenerateTeam();
+    if (!teamAlreadyAssigned) {
+			return uniqueTeam;
+    } else if (teamAlreadyAssigned(uniqueTeam) && maxNumOfTeams === teamsInGame.length) {
+      return 'sixth team';
+    }
+  }
+	return uniqueTeam;
 }
 
 export const setTeamSocketId = async (teamId: number, socketId: string) => {

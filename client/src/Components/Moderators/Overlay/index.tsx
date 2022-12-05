@@ -13,11 +13,12 @@ interface Props {
   handleLogout?: () => void;
   gameData?: any;
   gameId?: any;
-  presentingState?: boolean;
-  setPresentingState?: Dispatch<SetStateAction<boolean>>;
+  presenting?: boolean;
+  setPresenting?: Dispatch<SetStateAction<boolean>>;
 }
 
 function ModOverlay(props: Props) {
+	const { handleLogout, gameData, gameId, presenting, setPresenting } = props;
   const [time, setTime] = useState(300);
   const location = useLocation();
 
@@ -28,7 +29,6 @@ function ModOverlay(props: Props) {
 
     socket.on('tick', (timeInterval: number) => {
       setTime(timeInterval);
-      console.log(timeInterval);
     });
 
     return () => {
@@ -41,11 +41,6 @@ function ModOverlay(props: Props) {
     const minutes = Math.floor(timer / 60);
     const seconds = timer - minutes * 60;
 
-    if (timer === 0) {
-      // @ts-ignore
-      props.setPresentingState(true);
-    } 
-
     return {minutes: minutes, seconds: seconds.toLocaleString('en-US', {minimumIntegerDigits: 2})};
   };
 
@@ -57,10 +52,9 @@ function ModOverlay(props: Props) {
 
   const codeToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`www.haicue.com/game/${props.gameData.gameCode}`);
-      console.log('Content copied to clipboard');
+      await navigator.clipboard.writeText(`www.haicue.com/game/${gameData.gameCode}`);
     } catch (err) {
-      alert('Failed to copy: ');
+      console.log('Failed to copy: ');
     }
   };
 
@@ -86,12 +80,12 @@ function ModOverlay(props: Props) {
         <h1>MODS</h1>
       </Grid>
 
-      {props.gameData ? (
-        <GameInfo h1Input={props.gameData.textOne} h3Input={props.gameData.labelOne} />
+      {gameData ? (
+        <GameInfo h1Input={gameData.textOne} h3Input={gameData.labelOne} />
       ) : null}
 
-      {location.pathname.includes('/brainstorming') ? (<><h3>timer</h3><h1>{timer.minutes}:{timer.seconds}</h1></>) : (props.gameData ? (
-        <GameInfo h1Input={props.gameData.textTwo} h3Input={props.gameData.labelTwo} />
+      {location.pathname.includes('/brainstorming') ? (<><h3>timer</h3><h1>{timer.minutes}:{timer.seconds}</h1></>) : (gameData ? (
+        <GameInfo h1Input={gameData.textTwo} h3Input={gameData.labelTwo} />
       ) : null)}
 
       <Grid
@@ -105,28 +99,24 @@ function ModOverlay(props: Props) {
         }}
       >
         <Link to="/">
-          {props.gameData.labelOne == 'game' ? (
+          {gameData.labelOne == 'game' ? (
             <>
-              <DogEarButton onClick={() => updateGameStatus(props.gameId)} style={greenButton}>
+              <DogEarButton onClick={() => updateGameStatus(gameId)} style={greenButton}>
                 <h3>Publish</h3>
               </DogEarButton>
-              <br />
-              <br />
-              <DogEarButton onClick={props.handleLogout} style={redButton}>
+              <DogEarButton onClick={handleLogout} style={redButton}>
                 <h3>Logout</h3>
               </DogEarButton>
             </>
           ) : null}
 
           {location.pathname == '/' ? (
-            <DogEarButton onClick={props.handleLogout} style={redButton}>
+            <DogEarButton onClick={handleLogout} style={redButton}>
               <h3>Logout</h3>
             </DogEarButton>
           ) : null}
         </Link>
-        <br />
-        <br />
-        {props.gameData.labelOne == 'round' ? (
+        {location.pathname.includes('round') ? (
           <DogEarButton onClick={codeToClipboard} style={blackButton}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
               <h3 style={{marginLeft: '2rem'}}>player url</h3>{' '}

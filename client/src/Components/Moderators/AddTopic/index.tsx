@@ -41,7 +41,7 @@ function ModAddTopic(props: Props) {
 	}
 
 	const getTopicList = async () => {
-		const topicList = await getData(`/topics/${props.gameId}`);
+		const topicList = await getData(`/topics/game/${props.gameId}`);
 		setTopics(topicList);
 	};
 
@@ -63,7 +63,7 @@ function ModAddTopic(props: Props) {
 				{topics?.map((topic: Topic) => { return <TopicItem key={topic.id} topic={topic} deleteTopic={deleteTopic} /> })}
 			</Grid>
       <form onSubmit={handleSubmit(addNewTopic)}>
-        <Grid container spacing={2} style={{position: 'relative', top: 20}}>
+        <Grid container spacing={3} style={{position: 'relative', top: 20}}>
           <Grid container item xs={9} direction="column">
             <Controller
               control={control}
@@ -74,6 +74,7 @@ function ModAddTopic(props: Props) {
                   fullWidth
                   variant="standard"
 									required
+									inputProps={{maxLength: 20}}
                 />
               )}
             />

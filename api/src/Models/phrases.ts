@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { Phrases, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -23,6 +23,21 @@ export const getPhrase = async (topicId: number) => {
 	}
 }
 
+export const getUniquePhrase = async (topicId: number) => {
+	const phrases = await prisma.phrases.findMany({
+		where: {
+			topicId: Number(topicId),
+		}
+	});
+		console.log('phrases: ', phrases);
+		for (let i=0; i<phrases.length; i++) {
+			if (phrases[i].teamId === null) {
+				console.log('PHRASES[i]: ', phrases[i]);
+				return phrases[i];
+			}
+		}
+}
+
 export const createPhrase = async (body: string, topicId: number, moderatorId: number) => {
   return await prisma.phrases.create({
     data: {
@@ -41,4 +56,14 @@ export const deletePhrase = async(id: number) => {
         id: Number(id), 
       }
   });
+}
+
+const findUniquePhrase = (phrases: Phrases[]) => {
+  for (let i=0; i<phrases.length; i++) {
+    if (phrases[i].teamId === null) {
+			console.log('PHRASES[i]: ', phrases[i]);
+			return phrases[i];
+    }
+  }
+	return '';
 }

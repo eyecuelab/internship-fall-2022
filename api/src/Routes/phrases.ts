@@ -4,6 +4,7 @@ import express from "express";
 const router = express.Router();
 
 router.get('/phrases/:topicId', phrasesControllers.getPhrase);
+router.get('/phrases/one/:topicId', phrasesControllers.getOnePhrase);
 router.post('/phrases', phrasesControllers.createPhrase);
 router.delete('/phrases/:id', phrasesControllers.deletePhrase);
 

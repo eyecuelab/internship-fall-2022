@@ -11,8 +11,8 @@ import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
   gameId: number;
-	presentingState: boolean;
-	setPresentingState: Dispatch<SetStateAction<boolean>>;
+	presenting: boolean;
+	setPresenting: Dispatch<SetStateAction<boolean>>;
 }
 
 function TeamList(props: Props) {
@@ -82,7 +82,7 @@ function TeamList(props: Props) {
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${props.gameId}/presenting`}>
-		      {props.presentingState ? <DogEarButton style={greenButton} >
+		      {props.presenting ? <DogEarButton style={greenButton} >
             <h3>Start Reading</h3>
           </DogEarButton> : null }
 		  </Link>

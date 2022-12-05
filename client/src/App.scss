@@ -146,6 +146,10 @@ input, textarea {
 	color: #363636;
 }
 
+input {
+	margin-top: 1.75rem !important;
+}
+
 .bottom {
 	position: absolute !important;
 	bottom: 0rem;
@@ -156,6 +160,11 @@ input, textarea {
 .spacer {
 	height: 5rem;
 	// margin-bottom: 0.5rem;
+}
+
+.panic {
+	color: #ff0000;
+	// -webkit-text-stroke: 1px #000;
 }
 
 .fade-in-down {

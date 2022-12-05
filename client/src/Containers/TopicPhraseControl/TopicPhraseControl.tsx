@@ -37,7 +37,6 @@ function TopicPhraseControl(props: Props) {
 
 	const passedInfo ={labelOne: "game", textOne: game?.name};
 	
-
   if (localStorage.getItem('user')) {
 		if (props.viewPhrases) {
 			return (
