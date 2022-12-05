@@ -23,7 +23,7 @@ model Teams {
   id                  Int               @id @default(autoincrement())
   teamName            String
   teamScore           Int
-  game                Games             @relation(fields: [gameId], references: [id])
+  game                Games             @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId              Int
 	phrases							Phrases[]
 	socketId						String?
@@ -68,9 +68,9 @@ model Games {
 
 model Rounds {
   id                  Int               @id @default(autoincrement())
-	game								Games?						@relation(fields: [gameId], references: [id])
+	game								Games?						@relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId              Int
-	topic								Topics						@relation(fields: [topicId], references: [id])
+	topic								Topics						@relation(fields: [topicId], references: [id], onDelete: Cascade)
   topicId             Int								@unique
 	Turns								Turns[]
 	startedAt						DateTime?
