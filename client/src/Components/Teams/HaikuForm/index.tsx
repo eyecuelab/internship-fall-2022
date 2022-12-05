@@ -32,14 +32,13 @@ function HaikuForm(props: Props) {
 	const [phrase, setPhrase] = useState(['', '']);
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
-	const roundNum = JSON.parse(localStorage.getItem('game') as string).Rounds.length;
-	// const topic = 'Holiday Activities';
-	// const phrase = ['decorating', 'tree'];
+	const [roundNum, setRoundNum] = useState(1);
 
 	whiteButton.width = '46%';
 	greenButton.width = '46%';
 
 	useEffect(() => {
+		setRoundNum(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
 		const stemList: any[] = [];
 		console.log('props.topic', props.topic);
 		getData(`/phrases/one/${props.topic.id}`).then((response) => {
