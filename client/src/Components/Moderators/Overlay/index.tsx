@@ -41,11 +41,6 @@ function ModOverlay(props: Props) {
     const minutes = Math.floor(timer / 60);
     const seconds = timer - minutes * 60;
 
-    if (timer === 0) {
-      // @ts-ignore
-      // setPresenting(true);
-    } 
-
     return {minutes: minutes, seconds: seconds.toLocaleString('en-US', {minimumIntegerDigits: 2})};
   };
 
