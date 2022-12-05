@@ -7,14 +7,15 @@ interface Props {
   handleSwitch?: () => void;
   gameData?: any;
   haikuData?: any;
+  topicData?: any;
 }
 
 function ModPresenting(props: Props) {
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
-  console.log(props.gameData);
   const [lineNumber, setLineNumber] = useState(1);
+  
 
   const lineAdvancer = () => {
     if (lineNumber < 3) {
@@ -24,12 +25,14 @@ function ModPresenting(props: Props) {
     }
   };
 
+  console.log(props.topicData)
+
   return (
     <>
       <Container>
         <div>
           <h3>team</h3>
-          <h1>insert topic info</h1>
+          <h1>{props.topicData.name}</h1>
           <br />
           <br />
           <h3>line {lineNumber}</h3>
