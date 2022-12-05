@@ -14,6 +14,7 @@ interface Props {
   gameData?: any;
   gameId?: any;
   presenting?: boolean;
+  gameRound?: any;
   setPresenting?: Dispatch<SetStateAction<boolean>>;
 }
 
