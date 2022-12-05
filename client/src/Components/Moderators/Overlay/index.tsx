@@ -116,7 +116,7 @@ function ModOverlay(props: Props) {
             </DogEarButton>
           ) : null}
         </Link>
-        {gameData.labelOne == 'round' ? (
+        {location.pathname.includes('round') ? (
           <DogEarButton onClick={codeToClipboard} style={blackButton}>
             <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
               <h3 style={{marginLeft: '2rem'}}>player url</h3>{' '}
