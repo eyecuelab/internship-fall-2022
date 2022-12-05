@@ -25,6 +25,7 @@ model Teams {
   teamScore           Int
   game                Games             @relation(fields: [gameId], references: [id])
   gameId              Int
+	phrases							Phrases[]
 	socketId						String?
 }
 
@@ -48,6 +49,8 @@ model Phrases {
   topicId             Int
 	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
 	moderatorId					Int
+	team								Teams?						@relation(fields: [teamId], references: [id])
+	teamId							Int?
 }
 
 model Games {

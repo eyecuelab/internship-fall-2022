@@ -23,32 +23,19 @@ export const getPhrase = async (topicId: number) => {
 	}
 }
 
-export const randomlyGeneratePhrase = (phrases: Phrases[]) => {
-  let randomIndex = Math.floor(Math.random() * 8);
-  const phrase = phrases[randomIndex];
-  return phrase;
-}
-
 export const getUniquePhrase = async (topicId: number) => {
 	const phrases = await prisma.phrases.findMany({
 		where: {
 			topicId: Number(topicId),
 		}
 	});
-
-	let uniquePhrase = randomlyGeneratePhrase(phrases);
-
-  const phraseAlreadyAssigned = (body: string) => {
-    return phrases.some((phrase: Phrases) => phrase.body === body)
-  }
-
-  while (phraseAlreadyAssigned(uniquePhrase.body)) {
-    uniquePhrase = randomlyGeneratePhrase(phrases);
-    if (!phraseAlreadyAssigned) {
-			return uniquePhrase;
-    }
-  }
-	return uniquePhrase;
+	console.log('phrases: ', phrases);
+	for (let i=0; i<phrases.length; i++) {
+		if (phrases[i].teamId === null) {
+			console.log('PHRASES[i]: ', phrases[i]);
+			return phrases[i];
+		}
+	}
 }
 
 export const createPhrase = async (body: string, topicId: number, moderatorId: number) => {
@@ -69,4 +56,14 @@ export const deletePhrase = async(id: number) => {
         id: Number(id), 
       }
   });
+}
+
+const findUniquePhrase = (phrases: Phrases[]) => {
+  for (let i=0; i<phrases.length; i++) {
+    if (phrases[i].teamId === null) {
+			console.log('PHRASES[i]: ', phrases[i]);
+			return phrases[i];
+    }
+  }
+	return '';
 }

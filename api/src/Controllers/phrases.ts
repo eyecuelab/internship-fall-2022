@@ -6,12 +6,13 @@ const phrasesControllers = {
   async getPhrase(req: any, res: any) {
     const { topicId, moderatorId } = req.params;
     const phrases = await getPhrase(Number(topicId));
-    return res.json(phrases);
+    res.json(phrases);
   },
 
 	async getOnePhrase (req: any, res: any) {
 		const { topicId } = req.params;
 		const phrase = await getUniquePhrase(Number(topicId));
+		res.json(phrase);
 	},
 
   async createPhrase(req: any, res: any) {
