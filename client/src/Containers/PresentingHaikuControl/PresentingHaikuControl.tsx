@@ -6,6 +6,7 @@ import ModPresenting from '../../Components/Moderators/Presenting';
 import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
+import { Games } from '@mui/icons-material';
 // do I need ModLogin?
 
 interface Props {
@@ -20,13 +21,20 @@ function PresentingHaikuControl(props: Props) {
   const [haiku, setHaiku] = useState({});
   const [team, setTeam] = useState({});
   const [teamsLeft, setTeamsLeft] = useState(0);
+  const [round, setRound]= useState({});
+  const [topic, setTopic]= useState({});
 
   useEffect(() => {
     getGameList();
     // I guess I need this for the gameCode Id link
     getHaikuInfo();
-    getTeam();
   }, []);
+
+  useEffect(() => {
+    if(round.topicId){
+      getTopicInfo();
+    }
+  }, [round.topicId]);
 
   const getHaikuInfo = async () => {
     const haikus = await getData('/haicues/1/1');
@@ -35,15 +43,20 @@ function PresentingHaikuControl(props: Props) {
   };
 
   const getGameList = async () => {
-    const game = await getData(`/games/${id}`);
-    setGame(game);
+    const games = await getData(`/games/${id}`);
+    const roundInfo = games.Rounds[0];
+    setRound(roundInfo)
+    setGame(games);
   };
 
-  const getTeam = async () => {
-    const currentTeam = await getData('/teams/1');
-    // hardcoded- should be `/teams/${teamId }`. Where am I geting the teamID from? should match db/Turns/peformingTeamId.
-    setTeam(currentTeam);
+  const getTopicInfo = async () => {
+    if (round.topicId !=null) {
+      const topicInfo = await getData(`/topic/${round.topicId}`);
+      setTopic(topicInfo)
+    } else {null}
   };
+
+  console.log(haiku);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
@@ -53,10 +66,11 @@ function PresentingHaikuControl(props: Props) {
 
   const passedInfo = {
     labelOne: 'round',
-    textOne: 'pass #',
+    textOne: 'round',
     labelTwo: 'teams left',
     textTwo: 'pass #',
     gameCode: game.gameCode,
+    gameRound: round,
   };
 
   if (localStorage.getItem('user')) {
@@ -74,7 +88,12 @@ function PresentingHaikuControl(props: Props) {
       return (
         <CardTemplate
           content={
-            <ModPresenting handleSwitch={handleBuzzToggle} haikuData={haiku} gameData={game} />
+            <ModPresenting 
+              handleSwitch={handleBuzzToggle} 
+              haikuData={haiku} 
+              gameData={game}
+              topicData={topic}
+            />
           }
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
