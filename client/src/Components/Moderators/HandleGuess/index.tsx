@@ -6,6 +6,8 @@ import { whiteButton, greenButton, redButton, DogEarButton } from '../../compone
 interface Props {
   handleSwitch?: () => void;
   gameData?: any;
+  haikuData?: any;
+  topicData?: any;
 }
 
 function ModHandleGuess(props: Props) {
@@ -18,7 +20,7 @@ function ModHandleGuess(props: Props) {
       <Container>
         <div>
           <h3>*insert team name*</h3>
-          <h1>*insert topic*</h1>
+          <h1>{props.topicData.name}</h1>
 					<br />
 					<br />
           <h3>buzzer pressed!</h3>
@@ -29,7 +31,6 @@ function ModHandleGuess(props: Props) {
           <DogEarButton onClick={props.handleSwitch}  style={greenButton}>
             <h3>reward points</h3>
           </DogEarButton>
-          <br />
           <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
             <h3>dismiss guess</h3>
           </DogEarButton>
