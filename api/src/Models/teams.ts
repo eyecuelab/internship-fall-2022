@@ -6,7 +6,10 @@ export const getTeamsByGame = async (gameId: number) => {
   return await prisma.teams.findMany({
 		where: {
 			gameId: Number(gameId)
-		}
+		},
+		orderBy: {
+			teamScore: 'desc',
+		},
 	});
 }
 

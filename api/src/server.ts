@@ -61,6 +61,10 @@ io.on('connection', (socket : Socket) => {
 		}
 	});
 
+	socket.on('submit', () => {
+		io.emit('submit');
+	});
+
 	socket.on('buzz', () => {
 		io.emit('buzz');
 	});

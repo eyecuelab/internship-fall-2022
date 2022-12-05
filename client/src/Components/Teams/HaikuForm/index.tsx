@@ -4,6 +4,7 @@ import { TextField } from '@mui/material';
 import { getData, postData, putData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
 import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
+import socket from '../../../Hooks/WebsocketHook';
 import { Topic } from '../../../Types/Types';
 
 interface Props {
@@ -68,6 +69,7 @@ function HaikuForm(props: Props) {
 				postData('/haicues', data);
 			}
 		});
+		socket.emit('submit');
 	};
 
 	const swapLabel = (line: number, status: string) => {
