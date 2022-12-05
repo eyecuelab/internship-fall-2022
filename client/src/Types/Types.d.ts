@@ -52,6 +52,7 @@ export type Game = {
   Teams: Team[]
   Users: User[]
 	Topics: Topic[]
+	Rounds: Round[]
 }
 
 export type Round = {

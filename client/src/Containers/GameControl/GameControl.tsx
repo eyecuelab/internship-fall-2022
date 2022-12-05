@@ -18,7 +18,7 @@ function GameControl() {
 	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
 	const [color, setColor] = useState('#888');
-	const [gamePhase, setGamePhase] = useState('');
+	const [gamePhase, setGamePhase] = useState(localStorage.getItem('game-phase') || '');
 	// const [readyPhase, setReadyPhase] = useState(false);
 	// const [brainstorming, setBrainstorming] = useState(false);
 	// const [guessing, setGuessing] = useState(false);
