@@ -20,7 +20,7 @@ function TeamLobby(props: Props) {
     >
       <Grid item>
         {phase ? <><h3 id="phase-down">team {team.teamName},<br /> get ready for</h3>
-				<h1 id="phase-left">round {game.rounds}</h1></>
+				<h1 id="phase-left">round {game.Rounds.length}</h1></>
 				 : <><h3 className="fade-in-down" style={{ width: '65%' }}>you are invited to be the team lead for</h3>
         <h1 className="fade-in-left" style={{ marginTop: '1rem' }}>team {team?.teamName}</h1></> }
       </Grid>

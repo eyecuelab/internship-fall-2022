@@ -32,7 +32,7 @@ function HaikuForm(props: Props) {
 	const [phrase, setPhrase] = useState(['', '']);
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
-	const roundNum = '2';
+	const roundNum = JSON.parse(localStorage.getItem('game') as string).Rounds.length;
 	// const topic = 'Holiday Activities';
 	// const phrase = ['decorating', 'tree'];
 
@@ -127,7 +127,7 @@ function HaikuForm(props: Props) {
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
-      <h3 className="fade-in-down">ROUND {roundNum} - {}</h3>
+      <h3 className="fade-in-down">ROUND {roundNum} - {props.topic.name}</h3>
       <h1 className="fade-in-left">{phrase.join(' ')}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>

@@ -56,7 +56,7 @@ function TeamOverlay(props: Props) {
       <br />
 			{timerPhase ? 
       	<><h3>Timer</h3>
-    	  <h1 style={timer.minutes < 1 ? {color: 'red'} : {color: '#fff'}}>{timer.minutes}:{timer.seconds}</h1></>
+    	  <h1 className={timer.minutes < 1 ? 'panic' : ''}>{timer.minutes}:{timer.seconds}</h1></>
 				: null
 			}
     </>
