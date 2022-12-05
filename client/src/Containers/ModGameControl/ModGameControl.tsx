@@ -19,12 +19,10 @@ function ModGameControl(props: Props) {
 
 	useEffect(() => {
 		getGameList();
-		getGameList();
 		props.setUserData(props.userData);
 	}, []);
 
 	const getGameList = () => {
-		setGames([]);
 		const user = JSON.parse(localStorage.getItem('user') as string);
 		if (user) {
 		getData(`/moderators/${user.email}`)

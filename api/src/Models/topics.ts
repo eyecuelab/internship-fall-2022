@@ -7,6 +7,9 @@ export const getTopic = async (topicId: number) => {
 		return await prisma.topics.findUnique({
 			where: {
 				id: Number(topicId)
+			},
+			include: {
+				Phrase: true
 			}
 		});
 	} catch(error: unknown) {
