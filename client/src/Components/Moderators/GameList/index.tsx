@@ -14,8 +14,6 @@ interface Props {
 function ModGameList(props: Props) {
 
 	useEffect(() => {
-		console.log('got the games');
-		props.getGameList();
 		props.getGameList();
 	}, []);
 
@@ -36,9 +34,9 @@ function ModGameList(props: Props) {
         </Grid>
       </Grid>
       <hr />
-      { <Grid container>
+      <Grid container>
 				{ (props.gameList?.map((game: Game) => <GameItem key={game.id} game={game} deleteGame={deleteGame}/>)) } {/* this line renders each game from the database */}
-      </Grid> }
+      </Grid>
 			<div className="spacer" />
       <DogEarButton
 				className="bottom"

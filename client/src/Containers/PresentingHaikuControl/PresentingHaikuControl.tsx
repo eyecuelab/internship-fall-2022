@@ -6,6 +6,7 @@ import ModPresenting from '../../Components/Moderators/Presenting';
 import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
+import { Games } from '@mui/icons-material';
 // do I need ModLogin?
 
 interface Props {
@@ -14,18 +15,46 @@ interface Props {
 }
 
 function PresentingHaikuControl(props: Props) {
-  const {id} = useParams();
+  const { id } = useParams();
   const [game, setGame] = useState({});
   const [buzzedIn, setBuzzedIn] = useState(false);
+  const [haiku, setHaiku] = useState({});
+  const [team, setTeam] = useState({});
+  const [teamsLeft, setTeamsLeft] = useState(0);
+  const [round, setRound]= useState({});
+  const [topic, setTopic]= useState({});
 
   useEffect(() => {
     getGameList();
   }, []);
 
-  const getGameList = async () => {
-    const game = await getData(`/games/${id}`);
-    setGame(game);
+  useEffect(() => {
+    if(round.topicId){
+      getTopicInfo();
+      getHaikuInfo();
+    }
+  }, [round.topicId]);
+
+  const getHaikuInfo = async () => {
+    const haikus = await getData(`/haicues/${round.id}/1`);
+    // hardcoded-should be `/haicues/${roundId}/${teamId }`. Not sure how that gets passed in.
+    setHaiku(haikus);
   };
+
+  const getGameList = async () => {
+    const games = await getData(`/games/${id}`);
+    const roundInfo = games.Rounds[0];
+    setRound(roundInfo)
+    setGame(games);
+  };
+
+  const getTopicInfo = async () => {
+      const topicInfo = await getData(`/topic/${round.topicId}`);
+      setTopic(topicInfo)
+    
+  };
+
+  console.log(game);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
@@ -35,17 +64,25 @@ function PresentingHaikuControl(props: Props) {
 
   const passedInfo = {
     labelOne: 'round',
-    textOne: '*pass round*',
+    textOne: 'round',
     labelTwo: 'teams left',
     textTwo: 'pass #',
     gameCode: game.gameCode,
+    gameRound: round,
   };
 
   if (localStorage.getItem('user')) {
+    1;
     if (buzzedIn) {
       return (
         <CardTemplate
-          content={<ModHandleGuess handleSwitch={handleBuzzToggle} />}
+          content={
+            <ModHandleGuess 
+              handleSwitch={handleBuzzToggle} 
+              haikuData={haiku} 
+              gameData={game}
+              topicData={topic}
+            />}
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
           color="#15586a"
@@ -54,7 +91,14 @@ function PresentingHaikuControl(props: Props) {
     } else {
       return (
         <CardTemplate
-          content={<ModPresenting handleSwitch={handleBuzzToggle} />}
+          content={
+            <ModPresenting 
+              handleSwitch={handleBuzzToggle} 
+              haikuData={haiku} 
+              gameData={game}
+              topicData={topic}
+            />
+          }
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
           color="#15586a"

@@ -31,6 +31,8 @@ export type Topic = {
   Phrase: Phrase[]
   game: Game
   gameId: number
+	round: Round
+	roundId: number
 }
 
 export type Phrase = {
@@ -44,12 +46,13 @@ export type Phrase = {
 export type Game = {
 	id: number
 	name: string				
-  round: number
+  rounds: number
   gameCode: string
 	publishedAt: Date					
   Teams: Team[]
   Users: User[]
 	Topics: Topic[]
+	Rounds: Round[]
 }
 
 export type Round = {

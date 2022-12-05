@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/teams/game/:gameId', teamsControllers.getTeams);
 router.get('/teams/:id', teamsControllers.getOneTeam);
-router.post('/teams', teamsControllers.createTeam);
+router.post('/teams', teamsControllers.createUniqueTeam);
 
 export default router; 

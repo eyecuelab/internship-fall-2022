@@ -57,6 +57,7 @@ function ModNewGame(props: Props) {
 						fullWidth
 						variant="standard"
 						required
+						inputProps={{maxLength: 15}}
 					/>
 				)}
 			/>

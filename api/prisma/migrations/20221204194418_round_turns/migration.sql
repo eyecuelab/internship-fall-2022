@@ -1,0 +1,2 @@
+-- AddForeignKey
+ALTER TABLE "Turns" ADD CONSTRAINT "Turns_roundId_fkey" FOREIGN KEY ("roundId") REFERENCES "Rounds"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

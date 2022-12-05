@@ -7,19 +7,29 @@ import {Container, ButtonContainer} from './styles';
 import {getData, postData} from '../../../ApiHelper';
 import { Team } from '../../../Types/Types';
 import TeamItem from './TeamItem';
+import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
   gameId: number;
-	presentingState: boolean;
-	setPresentingState: Dispatch<SetStateAction<boolean>>;
+	presenting: boolean;
+	setPresenting: Dispatch<SetStateAction<boolean>>;
 }
 
 function TeamList(props: Props) {
 	const [teams, setTeams] = useState([]);
+	const [teamArr, setTeamArr] = useState({});
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
 		getTeamList();
+
+		socket.on('submit', () => {
+			getTeamStatus();
+		});
+
+		return () => {
+      socket.off('submit');
+    };
 	}, []);
 
 	const getTeamList = async () => {
@@ -30,6 +40,22 @@ function TeamList(props: Props) {
 	const extendTime = () => {
 		postData(`/addTime`, [props.gameId]);
 	}
+
+	const getTeamStatus = async () => {
+		var teamArr = new Array;
+		getData(`/rounds/games/${props.gameId}`).then((round) => {
+			getData(`/haicues/round/${round[0].id}`).then((haicues) => {
+				for (let i = 0; i < haicues.length; i++) {
+					teamArr.push(haicues[i].teamId);
+				}
+				setTeamArr(teamArr);
+				
+				if (teamArr.length === teams.length) {
+					props.setPresentingState(true);
+				} 
+			});
+		})
+	  };
 
   whiteButton.width = '100%';
   redButton.width = '100%';
@@ -52,11 +78,11 @@ function TeamList(props: Props) {
           <hr />
         </div>
 		<Grid container>
-				{teams?.map((team: Team) => { return <TeamItem key={team.id} team={team} /> })}
+				{teams?.map((team: Team) => { return <TeamItem key={team.id} team={team} teamArr={teamArr} /> })}
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${props.gameId}/presenting`}>
-		      {props.presentingState ? <DogEarButton style={greenButton} >
+		      {props.presenting ? <DogEarButton style={greenButton} >
             <h3>Start Reading</h3>
           </DogEarButton> : null }
 		  </Link>
@@ -64,7 +90,11 @@ function TeamList(props: Props) {
             <h3>EXTENDS 30 SECONDS</h3>
           </DogEarButton>
 		  <Link to={`/game/${props.gameId}/round`}>
-          <DogEarButton style={redButton} >
+          <DogEarButton
+		  	style={redButton}
+			// TODO(weijwang): for debug only, remove later
+			// onMouseOver={() => socket.emit('submit')}
+			>
             <h3>END ROUND</h3>
           </DogEarButton>
 		  </Link>

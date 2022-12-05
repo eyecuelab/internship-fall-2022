@@ -4,10 +4,11 @@ import { Team } from '../../../Types/Types';
 
 interface Props {
 	team: Team,
+	teamArr: any,
 }
 
 function TeamItem (props: Props) {
-	const { team } = props
+	const { team, teamArr } = props
 
 	return(
 		<>
@@ -19,7 +20,7 @@ function TeamItem (props: Props) {
             <h3 style={{textAlign: 'center', lineHeight: '64px'}}> {team.teamScore} </h3>
           </Grid>
           <Grid container item xs={4} direction="column">
-            <h3 style={{textAlign: 'right', lineHeight: '64px'}}> {(team.id === 1) ? 'done' : 'not yet'}</h3>
+            <h3 style={{textAlign: 'right', lineHeight: '64px'}}> {(Array.from(teamArr).indexOf(team.id) > -1) ? 'done' : 'not yet'}</h3>
           </Grid>
         </Grid>
 		</>
