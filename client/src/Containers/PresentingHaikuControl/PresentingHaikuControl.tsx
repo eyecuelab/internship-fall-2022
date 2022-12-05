@@ -26,19 +26,18 @@ function PresentingHaikuControl(props: Props) {
 
   useEffect(() => {
     getGameList();
-    // I guess I need this for the gameCode Id link
-    getHaikuInfo();
   }, []);
 
   useEffect(() => {
     if(round.topicId){
       getTopicInfo();
+      getHaikuInfo();
     }
   }, [round.topicId]);
 
   const getHaikuInfo = async () => {
-    const haikus = await getData('/haicues/1/1');
-    // hardcoded-should be `/haicues/${roundId}/${teamId }`: data should be in db/Turns/roundID & performingTeamID.
+    const haikus = await getData(`/haicues/${round.id}/1`);
+    // hardcoded-should be `/haicues/${roundId}/${teamId }`. Not sure how that gets passed in.
     setHaiku(haikus);
   };
 
@@ -50,13 +49,12 @@ function PresentingHaikuControl(props: Props) {
   };
 
   const getTopicInfo = async () => {
-    if (round.topicId !=null) {
       const topicInfo = await getData(`/topic/${round.topicId}`);
       setTopic(topicInfo)
-    } else {null}
+    
   };
 
-  console.log(haiku);
+  console.log(game);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
@@ -78,7 +76,13 @@ function PresentingHaikuControl(props: Props) {
     if (buzzedIn) {
       return (
         <CardTemplate
-          content={<ModHandleGuess haikuData={haiku} handleSwitch={handleBuzzToggle} />}
+          content={
+            <ModHandleGuess 
+              handleSwitch={handleBuzzToggle} 
+              haikuData={haiku} 
+              gameData={game}
+              topicData={topic}
+            />}
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
           color="#15586a"
