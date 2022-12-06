@@ -11,96 +11,105 @@ datasource db {
 }
 
 model Moderators {
-	id									Int								@id @default(autoincrement())
-	email								String						@unique
-	games								Games[]
-	topics							Topics[]
-	phrases							Phrases[]
-	socketId						String?
+  id       Int       @id @default(autoincrement())
+  email    String    @unique
+  games    Games[]
+  topics   Topics[]
+  phrases  Phrases[]
+  socketId String?
 }
 
 model Teams {
-  id                  Int               @id @default(autoincrement())
-  teamName            String
-  teamScore           Int
-  game                Games             @relation(fields: [gameId], references: [id], onDelete: Cascade)
-  gameId              Int
-	phrases							Phrases[]
-	socketId						String?
+  id        Int       @id @default(autoincrement())
+  teamName  String
+  teamScore Int
+  game      Games     @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId    Int
+  phrases   Phrases[]
+  Turns     Turns[]
+  Haicues   Haicues[]
+  socketId  String?
 }
 
 model Topics {
-  id                  Int               @id @default(autoincrement())
-  name                String
-  Phrase              Phrases[]
-  game                Games             @relation(fields: [gameId], references: [id], onDelete: Cascade)
-  gameId              Int
-	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
-	moderatorId					Int
-	round								Rounds?						
-	roundId							Int?							@unique
+  id          Int        @id @default(autoincrement())
+  name        String
+  Phrase      Phrases[]
+  game        Games      @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId      Int
+  moderator   Moderators @relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+  moderatorId Int
+  round       Rounds?
+  roundId     Int?       @unique
 }
 
 model Phrases {
-  id                  Int               @id @default(autoincrement())
-  body                String
-  wordCount           Int
-  topic               Topics            @relation(fields: [topicId], references: [id], onDelete: Cascade)
-  topicId             Int
-	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
-	moderatorId					Int
-	team								Teams?						@relation(fields: [teamId], references: [id])
-	teamId							Int?
+  id          Int        @id @default(autoincrement())
+  body        String
+  wordCount   Int
+  topic       Topics     @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topicId     Int
+  moderator   Moderators @relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+  moderatorId Int
+  team        Teams?     @relation(fields: [teamId], references: [id])
+  teamId      Int?
+  Haicues     Haicues[]
 }
 
 model Games {
-  id                  Int               @id @default(autoincrement())
-	name								String						
-  rounds              Int
-  gameCode            String          	@unique  
-	publishedAt 				DateTime?					
-  Team                Teams[]
-	Topic								Topics[]
-	Rounds							Rounds[]
-	moderator					  Moderators				@relation(fields: [moderatorId], references: [id], onDelete: Cascade)
-	moderatorId					Int
+  id          Int        @id @default(autoincrement())
+  name        String
+  gameCode    String     @unique
+  publishedAt DateTime?
+  Team        Teams[]
+  Topic       Topics[]
+  Rounds      Rounds[]
+  moderator   Moderators @relation(fields: [moderatorId], references: [id], onDelete: Cascade)
+  moderatorId Int
 }
 
 model Rounds {
-  id                  Int               @id @default(autoincrement())
-	game								Games?						@relation(fields: [gameId], references: [id], onDelete: Cascade)
-  gameId              Int
-	topic								Topics						@relation(fields: [topicId], references: [id], onDelete: Cascade)
-  topicId             Int								@unique
-	Turns								Turns[]
-	startedAt						DateTime?
+  id        Int       @id @default(autoincrement())
+  game      Games?    @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  gameId    Int
+  topic     Topics    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topicId   Int       @unique
+  Turns     Turns[]
+  Haicues   Haicues[]
+  startedAt DateTime?
 }
 
 model Turns {
-  id                  Int               @id @default(autoincrement())
-  performingTeamId    Int
-  performingTeamScore Int
-  guessingTeamId      Int
-  guessingTeamScore   Int
-	Round								Rounds?						@relation(fields: [roundId], references: [id])
-  roundId             Int
-  currentLineNumber   Int               @default(0)
+  id                Int     @id @default(autoincrement())
+  performingTeam    Teams   @relation(fields: [performingTeamId], references: [id], onDelete: Cascade)
+  performingTeamId  Int
+  guessingTeamId    Int?
+  Haicue            Haicues @relation(fields: [haicueId], references: [id], onDelete: Cascade)
+  haicueId          Int
+  Round             Rounds? @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  roundId           Int
+  currentLineNumber Int     @default(0)
 }
 
 model Haicues {
-  id            Int                     @id @default(autoincrement())
-  roundId       Int
-  teamId        Int
-  line1         String
-  line2         String
-  line3         String
-  lineGuessed   Int?
-  correctTeam   Int?
+  id          Int     @id @default(autoincrement())
+  Round       Rounds  @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  roundId     Int
+  Phrase      Phrases @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+  phraseId    Int
+  Team        Teams   @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  teamId      Int
+  line1       String
+  line2       String
+  line3       String
+  lineGuessed Int?
+  correctTeam Int?
+  Turns       Turns[]
 }
 
 model Buzzers {
-  id            Int                     @id @default(autoincrement())
-  turnId        Int
-  teamId        Int
-  buzzAt        DateTime?
+  id     Int       @id @default(autoincrement())
+  turnId Int
+  teamId Int
+  buzzAt DateTime?
 }
