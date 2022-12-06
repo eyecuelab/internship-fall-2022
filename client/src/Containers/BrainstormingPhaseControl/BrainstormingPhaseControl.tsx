@@ -13,18 +13,16 @@ interface Props {
 }
 
 function BrainstormingPhaseControl(props: Props) {
-  const {id} = useParams();
-  const [game, setGame] = useState({});
+  const { id } = useParams();
+  const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
   const [presenting, setPresenting] = useState(false);
 
   useEffect(() => {
-    getGameList();
+    getData(`/games/${ id }`).then((game) => {
+			setGame(game);
+			localStorage.setItem('game', JSON.stringify(game))
+		});
   }, []);
-
-  const getGameList = async () => {
-    const game = await getData(`/games/${id}`);
-    setGame(game);
-  };
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
@@ -33,7 +31,7 @@ function BrainstormingPhaseControl(props: Props) {
   if (localStorage.getItem('user')) {
   return (
     <CardTemplate
-      content={<TeamList gameId={Number(id)} presenting={presenting} setPresenting={setPresenting}/>}
+      content={<TeamList gameId={game} presenting={presenting} setPresenting={setPresenting}/>}
       overlay={<ModOverlay gameData={passedInfo} presenting={presenting} setPresenting={setPresenting} />}
       bgUrl="/images/moderator_card_background_2.png"
       color="#15586a"

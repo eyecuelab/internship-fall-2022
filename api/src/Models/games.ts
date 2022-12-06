@@ -3,7 +3,7 @@ import GameCode from '../GenerateGameCode';
 
 const prisma = new PrismaClient();
 
-export const getGameById = async (id: number) => {
+export const getOneGame = async (id: number) => {
   return await prisma.games.findUnique({
 		where: {
 			id: Number(id)
@@ -45,7 +45,6 @@ export const createGame = async (name: string, moderatorId: number) => {
 			...{
 				name: name,
 				gameCode: GameCode.generate(),
-				rounds: 0,
 				moderator: { connect: { id: moderatorId } }
 			}
     }

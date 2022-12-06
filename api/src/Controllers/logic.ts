@@ -28,7 +28,9 @@ const logicControllers = {
 	async startGuessing (req: any, res: any) {
 		const { gameId } = req.body;
 		timeRemaining = 0;
-		await startGuessingPhase(gameId);
+		setInterval(() => {
+			startGuessingPhase(gameId)
+		}, 1500);
 		res.json(200);
 	},
 
