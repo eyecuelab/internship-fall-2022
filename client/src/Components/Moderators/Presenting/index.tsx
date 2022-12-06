@@ -5,7 +5,6 @@ import {Container, ButtonContainer} from './styles';
 import socket from '../../../Hooks/WebsocketHook';
 import {Button} from '@mui/material';
 import {whiteButton, greenButton, redButton, DogEarButton} from '../../componentStyles';
-import {whiteButton, greenButton, redButton, DogEarButton} from '../../componentStyles';
 import { Game, Haicue, Team, Topic } from '../../../Types/Types';
 import { getData } from '../../../ApiHelper';
 
