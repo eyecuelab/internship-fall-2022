@@ -19,6 +19,7 @@ function TeamList(props: Props) {
 	const [teams, setTeams] = useState([]);
 	const [teamArr, setTeamArr] = useState({});
 	const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
+	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
@@ -88,7 +89,7 @@ function TeamList(props: Props) {
 				{teams?.map((team: Team) => { return <TeamItem key={team.id} team={team} teamArr={teamArr} /> })}
 			</Grid>
         <ButtonContainer>
-		<Link to={`/game/${props.gameId}/presenting`}>
+		<Link to={`/game/${game.id}/presenting`}>
 		      {props.presenting ? <DogEarButton style={greenButton} onClick={setHaikus}>
             <h3>Start Reading</h3>
           </DogEarButton> : null }
@@ -96,7 +97,7 @@ function TeamList(props: Props) {
           <DogEarButton onClick={() => extendTime()} style={whiteButton} >
             <h3>EXTENDS 30 SECONDS</h3>
           </DogEarButton>
-		  <Link to={`/game/${props.gameId}/round`}>
+		  <Link to={`/game/${game.id}/round`}>
           <DogEarButton
 		  	style={redButton}
 			// TODO(weijwang): for debug only, remove later
