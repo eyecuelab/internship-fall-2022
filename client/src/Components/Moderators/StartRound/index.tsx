@@ -17,7 +17,6 @@ interface Props {
 function ModStartRound(props: Props) {
 	const { topic, handleSwitch} = props;
   const { id } = useParams();
-  const {setValue} = useForm<IFormInput>();
 	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
   const [topics, setTopics] = useState([]);
   const user = JSON.parse(localStorage.getItem('user') as string);
@@ -30,13 +29,23 @@ function ModStartRound(props: Props) {
 
 	console.log('ROUND: ', round);
 
+	// const setNewTurns = () => {
+		// getData(`/rounds/game/${game.id}`).then((rounds) => {
+		// 	const thisRound = rounds.split(-1)[0];
+		// 	for (let i=0; i<thisRound.Haicues.length; i++) {
+		// 		postData('/turns', {roundId: thisRound.id, presentingTeamId: thisRound.Haicues[i].teamId, haicueId: thisRound.Haicues[i].id})
+		// 	}
+		// })
+	// }
+
 	const selectTopic = () => {
-		postData('/addRound', { gameId: id, topicId: topic.id}).then(() => {
+		postData('/round', { gameId: id, topicId: topic.id }).then((newRound) => {
 			getData(`/games/${id}`).then((data) => {
 				localStorage.setItem('game', JSON.stringify(data));
-				setRound(data.Rounds.slice(-1)[0]);
-				putData('/topics/', { topicId: topic.id, roundId: data.Rounds.slice(-1)[0].id });
+				setRound(newRound);
+				putData('/topics/', { topicId: topic.id, roundId: newRound.id });
 				postData('/startGame', { gameId: id });
+				console.log('NEW ROUND: ', newRound);
 			});
 		});
 	}
@@ -55,11 +64,12 @@ function ModStartRound(props: Props) {
           <br />
         </div>
         <ButtonContainer>
-					<Link to={{pathname: `/game/${id}/round/${round?.id}`}}>
+					<Link to={{pathname: `/game/${id}/brainstorming`}}>
           <DogEarButton style={greenButton} onClick={selectTopic}>
             <h3>start round</h3>
           </DogEarButton>
 					</Link>
+					{/* @ts-ignore */}
           <DogEarButton style={whiteButton} onClick={handleSwitch}>
             <h3>back to selection</h3>
           </DogEarButton>

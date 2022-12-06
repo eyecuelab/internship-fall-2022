@@ -21,8 +21,8 @@ const haicuesControllers = {
 	},
 
 	async createHaicue(req: any, res: any) {
-		const { line1, line2, line3 } = req.body;
-		const haicue = await createHaicues(1, 1, 1, line1, line2, line3);
+		const { roundId, teamId, phraseId, line1, line2, line3 } = req.body;
+		const haicue = await createHaicues(roundId, teamId, phraseId, line1, line2, line3);
 		res.status(201).json(haicue);
 	},
 

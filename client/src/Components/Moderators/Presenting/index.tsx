@@ -1,23 +1,38 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import '../../../index.css';
 import {Container, ButtonContainer} from './styles';
-import {Button} from '@mui/material';
 import {whiteButton, greenButton, redButton, DogEarButton} from '../../componentStyles';
 import { Game, Haicue, Team, Topic } from '../../../Types/Types';
+import { getData } from '../../../ApiHelper';
 interface Props {
   handleSwitch?: () => void;
-  gameData?: Game;
-	teamData: Team;
+  gameData: Game;
+	// teamData: Team;
   haikuData: Haicue;
   topicData?: Topic;
 }
 
 function ModPresenting(props: Props) {
+	const [turns, setTurns] = useState(0);
+	const [team, setTeam] = useState<Team>();
+	const [haiku, setHaiku] = useState<Haicue>();
+	const [thisTurn, setThisTurn] = useState();
   const [lineNumber, setLineNumber] = useState(1);
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
   
+	useEffect(() => {
+		getData(`/rounds/games/${props.gameData.id}`).then((rounds) => {
+			setThisTurn(rounds.Turns[turns]);
+			getData(`/teams/${rounds.Turns[turns].teamId}`).then((team) => {
+				setTeam(team);
+				getData(`/haicues/${rounds.Turns[turns]}/${team.id}`).then((haiku) => {
+					setHaiku(haiku);
+				})
+			});
+		});
+	}, []);
 
   const lineAdvancer = () => {
     if (lineNumber < 3) {
@@ -34,16 +49,16 @@ function ModPresenting(props: Props) {
       <Container>
         <div>
           <h3>team</h3>
-          <h1>{props.teamData.teamName}</h1>
+          <h1>{team?.teamName}</h1>
           <br />
           <br />
           <h3>line {lineNumber}</h3>
           <h1>
             {lineNumber == 3 ?
-              props.haikuData.line3 || '' :
+              haiku?.line3 :
               lineNumber == 2 ?
-              props.haikuData.line2 || '' :
-              props.haikuData.line1 || '' }
+              haiku?.line2 :
+              haiku?.line1 }
           </h1>
         </div>
         <ButtonContainer>

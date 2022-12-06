@@ -2,7 +2,7 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
 import ModStartRound from '../../Components/Moderators/StartRound';
-import { getData, putData} from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
@@ -16,10 +16,9 @@ interface Props {
 
 function ModStartRoundControl(props: Props) {
   const {id} = useParams();
-  const [game, setGame] = useState<Game>({});
-	const [topic, setTopic] = useState<Topic>();
+  const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
+	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.slice(-1)[0]);
   const [selectedTopic, setSelectedTopic] = useState(false)
-
 
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
@@ -39,6 +38,15 @@ function ModStartRoundControl(props: Props) {
 		localStorage.clear();
 		window.localStorage.clear();
   };
+
+	// const setNewTurns = () => {
+	// 	getData(`/rounds/game/${game.id}`).then((rounds) => {
+	// 		const thisRound = rounds.split(-1)[0];
+	// 		for (let i=0; i<thisRound.Haicues.length; i++) {
+	// 			postData('/turns', {roundId: thisRound.id, presentingTeamId: thisRound.Haicues[i].teamId, haicueId: thisRound.Haicues[i].id})
+	// 		}
+	// 	})
+	// }
 
   const passedInfo ={labelOne: "round", textOne: "1"};
 	

@@ -45,7 +45,6 @@ export const createGame = async (name: string, moderatorId: number) => {
 			...{
 				name: name,
 				gameCode: GameCode.generate(),
-				rounds: 0,
 				moderator: { connect: { id: moderatorId } }
 			}
     }

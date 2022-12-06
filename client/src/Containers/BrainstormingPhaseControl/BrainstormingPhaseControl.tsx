@@ -13,12 +13,12 @@ interface Props {
 }
 
 function BrainstormingPhaseControl(props: Props) {
-  const { gameId, roundId } = useParams();
+  const { id } = useParams();
   const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
   const [presenting, setPresenting] = useState(false);
 
   useEffect(() => {
-    getData(`/games/${ gameId }`).then((game) => {
+    getData(`/games/${ id }`).then((game) => {
 			setGame(game);
 			localStorage.setItem('game', JSON.stringify(game))
 		});

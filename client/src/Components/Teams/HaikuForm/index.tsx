@@ -14,12 +14,18 @@ interface Props {
 }
 
 interface IFormInput {
+	roundId: number,
+	teamId: number,
+	phraseId: number,
   line1: string;
   line2: string;
   line3: string;
 }
 
 type Data = {
+	roundId: number,
+	teamId: number,
+	phraseId: number,
 	line1: string,
 	line2: string,
 	line3: string,
@@ -33,21 +39,24 @@ function HaikuForm(props: Props) {
 	const [phrase, setPhrase] = useState(['', '']);
 	const [team, setTeam] = useState(JSON.parse(localStorage.getItem('team') as string))
 	const { submitState, setSubmitState } = props;
-  const { control, handleSubmit } = useForm<IFormInput>();
-	const [roundNum, setRoundNum] = useState(1);
-
+  const { control, handleSubmit, setValue } = useForm<IFormInput>();
+	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
+	const [roundNum, setRoundNum] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
+	const [submitted, setSubmitted] = useState(false);
 	whiteButton.width = '46%';
 	greenButton.width = '46%';
 
 	useEffect(() => {
+		setRound(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 		setRoundNum(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
 		const stemList: any[] = [];
 		console.log('props.topic', props.topic);
-		getData(`/phrases/one/${props.topic.id}`).then((response) => {
-			console.log('phrase: ', response);
-			setPhrase(response.body.split(' '));
-			localStorage.setItem('phrase', JSON.stringify(response));
-			response.body.split(' ').forEach((word: string, index: number) => { 
+		getData(`/phrases/one/${props.topic.id}`).then((phrase) => {
+			console.log('phrase: ', phrase);
+			setPhrase(phrase.body.split(' '));
+			setValue('phraseId', phrase.id)
+			localStorage.setItem('phrase', JSON.stringify(phrase));
+			phrase.body.split(' ').forEach((word: string, index: number) => { 
 				findStems(word)
 				.then((data) => {
 					stemList[index] = (data.meta.stems);
@@ -57,16 +66,21 @@ function HaikuForm(props: Props) {
 			});
 		});
 
+		setValue('roundId', props.topic.roundId);
+		setValue('teamId', team.id);
 	}, []);
 
   const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
-		getData(`/haicues/${props.topic.roundId}/${team.id}`).then((response) => {
-			if (response.id) {
-				putData('/haicues', {'id': Number(response.id), 'line1': data.line1, 'line2': data.line2, 'line3': data.line3})
-			} else {
-				postData('/haicues', data);
-			}
-		});
+		if (submitted) {
+			getData(`/haicues/${props.topic.roundId}/${team.id}`).then((haicue) => {
+					putData('/haicues', {id: Number(haicue.id), line1: data.line1, line2: data.line2, line3: data.line3})
+			});
+		} else {
+			postData('/haicues', data).then((haicue) => {
+				postData('/turns', {roundId: round.id, presentingTeamId: team.id, haicueId: haicue.id});
+			});
+		}
+		setSubmitted(true);
 		socket.emit('submit');
 	};
 

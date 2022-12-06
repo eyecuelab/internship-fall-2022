@@ -26,8 +26,8 @@ export const getRoundHaicues = async (id: number) => {
 export const createHaicues = async (roundId: number, teamId: number, phraseId: number, line1: string, line2: string, line3: string) => {
 	return await prisma.haicues.create({
     data: {
-			Round: { connect: {id: 1}},
-			Team: { connect: {id: 1}},
+			Round: { connect: {id: roundId}},
+			Team: { connect: {id: teamId}},
 			Phrase: { connect: {id: Number(phraseId)}},
 			line1: line1,
 			line2: line2,

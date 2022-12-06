@@ -37,12 +37,12 @@ function TeamList(props: Props) {
 	}, []);
 
 	const extendTime = () => {
-		postData(`/addTime`, [props.gameId]);
+		postData('/addTime', [props.gameId]);
 	}
 
 	const getTeamStatus = async () => {
 		var teamArr = new Array;
-		getData(`/rounds/games/${props.gameId}`).then((round) => {
+		getData(`/rounds/games/${game.id}`).then((round) => {
 			getData(`/haicues/round/${round[0].id}`).then((haicues) => {
 				for (let i = 0; i < haicues.length; i++) {
 					teamArr.push(haicues[i].teamId);
@@ -56,11 +56,11 @@ function TeamList(props: Props) {
 		})
 	};
 
-	const setHaikus = () => {
-		getData(`/haicues/round/`).then(() => {
+	// const setHaikus = () => {
+	// 	getData(`/haicues/round/`).then(() => {
 
-		})
-	}
+	// 	})
+	// }
 
   whiteButton.width = '100%';
   redButton.width = '100%';
@@ -87,7 +87,7 @@ function TeamList(props: Props) {
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${game.id}/presenting`}>
-		      {props.presenting ? <DogEarButton style={greenButton} onClick={setHaikus}>
+		      {props.presenting ? <DogEarButton style={greenButton}>
             <h3>Start Reading</h3>
           </DogEarButton> : null }
 		  </Link>

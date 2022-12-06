@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import {Grid, TextField, Button} from '@mui/material';
 import {Link, useParams} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
@@ -10,7 +10,7 @@ import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 
 interface Props {
-  setTopic: () => void;
+  setTopic: Dispatch<SetStateAction<Topic>>;
   handleSwitch: () => void;
 }
 

@@ -6,9 +6,8 @@ import ModPresenting from '../../Components/Moderators/Presenting';
 import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
-import { Games } from '@mui/icons-material';
-import { Topic } from '../../Types/Types';
-// do I need ModLogin?
+import { Game, Haicue, Round, Team, Topic, Turn } from '../../Types/Types';
+
 
 interface Props {
   setUserData: Dispatch<SetStateAction<{}>>;
@@ -17,14 +16,14 @@ interface Props {
 
 function PresentingHaikuControl(props: Props) {
   const { id } = useParams();
-  const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
-  const [haiku, setHaiku] = useState();
-  const [team, setTeam] = useState(JSON.parse(localStorage.getItem('presenting-team') as string));
-  const [round, setRound]= useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
-	const [turn, setTurn] = useState(JSON.parse(localStorage.getItem('turn') as string));
-  const [topic, setTopic]= useState(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
+  const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
+  const [haiku, setHaiku] = useState<Haicue>({id: 0, roundId: 0, teamId: 0, lineGuessed: 0, correctTeam: 0, line1: '', line2: '', line3: ''});
+  const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('presenting-team') as string));
+  const [round, setRound]= useState<Round>(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
+	const [turn, setTurn] = useState<Turn>(JSON.parse(localStorage.getItem('turn') as string));
+  const [topic, setTopic]= useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
   const [buzzedIn, setBuzzedIn] = useState(false);
-  const [teamsLeft, setTeamsLeft] = useState(0);
+  // const [teamsLeft, setTeamsLeft] = useState(0);
 
   useEffect(() => {
     getData(`/games/${id}`).then((games) => {
@@ -51,9 +50,20 @@ function PresentingHaikuControl(props: Props) {
 
   }, [round]);
 
-	const setNewTurn = () => {
-		postData('/turns', {roundId: round.id, presentingTeamId: 1, haicueId: 1});
-	}
+	// useEffect(() => {
+	// 	getData().then(() => {
+
+	// 	});
+	// }, []);
+
+	// const setNewTurns = () => {
+	// 	getData(`/rounds/game/${game.id}`).then((rounds) => {
+	// 		const thisRound = rounds.split(-1)[0];
+	// 		for (let i=0; i<thisRound.Haicues.length; i++) {
+	// 			postData('/turns', {roundId: thisRound.id, presentingTeamId: thisRound.Haicues[i].teamId, haicueId: thisRound.Haicues[i].id})
+	// 		}
+	// 	})
+	// }
 
   console.log('GAME: ', game);
 
@@ -94,7 +104,8 @@ function PresentingHaikuControl(props: Props) {
           content={
             <ModPresenting 
               handleSwitch={handleBuzzToggle} 
-              haikuData={haiku} 
+              haikuData={haiku}
+							// teamData={team} 
               gameData={game}
               topicData={topic}
             />
