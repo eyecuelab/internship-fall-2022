@@ -1,9 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import '../../../index.css';
+import { Link } from 'react-router-dom';
 import {Container, ButtonContainer} from './styles';
+import socket from '../../../Hooks/WebsocketHook';
+import {Button} from '@mui/material';
+import {whiteButton, greenButton, redButton, DogEarButton} from '../../componentStyles';
 import {whiteButton, greenButton, redButton, DogEarButton} from '../../componentStyles';
 import { Game, Haicue, Team, Topic } from '../../../Types/Types';
 import { getData } from '../../../ApiHelper';
+
 interface Props {
   handleSwitch?: () => void;
   gameData: Game;
@@ -21,6 +26,25 @@ function ModPresenting(props: Props) {
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
+
+  const [lineNumber, setLineNumber] = useState(1);
+
+  useEffect(()=>{
+    socket.on('connection', () => {
+			console.log('socket open');
+		});
+
+		socket.on('buzz', () => {
+			props.handleSwitch;
+		});
+
+    socket.emit('buzzer_refresh');
+
+		return () => {
+			socket.off('connection');
+			socket.off('buzz');
+		}
+  }, []);
   
 	useEffect(() => {
 		getData(`/rounds/games/${props.gameData.id}`).then((rounds) => {
@@ -68,9 +92,11 @@ function ModPresenting(props: Props) {
           <DogEarButton onClick={lineAdvancer} style={whiteButton}>
             <h3>advance haicue clue</h3>
           </DogEarButton>
-          <DogEarButton onClick={props.handleSwitch} style={redButton}>
-            <h3>end round</h3>
-          </DogEarButton>
+          <Link to={`/game/${props.gameData.id}/round`}>
+            <DogEarButton onClick={props.handleSwitch} style={redButton}>
+              <h3>end round</h3>
+            </DogEarButton>
+          </Link>
         </ButtonContainer>
       </Container>
     </>
