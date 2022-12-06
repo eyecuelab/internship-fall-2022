@@ -18,12 +18,12 @@ interface IFormInput {
 }
 
 type Data = {
-	name: string;
+	name?: string;
 	moderatorId: number;
 }
 
 function ModNewGame(props: Props) {
-  const { control, handleSubmit, setValue } = useForm<IFormInput>();
+  const { control, handleSubmit, setValue } = useForm<IFormInput>({defaultValues:{name: ""}});
 	const userData = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
