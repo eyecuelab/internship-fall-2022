@@ -85,7 +85,7 @@ function ModOverlay(props: Props) {
         <GameInfo h1Input={gameData.textOne} h3Input={gameData.labelOne} />
       ) : null}
 
-      {location.pathname.includes('round/') ? (<><h3>timer</h3><h1>{timer.minutes}:{timer.seconds}</h1></>) : (gameData ? (
+      {location.pathname.includes('round/') ? (<><h3 className={timer.minutes < 1 ? 'panic' : ''}>timer</h3><h1>{timer.minutes}:{timer.seconds}</h1></>) : (gameData ? (
         <GameInfo h1Input={gameData.textTwo} h3Input={gameData.labelTwo} />
       ) : null)}
 
