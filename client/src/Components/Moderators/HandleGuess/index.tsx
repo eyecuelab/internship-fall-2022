@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import '../../../index.css';
+import { Link } from 'react-router-dom';
 import socket from '../../../Hooks/WebsocketHook';
 import { Container, ButtonContainer, TeamAvatar } from './styles';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
@@ -47,9 +48,11 @@ function ModHandleGuess(props: Props) {
           <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
             <h3>dismiss guess</h3>
           </DogEarButton>
-          <DogEarButton onClick={props.handleSwitch} style={redButton}>
-            <h3>end round</h3>
-          </DogEarButton>
+          <Link to={`/game/${props.gameData.id}/round`}>
+            <DogEarButton onClick={props.handleSwitch} style={redButton}>
+              <h3>end round</h3>
+            </DogEarButton>
+          </Link>
         </ButtonContainer>
       </Container>
     </>
