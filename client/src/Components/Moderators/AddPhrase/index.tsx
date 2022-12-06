@@ -23,7 +23,7 @@ type Data = {
 function ModAddPhrase(props: Props) {
 	const { topicId } = useParams();
 	const navigate = useNavigate();
-  const { control, handleSubmit, setValue, reset } = useForm<IFormInput>();
+  const { control, handleSubmit, setValue, reset } = useForm<IFormInput>({defaultValues:{body: ""}});
   const [phrases, setPhrases] = useState([]);
 	const [topicName, setTopicName] = useState("");
 	const user = JSON.parse(localStorage.getItem('user') as string);

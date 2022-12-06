@@ -18,7 +18,7 @@ interface IFormInput {
 }
 
 function ModAddTopic(props: Props) {
-  const {control, handleSubmit, setValue, reset} = useForm<IFormInput>();
+  const {control, handleSubmit, setValue, reset} = useForm<IFormInput>({defaultValues:{name:""}});
   const [topics, setTopics] = useState([]);
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
