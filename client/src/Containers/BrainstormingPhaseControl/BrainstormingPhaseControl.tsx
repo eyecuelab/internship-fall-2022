@@ -13,18 +13,16 @@ interface Props {
 }
 
 function BrainstormingPhaseControl(props: Props) {
-  const {id} = useParams();
+  const { gameId, roundId } = useParams();
   const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
   const [presenting, setPresenting] = useState(false);
 
-  // useEffect(() => {
-  //   getGameList();
-  // }, []);
-
-  // const getGameList = async () => {
-  //   const game = await getData(`/games/${id}`);
-  //   setGame(game);
-  // };
+  useEffect(() => {
+    getData(`/games/${ gameId }`).then((game) => {
+			setGame(game);
+			localStorage.setItem('game', JSON.stringify(game))
+		});
+  }, []);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 

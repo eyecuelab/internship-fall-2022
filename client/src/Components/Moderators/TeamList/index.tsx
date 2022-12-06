@@ -23,7 +23,9 @@ function TeamList(props: Props) {
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
-		getTeamList();
+		getData(`/teams/game/${game.id}`).then((teams) => {
+			setTeams(teams);
+		});
 
 		socket.on('submit', () => {
 			getTeamStatus();
@@ -33,11 +35,6 @@ function TeamList(props: Props) {
       socket.off('submit');
     };
 	}, []);
-
-	const getTeamList = async () => {
-		const TeamList = await getData(`/teams/game/${game.id}`);
-		setTeams(TeamList);
-	};
 
 	const extendTime = () => {
 		postData(`/addTime`, [props.gameId]);
@@ -53,7 +50,7 @@ function TeamList(props: Props) {
 				setTeamArr(teamArr);
 				
 				if (teamArr.length === teams.length) {
-					props.setPresentingState(true);
+					props.setPresenting(true);
 				} 
 			});
 		})
@@ -94,7 +91,7 @@ function TeamList(props: Props) {
             <h3>Start Reading</h3>
           </DogEarButton> : null }
 		  </Link>
-          <DogEarButton onClick={() => extendTime()} style={whiteButton} >
+          <DogEarButton onClick={extendTime} style={whiteButton} >
             <h3>EXTENDS 30 SECONDS</h3>
           </DogEarButton>
 		  <Link to={`/game/${game.id}/round`}>

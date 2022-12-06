@@ -23,21 +23,17 @@ function ModStartRound(props: Props) {
   const user = JSON.parse(localStorage.getItem('user') as string);
 
   useEffect(() => {
-    getTopicList();
+    getData(`/topics/game/${id}`).then((response) => {
+			setTopics(response);
+		});
   }, []);
 
 	console.log('ROUND: ', round);
 
-  const getTopicList = async () => {
-    getData(`/topics/game/${id}`).then((response) => {
-			setTopics(response);
-		});
-  };
-
 	const selectTopic = () => {
 		postData('/addRound', { gameId: id, topicId: topic.id}).then(() => {
 			getData(`/games/${id}`).then((data) => {
-				localStorage.setItem('game', data);
+				localStorage.setItem('game', JSON.stringify(data));
 				setRound(data.Rounds.slice(-1)[0]);
 				putData('/topics/', { topicId: topic.id, roundId: data.Rounds.slice(-1)[0].id });
 				postData('/startGame', { gameId: id });
