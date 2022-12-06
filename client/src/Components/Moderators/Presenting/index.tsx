@@ -48,7 +48,7 @@ function ModPresenting(props: Props) {
 			setThisTurn(rounds.Turns[turns]);
 			getData(`/teams/${rounds.Turns[turns].teamId}`).then((team) => {
 				setTeam(team);
-				getData(`/haicues/${rounds.Turns[turns]}/${team.id}`).then((haiku) => {
+				getData(`/haicues/${rounds.Turns[turns].roundId}/${rounds.Turns[turns].teamId}`).then((haiku) => {
 					setHaiku(haiku);
 				})
 			});
