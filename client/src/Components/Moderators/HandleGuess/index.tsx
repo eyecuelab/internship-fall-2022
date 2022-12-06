@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../../index.css';
+import socket from '../../../Hooks/WebsocketHook';
 import { Container, ButtonContainer, TeamAvatar } from './styles';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
+import { PropaneSharp } from '@mui/icons-material';
 
 interface Props {
   handleSwitch?: () => void;
@@ -14,6 +16,17 @@ function ModHandleGuess(props: Props) {
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
+
+  useEffect(() => {
+		socket.on('connection', () => {
+			console.log('socket open');
+		});
+
+		return () => {
+			socket.off('connection');
+		}
+	}, []);
+
 
   return (
     <>
