@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import '../../../index.css';
+import { Link } from 'react-router-dom';
 import {Container, ButtonContainer} from './styles';
 import socket from '../../../Hooks/WebsocketHook';
 import {Button} from '@mui/material';
@@ -29,12 +30,10 @@ function ModPresenting(props: Props) {
 		});
 
     socket.emit('buzzer_refresh');
-    // this should ensure buzzers are refreshed anytime a guess is dismissed or a new round starts
 
 		return () => {
 			socket.off('connection');
 			socket.off('buzz');
-      // ask anthony about this return?
 		}
   }, []);
 
@@ -70,9 +69,11 @@ function ModPresenting(props: Props) {
           <DogEarButton onClick={lineAdvancer} style={whiteButton}>
             <h3>advance haicue clue</h3>
           </DogEarButton>
-          <DogEarButton onClick={props.handleSwitch} style={redButton}>
-            <h3>end round</h3>
-          </DogEarButton>
+          <Link to={`/game/${props.gameData.id}/round`}>
+            <DogEarButton onClick={props.handleSwitch} style={redButton}>
+              <h3>end round</h3>
+            </DogEarButton>
+          </Link>
         </ButtonContainer>
       </Container>
     </>
