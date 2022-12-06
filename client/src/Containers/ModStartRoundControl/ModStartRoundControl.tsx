@@ -34,7 +34,6 @@ function ModStartRoundControl(props: Props) {
     setSelectedTopic(!selectedTopic);
   };
 
-
   const handleLogout = () => {
 		props.setUserData({});
 		localStorage.clear();

@@ -31,6 +31,7 @@ function HaikuForm(props: Props) {
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
 	const [phrase, setPhrase] = useState(['', '']);
+	const [team, setTeam] = useState(JSON.parse(localStorage.getItem('team') as string))
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit } = useForm<IFormInput>();
 	const [roundNum, setRoundNum] = useState(1);
@@ -58,11 +59,8 @@ function HaikuForm(props: Props) {
 
 	}, []);
 
-	const roundId = 1;
-	const teamId = 1;
-
   const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
-		getData(`/haicues/${roundId}/${teamId}`).then((response) => {
+		getData(`/haicues/${props.topic.roundId}/${team.id}`).then((response) => {
 			if (response.id) {
 				putData('/haicues', {'id': Number(response.id), 'line1': data.line1, 'line2': data.line2, 'line3': data.line3})
 			} else {

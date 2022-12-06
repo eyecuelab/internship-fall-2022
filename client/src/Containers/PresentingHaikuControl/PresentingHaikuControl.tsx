@@ -1,12 +1,13 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
-import { getData } from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import ModPresenting from '../../Components/Moderators/Presenting';
 import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
 import { Games } from '@mui/icons-material';
+import { Topic } from '../../Types/Types';
 // do I need ModLogin?
 
 interface Props {
@@ -16,45 +17,45 @@ interface Props {
 
 function PresentingHaikuControl(props: Props) {
   const { id } = useParams();
-  const [game, setGame] = useState({});
+  const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
+  const [haiku, setHaiku] = useState();
+  const [team, setTeam] = useState(JSON.parse(localStorage.getItem('presenting-team') as string));
+  const [round, setRound]= useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
+	const [turn, setTurn] = useState(JSON.parse(localStorage.getItem('turn') as string));
+  const [topic, setTopic]= useState(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
   const [buzzedIn, setBuzzedIn] = useState(false);
-  const [haiku, setHaiku] = useState({});
-  const [team, setTeam] = useState({});
   const [teamsLeft, setTeamsLeft] = useState(0);
-  const [round, setRound]= useState({});
-  const [topic, setTopic]= useState({});
 
   useEffect(() => {
-    getGameList();
+    getData(`/games/${id}`).then((games) => {
+			setGame(games);
+			setRound(games.Rounds.slice(-1)[0]);
+		});
+
+		getData(`/turns/presentingTeam/${round.id}`).then((turn) => {
+			console.log('TURN DATA: ', turn);
+			setTurn(turn);
+			setTeam(turn.performingTeam);
+		});
+
   }, []);
 
   useEffect(() => {
-    if(round.topicId){
-      getTopicInfo();
-      getHaikuInfo();
-    }
-  }, [round.topicId]);
+		getData(`/topic/${round.topicId}`).then((topic) => {
+			setTopic(topic);
+		});
 
-  const getHaikuInfo = async () => {
-    const haikus = await getData(`/haicues/${round.id}/1`);
-    // hardcoded-should be `/haicues/${roundId}/${teamId }`. Not sure how that gets passed in.
-    setHaiku(haikus);
-  };
+    getData(`/haicues/rounds/${round.id}`).then((haikus) => {
+			setHaiku(haikus);
+		});
 
-  const getGameList = async () => {
-    const games = await getData(`/games/${id}`);
-    const roundInfo = games.Rounds[0];
-    setRound(roundInfo)
-    setGame(games);
-  };
+  }, [round]);
 
-  const getTopicInfo = async () => {
-      const topicInfo = await getData(`/topic/${round.topicId}`);
-      setTopic(topicInfo)
-    
-  };
+	const setNewTurn = () => {
+		postData('/turns', {roundId: round.id, presentingTeamId: 1, haicueId: 1});
+	}
 
-  console.log(game);
+  console.log('GAME: ', game);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
@@ -64,7 +65,7 @@ function PresentingHaikuControl(props: Props) {
 
   const passedInfo = {
     labelOne: 'round',
-    textOne: 'round',
+    textOne: game.Rounds.length,
     labelTwo: 'teams left',
     textTwo: 'pass #',
     gameCode: game.gameCode,
@@ -72,7 +73,6 @@ function PresentingHaikuControl(props: Props) {
   };
 
   if (localStorage.getItem('user')) {
-    1;
     if (buzzedIn) {
       return (
         <CardTemplate

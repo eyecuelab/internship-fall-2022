@@ -5,12 +5,12 @@ import {Grid, Button} from '@mui/material';
 import {DogEarButton, whiteButton, redButton, greenButton} from '../../componentStyles';
 import {Container, ButtonContainer} from './styles';
 import {getData, postData} from '../../../ApiHelper';
-import { Team } from '../../../Types/Types';
+import { Game, Team } from '../../../Types/Types';
 import TeamItem from './TeamItem';
 import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
-  gameId: number;
+  gameId: Game;
 	presenting: boolean;
 	setPresenting: Dispatch<SetStateAction<boolean>>;
 }
@@ -18,6 +18,7 @@ interface Props {
 function TeamList(props: Props) {
 	const [teams, setTeams] = useState([]);
 	const [teamArr, setTeamArr] = useState({});
+	const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
@@ -33,7 +34,7 @@ function TeamList(props: Props) {
 	}, []);
 
 	const getTeamList = async () => {
-		const TeamList = await getData(`/teams/game/${props.gameId}`);
+		const TeamList = await getData(`/teams/game/${game.id}`);
 		setTeams(TeamList);
 	};
 
@@ -55,7 +56,13 @@ function TeamList(props: Props) {
 				} 
 			});
 		})
-	  };
+	};
+
+	const setHaikus = () => {
+		getData(`/haicues/round/`).then(() => {
+
+		})
+	}
 
   whiteButton.width = '100%';
   redButton.width = '100%';
@@ -82,7 +89,7 @@ function TeamList(props: Props) {
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${props.gameId}/presenting`}>
-		      {props.presenting ? <DogEarButton style={greenButton} >
+		      {props.presenting ? <DogEarButton style={greenButton} onClick={setHaikus}>
             <h3>Start Reading</h3>
           </DogEarButton> : null }
 		  </Link>
