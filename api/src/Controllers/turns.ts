@@ -8,8 +8,8 @@ const turnsControllers = {
 	},
 
 	async createTurn(req: any, res: any) {
-		const { roundId, presentingTeamId } = req.body;
-		const turn = await createTurn(roundId, presentingTeamId);
+		const { roundId, presentingTeamId, haicueId } = req.body;
+		const turn = await createTurn(roundId, presentingTeamId, haicueId);
 		return res.status(201).json(turn);
 	},
 

@@ -82,14 +82,16 @@ model Turns {
   performingTeam    Teams   @relation(fields: [performingTeamId], references: [id], onDelete: Cascade)
   performingTeamId  Int
   guessingTeamId    Int?
+  Haicue            Haicues @relation(fields: [haicueId], references: [id], onDelete: Cascade)
+  haicueId          Int
   Round             Rounds? @relation(fields: [roundId], references: [id])
   roundId           Int
   currentLineNumber Int     @default(0)
 }
 
 model Haicues {
-  id          Int    @id @default(autoincrement())
-  Round       Rounds @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  id          Int     @id @default(autoincrement())
+  Round       Rounds  @relation(fields: [roundId], references: [id], onDelete: Cascade)
   roundId     Int
   teamId      Int
   line1       String
@@ -97,6 +99,7 @@ model Haicues {
   line3       String
   lineGuessed Int?
   correctTeam Int?
+  Turns       Turns[]
 }
 
 model Buzzers {
