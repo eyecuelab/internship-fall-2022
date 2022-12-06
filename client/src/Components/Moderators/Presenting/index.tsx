@@ -26,8 +26,6 @@ function ModPresenting(props: Props) {
   redButton.width = '100%';
   greenButton.width = '100%';
 
-  const [lineNumber, setLineNumber] = useState(1);
-
   useEffect(()=>{
     socket.on('connection', () => {
 			console.log('socket open');
