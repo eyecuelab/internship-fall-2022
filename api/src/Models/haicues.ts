@@ -23,11 +23,12 @@ export const getRoundHaicues = async (id: number) => {
 	});
 }
 
-export const createHaicues = async (roundNum: number, team: number, line1: string, line2: string, line3: string) => {
+export const createHaicues = async (roundId: number, teamId: number, phraseId: number, line1: string, line2: string, line3: string) => {
 	return await prisma.haicues.create({
     data: {
-			roundId: 1,
-			teamId: 1,
+			Round: { connect: {id: 1}},
+			Team: { connect: {id: 1}},
+			Phrase: { connect: {id: Number(phraseId)}},
 			line1: line1,
 			line2: line2,
 			line3: line3,

@@ -26,8 +26,9 @@ model Teams {
   game      Games     @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId    Int
   phrases   Phrases[]
-  socketId  String?
   Turns     Turns[]
+  Haicues   Haicues[]
+  socketId  String?
 }
 
 model Topics {
@@ -52,6 +53,7 @@ model Phrases {
   moderatorId Int
   team        Teams?     @relation(fields: [teamId], references: [id])
   teamId      Int?
+  Haicues     Haicues[]
 }
 
 model Games {
@@ -84,7 +86,7 @@ model Turns {
   guessingTeamId    Int?
   Haicue            Haicues @relation(fields: [haicueId], references: [id], onDelete: Cascade)
   haicueId          Int
-  Round             Rounds? @relation(fields: [roundId], references: [id])
+  Round             Rounds? @relation(fields: [roundId], references: [id], onDelete: Cascade)
   roundId           Int
   currentLineNumber Int     @default(0)
 }
@@ -93,6 +95,9 @@ model Haicues {
   id          Int     @id @default(autoincrement())
   Round       Rounds  @relation(fields: [roundId], references: [id], onDelete: Cascade)
   roundId     Int
+  Phrase      Phrases @relation(fields: [phraseId], references: [id], onDelete: Cascade)
+  phraseId    Int
+  Team        Teams   @relation(fields: [teamId], references: [id], onDelete: Cascade)
   teamId      Int
   line1       String
   line2       String

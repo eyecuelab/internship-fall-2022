@@ -4,6 +4,6 @@ import express from "express";
 const router = express.Router();
 
 router.get('/rounds/games/:id', roundsControllers.getCurRoundsByGameId);
-router.post('/addRound', roundsControllers.assignRoundToGame);
+router.post('/round', roundsControllers.assignRoundToGame);
 
 export default router;
