@@ -1,6 +1,12 @@
-import { createTurn, getTurn, updatePresentingTeam } from '../Models/turns';
+import { createTurn, getTurn, getTurnsByRound, updatePresentingTeam } from '../Models/turns';
 
 const turnsControllers = {
+	async getRoundTurns(req: any, res: any) {
+		const { id } = req.params;
+		const turns = await getTurnsByRound(id);
+		return res.json(turns)
+	},
+
 	async getTurn(req: any, res: any) {
 		const { id } = req.params;
 		const turn = await getTurn(id);
