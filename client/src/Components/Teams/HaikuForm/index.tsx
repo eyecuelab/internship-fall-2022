@@ -71,17 +71,22 @@ function HaikuForm(props: Props) {
 	}, []);
 
   const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
+		console.log('HAIKU SUBMIT ROUND: ', round);
+		console.log('HAIKU SUBMIT TEAM: ', team);
 		if (submitted) {
-			getData(`/haicues/${props.topic.roundId}/${team.id}`).then((haicue) => {
-					putData('/haicues', {id: Number(haicue.id), line1: data.line1, line2: data.line2, line3: data.line3})
+			getData(`/haicues/round/${round.id}/team/${team.id}`).then((haicue) => {
+				putData('/haicues', {id: Number(haicue.id), line1: data.line1, line2: data.line2, line3: data.line3}).then(() => {
+					socket.emit('submit');
+				});
 			});
 		} else {
 			postData('/haicues', data).then((haicue) => {
-				postData('/turns', {roundId: round.id, presentingTeamId: team.id, haicueId: haicue.id});
+				postData('/turns', {roundId: round.id, presentingTeamId: team.id, haicueId: haicue.id}).then(() => {
+					socket.emit('submit');
+				});
 			});
 		}
 		setSubmitted(true);
-		socket.emit('submit');
 	};
 
 	const swapLabel = (line: number, status: string) => {

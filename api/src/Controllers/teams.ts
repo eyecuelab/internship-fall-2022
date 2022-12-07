@@ -8,8 +8,8 @@ const teamsControllers = {
   },
 
 	async getOneTeam(req: any, res: any) {
-		const { teamId } = req.params;
-		const team = await getTeamById(teamId);
+		const { id } = req.params;
+		const team = await getTeamById(id);
 		return res.json(team);
 	},
 

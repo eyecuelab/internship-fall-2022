@@ -83,6 +83,7 @@ export const countSyllables = (inputWord: string) => {
 	];
 	const doubleMinusSyllables = [
 		/[aeiou][^aeiou]e.*[aeiou][^aeiou]e$/i,
+		/[aeiou][^aeiou]e.*[aeiou][^aeiou]es$/i,
 		/^(fore[^bfhqsv])/i,
 		/rriage$/i,
 		/[^g]giate/,

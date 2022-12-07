@@ -28,7 +28,21 @@ function TeamList(props: Props) {
 		});
 
 		socket.on('submit', () => {
-			getTeamStatus();
+			var teamArr = new Array;
+			getData(`/rounds/games/${game.id}`).then((round) => {
+				getData(`/haicues/round/${round[0].id}`).then((haicues) => {
+					for (let i = 0; i < haicues.length; i++) {
+						teamArr.push(haicues[i].teamId);
+					}
+					setTeamArr(teamArr);
+					console.log();
+					console.log();
+					
+					if (teamArr.length === teams.length) {
+						props.setPresenting(true);
+					} 
+				});
+			});
 		});
 
 		return () => {
@@ -40,21 +54,21 @@ function TeamList(props: Props) {
 		postData('/addTime', [props.gameId]);
 	}
 
-	const getTeamStatus = async () => {
-		var teamArr = new Array;
-		getData(`/rounds/games/${game.id}`).then((round) => {
-			getData(`/haicues/round/${round[0].id}`).then((haicues) => {
-				for (let i = 0; i < haicues.length; i++) {
-					teamArr.push(haicues[i].teamId);
-				}
-				setTeamArr(teamArr);
+	// const getTeamStatus = async () => {
+	// 	var teamArr = new Array;
+	// 	getData(`/rounds/games/${game.id}`).then((round) => {
+	// 		getData(`/haicues/round/${round[0].id}`).then((haicues) => {
+	// 			for (let i = 0; i < haicues.length; i++) {
+	// 				teamArr.push(haicues[i].teamId);
+	// 			}
+	// 			setTeamArr(teamArr);
 				
-				if (teamArr.length === teams.length) {
-					props.setPresenting(true);
-				} 
-			});
-		})
-	};
+	// 			if (teamArr.length === teams.length) {
+	// 				props.setPresenting(true);
+	// 			} 
+	// 		});
+	// 	});
+	// };
 
 	// const setHaikus = () => {
 	// 	getData(`/haicues/round/`).then(() => {
@@ -70,7 +84,7 @@ function TeamList(props: Props) {
       <Container>
         <Grid container>
           <Grid container item xs={5} direction="column">
-            <h3>GAMES</h3>
+            <h3>TEAM</h3>
           </Grid>
           <Grid container item xs={3} direction="column">
             <h3 style={{textAlign: 'right'}}>SCORE</h3>
@@ -92,7 +106,7 @@ function TeamList(props: Props) {
           </DogEarButton> : null }
 		  </Link>
           <DogEarButton onClick={extendTime} style={whiteButton} >
-            <h3>EXTENDS 30 SECONDS</h3>
+            <h3>EXTEND 30 SECONDS</h3>
           </DogEarButton>
 		  <Link to={`/game/${game.id}/round`}>
           <DogEarButton

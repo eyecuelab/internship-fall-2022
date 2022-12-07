@@ -25,6 +25,11 @@ function PresentingHaikuControl(props: Props) {
   const [buzzedIn, setBuzzedIn] = useState(false);
   // const [teamsLeft, setTeamsLeft] = useState(0);
 
+	console.log('INITIAL GAME: ', game);
+	console.log('INITIAL ROUND: ', round);
+	// console.log('INITIAL ',);
+	// console.log('INITIAL ',);
+
   useEffect(() => {
     getData(`/games/${id}`).then((games) => {
 			setGame(games);
@@ -40,11 +45,12 @@ function PresentingHaikuControl(props: Props) {
   }, []);
 
   useEffect(() => {
+		console.log('ROUND TOPIC ID', round.topicId);
 		getData(`/topic/${round.topicId}`).then((topic) => {
 			setTopic(topic);
 		});
 
-    getData(`/haicues/rounds/${round.id}`).then((haikus) => {
+    getData(`/haicues/round/${round.id}`).then((haikus) => {
 			setHaiku(haikus);
 		});
 
