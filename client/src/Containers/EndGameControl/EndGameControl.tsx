@@ -15,18 +15,24 @@ interface Props {
 function EndGameControl(props: Props) {
 	const {id} = useParams();
 	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
+	const [round, setRound]= useState<Round>(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 
   useEffect(() => {
-	getData(`/games/${id}`).then(game => {
-		setGame(game);
-	});
+    getData(`/games/${id}`).then(games => {
+      setGame(games);
+	  setRound(games.Rounds.slice(-1)[0]);
+    });
   }, []);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   const passedInfo = {
     labelOne: 'round',
-    textOne: '3',
+    textOne: game.Rounds.length,
+    labelTwo: 'teams left',
+    textTwo: 'pass #',
+    gameCode: game.gameCode,
+    gameRound: round,
   };
 
   if (localStorage.getItem('user')) {
