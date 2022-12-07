@@ -7,6 +7,7 @@ import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
 import { Game, Topic } from '../../Types/Types';
+import { CurrencyYenTwoTone } from '@mui/icons-material';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -16,9 +17,13 @@ interface Props {
 
 function ModStartRoundControl(props: Props) {
   const {id} = useParams();
+
   const [game, setGame] = useState<Game>(); //JSON.parse(localStorage.getItem('game') as string)
 	const [topic, setTopic] = useState<Topic>(); //JSON.parse(localStorage.getItem('game') as string).Topic.slice(-1)[0]
+
   const [selectedTopic, setSelectedTopic] = useState(false)
+
+	console.log(JSON.parse(localStorage.getItem('game') as string));
 
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
