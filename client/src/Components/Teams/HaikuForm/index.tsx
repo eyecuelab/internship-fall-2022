@@ -36,6 +36,7 @@ function HaikuForm(props: Props) {
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
+	// @ts-ignore
 	const [phrase, setPhrase] = useState<Phrase>({id: 0, body: 'null value', wordCount: 2, topic: {}, topicId: 0});
 	const [team, setTeam] = useState(JSON.parse(localStorage.getItem('team') as string))
 	const { submitState, setSubmitState } = props;

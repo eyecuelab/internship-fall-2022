@@ -29,15 +29,6 @@ function ModStartRound(props: Props) {
 
 	console.log('ROUND: ', round);
 
-	// const setNewTurns = () => {
-		// getData(`/rounds/game/${game.id}`).then((rounds) => {
-		// 	const thisRound = rounds.split(-1)[0];
-		// 	for (let i=0; i<thisRound.Haicues.length; i++) {
-		// 		postData('/turns', {roundId: thisRound.id, presentingTeamId: thisRound.Haicues[i].teamId, haicueId: thisRound.Haicues[i].id})
-		// 	}
-		// })
-	// }
-
 	const selectTopic = () => {
 		postData('/round', { gameId: id, topicId: topic.id }).then((newRound) => {
 			getData(`/games/${id}`).then((data) => {

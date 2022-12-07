@@ -50,6 +50,7 @@ function ModStartRoundControl(props: Props) {
 		if (selectedTopic) {
 			return (
 				<CardTemplate
+				// @ts-ignore
         content={<ModStartRound topic={topic} handleSwitch={handleSelectedTopic}/>}
 					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
@@ -59,6 +60,7 @@ function ModStartRoundControl(props: Props) {
 		} else {
 			return (
 				<CardTemplate
+				// @ts-ignore
           content={<ModChooseTopic setTopic={setTopic} handleSwitch={handleSelectedTopic}/>}
 					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
