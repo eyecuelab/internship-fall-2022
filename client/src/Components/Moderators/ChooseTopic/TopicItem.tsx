@@ -18,8 +18,11 @@ function TopicItem(props: Props) {
   const {topic, setTopic, handleSwitch} = props;
 
   const handleSetTopic = () => {
+		console.log("handleSetTopic");
 		getData(`/teams/game/${id}`).then((teams) => {
+			console.log('teams:', teams)
 			getData(`/phrases/${topic.id}`).then((phrases) => {
+				console.log("phrases:", phrases)
 				for (let i=0; i<teams.length; i++) {
 					putData('/team/addPhrase', { teamId: teams[i].id, phraseId: phrases[i].id}).then(() => {
 						console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
