@@ -1,3 +1,4 @@
+// export const API_ENDPOINT = 'https://localhost:3000'
 export const API_ENDPOINT = 'https://haicue-pikachu-api.fly.dev';
 const BASE_HEADERS = {
   headers: {
