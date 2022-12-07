@@ -17,8 +17,10 @@ interface Props {
 function ModStartRoundControl(props: Props) {
   const {id} = useParams();
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
-	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.slice(-1)[0]);
+	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('game') as string));
   const [selectedTopic, setSelectedTopic] = useState(false)
+
+	console.log(topic);
 
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
