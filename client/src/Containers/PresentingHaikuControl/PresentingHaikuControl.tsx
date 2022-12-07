@@ -80,7 +80,7 @@ function PresentingHaikuControl(props: Props) {
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   const handleBuzzToggle = () => {
-    setBuzzedIn(!buzzedIn);
+    setBuzzedIn(false);
   };
 
   const passedInfo = {
