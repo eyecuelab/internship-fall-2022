@@ -102,6 +102,7 @@ function PresentingHaikuControl(props: Props) {
               haikuData={haiku} 
               gameData={game}
               topicData={topic}
+							// @ts-ignore
 							guessingTeam={guessingTeam}
             />}
           overlay={<ModOverlay gameData={passedInfo} />}
