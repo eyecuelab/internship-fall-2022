@@ -18,6 +18,11 @@ export const getTeamById = async (teamId: number) => {
 	return await prisma.teams.findUnique({
 		where: {
 			id: Number(teamId)
+		},
+		include: {
+			phrases: true,
+			Turns: true,
+			Haicues: true
 		}
 	});
 }

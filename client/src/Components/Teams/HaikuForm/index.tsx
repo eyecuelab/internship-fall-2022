@@ -52,32 +52,20 @@ function HaikuForm(props: Props) {
 		const stemList: any[] = [];
 		console.log('props.topic', props.topic);
 		getData(`/team/${team.id}`).then((team) => {
-			localStorage.setItem('team', team);
+			localStorage.setItem('team', JSON.stringify(team));
+			console.log('TEAM: ', team);
 			setTeam(team);
-			setPhrase(team.Phrases.slice(-1)[0]);
-			team.Phrases.slice(-1)[0].split(' ').forEach((word: string, index: number) => {
+			console.log('TEAM PHRASES: ', team.phrases.slice(-1)[0].body);
+			setPhrase(team.phrases.slice(-1)[0].body.split(' '));
+			team.phrases.slice(-1)[0].body.split(' ').forEach((word: string, index: number) => {
 				findStems(word)
 				.then((data) => {
 					stemList[index] = (data.meta.stems);
 					// @ts-ignore
 					setStems(stemList);
-				})
-			})
-		})
-		// getData(`/phrases/one/${props.topic.id}`).then((phrase) => {
-		// 	console.log('phrase: ', phrase);
-		// 	setPhrase(phrase.body.split(' '));
-		// 	setValue('phraseId', phrase.id)
-		// 	localStorage.setItem('phrase', JSON.stringify(phrase));
-		// 	phrase.body.split(' ').forEach((word: string, index: number) => { 
-		// 		findStems(word)
-		// 		.then((data) => {
-		// 			stemList[index] = (data.meta.stems);
-		// 			// @ts-ignore
-		// 			setStems(stemList);
-		// 		});
-		// 	});
-		// });
+				});
+			});
+		});
 
 		setValue('roundId', props.topic.roundId);
 		setValue('teamId', team.id);
