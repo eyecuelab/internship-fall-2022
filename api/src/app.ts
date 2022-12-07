@@ -5,6 +5,7 @@ import phrasesRouter from "./Routes/phrases";
 import gamesRouter from "./Routes/games";
 import moderatorsRouter from "./Routes/moderators";
 import roundsRouter from "./Routes/rounds";
+import turnsRouter from "./Routes/turns";
 import logicRouter from "./Routes/logic";
 import cors from 'cors';
 import express from 'express';
@@ -15,6 +16,8 @@ app.use(cors({
   origin: [
     '*',
     'http://localhost:5173',
+		'https://fancy-liger-5c83e4.netlify.app',
+		'https://haicue.com',
 		'https://www.thunderclient.com'
   ], 
   methods: ['GET', 'POST', 'DELETE', 'PUT']}));
@@ -29,6 +32,7 @@ app.use(
 	gamesRouter,
 	moderatorsRouter,
 	roundsRouter,
+	turnsRouter,
 	logicRouter
 );
 

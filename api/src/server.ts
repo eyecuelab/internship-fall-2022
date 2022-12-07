@@ -9,6 +9,8 @@ const io = new Server(server, {
     origin: [
       '*',
       'http://localhost:5173',
+			'https://fancy-liger-5c83e4.netlify.app',
+			'https://haicue.com',
 			'https://www.thunderclient.com'
     ],
     methods: ['GET', 'POST', 'DELETE', 'PUT']
