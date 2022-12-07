@@ -14,7 +14,7 @@ import { Game, Team, Topic } from '../../Types/Types';
 function GameControl() {
 	window.localStorage.removeItem('user');
 	const { code } = useParams();
-	const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
+	const [team, setTeam] = useState<Team>();
 	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
 	const [color, setColor] = useState('#888');

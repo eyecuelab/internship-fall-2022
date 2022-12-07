@@ -51,20 +51,33 @@ function HaikuForm(props: Props) {
 		setRoundNum(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
 		const stemList: any[] = [];
 		console.log('props.topic', props.topic);
-		getData(`/phrases/one/${props.topic.id}`).then((phrase) => {
-			console.log('phrase: ', phrase);
-			setPhrase(phrase.body.split(' '));
-			setValue('phraseId', phrase.id)
-			localStorage.setItem('phrase', JSON.stringify(phrase));
-			phrase.body.split(' ').forEach((word: string, index: number) => { 
+		getData(`/team/${team.id}`).then((team) => {
+			localStorage.setItem('team', team);
+			setTeam(team);
+			setPhrase(team.Phrases.slice(-1)[0]);
+			team.Phrases.slice(-1)[0].split(' ').forEach((word: string, index: number) => {
 				findStems(word)
 				.then((data) => {
 					stemList[index] = (data.meta.stems);
 					// @ts-ignore
 					setStems(stemList);
-				});
-			});
-		});
+				})
+			})
+		})
+		// getData(`/phrases/one/${props.topic.id}`).then((phrase) => {
+		// 	console.log('phrase: ', phrase);
+		// 	setPhrase(phrase.body.split(' '));
+		// 	setValue('phraseId', phrase.id)
+		// 	localStorage.setItem('phrase', JSON.stringify(phrase));
+		// 	phrase.body.split(' ').forEach((word: string, index: number) => { 
+		// 		findStems(word)
+		// 		.then((data) => {
+		// 			stemList[index] = (data.meta.stems);
+		// 			// @ts-ignore
+		// 			setStems(stemList);
+		// 		});
+		// 	});
+		// });
 
 		setValue('roundId', props.topic.roundId);
 		setValue('teamId', team.id);

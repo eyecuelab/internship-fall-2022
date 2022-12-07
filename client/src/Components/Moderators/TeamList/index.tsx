@@ -19,7 +19,7 @@ function TeamList(props: Props) {
 	const [teams, setTeams] = useState([]);
 	const [teamArr, setTeamArr] = useState({});
 	const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
-	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
+	const [round, setRound] = useState(); //JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {

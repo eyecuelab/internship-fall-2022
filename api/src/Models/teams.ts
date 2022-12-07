@@ -87,3 +87,14 @@ export const getTeamBySocketId = async (socketId: string) => {
 		where: { socketId: socketId }
 	})
 }
+
+export const addUniquePhrase = async (teamId: number, phraseId: number) => {
+	return await prisma.phrases.update({
+		where: {
+			id: Number(phraseId)
+		},
+		data: {
+			team: { connect: { id: Number(teamId) }}
+		}
+	})
+} 
