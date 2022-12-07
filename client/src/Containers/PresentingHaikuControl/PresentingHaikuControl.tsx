@@ -7,6 +7,7 @@ import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
 import { Game, Haicue, Round, Team, Topic, Turn } from '../../Types/Types';
+import socket from '../../Hooks/WebsocketHook';
 
 
 interface Props {
@@ -29,6 +30,21 @@ function PresentingHaikuControl(props: Props) {
 	console.log('INITIAL ROUND: ', round);
 	// console.log('INITIAL ',);
 	// console.log('INITIAL ',);
+
+	useEffect(() => {
+		socket.on('connection', () => {
+			console.log('socket open');
+		});
+
+		socket.on('buzz', (team: Team) => {
+			console.log('a team buzzed in: ', team.teamName);
+		});
+
+		return () => {
+			socket.off('connection');
+			socket.off('buzz');
+		}
+	}, [])
 
   useEffect(() => {
     getData(`/games/${id}`).then((games) => {

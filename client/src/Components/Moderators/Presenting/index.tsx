@@ -61,9 +61,6 @@ function ModPresenting(props: Props) {
 				getData(`/team/${haicue.teamId}`).then((team) => {
 					setTeam(team);
 				});
-				// getData(`/turns/presentingTeam/${haicue.id}`).then((turn) => {
-				// 	console.log('THIS HAICUE: ', turn.haicue);
-				// })
 			});
 		});
 	}, []);
