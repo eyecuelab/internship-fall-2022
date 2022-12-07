@@ -8,11 +8,12 @@ const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
     origin: [
-      '*',
       'http://localhost:5173',
-			'https://www.thunderclient.com',
+			'https://fancy-liger-5c83e4.netlify.app',
 			'https://haicue.com',
+			'https://www.thunderclient.com'
 			'https://haicue-pikachu-api.fly.dev',
+
     ],
     methods: ['GET', 'POST', 'DELETE', 'PUT'],
 		
