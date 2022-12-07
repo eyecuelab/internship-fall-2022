@@ -3,7 +3,7 @@ import io from "../server";
 export const startThisGame = (gameId: number) => {
 	const timer = 300;
 	io.emit('start_game'); //.in(gameId.toString())
-	setTimeout(() => io.emit('start_round', timer), 15000); //.in(gameId.toString())
+	setTimeout(() => io.emit('start_round', timer), 5000); //.in(gameId.toString())
 }
 
 export const emitStartRound = (gameId: number) => {
