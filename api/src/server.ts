@@ -11,7 +11,7 @@ const io = new Server(server, {
       'http://localhost:5173',
 			'https://fancy-liger-5c83e4.netlify.app',
 			'https://haicue.com',
-			'https://www.thunderclient.com'
+			'https://www.thunderclient.com',
 			'https://haicue-pikachu-api.fly.dev',
 
     ],
