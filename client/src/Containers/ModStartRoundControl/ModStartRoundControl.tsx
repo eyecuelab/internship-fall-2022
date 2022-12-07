@@ -21,7 +21,7 @@ function ModStartRoundControl(props: Props) {
   const [game, setGame] = useState<Game>(); //JSON.parse(localStorage.getItem('game') as string)
 	const [topic, setTopic] = useState<Topic>(); //JSON.parse(localStorage.getItem('game') as string).Topic.slice(-1)[0]
 
-  const [selectedTopic, setSelectedTopic] = useState(false)
+  const [selectedTopic, setSelectedTopic] = useState(false);
 
 	console.log(JSON.parse(localStorage.getItem('game') as string));
 
