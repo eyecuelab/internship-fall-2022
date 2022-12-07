@@ -56,21 +56,6 @@ function PresentingHaikuControl(props: Props) {
 
   }, [round]);
 
-	// useEffect(() => {
-	// 	getData().then(() => {
-
-	// 	});
-	// }, []);
-
-	// const setNewTurns = () => {
-	// 	getData(`/rounds/game/${game.id}`).then((rounds) => {
-	// 		const thisRound = rounds.split(-1)[0];
-	// 		for (let i=0; i<thisRound.Haicues.length; i++) {
-	// 			postData('/turns', {roundId: thisRound.id, presentingTeamId: thisRound.Haicues[i].teamId, haicueId: thisRound.Haicues[i].id})
-	// 		}
-	// 	})
-	// }
-
   console.log('GAME: ', game);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
