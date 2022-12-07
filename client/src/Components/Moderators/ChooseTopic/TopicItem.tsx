@@ -8,6 +8,7 @@ import { round } from 'corners';
 
 interface Props {
   topic: Topic;
+	selectTopic: Dispatch<SetStateAction<boolean>>;
   setTopic: Dispatch<SetStateAction<Topic>>;
 	handleSwitch: Dispatch<SetStateAction<boolean>>;
 }
@@ -40,7 +41,8 @@ function TopicItem(props: Props) {
 
   return (
     <>
-			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={() => handleSetTopic()} disabled={topic.roundId ? true : false}>
+		{/* ts-ignore */}
+			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={() => props.selectTopic} disabled={topic.roundId ? true : false}>
 				<h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
 			</DogEarButton>
     </>

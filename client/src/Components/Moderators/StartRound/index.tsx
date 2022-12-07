@@ -34,9 +34,26 @@ function ModStartRound(props: Props) {
 			getData(`/games/${id}`).then((data) => {
 				localStorage.setItem('game', JSON.stringify(data));
 				setRound(newRound);
-				putData('/topics/', { topicId: topic.id, roundId: newRound.id });
-				postData('/startGame', { gameId: id });
-				console.log('NEW ROUND: ', newRound);
+				putData('/topics/', { topicId: topic.id, roundId: newRound.id }).then(() => {
+					console.log("handleSetTopic");
+					getData(`/teams/game/${id}`).then((teams) => {
+						console.log('teams:', teams)
+						getData(`/phrases/${topic.id}`).then((phrases) => {
+							console.log("phrases:", phrases)
+							for (let i=0; i<teams.length; i++) {
+								putData('/team/addPhrase', { teamId: teams[i].id, phraseId: phrases[i].id}).then(() => {
+									console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
+								});
+								if (i === teams.length - 1) {
+									console.log('i = teams length');
+									props.handleSwitch(true);
+									postData('/startGame', { gameId: id });
+									console.log('NEW ROUND: ', newRound);
+								}
+							}
+						});
+					});
+				});
 			});
 		});
 	}
@@ -60,8 +77,7 @@ function ModStartRound(props: Props) {
             <h3>start round</h3>
           </DogEarButton>
 					</Link>
-					{/* @ts-ignore */}
-          <DogEarButton style={whiteButton} onClick={handleSwitch}>
+          <DogEarButton style={whiteButton} onClick={() => handleSwitch(false)}>
             <h3>back to selection</h3>
           </DogEarButton>
           <DogEarButton style={redButton}>
