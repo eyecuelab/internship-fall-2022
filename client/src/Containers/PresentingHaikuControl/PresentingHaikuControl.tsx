@@ -20,6 +20,7 @@ function PresentingHaikuControl(props: Props) {
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
   const [haiku, setHaiku] = useState<Haicue>({id: 0, roundId: 0, teamId: 0, lineGuessed: 0, correctTeam: 0, line1: '', line2: '', line3: ''});
   const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('presenting-team') as string));
+	const [guessingTeam, setGuessingTeam] = useState<Team>();
   const [round, setRound]= useState<Round>(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 	const [turn, setTurn] = useState<Turn>(JSON.parse(localStorage.getItem('turn') as string));
   const [topic, setTopic]= useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
@@ -38,13 +39,15 @@ function PresentingHaikuControl(props: Props) {
 
 		socket.on('buzz', (team: Team) => {
 			console.log('a team buzzed in: ', team.teamName);
+			setGuessingTeam(team);
+			setBuzzedIn(true);
 		});
 
 		return () => {
 			socket.off('connection');
 			socket.off('buzz');
 		}
-	}, [])
+	}, []);
 
   useEffect(() => {
     getData(`/games/${id}`).then((games) => {
@@ -99,6 +102,7 @@ function PresentingHaikuControl(props: Props) {
               haikuData={haiku} 
               gameData={game}
               topicData={topic}
+							guessingTeam={guessingTeam}
             />}
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
