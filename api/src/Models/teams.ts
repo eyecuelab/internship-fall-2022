@@ -10,6 +10,11 @@ export const getTeamsByGame = async (gameId: number) => {
 		orderBy: {
 			teamScore: 'desc',
 		},
+		include: {
+			phrases: true,
+			Turns: true,
+			Haicues: true,
+		}
 	});
 }
 

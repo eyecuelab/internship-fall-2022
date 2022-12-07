@@ -16,6 +16,7 @@ app.use(cors({
   origin: [
 		'https://haicue.com',
     'http://localhost:5173',
+    'http://localhost:4173',
 		'https://fancy-liger-5c83e4.netlify.app',
 		'https://www.thunderclient.com',
 		'https://haicue-pikachu-api.fly.dev'
