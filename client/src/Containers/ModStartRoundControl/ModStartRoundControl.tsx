@@ -17,9 +17,10 @@ interface Props {
 
 function ModStartRoundControl(props: Props) {
   const {id} = useParams();
-  const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
-	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('game') as string));
-	// I'm not sure why we need to get the topic here...at this point, it hasn't been selected.
+
+  const [game, setGame] = useState<Game>(); //JSON.parse(localStorage.getItem('game') as string)
+	const [topic, setTopic] = useState<Topic>(); //JSON.parse(localStorage.getItem('game') as string).Topic.slice(-1)[0]
+
   const [selectedTopic, setSelectedTopic] = useState(false)
 
 	console.log(JSON.parse(localStorage.getItem('game') as string));
@@ -43,23 +44,14 @@ function ModStartRoundControl(props: Props) {
 		window.localStorage.clear();
   };
 
-	// const setNewTurns = () => {
-	// 	getData(`/rounds/game/${game.id}`).then((rounds) => {
-	// 		const thisRound = rounds.split(-1)[0];
-	// 		for (let i=0; i<thisRound.Haicues.length; i++) {
-	// 			postData('/turns', {roundId: thisRound.id, presentingTeamId: thisRound.Haicues[i].teamId, haicueId: thisRound.Haicues[i].id})
-	// 		}
-	// 	})
-	// }
-
-  const passedInfo ={labelOne: "round", textOne: "1"};
+  const passedInfo ={labelOne: "round", textOne: "1", gameCode: game?.gameCode};
 	
   if (localStorage.getItem('user')) {
 		if (selectedTopic) {
 			return (
 				<CardTemplate
         content={<ModStartRound topic={topic} handleSwitch={handleSelectedTopic}/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
@@ -67,8 +59,8 @@ function ModStartRoundControl(props: Props) {
 		} else {
 			return (
 				<CardTemplate
-          content={<ModChooseTopic handleSetTopic={setTopic} handleSwitch={handleSelectedTopic}/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+          content={<ModChooseTopic setTopic={setTopic} handleSwitch={handleSelectedTopic}/>}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>

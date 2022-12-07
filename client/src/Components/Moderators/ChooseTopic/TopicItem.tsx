@@ -1,5 +1,5 @@
 import React, {Dispatch, SetStateAction, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {Round, Topic} from '../../../Types/Types';
 import {Button} from '@mui/material';
 import {DogEarButton, whiteButton} from '../../componentStyles';
@@ -14,11 +14,21 @@ interface Props {
 
 
 function TopicItem(props: Props) {
+	const { id } = useParams();
   const {topic, setTopic, handleSwitch} = props;
 
   const handleSetTopic = () => {
-    setTopic(topic);
-    handleSwitch(true);
+		getData(`/teams/game/${id}`).then((teams) => {
+			getData(`/phrases/${topic.id}`).then((phrases) => {
+				for (let i=0; i<teams.length; i++) {
+					putData('/team/addPhrase', { teamId: teams[i].id, phraseId: phrases[i].id}).then(() => {
+						console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
+					});
+				}
+			});
+			setTopic(topic);
+			handleSwitch(true);
+		});
   }
 
 	whiteButton.width = '100%';

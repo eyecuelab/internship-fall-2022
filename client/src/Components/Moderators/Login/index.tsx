@@ -5,6 +5,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import { Content, Header } from './styles';
 import { DogEarButton, whiteButton } from '../../componentStyles';
 import { getData, postData } from '../../../ApiHelper';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
 	setUserData: (data: any) => void;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 function ModLogin(props: Props) {
+	const navigate = useNavigate();
 	whiteButton.width = '100%';
 	whiteButton.padding = '1rem';
 	whiteButton.height = '5rem';
@@ -30,8 +32,9 @@ function ModLogin(props: Props) {
 				const user = JSON.parse(localStorage.getItem('user') as string);
 				getData(`/moderators/${user.email}`).then((moderator) => {
 					!moderator && postData('/moderators', { email: user.email });
-				}) 
+				}) ;
 				props.setUserData(data);
+				navigate('/');
 			});
 		}
 	})

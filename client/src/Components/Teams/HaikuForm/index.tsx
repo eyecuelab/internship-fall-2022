@@ -5,7 +5,7 @@ import { getData, postData, putData } from '../../../ApiHelper';
 import { findStems, compareWords, haikuCheck } from './validation'
 import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
 import socket from '../../../Hooks/WebsocketHook';
-import { Topic } from '../../../Types/Types';
+import { Phrase, Topic } from '../../../Types/Types';
 
 interface Props {
 	topic: Topic;
@@ -36,7 +36,7 @@ function HaikuForm(props: Props) {
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
-	const [phrase, setPhrase] = useState(['', '']);
+	const [phrase, setPhrase] = useState<Phrase>({id: 0, body: 'null value', wordCount: 2, topic: {}, topicId: 0});
 	const [team, setTeam] = useState(JSON.parse(localStorage.getItem('team') as string))
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
@@ -51,12 +51,17 @@ function HaikuForm(props: Props) {
 		setRoundNum(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
 		const stemList: any[] = [];
 		console.log('props.topic', props.topic);
-		getData(`/phrases/one/${props.topic.id}`).then((phrase) => {
-			console.log('phrase: ', phrase);
-			setPhrase(phrase.body.split(' '));
-			setValue('phraseId', phrase.id)
-			localStorage.setItem('phrase', JSON.stringify(phrase));
-			phrase.body.split(' ').forEach((word: string, index: number) => { 
+		getData(`/team/${team.id}`).then((team) => {
+			localStorage.setItem('team', JSON.stringify(team));
+			console.log('TEAM: ', team);
+			setTeam(team);
+			console.log('TEAM PHRASES: ', team.phrases.slice(-1)[0].body);
+			setPhrase(team.phrases.slice(-1)[0]);
+			setValue('roundId', props.topic.roundId);
+			setValue('teamId', team.id);
+			console.log(team.phrases.slice(-1)[0].id);
+			setValue('phraseId', team.phrases.slice(-1)[0].id);
+			team.phrases.slice(-1)[0].body.split(' ').forEach((word: string, index: number) => {
 				findStems(word)
 				.then((data) => {
 					stemList[index] = (data.meta.stems);
@@ -66,22 +71,26 @@ function HaikuForm(props: Props) {
 			});
 		});
 
-		setValue('roundId', props.topic.roundId);
-		setValue('teamId', team.id);
 	}, []);
 
   const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
+		console.log('HAIKU SUBMIT ROUND: ', round);
+		console.log('HAIKU SUBMIT TEAM: ', team);
 		if (submitted) {
-			getData(`/haicues/${props.topic.roundId}/${team.id}`).then((haicue) => {
-					putData('/haicues', {id: Number(haicue.id), line1: data.line1, line2: data.line2, line3: data.line3})
+			getData(`/haicues/round/${round.id}/team/${team.id}`).then((haicue) => {
+				putData('/haicues', {id: Number(haicue.id), line1: data.line1, line2: data.line2, line3: data.line3}).then(() => {
+					socket.emit('submit');
+				});
 			});
 		} else {
-			postData('/haicues', data).then((haicue) => {
-				postData('/turns', {roundId: round.id, presentingTeamId: team.id, haicueId: haicue.id});
+			console.log('HAIKU DATA: ', data);
+			postData('/addHaicue', data).then((haicue) => {
+				postData('/turns', {roundId: round.id, presentingTeamId: team.id, phraseId: phrase.id,  haicueId: haicue.id}).then(() => {
+					socket.emit('submit');
+				});
 			});
 		}
 		setSubmitted(true);
-		socket.emit('submit');
 	};
 
 	const swapLabel = (line: number, status: string) => {
@@ -141,7 +150,7 @@ function HaikuForm(props: Props) {
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3 className="fade-in-down">ROUND {roundNum} - {props.topic.name}</h3>
-      <h1 className="fade-in-left">{phrase.join(' ')}</h1>
+      <h1 className="fade-in-left">{phrase.body}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
