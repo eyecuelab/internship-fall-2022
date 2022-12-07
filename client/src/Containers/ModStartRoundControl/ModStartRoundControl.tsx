@@ -7,6 +7,7 @@ import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
 import { Game, Topic } from '../../Types/Types';
+import { CurrencyYenTwoTone } from '@mui/icons-material';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -18,9 +19,10 @@ function ModStartRoundControl(props: Props) {
   const {id} = useParams();
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('game') as string));
+	// I'm not sure why we need to get the topic here...at this point, it hasn't been selected.
   const [selectedTopic, setSelectedTopic] = useState(false)
 
-	console.log(topic);
+	console.log(JSON.parse(localStorage.getItem('game') as string));
 
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
@@ -65,7 +67,7 @@ function ModStartRoundControl(props: Props) {
 		} else {
 			return (
 				<CardTemplate
-          content={<ModChooseTopic setTopic={setTopic} handleSwitch={handleSelectedTopic}/>}
+          content={<ModChooseTopic handleSetTopic={setTopic} handleSwitch={handleSelectedTopic}/>}
 					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
