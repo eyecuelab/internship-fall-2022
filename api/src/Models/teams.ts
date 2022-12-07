@@ -14,6 +14,7 @@ export const getTeamsByGame = async (gameId: number) => {
 }
 
 export const getTeamById = async (teamId: number) => {
+	console.log('OFFENDING TEAM: ', teamId)
 	return await prisma.teams.findUnique({
 		where: {
 			id: Number(teamId)
