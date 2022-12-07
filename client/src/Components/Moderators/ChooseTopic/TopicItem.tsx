@@ -24,10 +24,12 @@ function TopicItem(props: Props) {
 					putData('/team/addPhrase', { teamId: teams[i].id, phraseId: phrases[i].id}).then(() => {
 						console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
 					});
+					if (i === teams.length) {
+						setTopic(topic);
+						handleSwitch(true);
+					}
 				}
 			});
-			setTopic(topic);
-			handleSwitch(true);
 		});
   }
 
@@ -35,7 +37,7 @@ function TopicItem(props: Props) {
 
   return (
     <>
-			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={handleSetTopic} disabled={topic.roundId ? true : false}>
+			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={() => handleSetTopic()} disabled={topic.roundId ? true : false}>
 				<h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
 			</DogEarButton>
     </>
