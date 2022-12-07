@@ -16,17 +16,17 @@ function BrainstormingPhaseControl(props: Props) {
   const { id } = useParams();
   const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
   const [presenting, setPresenting] = useState(false);
+	const [passedInfo, setPassedInfo] = useState({textOne: game.Rounds.length, labelOne: 'round', gameCode: game?.gameCode});
 
   useEffect(() => {
     getData(`/games/${ id }`).then((game) => {
+			setPassedInfo({textOne: game.Rounds.length, labelOne: 'round', gameCode: game.gameCode});
 			setGame(game);
 			localStorage.setItem('game', JSON.stringify(game))
 		});
   }, []);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
-
-  const passedInfo = {textOne: game.Rounds.length + 1, labelOne: 'round', gameCode: game?.gameCode}
 
   if (localStorage.getItem('user')) {
   return (

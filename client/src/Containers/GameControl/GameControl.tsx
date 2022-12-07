@@ -108,6 +108,7 @@ function GameControl() {
 				<Buzzer roundNumber={2} topic={'holiday activity'} /> : 
 				( gamePhase === 'brainstorming' ? 
 					<HaikuForm topic={topic} submitState={submitState} setSubmitState={setSubmitState}/> 
+					// @ts-ignore
 				: <TeamLobby game={game} team={team} phase={gamePhase === 'ready'}/> )
 				/* <Score /> */ 
 			} 
