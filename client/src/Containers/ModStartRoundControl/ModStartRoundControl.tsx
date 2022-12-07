@@ -2,11 +2,12 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
 import ModStartRound from '../../Components/Moderators/StartRound';
-import { getData, putData} from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
 import { Game, Topic } from '../../Types/Types';
+import { CurrencyYenTwoTone } from '@mui/icons-material';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -16,10 +17,13 @@ interface Props {
 
 function ModStartRoundControl(props: Props) {
   const {id} = useParams();
-  const [game, setGame] = useState<Game>({});
-	const [topic, setTopic] = useState<Topic>();
+
+  const [game, setGame] = useState<Game>(); //JSON.parse(localStorage.getItem('game') as string)
+	const [topic, setTopic] = useState<Topic>(); //JSON.parse(localStorage.getItem('game') as string).Topic.slice(-1)[0]
+
   const [selectedTopic, setSelectedTopic] = useState(false)
 
+	console.log(JSON.parse(localStorage.getItem('game') as string));
 
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
@@ -34,21 +38,20 @@ function ModStartRoundControl(props: Props) {
     setSelectedTopic(!selectedTopic);
   };
 
-
   const handleLogout = () => {
 		props.setUserData({});
 		localStorage.clear();
 		window.localStorage.clear();
   };
 
-  const passedInfo ={labelOne: "round", textOne: "1"};
+  const passedInfo ={labelOne: "round", textOne: "1", gameCode: game?.gameCode};
 	
   if (localStorage.getItem('user')) {
 		if (selectedTopic) {
 			return (
 				<CardTemplate
         content={<ModStartRound topic={topic} handleSwitch={handleSelectedTopic}/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
@@ -57,7 +60,7 @@ function ModStartRoundControl(props: Props) {
 			return (
 				<CardTemplate
           content={<ModChooseTopic setTopic={setTopic} handleSwitch={handleSelectedTopic}/>}
-					overlay={<ModOverlay gameData={game} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>

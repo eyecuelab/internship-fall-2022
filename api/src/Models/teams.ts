@@ -14,9 +14,15 @@ export const getTeamsByGame = async (gameId: number) => {
 }
 
 export const getTeamById = async (teamId: number) => {
+	console.log('OFFENDING TEAM: ', teamId)
 	return await prisma.teams.findUnique({
 		where: {
 			id: Number(teamId)
+		},
+		include: {
+			phrases: true,
+			Turns: true,
+			Haicues: true
 		}
 	});
 }
@@ -86,3 +92,14 @@ export const getTeamBySocketId = async (socketId: string) => {
 		where: { socketId: socketId }
 	})
 }
+
+export const addUniquePhrase = async (teamId: number, phraseId: number) => {
+	return await prisma.phrases.update({
+		where: {
+			id: Number(phraseId)
+		},
+		data: {
+			team: { connect: { id: Number(teamId) }}
+		}
+	})
+} 

@@ -22,7 +22,6 @@ export type Team = {
   teamScore: number
   game: Game
   gameId: number
-  users: User[]
 }
 
 export type Topic = {
@@ -50,7 +49,6 @@ export type Game = {
   gameCode: string
 	publishedAt: Date					
   Teams: Team[]
-  Users: User[]
 	Topics: Topic[]
 	Rounds: Round[]
 }

@@ -1,10 +1,8 @@
 import { getPhrase, getUniquePhrase, createPhrase, deletePhrase } from "../Models/phrases";
 
-import io from "../server";
-
 const phrasesControllers = {
   async getPhrase(req: any, res: any) {
-    const { topicId, moderatorId } = req.params;
+    const { topicId } = req.params;
     const phrases = await getPhrase(Number(topicId));
     res.json(phrases);
   },

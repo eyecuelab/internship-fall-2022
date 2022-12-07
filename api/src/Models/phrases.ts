@@ -57,13 +57,3 @@ export const deletePhrase = async(id: number) => {
       }
   });
 }
-
-const findUniquePhrase = (phrases: Phrases[]) => {
-  for (let i=0; i<phrases.length; i++) {
-    if (phrases[i].teamId === null) {
-			console.log('PHRASES[i]: ', phrases[i]);
-			return phrases[i];
-    }
-  }
-	return '';
-}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Grid } from '@mui/material';
 import socket from '../../../Hooks/WebsocketHook';
 import { DogEarButton, greenButton, redButton } from '../../componentStyles';
+import { Team } from '../../../Types/Types';
 
 interface Props {
 	roundNumber: number;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function Buzzer (props: Props) {
+	const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
 	const [buzzerState, setBuzzerState] = useState(true);
 
 	greenButton.width = '100%';
@@ -35,7 +37,7 @@ function Buzzer (props: Props) {
 	}, []);
 
 	const buzzIn = () => {
-		socket.emit('buzz');
+		socket.emit('buzz', team);
 	}
 
 	const buzzRefresh = () => {

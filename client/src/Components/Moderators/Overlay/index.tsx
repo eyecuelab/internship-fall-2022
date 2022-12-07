@@ -1,7 +1,6 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import '../../../index.css';
 import {Link, useLocation} from 'react-router-dom';
-
 import {Grid, Button} from '@mui/material';
 import {DogEarButton, greenButton, redButton, blackButton} from '../../componentStyles';
 import {putData} from '../../../ApiHelper';
@@ -41,6 +40,11 @@ function ModOverlay(props: Props) {
   const formatTimer = (timer: number) => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer - minutes * 60;
+
+		if (timer === 0) {
+			// @ts-ignore
+			props.setPresenting(true);
+		}
 
     return {minutes: minutes, seconds: seconds.toLocaleString('en-US', {minimumIntegerDigits: 2})};
   };
@@ -85,7 +89,7 @@ function ModOverlay(props: Props) {
         <GameInfo h1Input={gameData.textOne} h3Input={gameData.labelOne} />
       ) : null}
 
-      {location.pathname.includes('/brainstorming') ? (<><h3>timer</h3><h1>{timer.minutes}:{timer.seconds}</h1></>) : (gameData ? (
+      {location.pathname.includes('brainstorming') ? (<><h3>timer</h3><h1 className={timer.minutes < 1 ? 'panic' : ''}>{timer.minutes}:{timer.seconds}</h1></>) : (gameData ? (
         <GameInfo h1Input={gameData.textTwo} h3Input={gameData.labelTwo} />
       ) : null)}
 
@@ -100,7 +104,7 @@ function ModOverlay(props: Props) {
         }}
       >
         <Link to="/">
-          {gameData.labelOne == 'game' ? (
+          {gameData ? (gameData.labelOne == 'game' ? (
             <>
               <DogEarButton onClick={() => updateGameStatus(gameId)} style={greenButton}>
                 <h3>Publish</h3>
@@ -109,7 +113,7 @@ function ModOverlay(props: Props) {
                 <h3>Logout</h3>
               </DogEarButton>
             </>
-          ) : null}
+          ) : null) : null}
 
           {location.pathname == '/' ? (
             <DogEarButton onClick={handleLogout} style={redButton}>
@@ -117,9 +121,9 @@ function ModOverlay(props: Props) {
             </DogEarButton>
           ) : null}
         </Link>
-        {location.pathname.includes('round') ? (
+        {location.pathname.includes('brainstorming') || location.pathname.includes('round') ? (
           <DogEarButton onClick={codeToClipboard} style={blackButton}>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
+            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-around'}}>
               <h3 style={{marginLeft: '2rem'}}>player url</h3>{' '}
               <ContentCopyIcon sx={{fontSize: '3rem'}} />
             </div>
