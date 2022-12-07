@@ -82,26 +82,27 @@ export const countSyllables = (inputWord: string) => {
 		{'yosemite': 4},
 	];
 	const doubleMinusSyllables = [
+		/[aeiou][^aeiou]e.*[aeiou][^aeiou]e$/i,
+		/[aeiou][^aeiou]e.*[aeiou][^aeiou]es$/i,
 		/^(fore[^bfhqsv])/i,
 		/rriage$/i,
 		/[^g]giate/,
 		/[au]gue[ds]$/i,
-		/[aeiou][^aeiou]e.*[aeiou][^aeiou]e$/i
 	];
 	const minusSyllables = [
-		/([^d][^bdfktz][^dfltuy]|[ff])ed$/i,
+		/ype/gi,
+		/(.)+o[^aeiou]e/gi,
+		/([^d][^dfktz][^dftuy]|[ff])ed$/i,
 		/[io]gue[ds]$/i,
 		/thed$/i,
-		/eday$/i,
 		/^(fore[^v])/i,
-		/[aeiou][^aeiouky]e/gi,
 		// /[ff|bb|gg|pp|zz]ed/,
 		/^[aeiou][^aeiou]e$/i,
 		/[^aeiou][aeiou][^aeiou]e$/i,
-		/[^bcilnrs][aeiou][^aeiouycgz]e[ds]$/i,
+		/[^bcilnrs][aeiou][^aeiouycdgz]e[ds]$/i,
 		/[bilr][aeiou][^aeioucgz]es$/i,
-		/[^cnv|aeiou][^(l)|(hp)]e$/i,
-		/[aeiou][^aeiouz]e[^rd]$/i,
+		/[^nc|aeiou][^(l)|(hp)]e$/i,
+		/[aeiou][^aeiouz]e[^rdn]$/i,
 		// /[st]ions$/i,
 		// /[st]ion$/i,
 		/cious$/i,
@@ -112,10 +113,8 @@ export const countSyllables = (inputWord: string) => {
 		/iage/i,
 	];
 	const plusSyllables = [
-		/io$/i,
 		/sm$/i,
-		/ier$/i,
-		/[^t][aeiou]ous$/i,
+		/[aeiou]ous$/i,
 		/[aeiouy]ing$/i,
 		/[^l]lien$/i,
 		/[aeiou][^aeiou][aeiou][^aeiou]ie$/i,

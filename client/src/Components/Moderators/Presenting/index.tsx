@@ -44,13 +44,23 @@ function ModPresenting(props: Props) {
   }, []);
   
 	useEffect(() => {
-		getData(`/rounds/games/${props.gameData.id}`).then((rounds) => {
+		console.log('important: ', JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
+		const round = (JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
+		console.log('important round: ', round);
+		getData(`/rounds/${round.id}`).then((rounds) => {
+			console.log('rounds: ', rounds);
+			console.log('ROUNDS TURNS: ', rounds.Turns[turns]);
 			setThisTurn(rounds.Turns[turns]);
 			getData(`/teams/${rounds.Turns[turns].teamId}`).then((team) => {
+				console.log(team);
 				setTeam(team);
-				getData(`/haicues/${rounds.Turns[turns].roundId}/${rounds.Turns[turns].teamId}`).then((haiku) => {
-					setHaiku(haiku);
-				})
+			});
+			getData(`/haicues/round/${rounds.Turns[turns].roundId}/team/${rounds.Turns[turns].performingTeamId}`).then((haicue) => {
+				console.log('THIS haicue: ', haicue);
+				setHaiku(haicue);
+				getData(`/team/${haicue.teamId}`).then((team) => {
+					setTeam(team);
+				});
 			});
 		});
 	}, []);

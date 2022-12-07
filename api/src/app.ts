@@ -15,10 +15,13 @@ const app = express();
 app.use(cors({
   origin: [
     '*',
+		'https://haicue.com',
     'http://localhost:5173',
-		'https://www.thunderclient.com'
+		'https://www.thunderclient.com',
+		'https://haicue-pikachu-api.fly.dev'
   ], 
-  methods: ['GET', 'POST', 'DELETE', 'PUT']}));
+  methods: ['GET', 'POST', 'DELETE', 'PUT'], 
+	credentials: true,}));
 
 app.use(express.json());
 

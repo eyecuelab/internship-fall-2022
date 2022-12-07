@@ -1,7 +1,6 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import '../../../index.css';
 import {Link, useLocation} from 'react-router-dom';
-
 import {Grid, Button} from '@mui/material';
 import {DogEarButton, greenButton, redButton, blackButton} from '../../componentStyles';
 import {putData} from '../../../ApiHelper';
@@ -105,7 +104,7 @@ function ModOverlay(props: Props) {
         }}
       >
         <Link to="/">
-          {gameData.labelOne == 'game' ? (
+          {gameData ? (gameData.labelOne == 'game' ? (
             <>
               <DogEarButton onClick={() => updateGameStatus(gameId)} style={greenButton}>
                 <h3>Publish</h3>
@@ -114,7 +113,7 @@ function ModOverlay(props: Props) {
                 <h3>Logout</h3>
               </DogEarButton>
             </>
-          ) : null}
+          ) : null) : null}
 
           {location.pathname == '/' ? (
             <DogEarButton onClick={handleLogout} style={redButton}>
