@@ -1,9 +1,9 @@
-import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../../index.css';
-import {Link, useLocation, useParams} from 'react-router-dom';
-import {Grid, Button} from '@mui/material';
-import {DogEarButton, greenButton, redButton, blackButton} from '../../componentStyles';
-import {putData} from '../../../ApiHelper';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { Grid } from '@mui/material';
+import { DogEarButton, greenButton, redButton, blackButton } from '../../componentStyles';
+import { putData } from '../../../ApiHelper';
 import GameInfo from './GameInfo';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import socket from '../../../Hooks/WebsocketHook';
@@ -59,7 +59,7 @@ function ModOverlay(props: Props) {
 
   const codeToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`www.haicue.com/game/${gameData.gameCode}`);
+      await navigator.clipboard.writeText(`www.haicue.com/${gameData.gameCode}`);
     } catch (err) {
       console.log('Failed to copy: ');
     }

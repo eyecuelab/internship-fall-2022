@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import { Grid, TextField, Button } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import { DogEarButton, greenButton, whiteButton } from '../../componentStyles';
 import { deleteData, getData, postData } from '../../../ApiHelper';
 import PhraseItem from './PhraseItem';

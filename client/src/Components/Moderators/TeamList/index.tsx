@@ -1,10 +1,10 @@
-import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../../index.css';
 import { Link } from 'react-router-dom';
-import {Grid, Button} from '@mui/material';
-import {DogEarButton, whiteButton, redButton, greenButton} from '../../componentStyles';
-import {Container, ButtonContainer} from './styles';
-import {getData, postData} from '../../../ApiHelper';
+import { Grid } from '@mui/material';
+import { DogEarButton, whiteButton, redButton, greenButton } from '../../componentStyles';
+import { Container, ButtonContainer } from './styles';
+import { getData, postData } from '../../../ApiHelper';
 import { Game, Team } from '../../../Types/Types';
 import TeamItem from './TeamItem';
 import socket from '../../../Hooks/WebsocketHook';
@@ -19,8 +19,6 @@ function TeamList(props: Props) {
 	const [teams, setTeams] = useState([]);
 	const [teamArr, setTeamArr] = useState({});
 	const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
-	const [round, setRound] = useState(); //JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]
-	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
 		getData(`/teams/game/${game.id}`).then((teams) => {
@@ -87,15 +85,11 @@ function TeamList(props: Props) {
             <h3>Start Reading</h3>
           </DogEarButton> : null }
 		  </Link>
-          <DogEarButton onClick={extendTime} style={whiteButton} >
+          <DogEarButton onClick={extendTime} style={whiteButton}>
             <h3>EXTEND 30 SECONDS</h3>
           </DogEarButton>
 		  <Link to={`/game/${game.id}/round`}>
-          <DogEarButton
-		  	style={redButton}
-			// TODO(weijwang): for debug only, remove later
-			// onMouseOver={() => socket.emit('submit')}
-			>
+          <DogEarButton style={redButton}>
             <h3>END ROUND</h3>
           </DogEarButton>
 		  </Link>
