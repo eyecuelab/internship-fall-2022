@@ -5,6 +5,7 @@ import { Grid } from '@mui/material';
 import { DogEarButton, greenButton, redButton, blackButton } from '../../componentStyles';
 import { putData } from '../../../ApiHelper';
 import GameInfo from './GameInfo';
+import InfoText from './InfoText';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import socket from '../../../Hooks/WebsocketHook';
 
@@ -79,10 +80,13 @@ function ModOverlay(props: Props) {
         display: 'block',
       }}
     >
-      <Grid item xs={12} md={12} lg={12}>
-        <h3>Team</h3>
-        <h1>MODS</h1>
-      </Grid>
+      <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start'}}>
+        <div>
+          <h3>Team</h3>
+          <h1>MODS</h1>
+        </div>
+        <InfoText />
+      </div>
 
       {gameData ? (
         <GameInfo h1Input={gameData.textOne} h3Input={gameData.labelOne} />
