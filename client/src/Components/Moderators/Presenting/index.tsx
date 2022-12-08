@@ -60,6 +60,10 @@ function ModPresenting(props: Props) {
 		socket.emit('presenting', team);
 	}, [team?.id]);
 
+	const buzzer = () => {
+		socket.emit('buzz');
+	}
+
   return (
     <>
       <Container>
@@ -78,7 +82,7 @@ function ModPresenting(props: Props) {
           </h1>
         </div>
         <ButtonContainer>
-        <DogEarButton onClick={handleSwitch} style={whiteButton}>
+        <DogEarButton onClick={buzzer} style={whiteButton}>
             <h3>fake buzzer</h3>
           </DogEarButton>
           <DogEarButton onClick={lineAdvancer} style={whiteButton}>
