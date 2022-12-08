@@ -23,10 +23,10 @@ function App() {
 		<GoogleOAuthProvider clientId={client_id}>
 			<Router>
 				<Routes>
-					<Route path="/game/:code" element={<GameControl />} />
+					<Route path="/:code" element={<GameControl />} />
 					<Route path="/" element={<ModGameControl setUserData={setUserData} userData={userData}/>} />
-					<Route path="/gameinfo/:id" element={<TopicPhraseControl setUserData={setUserData} userData={userData} viewPhrases={false}/>} />
-					<Route path="/topic/:topicId" element={<TopicPhraseControl setUserData={setUserData} userData={userData} viewPhrases={true}/>} />
+					<Route path="/game/:id" element={<TopicPhraseControl setUserData={setUserData} userData={userData} viewPhrases={false}/>} />
+					<Route path="/game/:id/topic/:topicId" element={<TopicPhraseControl setUserData={setUserData} userData={userData} viewPhrases={true}/>} />
 					<Route path="/game/:id/round" element={<ModStartRoundControl setUserData={setUserData} userData={userData} viewPhrases={false}/>} />
 					<Route path="/game/:id/presenting" element={<PresentingHaikuControl setUserData={setUserData} userData={userData} />} />
 					<Route path="/game/:id/brainstorming" element={<BrainstormingPhaseControl setUserData={setUserData} userData={userData} />} />

@@ -1,13 +1,10 @@
-import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import '../../../index.css';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Container, ButtonContainer } from './styles';
-import {useForm, SubmitHandler, Controller} from 'react-hook-form';
-import { Button } from '@mui/material';
-import {Topic} from '../../../Types/Types';
+import { Topic } from '../../../Types/Types';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 import { postData, getData, putData } from '../../../ApiHelper';
-import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
   topic: Topic;
@@ -19,7 +16,6 @@ function ModStartRound(props: Props) {
   const { id } = useParams();
 	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
   const [topics, setTopics] = useState([]);
-  const user = JSON.parse(localStorage.getItem('user') as string);
 
   useEffect(() => {
     getData(`/topics/game/${id}`).then((response) => {

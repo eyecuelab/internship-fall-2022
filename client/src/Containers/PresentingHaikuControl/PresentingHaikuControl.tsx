@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
-import { getData, postData } from '../../ApiHelper';
+import { getData } from '../../ApiHelper';
 import ModPresenting from '../../Components/Moderators/Presenting';
 import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
@@ -25,12 +25,9 @@ function PresentingHaikuControl(props: Props) {
 	const [turn, setTurn] = useState<Turn>(JSON.parse(localStorage.getItem('turn') as string));
   const [topic, setTopic]= useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
   const [buzzedIn, setBuzzedIn] = useState(false);
-  // const [teamsLeft, setTeamsLeft] = useState(0);
 
 	console.log('INITIAL GAME: ', game);
 	console.log('INITIAL ROUND: ', round);
-	// console.log('INITIAL ',);
-	// console.log('INITIAL ',);
 
 	useEffect(() => {
 		socket.on('connection', () => {
@@ -80,6 +77,7 @@ function PresentingHaikuControl(props: Props) {
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   const handleBuzzToggle = () => {
+		socket.emit('buzzer_refresh');
     setBuzzedIn(false);
   };
 
@@ -117,7 +115,7 @@ function PresentingHaikuControl(props: Props) {
             <ModPresenting 
               handleSwitch={handleBuzzToggle} 
               haikuData={haiku}
-							// teamData={team} 
+							teamData={team} 
               gameData={game}
               topicData={topic}
             />

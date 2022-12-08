@@ -1,11 +1,10 @@
-import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
-import {Grid, TextField, Button} from '@mui/material';
-import {Link, useParams} from 'react-router-dom';
-import {useForm, SubmitHandler, Controller} from 'react-hook-form';
-import {getData, putData} from '../../../ApiHelper';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { Grid } from '@mui/material';
+import { Link, useParams } from 'react-router-dom';
+import { getData } from '../../../ApiHelper';
 import TopicItem from './TopicItem';
-import {Topic} from '../../../Types/Types';
-import { Container, ButtonContainer } from './styles';
+import { Topic } from '../../../Types/Types';
+import { Container } from './styles';
 import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 
