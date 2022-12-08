@@ -50,6 +50,7 @@ function ModGameControl(props: Props) {
 
   const handleCreateNewGame = () => {
     setCreateNewGameView(!createNewGameView);
+		getGameList();
   };
 
   if (localStorage.getItem('user')) {
