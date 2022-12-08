@@ -1,10 +1,10 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import {useParams} from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
-import {getData, postData} from '../../ApiHelper';
+import { getData, postData } from '../../ApiHelper';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import EndGame from '../../Components/Moderators/EndGame';
-import {Game, Team, Round} from '../../Types/Types';
+import { Game, Team, Round } from '../../Types/Types';
 import TeamOverlay from '../../Components/Teams/Overlay';
 
 interface Props {
@@ -24,6 +24,7 @@ function EndGameControl(props: Props) {
     JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]
   );
   const user = JSON.parse(localStorage.getItem('user') as string);
+<<<<<<< HEAD
   const colors = {
     apple: '#0A1031',
     blueberry: '#0c114a',
@@ -34,6 +35,9 @@ function EndGameControl(props: Props) {
     pear: '#CDA70D',
     strawberry: '#D00D0A',
   };
+=======
+  const colors = {apple: '#0A1031', blueberry: '#0c114a', cherry: '#C70009', kiwi: '#61750D', lemon: '#105839', peach: '#DF9190', pear: '#CDA70D', strawberry: '#D00D0A'}
+>>>>>>> 820e1ea164c176d985ff4f942b66569dba1abb4e
 
   useEffect(() => {
     getData(`/games/${id}`).then(games => {
@@ -90,7 +94,11 @@ function EndGameControl(props: Props) {
       />
     );
   }
+<<<<<<< HEAD
   //   return <ModLogin setUserData={props.setUserData} userData={props.userData} />;
+=======
+//   return <ModLogin setUserData={props.setUserData} userData={props.userData} />;
+>>>>>>> 820e1ea164c176d985ff4f942b66569dba1abb4e
 }
 
 export default EndGameControl;
