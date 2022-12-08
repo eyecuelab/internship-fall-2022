@@ -44,6 +44,7 @@ function ModGameControl(props: Props) {
 
   const handleCreateNewGame = () => {
     setCreateNewGameView(!createNewGameView);
+		getGameList();
   };
 
 	const passedInfo= {labelOne: " ", textOne: ""}
