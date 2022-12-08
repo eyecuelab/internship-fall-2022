@@ -8,15 +8,15 @@ import { round } from 'corners';
 
 interface Props {
   topic: Topic;
-	selectTopic: Dispatch<SetStateAction<boolean>>;
+	selectTopic: () => void;
   setTopic: Dispatch<SetStateAction<Topic>>;
-	handleSwitch: () => void;
+	// handleSwitch: () => void;
 }
 
 
 function TopicItem(props: Props) {
 	const { id } = useParams();
-  const {topic, setTopic, handleSwitch} = props;
+  const {topic, setTopic} = props;
 
   const handleSetTopic = () => {
 		// console.log("handleSetTopic");
@@ -29,8 +29,8 @@ function TopicItem(props: Props) {
 		// 				console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
 		// 			});
 		// 			if (i === teams.length) {
-		setTopic(topic);
-		handleSwitch();
+		// setTopic(topic);
+		// handleSwitch();
 		// 			}
 		// 		}
 		// 	});
@@ -41,8 +41,7 @@ function TopicItem(props: Props) {
 
   return (
     <>
-		{/* ts-ignore */}
-			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={() => props.selectTopic} disabled={topic.roundId ? true : false}>
+			<DogEarButton id={`topic${topic.id}`} style={whiteButton} onClick={props.selectTopic} disabled={topic.roundId ? true : false}>
 				<h4 style={{lineHeight: '3.5rem'}}>{topic.name.toString()}</h4>
 			</DogEarButton>
     </>

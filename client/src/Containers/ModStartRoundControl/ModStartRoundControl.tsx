@@ -30,7 +30,13 @@ function ModStartRoundControl(props: Props) {
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
 		});
+		console.log(topic, selectedTopic);
   }, []);
+
+	useEffect(() => {
+		setSelectedTopic(selectedTopic);
+		setTopic(topic);
+	}, [topic?.id, selectedTopic])
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
