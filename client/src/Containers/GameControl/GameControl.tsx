@@ -30,13 +30,16 @@ function GameControl() {
 		getData(`/games/room/${code?.toUpperCase()}`)
 		.then((response) => {
 
-			if (JSON.parse(localStorage.getItem('game') as string).gameCode.toLowerCase() !== response.gameCode.toUpperCase) {
-				localStorage.clear();
+			if (localStorage.getItem('game')) {
+				if (JSON.parse(localStorage.getItem('game') as string).gameCode.toLowerCase() !== response.gameCode.toUpperCase) {
+					localStorage.clear();
+				}
 			}
 			
 			console.log(response);
 			localStorage.setItem('game', JSON.stringify(response));
 			setGame(response);
+
 			if (localStorage.getItem('game-phase') === 'ready') { 
 				console.log('TOPIC: ', response.Rounds.slice(-1)[0]);
 				getData(`/topics/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
@@ -45,6 +48,7 @@ function GameControl() {
 					localStorage.setItem('topic', JSON.stringify(topic));
 				});
 			}
+
 			if (!localStorage.getItem('team')) {
 				postData('/teams', { gameId: response.id })
 				.then((data) => {
