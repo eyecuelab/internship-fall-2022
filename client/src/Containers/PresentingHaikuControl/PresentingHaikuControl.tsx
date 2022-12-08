@@ -97,9 +97,8 @@ function PresentingHaikuControl(props: Props) {
 				(guessingTeamScore as number) += 0;
 				presentingTeamScore += 0;
 		}
-		putData('/team/addPoints', {teamId: guessingTeam?.id, points: (guessingTeamScore)}).then(() => {
-			handleBuzzToggle();
-		})
+		putData('/team/addPoints', {teamId: guessingTeam?.id, points: (guessingTeamScore)});
+		putData('/team/addPoints', {teamId: team.id, points: presentingTeamScore});
 	}
 
   const handleBuzzToggle = () => {
