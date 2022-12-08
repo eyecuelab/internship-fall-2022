@@ -1,6 +1,5 @@
 import React, {ReactElement} from 'react';
 import ReactConfetti from 'react-confetti';
-import InfoText from './InfoText';
 import '../../index.css';
 import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent} from './styles';
 
@@ -17,7 +16,6 @@ function CardTemplate(props: CardTemplateProps) {
   return (
     <>
 			<Header>
-      <InfoText />
         <h4>Eyecue Haicue</h4>
       </Header>
       <StyledCard>
