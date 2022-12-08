@@ -29,6 +29,11 @@ function GameControl() {
 	useEffect(() => {
 		getData(`/games/room/${code?.toUpperCase()}`)
 		.then((response) => {
+
+			if (JSON.parse(localStorage.getItem('game') as string).gameCode.toLowerCase() !== response.gameCode.toUpperCase) {
+				localStorage.clear();
+			}
+			
 			console.log(response);
 			localStorage.setItem('game', JSON.stringify(response));
 			setGame(response);
