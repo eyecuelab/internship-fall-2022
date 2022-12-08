@@ -15,7 +15,7 @@ interface Props {
 }
 
 function ModStartRound(props: Props) {
-	const { topic, handleSwitch} = props;
+	const { topic, handleSwitch } = props;
   const { id } = useParams();
 	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
   const [topics, setTopics] = useState([]);
@@ -28,6 +28,11 @@ function ModStartRound(props: Props) {
   }, []);
 
 	console.log('ROUND: ', round);
+
+	const doBoth = () => {
+		selectTopic();
+		handleSetTopic();
+	}
 
 	const selectTopic = () => {
 		postData('/round', { gameId: id, topicId: topic.id }).then((newRound) => {
@@ -58,6 +63,25 @@ function ModStartRound(props: Props) {
 		});
 	}
 
+	const handleSetTopic = () => {
+		console.log("handleSetTopic");
+		getData(`/teams/game/${id}`).then((teams) => {
+			console.log('teams:', teams)
+			getData(`/phrases/${topic.id}`).then((phrases) => {
+				console.log("phrases:", phrases)
+				for (let i=0; i<teams.length; i++) {
+					putData('/team/addPhrase', { teamId: teams[i].id, phraseId: phrases[i].id}).then(() => {
+						console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
+					});
+					if (i === teams.length) {
+						// setTopic(topic);
+						handleSwitch(true);
+					}
+				}
+			});
+		});
+  }
+
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -73,7 +97,7 @@ function ModStartRound(props: Props) {
         </div>
         <ButtonContainer>
 					<Link to={{pathname: `/game/${id}/brainstorming`}}>
-          <DogEarButton style={greenButton} onClick={selectTopic}>
+          <DogEarButton style={greenButton} onClick={doBoth}>
             <h3>start round</h3>
           </DogEarButton>
 					</Link>

@@ -8,7 +8,7 @@
     "lint:fix": "eslint --fix",
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite build && vite preview",
+    "preview": "tsc && vite build && vite preview",
     "pretty": "prettier --write \"./**/*.{ts,tsx,js,jsx,json}\""
   },
   "dependencies": {

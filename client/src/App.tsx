@@ -7,8 +7,10 @@ import GameControl from './Containers/GameControl/GameControl';
 import ModStartRoundControl from './Containers/ModStartRoundControl/ModStartRoundControl';
 import PresentingHaikuControl from './Containers/PresentingHaikuControl/PresentingHaikuControl';
 import BrainstormingPhaseControl from './Containers/BrainstormingPhaseControl/BrainstormingPhaseControl';
+import EndGameControl from './Containers/EndGameControl/EndGameControl';
 import './App.scss';
 import { client_id } from '../endpoints';
+
 
 function App() {
 	const [userData, setUserData] = useState({});
@@ -28,6 +30,7 @@ function App() {
 					<Route path="/game/:id/round" element={<ModStartRoundControl setUserData={setUserData} userData={userData} viewPhrases={false}/>} />
 					<Route path="/game/:id/presenting" element={<PresentingHaikuControl setUserData={setUserData} userData={userData} />} />
 					<Route path="/game/:id/brainstorming" element={<BrainstormingPhaseControl setUserData={setUserData} userData={userData} />} />
+					<Route path="/game/:id/result" element={<EndGameControl setUserData={setUserData} userData={userData} />} />
 				</Routes>
 			</Router>
 		</GoogleOAuthProvider>
