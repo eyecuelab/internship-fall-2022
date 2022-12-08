@@ -4,14 +4,11 @@ import CardTemplate from '../../Components/CardTemplate';
 import { getData, postData } from '../../ApiHelper';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import EndGame from '../../Components/Moderators/EndGame';
-import { Game, Team, Round } from '../../Types/Types';
+import { Game, Team, Round, User } from '../../Types/Types';
 import TeamOverlay from '../../Components/Teams/Overlay';
 
 interface Props {
-  setUserData: Dispatch<SetStateAction<{}>>;
-  userData: any;
-  submitState: boolean;
-  setSubmitState: Dispatch<SetStateAction<boolean>>;
+  setUserData: Dispatch<SetStateAction<User | undefined>>;
 }
 
 function EndGameControl(props: Props) {

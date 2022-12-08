@@ -1,10 +1,7 @@
-import React, {Dispatch, SetStateAction, useEffect} from 'react';
-import {Link, useParams} from 'react-router-dom';
-import {Round, Topic} from '../../../Types/Types';
-import {Button} from '@mui/material';
-import {DogEarButton, whiteButton} from '../../componentStyles';
-import { getData, postData, putData } from '../../../ApiHelper';
-import { round } from 'corners';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import { Topic } from '../../../Types/Types';
+import { DogEarButton, whiteButton } from '../../componentStyles';
+import { getData } from '../../../ApiHelper';
 
 interface Props {
   topic: Topic;
@@ -14,7 +11,13 @@ interface Props {
 
 
 function TopicItem(props: Props) {
-  const {topic, selectTopic} = props;
+  const {topic, setTopic, selectTopic} = props;
+
+	useEffect(() => {
+		getData(`/topics/${topic.id}`).then((topic) => {
+			setTopic(topic)
+		});
+	}, [topic.id]);
 
 	whiteButton.width = '100%';
 
