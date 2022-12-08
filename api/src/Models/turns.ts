@@ -13,18 +13,14 @@ export const getTurnsByRound = async (roundId: number) => {
 	});
 }
 
-export const getTurn = async (roundId: number) => {
-	return await prisma.turns.findMany({
+export const getTurn = async (id: number) => {
+	return await prisma.turns.findUnique({
 		where: {
-			roundId: Number(roundId)
+			id: Number(id)
 		},
 		include: {
 			Haicue: true
-		},
-		orderBy: {
-			id: 'desc',
-		},
-		take: 1
+		}
 	});
 }
 
