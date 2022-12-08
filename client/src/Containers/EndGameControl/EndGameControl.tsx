@@ -1,11 +1,11 @@
-import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
-import {useParams} from 'react-router-dom';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
-import {getData} from '../../ApiHelper';
+import { getData } from '../../ApiHelper';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import EndGame from '../../Components/Moderators/EndGame';
 import ModLogin from '../../Components/Moderators/Login';
-import {Game, Round} from '../../Types/Types';
+import { Game, Round } from '../../Types/Types';
 
 interface Props {
   setUserData: Dispatch<SetStateAction<{}>>;

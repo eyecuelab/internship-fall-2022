@@ -67,19 +67,16 @@ function GameControl() {
 		});
 
 		socket.on('start_game', () => {
-			// setReadyPhase(true);
 			localStorage.setItem('game-phase', 'ready');
 			setGamePhase('ready');
 		});
 
 		socket.on('start_round', () => {
-			// setBrainstorming(true);
 			localStorage.setItem('game-phase', 'brainstorming');
 			setGamePhase('brainstorming');
 		});
 
 		socket.on('start_guessing', () => {
-			// setGuessing(true);
 			localStorage.setItem('game-phase', 'guessing');
 			setGamePhase('guessing');
 		});

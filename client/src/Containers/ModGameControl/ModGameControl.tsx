@@ -18,7 +18,6 @@ function ModGameControl(props: Props) {
 	const [games, setGames] = useState<Game[]>([]);
 
 	useEffect(() => {
-		// getGameList();
 		setGames([]);
 		const user = JSON.parse(localStorage.getItem('user') as string);
 		if (user) {

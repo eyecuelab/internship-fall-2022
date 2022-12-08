@@ -73,7 +73,11 @@ io.on('connection', (socket : Socket) => {
 
 	socket.on('start_guessing', () => {
 		io.emit('start_guessing');
-	})
+	});
+
+	socket.on('presenting', (team) => {
+		io.emit('presenting', team);
+	});
 
 	socket.on('buzz', (team: Teams) => {
 		io.emit('buzz', team);

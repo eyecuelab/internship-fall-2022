@@ -32,12 +32,11 @@ type Data = {
 }
 
 function HaikuForm(props: Props) {
-	const [stems, setStems] = useState([]);
+	const [stems, setStems] = useState<string[]>([]);
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
-	// @ts-ignore
-	const [phrase, setPhrase] = useState<Phrase>({id: 0, body: 'null value', wordCount: 2, topic: {}, topicId: 0});
+	const [phrase, setPhrase] = useState<Phrase>();
 	const [team, setTeam] = useState(JSON.parse(localStorage.getItem('team') as string))
 	const { submitState, setSubmitState } = props;
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
@@ -50,7 +49,7 @@ function HaikuForm(props: Props) {
 	useEffect(() => {
 		setRound(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 		setRoundNum(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
-		const stemList: any[] = [];
+		const stemList: string[] = [];
 		console.log('props.topic', props.topic);
 		getData(`/team/${team.id}`).then((team) => {
 			localStorage.setItem('team', JSON.stringify(team));
@@ -66,7 +65,6 @@ function HaikuForm(props: Props) {
 				findStems(word)
 				.then((data) => {
 					stemList[index] = (data.meta.stems);
-					// @ts-ignore
 					setStems(stemList);
 				});
 			});
@@ -86,6 +84,7 @@ function HaikuForm(props: Props) {
 		} else {
 			console.log('HAIKU DATA: ', data);
 			postData('/addHaicue', data).then((haicue) => {
+				// @ts-ignore
 				postData('/turns', {roundId: round.id, presentingTeamId: team.id, phraseId: phrase.id,  haicueId: haicue.id}).then(() => {
 					socket.emit('submit');
 				});
@@ -151,7 +150,7 @@ function HaikuForm(props: Props) {
   return (
     <div style={{ position: 'relative', height: '100%' }}>
       <h3 className="fade-in-down">ROUND {roundNum} - {props.topic.name}</h3>
-      <h1 className="fade-in-left">{phrase.body}</h1>
+      <h1 className="fade-in-left">{phrase?.body}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller

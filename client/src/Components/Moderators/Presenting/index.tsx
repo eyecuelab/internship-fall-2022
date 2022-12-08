@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../index.css';
 import { Link } from 'react-router-dom';
-import {Container, ButtonContainer} from './styles';
+import { Container, ButtonContainer } from './styles';
 import socket from '../../../Hooks/WebsocketHook';
-import {Button} from '@mui/material';
-import {whiteButton, greenButton, redButton, DogEarButton} from '../../componentStyles';
+import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 import { Game, Haicue, Team, Topic } from '../../../Types/Types';
 import { getData } from '../../../ApiHelper';
 
@@ -35,11 +34,8 @@ function ModPresenting(props: Props) {
 			props.handleSwitch;
 		});
 
-    socket.emit('buzzer_refresh');
-
 		return () => {
 			socket.off('connection');
-			socket.off('buzz');
 		}
   }, []);
   
@@ -67,6 +63,7 @@ function ModPresenting(props: Props) {
 
 	useEffect(() => {
 		setTeam(team);
+		socket.emit('presenting', team);
 	}, [team?.id])
 
   const lineAdvancer = () => {
