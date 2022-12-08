@@ -56,10 +56,11 @@ function ModOverlay(props: Props) {
 		console.log('OFFENDING ID: ', gameId);
     putData(`/games/${gameId}`);
   };
+  console.log(gameData)
 
   const codeToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`www.haicue.com/${gameData.gameCode}`);
+      await navigator.clipboard.writeText(`www.haicue.com/game/${gameData.gameCode}`);
     } catch (err) {
       console.log('Failed to copy: ');
     }

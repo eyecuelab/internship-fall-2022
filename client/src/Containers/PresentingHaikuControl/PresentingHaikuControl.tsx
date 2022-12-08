@@ -60,6 +60,8 @@ function PresentingHaikuControl(props: Props) {
 
   }, []);
 
+  console.log(team);
+
   useEffect(() => {
 		console.log('ROUND TOPIC ID', round.topicId);
 		getData(`/topic/${round.topicId}`).then((topic) => {
