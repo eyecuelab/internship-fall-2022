@@ -108,3 +108,14 @@ export const addUniquePhrase = async (teamId: number, phraseId: number) => {
 		}
 	})
 } 
+
+export const assignPoints = async (teamId: number, points: number) => {
+	return await prisma.teams.update({
+		where: {
+			id: teamId
+		},
+		data: {
+			teamScore: points
+		}
+	})
+}
