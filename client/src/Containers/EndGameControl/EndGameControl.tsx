@@ -59,12 +59,10 @@ function EndGameControl(props: Props) {
         postData('/teams', {gameId: response.id}).then(data => {
           setTeam(data);
           localStorage.setItem('team', JSON.stringify(data));
-          setColor(eval(`colors.${data.teamName}`));
         });
       } else {
         const teamData = JSON.parse(localStorage.getItem('team') as string);
         setTeam(teamData);
-        setColor(eval(`colors.${teamData.teamName}`));
       }
     });
   }, []);
