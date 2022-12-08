@@ -16,6 +16,7 @@ interface Props {
 }
 
 function TeamList(props: Props) {
+	const { gameId, presenting, setPresenting } = props;
 	const [teams, setTeams] = useState([]);
 	const [teamArr, setTeamArr] = useState({});
 	const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
@@ -33,11 +34,9 @@ function TeamList(props: Props) {
 						teamArr.push(haicues[i].teamId);
 					}
 					setTeamArr(teamArr);
-					console.log();
-					console.log();
 					
 					if (teamArr.length === teams.length) {
-						props.setPresenting(true);
+						setPresenting(true);
 					} 
 				});
 			});
@@ -46,10 +45,10 @@ function TeamList(props: Props) {
 		return () => {
       socket.off('submit');
     };
-	}, []);
+	}, [presenting]);
 
 	const extendTime = () => {
-		postData('/addTime', [props.gameId]);
+		postData('/addTime', [gameId]);
 	}
 
 	const startGuessingPhase = () => {
@@ -81,7 +80,7 @@ function TeamList(props: Props) {
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${game.id}/presenting`}>
-		      {props.presenting ? <DogEarButton style={greenButton} onClick={startGuessingPhase}>
+		      {presenting ? <DogEarButton style={greenButton} onClick={startGuessingPhase}>
             <h3>Start Reading</h3>
           </DogEarButton> : null }
 		  </Link>

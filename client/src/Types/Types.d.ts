@@ -70,14 +70,19 @@ export type Turn = {
 }
 
 export type Haicue = {
-	id: number
+  id: number
+  Round: Round
   roundId: number
+  Phrase: Phrase
+  phraseId: number
+  Team: Team
   teamId: number
   line1: string
   line2: string
   line3: string
-  lineGuessed: number
-  correctTeam: number
+  lineGuessed?: number
+  correctTeam?: number
+  Turns: Turn[]
 }
 
 export type Buzzer = {

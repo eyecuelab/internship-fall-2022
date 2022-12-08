@@ -11,15 +11,13 @@ import socket from '../../../Hooks/WebsocketHook';
 interface Props {
   handleLogout?: () => void;
   gameData?: any;
-  gameId?: any;
-  presenting?: boolean;
   gameRound?: any;
   setPresenting?: Dispatch<SetStateAction<boolean>>;
 }
 
 function ModOverlay(props: Props) {
 	const { id } = useParams();
-	const { handleLogout, gameData, gameId, presenting, setPresenting } = props;
+	const { handleLogout, gameData, setPresenting } = props;
   const [time, setTime] = useState(300);
   const location = useLocation();
 
@@ -44,7 +42,7 @@ function ModOverlay(props: Props) {
 
 		if (timer === 0) {
 			// @ts-ignore
-			props.setPresenting(true);
+			setPresenting(true);
 		}
 
     return {minutes: minutes, seconds: seconds.toLocaleString('en-US', {minimumIntegerDigits: 2})};
@@ -53,7 +51,6 @@ function ModOverlay(props: Props) {
   const timer = formatTimer(time);
 
   const updateGameStatus = (gameId: number) => {
-		console.log('OFFENDING ID: ', gameId);
     putData(`/games/${gameId}`);
   };
   console.log(gameData)

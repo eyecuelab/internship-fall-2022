@@ -4,17 +4,18 @@ import { Link } from 'react-router-dom';
 import socket from '../../../Hooks/WebsocketHook';
 import { Container, ButtonContainer, TeamAvatar } from './styles';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
-import { Team } from '../../../Types/Types';
+import { Game, Haicue, Team } from '../../../Types/Types';
 
 interface Props {
   handleSwitch?: () => void;
-  gameData?: any;
-  haikuData?: any;
-  topicData?: any;
-	guessingTeam: Team
+  gameData?: Game;
+  haikuData?: Haicue;
+	guessingTeam: Team;
+	assignPoints: () => void;
 }
 
 function ModHandleGuess(props: Props) {
+	const { handleSwitch, gameData, haikuData, guessingTeam, assignPoints } = props;
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -30,28 +31,27 @@ function ModHandleGuess(props: Props) {
 	}, []);
  
 
-
   return (
     <>
       <Container>
         <div>
-          <h3>*insert team name*</h3>
-          <h1>{props.haikuData.Phrase}</h1>
+          <h3>{guessingTeam.teamName}</h3>
+          <h1>{haikuData?.Phrase.body}</h1>
 					<br />
 					<br />
           <h3>buzzer pressed!</h3>
-          <h1>{props.guessingTeam.teamName}</h1>
-					<TeamAvatar src={`/images/${props.guessingTeam.teamName}_icon.png`}/>
+          <h1>{guessingTeam.teamName}</h1>
+					<TeamAvatar src={`/images/${guessingTeam.teamName}_icon.png`}/>
         </div>
         <ButtonContainer>
-          <DogEarButton onClick={props.handleSwitch}  style={greenButton}>
+          <DogEarButton onClick={assignPoints}  style={greenButton}>
             <h3>reward points</h3>
           </DogEarButton>
-          <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
+          <DogEarButton onClick={handleSwitch} style={whiteButton}>
             <h3>dismiss guess</h3>
           </DogEarButton>
-          <Link to={`/game/${props.gameData.id}/round`}>
-            <DogEarButton onClick={props.handleSwitch} style={redButton}>
+          <Link to={`/game/${gameData?.id}/round`}>
+            <DogEarButton onClick={handleSwitch} style={redButton}>
               <h3>end round</h3>
             </DogEarButton>
           </Link>

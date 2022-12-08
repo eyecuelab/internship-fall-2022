@@ -6,42 +6,33 @@ import { getData } from '../../ApiHelper';
 import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
-import { Game, Topic } from '../../Types/Types';
+import { Game, Topic, User } from '../../Types/Types';
 
 interface Props {
-	setUserData: Dispatch<SetStateAction<{}>>;
-	userData: any;
-  viewPhrases: boolean;
+	setUserData: Dispatch<SetStateAction<User | undefined>>;
+	logout: () => void;
 }
 
 function ModStartRoundControl(props: Props) {
   const { id } = useParams();
+	const { setUserData, logout } = props;
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string)); 
 	const [topic, setTopic] = useState<Topic>();
   const [selectedTopic, setSelectedTopic] = useState(false);
 
-	console.log(JSON.parse(localStorage.getItem('game') as string));
+  document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
 		});
-		console.log(topic, selectedTopic);
   }, []);
 
 	useEffect(() => {
 		setSelectedTopic(selectedTopic);
 		setTopic(topic);
-	}, [topic?.id, selectedTopic])
-
-  document.documentElement.style.background = 'url(/images/moderator_background.png)';
-
-  const handleLogout = () => {
-		props.setUserData({});
-		localStorage.clear();
-		window.localStorage.clear();
-  };
+	}, [topic?.id, selectedTopic]);
 
   const passedInfo ={labelOne: "round", textOne: "1", gameCode: game?.gameCode};
 	
@@ -51,7 +42,7 @@ function ModStartRoundControl(props: Props) {
 				<CardTemplate
 				// @ts-ignore
         content={<ModStartRound topic={topic} handleSwitch={setSelectedTopic}/>}
-					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={logout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
@@ -61,14 +52,14 @@ function ModStartRoundControl(props: Props) {
 				<CardTemplate
 				// @ts-ignore
           content={<ModChooseTopic setTopic={setTopic} handleSwitch={setSelectedTopic}/>}
-					overlay={<ModOverlay gameData={passedInfo} handleLogout={handleLogout} />}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={logout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
 			);
 		}
 	}
-	return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
+	return <ModLogin setUserData={setUserData} />;
 }
 
 export default ModStartRoundControl;

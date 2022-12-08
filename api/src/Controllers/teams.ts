@@ -1,4 +1,4 @@
-import { getTeamsByGame, getTeamById, createTeam, addUniquePhrase } from '../Models/teams';
+import { getTeamsByGame, getTeamById, createTeam, addUniquePhrase, assignPoints } from '../Models/teams';
 
 const teamsControllers = {
   async getTeams(req: any, res: any) {
@@ -23,6 +23,12 @@ const teamsControllers = {
 		const { teamId, phraseId } = req.body;
 		const teamWithPhrase = await addUniquePhrase(teamId, phraseId);
 		res.status(201).json(teamWithPhrase);
+	},
+
+	async addPoints(req: any, res: any) {
+		const { teamId, points } = req.body;
+		const teamWithPoints = await assignPoints(teamId, points);
+		res.status(201).json(teamWithPoints);
 	}
 }
 

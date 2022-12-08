@@ -16,7 +16,6 @@ const roundsControllers = {
 	async assignRoundToGame(req: any, res: any) {
 		const { gameId, topicId } = req.body;
 		const newRound = await addRound(gameId, topicId);
-		console.log('NEW ROUND: ', newRound);
 		res.status(201).json(newRound);
 	}
 }

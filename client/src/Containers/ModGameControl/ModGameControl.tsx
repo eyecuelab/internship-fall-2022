@@ -6,16 +6,20 @@ import ModGameList from '../../Components/Moderators/GameList';
 import ModNewGame from '../../Components/Moderators/NewGame';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import { getData } from '../../ApiHelper';
-import { Game } from '../../Types/Types';
+import { Game, User } from '../../Types/Types';
 
 interface Props {
-	setUserData: Dispatch<SetStateAction<{}>>;
-	userData: any;
+	userData: User | undefined;
+	setUserData: Dispatch<SetStateAction<User | undefined>>;
+	logout: () => void;
 }
 
 function ModGameControl(props: Props) {
+	const { userData, setUserData, logout } = props;
   const [createNewGameView, setCreateNewGameView] = useState(false);
 	const [games, setGames] = useState<Game[]>([]);
+
+  document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
 	useEffect(() => {
 		setGames([]);
@@ -23,13 +27,12 @@ function ModGameControl(props: Props) {
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
-				console.log(response);
 				setGames([...response.games])
 			});
 		} else {
 			setGames([...[]]);
 		}
-		props.setUserData(props.userData);
+		setUserData(userData);
 	}, [createNewGameView]);
 
 	const getGameList = () => {
@@ -38,21 +41,12 @@ function ModGameControl(props: Props) {
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
-				console.log(response);
 				setGames([...response.games])
 			});
 		} else {
 			setGames([...[]]);
 		}
 	}
-
-  document.documentElement.style.background = 'url(/images/moderator_background.png)';
-
-  const handleLogout = () => {
-		props.setUserData({});
-		localStorage.clear();
-		window.localStorage.clear();
-  };
 
   const handleCreateNewGame = () => {
     setCreateNewGameView(!createNewGameView);
@@ -64,7 +58,7 @@ function ModGameControl(props: Props) {
       return (
         <CardTemplate
           content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={handleLogout} />}
+          overlay={<ModOverlay handleLogout={logout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />
@@ -73,14 +67,14 @@ function ModGameControl(props: Props) {
       return (
         <CardTemplate
           content={<ModNewGame getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={handleLogout} />}
+          overlay={<ModOverlay handleLogout={logout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />
       );
     }
   }
-  return <ModLogin setUserData={props.setUserData} userData={props.userData}/>;
+  return <ModLogin setUserData={setUserData} />;
 }
 
 export default ModGameControl;
