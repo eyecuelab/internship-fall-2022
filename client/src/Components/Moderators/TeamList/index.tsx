@@ -46,7 +46,7 @@ function TeamList(props: Props) {
 		return () => {
       socket.off('submit');
     };
-	}, []);
+	}, [props.presenting]);
 
 	const extendTime = () => {
 		postData('/addTime', [props.gameId]);

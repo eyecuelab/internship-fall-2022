@@ -70,15 +70,19 @@ function Buzzer (props: Props) {
 		<>
 		{ presenting ? 
 			<>
-				<h3>round {props.roundNumber} - {props.topic}</h3>
-				<h3>you are reading: {phrase?.body}</h3>
+				<div className='fade-in-down'>
+					<h3>round {props.roundNumber} - {props.topic}</h3>
+					<h3>you are reading: {phrase?.body}</h3>
+				</div>
 				<br />
-				<h5>line 1</h5>
-				<h1>{haicue?.line1}</h1>
-				<h5>line 2</h5>
-				<h1>{haicue?.line2}</h1>
-				<h5>line 3</h5>
-				<h1>{haicue?.line3}</h1>
+				<div className='fade-in-left'>
+					<h5>line 1</h5>
+					<h1>{haicue?.line1}</h1>
+					<h5>line 2</h5>
+					<h1>{haicue?.line2}</h1>
+					<h5>line 3</h5>
+					<h1>{haicue?.line3}</h1>
+				</div>
 			</> 
 		: 
 			<>
