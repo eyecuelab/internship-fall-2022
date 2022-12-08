@@ -31,7 +31,7 @@ function GameControl() {
 		.then((response) => {
 
 			if (localStorage.getItem('game')) {
-				if (JSON.parse(localStorage.getItem('game') as string).gameCode.toLowerCase() !== response.gameCode.toUpperCase) {
+				if (JSON.parse(localStorage.getItem('game') as string).gameCode.toLowerCase() !== response.gameCode.toLowerCase()) {
 					localStorage.clear();
 				}
 			}
