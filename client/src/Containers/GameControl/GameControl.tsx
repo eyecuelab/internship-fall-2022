@@ -113,7 +113,6 @@ function GameControl() {
 			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
 			bgUrl={bgUrl}
-			color={color}
 		/>
 		</>
 	);

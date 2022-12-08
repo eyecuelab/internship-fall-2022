@@ -1,10 +1,5 @@
-import * as React from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+import { Backdrop, Box, Modal, Fade, Button, Typography } from '@mui/material';
 
 const style = {
   position: 'absolute' as 'absolute',
@@ -20,7 +15,7 @@ const style = {
 };
 
 function InfoText() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

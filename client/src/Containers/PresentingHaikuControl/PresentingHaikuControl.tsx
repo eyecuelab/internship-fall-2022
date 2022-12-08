@@ -1,30 +1,33 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
-import { getData } from '../../ApiHelper';
+import { getData, putData } from '../../ApiHelper';
 import ModPresenting from '../../Components/Moderators/Presenting';
 import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
-import { Game, Haicue, Round, Team, Topic, Turn } from '../../Types/Types';
+import { Game, Haicue, Round, Team, Topic, Turn, User } from '../../Types/Types';
 import socket from '../../Hooks/WebsocketHook';
 
 
 interface Props {
-  setUserData: Dispatch<SetStateAction<{}>>;
-  userData: any;
+  setUserData: Dispatch<SetStateAction<User | undefined>>;
 }
 
 function PresentingHaikuControl(props: Props) {
   const { id } = useParams();
+	const { setUserData } = props;
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
-  const [haiku, setHaiku] = useState<Haicue>({id: 0, roundId: 0, teamId: 0, lineGuessed: 0, correctTeam: 0, line1: '', line2: '', line3: ''});
+  const [haiku, setHaiku] = useState<Haicue>();
   const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('presenting-team') as string));
 	const [guessingTeam, setGuessingTeam] = useState<Team>();
   const [round, setRound]= useState<Round>(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 	const [turn, setTurn] = useState<Turn>(JSON.parse(localStorage.getItem('turn') as string));
   const [topic, setTopic]= useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
   const [buzzedIn, setBuzzedIn] = useState(false);
+	const [lineNumber, setLineNumber] = useState(1);
+
+  document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
 	console.log('INITIAL GAME: ', game);
 	console.log('INITIAL ROUND: ', round);
@@ -74,7 +77,38 @@ function PresentingHaikuControl(props: Props) {
 
   console.log('GAME: ', game);
 
-  document.documentElement.style.background = 'url(/images/moderator_background.png)';
+  const lineAdvancer = () => {
+    if (lineNumber < 3) {
+      setLineNumber(lineNumber + 1);
+    } else {
+      setLineNumber(1);
+    }
+  };
+
+	const assignPoints = () => {
+		let guessingTeamScore = guessingTeam?.teamScore;
+		let presentingTeamScore = team.teamScore
+		switch (lineNumber) {
+			case(1):
+				(guessingTeamScore as number) += 5;
+				presentingTeamScore += 1;
+				break;
+			case(2):
+				(guessingTeamScore as number) += 3;
+				presentingTeamScore += 3;
+				break;
+			case(3):
+				(guessingTeamScore as number) += 1;
+				presentingTeamScore += 5;
+				break;
+			default:
+				(guessingTeamScore as number) += 0;
+				presentingTeamScore += 0;
+		}
+		putData('/team/addPoints', {teamId: guessingTeam?.id, points: (guessingTeamScore)}).then(() => {
+			handleBuzzToggle();
+		})
+	}
 
   const handleBuzzToggle = () => {
 		socket.emit('buzzer_refresh');
@@ -100,6 +134,7 @@ function PresentingHaikuControl(props: Props) {
               haikuData={haiku} 
               gameData={game}
               topicData={topic}
+							assignPoints={assignPoints}
 							// @ts-ignore
 							guessingTeam={guessingTeam}
             />}
@@ -114,8 +149,7 @@ function PresentingHaikuControl(props: Props) {
           content={
             <ModPresenting 
               handleSwitch={handleBuzzToggle} 
-              haikuData={haiku}
-							teamData={team} 
+							lineAdvancer={lineAdvancer}
               gameData={game}
               topicData={topic}
             />
@@ -127,7 +161,7 @@ function PresentingHaikuControl(props: Props) {
       );
     }
   }
-  return <ModLogin setUserData={props.setUserData} userData={props.userData} />;
+  return <ModLogin setUserData={setUserData} />;
 }
 
 export default PresentingHaikuControl;

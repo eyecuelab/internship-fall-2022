@@ -8,11 +8,12 @@ interface Props {
 }
 
 function GameInfo(props: Props) {
+	const { h3Input, h1Input } = props;
   return (
-    <Grid item key={props.h1Input} xs={12} md={12} lg={12}>
+    <Grid item key={h1Input} xs={12} md={12} lg={12}>
       <br />
-      <h3>{props.h3Input}</h3>
-      <h1>{props.h1Input}</h1>
+      <h3>{h3Input}</h3>
+      <h1>{h1Input}</h1>
       <br />
     </Grid>
   );

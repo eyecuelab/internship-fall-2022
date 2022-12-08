@@ -11,6 +11,7 @@ interface Props {
 }
 
 function Buzzer (props: Props) {
+	const { roundNumber, topic } = props;
 	const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
 	const [phrase, setPhrase] = useState<Phrase>();
 	const [haicue, setHaicue] = useState<Haicue>();
@@ -62,16 +63,12 @@ function Buzzer (props: Props) {
 		socket.emit('buzz', team);
 	}
 
-	const buzzRefresh = () => {
-		socket.emit('buzzer_refresh');
-	}
-
 	return (
 		<>
 		{ presenting ? 
 			<>
 				<div className='fade-in-down'>
-					<h3>round {props.roundNumber} - {props.topic}</h3>
+					<h3>round {roundNumber} - {topic}</h3>
 					<h3>you are reading: {phrase?.body}</h3>
 				</div>
 				<br />
@@ -86,7 +83,7 @@ function Buzzer (props: Props) {
 			</> 
 		: 
 			<>
-				<h3>round {props.roundNumber} - {props.topic}</h3>
+				<h3>round {roundNumber} - {topic}</h3>
 				<Grid
 					container
 					alignItems="center"

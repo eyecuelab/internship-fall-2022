@@ -47,7 +47,7 @@ function ModStartRound(props: Props) {
 								});
 								if (i === teams.length - 1) {
 									console.log('i = teams length');
-									props.handleSwitch(true);
+									handleSwitch(true);
 									postData('/startGame', { gameId: id });
 									console.log('NEW ROUND: ', newRound);
 								}

@@ -32,13 +32,13 @@ type Data = {
 }
 
 function HaikuForm(props: Props) {
+	const { topic, submitState, setSubmitState } = props;
 	const [stems, setStems] = useState<string[]>([]);
 	const [lineOne, setLineOne] = useState('5 Syllables');
 	const [lineTwo, setLineTwo] = useState('7 Syllables');
 	const [lineThree, setLineThree] = useState('5 Syllables');
 	const [phrase, setPhrase] = useState<Phrase>();
 	const [team, setTeam] = useState(JSON.parse(localStorage.getItem('team') as string))
-	const { submitState, setSubmitState } = props;
   const { control, handleSubmit, setValue } = useForm<IFormInput>();
 	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 	const [roundNum, setRoundNum] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
@@ -50,14 +50,14 @@ function HaikuForm(props: Props) {
 		setRound(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 		setRoundNum(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
 		const stemList: string[] = [];
-		console.log('props.topic', props.topic);
+		console.log('topic', topic);
 		getData(`/team/${team.id}`).then((team) => {
 			localStorage.setItem('team', JSON.stringify(team));
 			console.log('TEAM: ', team);
 			setTeam(team);
 			console.log('TEAM PHRASES: ', team.phrases.slice(-1)[0].body);
 			setPhrase(team.phrases.slice(-1)[0]);
-			setValue('roundId', props.topic.roundId);
+			setValue('roundId', topic.roundId);
 			setValue('teamId', team.id);
 			console.log(team.phrases.slice(-1)[0].id);
 			setValue('phraseId', team.phrases.slice(-1)[0].id);
@@ -149,7 +149,7 @@ function HaikuForm(props: Props) {
 
   return (
     <div style={{ position: 'relative', height: '100%' }}>
-      <h3 className="fade-in-down">ROUND {roundNum} - {props.topic.name}</h3>
+      <h3 className="fade-in-down">ROUND {roundNum} - {topic.name}</h3>
       <h1 className="fade-in-left">{phrase?.body}</h1>
       <br />
       <form onSubmit={handleSubmit(onSubmit)}>

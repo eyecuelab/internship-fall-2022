@@ -10,7 +10,7 @@ interface Props {
 }
 
 function GameItem(props: Props) {
-  const {game, deleteGame} = props;
+  const { game, deleteGame } = props;
 
   return (
     <>

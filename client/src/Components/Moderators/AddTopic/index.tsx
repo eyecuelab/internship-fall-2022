@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, TextField, Button } from '@mui/material';
+import { Grid, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { DogEarButton, greenButton, whiteButton } from '../../componentStyles';
@@ -18,13 +18,14 @@ interface IFormInput {
 }
 
 function ModAddTopic(props: Props) {
+	const { gameId } = props;
   const {control, handleSubmit, setValue, reset} = useForm<IFormInput>({defaultValues:{name:""}});
   const [topics, setTopics] = useState([]);
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
 	getData(`/moderators/${user.email}`).then((moderator) => {
 		setValue('moderatorId', moderator.id);
-		setValue('gameId', props.gameId);
+		setValue('gameId', gameId);
 	});
 
 	useEffect(() => {
@@ -41,7 +42,7 @@ function ModAddTopic(props: Props) {
 	}
 
 	const getTopicList = async () => {
-		const topicList = await getData(`/topics/game/${props.gameId}`);
+		const topicList = await getData(`/topics/game/${gameId}`);
 		setTopics(topicList);
 	};
 

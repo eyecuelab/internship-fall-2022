@@ -12,6 +12,8 @@ type CardTemplateProps = {
 }
 
 function CardTemplate(props: CardTemplateProps) {
+	const { content, overlay, bgUrl, color } = props;
+
   return (
     <>
 			<Header>
@@ -20,14 +22,14 @@ function CardTemplate(props: CardTemplateProps) {
       </Header>
       <StyledCard>
         <div style={{ position: 'relative' }}>
-          <StyledCardMedia id='overlay-bg' bgUrl={props.bgUrl} color={props.color}/>
+          <StyledCardMedia id='overlay-bg' bgUrl={bgUrl} color={color}/>
           <Overlay>
-            {props.overlay}
+            {overlay}
           </Overlay>
         </div>
         <Content>
           <StyledCardContent>
-            {props.content}
+            {content}
           </StyledCardContent>
         </Content>
       </StyledCard>

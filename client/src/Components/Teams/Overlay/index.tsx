@@ -7,9 +7,9 @@ interface Props {
 }
 
 function TeamOverlay(props: Props) {
+	const { setSubmitState } = props;
 	const [time, setTime] = useState(300);
 	const [timerPhase, setTimerPhase] = useState(true);
-	const { setSubmitState } = props;
 	const teamData = JSON.parse(localStorage.getItem('team') as string);
 
 	useEffect(() => {
