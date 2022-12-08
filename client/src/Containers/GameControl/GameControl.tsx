@@ -19,12 +19,8 @@ function GameControl() {
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
 	const [color, setColor] = useState('#888');
 	const [gamePhase, setGamePhase] = useState(localStorage.getItem('game-phase') || '');
-	// const [readyPhase, setReadyPhase] = useState(false);
-	// const [brainstorming, setBrainstorming] = useState(false);
-	// const [guessing, setGuessing] = useState(false);
 	const [submitState, setSubmitState] = useState(true);
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
-	const colors = {apple: '#0A1031', blueberry: '#0c114a', cherry: '#C70009', kiwi: '#61750D', lemon: '#105839', peach: '#DF9190', pear: '#CDA70D', strawberry: '#D00D0A'}
 
 	useEffect(() => {
 		getData(`/games/room/${code?.toUpperCase()}`)

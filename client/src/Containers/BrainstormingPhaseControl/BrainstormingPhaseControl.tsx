@@ -5,7 +5,6 @@ import {getData} from '../../ApiHelper';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import TeamList from '../../Components/Moderators/TeamList';
 import ModLogin from '../../Components/Moderators/Login';
-import socket from '../../Hooks/WebsocketHook';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -24,7 +23,7 @@ function BrainstormingPhaseControl(props: Props) {
 			setGame(game);
 			localStorage.setItem('game', JSON.stringify(game))
 		});
-  }, []);
+  }, [game.id]);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
