@@ -15,6 +15,7 @@ interface Props {
 
 function ModChooseTopic(props: Props) {
 	const { id } = useParams();
+	const { setTopic, handleSwitch } = props;
   const [topics, setTopics] = useState([]);
 
   useEffect(() => {
@@ -27,9 +28,8 @@ function ModChooseTopic(props: Props) {
   }, []);
 
 	const selectTopic = (topic: Topic) => {
-		props.setTopic(topic);
-		props.handleSwitch(true);
-		console.log('ChooseTopic index selectTopic');
+		setTopic(topic);
+		handleSwitch(true);
 	}
 
   redButton.width = '100%';
@@ -45,7 +45,7 @@ function ModChooseTopic(props: Props) {
           {
             <Grid container>
               {topics?.map((topic: Topic) => {
-                return <TopicItem key={topic.id} topic={topic} setTopic={props.setTopic} selectTopic={() => selectTopic(topic)}/>;
+                return <TopicItem key={topic.id} topic={topic} setTopic={setTopic} selectTopic={() => selectTopic(topic)}/>;
               })}
             </Grid>
           }

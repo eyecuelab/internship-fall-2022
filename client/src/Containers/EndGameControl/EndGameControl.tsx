@@ -24,7 +24,7 @@ function EndGameControl(props: Props) {
     JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]
   );
   const user = JSON.parse(localStorage.getItem('user') as string);
-<<<<<<< HEAD
+
   const colors = {
     apple: '#0A1031',
     blueberry: '#0c114a',
@@ -35,9 +35,8 @@ function EndGameControl(props: Props) {
     pear: '#CDA70D',
     strawberry: '#D00D0A',
   };
-=======
-  const colors = {apple: '#0A1031', blueberry: '#0c114a', cherry: '#C70009', kiwi: '#61750D', lemon: '#105839', peach: '#DF9190', pear: '#CDA70D', strawberry: '#D00D0A'}
->>>>>>> 820e1ea164c176d985ff4f942b66569dba1abb4e
+
+  document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   useEffect(() => {
     getData(`/games/${id}`).then(games => {
@@ -45,8 +44,6 @@ function EndGameControl(props: Props) {
       setRound(games.Rounds.slice(-1)[0]);
     });
   }, []);
-
-  document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   const passedInfo = {
     labelOne: 'round',
@@ -94,11 +91,6 @@ function EndGameControl(props: Props) {
       />
     );
   }
-<<<<<<< HEAD
-  //   return <ModLogin setUserData={props.setUserData} userData={props.userData} />;
-=======
-//   return <ModLogin setUserData={props.setUserData} userData={props.userData} />;
->>>>>>> 820e1ea164c176d985ff4f942b66569dba1abb4e
 }
 
 export default EndGameControl;

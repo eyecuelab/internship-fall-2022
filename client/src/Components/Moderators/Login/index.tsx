@@ -9,10 +9,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface Props {
 	setUserData: (data: any) => void;
-	userData: any;
 }
 
 function ModLogin(props: Props) {
+	const { setUserData } = props;
 	const navigate = useNavigate();
 	whiteButton.width = '100%';
 	whiteButton.padding = '1rem';
@@ -33,7 +33,7 @@ function ModLogin(props: Props) {
 				getData(`/moderators/${user.email}`).then((moderator) => {
 					!moderator && postData('/moderators', { email: user.email });
 				}) ;
-				props.setUserData(data);
+				setUserData(data);
 				navigate('/');
 			});
 		}

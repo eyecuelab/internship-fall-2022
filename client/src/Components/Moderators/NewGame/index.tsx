@@ -22,11 +22,12 @@ type Data = {
 }
 
 function ModNewGame(props: Props) {
+	const { getGameList, handleCreateNewGame } = props;
   const { control, handleSubmit, setValue } = useForm<IFormInput>({defaultValues:{name: ""}});
 	const userData = JSON.parse(localStorage.getItem('user') as string);
 
 	useEffect(() => {
-		props.getGameList();
+		getGameList();
 	}, []);
 
 	getData(`/moderators/${userData?.email}`).then((response) => {
@@ -35,7 +36,7 @@ function ModNewGame(props: Props) {
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
 		postData('/games', data);
-		props.handleCreateNewGame();
+		handleCreateNewGame();
 	}
 
   greenButton.width = '100%';
@@ -69,7 +70,7 @@ function ModNewGame(props: Props) {
       </DogEarButton>
 			</form>
 			<div className="spacer" />
-			<DogEarButton onClick={props.handleCreateNewGame} className="bottom" style={whiteButton} >
+			<DogEarButton onClick={handleCreateNewGame} className="bottom" style={whiteButton} >
 				<h3>BACK TO GAMES</h3>
 			</DogEarButton>
 		</Grid>

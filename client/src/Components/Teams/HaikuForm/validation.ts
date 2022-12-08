@@ -46,7 +46,7 @@ export const lineCheck = (line: string[]) => {
   let sum = countArr.reduce((sum, number) => {
     return sum + number;
   }, 0);
-	console.log(sum);
+	// console.log(sum);
   return sum || 0;
 };
 
@@ -135,21 +135,21 @@ export const countSyllables = (inputWord: string) => {
 	}
 	for (let i=0; i<doubleMinusSyllables.length; i++) {
 		if (doubleMinusSyllables[i].test(word)) {
-			console.log('double minus: ',doubleMinusSyllables[i]);
+			// console.log('double minus: ',doubleMinusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ) - 1;
 			return syllables > 0 ? syllables : 1;
 		}
 	}
 	for (let i=0; i<minusSyllables.length; i++) {
 		if (minusSyllables[i].test(word)) {
-			console.log('single minus: ', minusSyllables[i]);
+			// console.log('single minus: ', minusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}
 	} 
 	for (let i=0; i<plusSyllables.length; i++) {
 		if (plusSyllables[i].test(word)) {
-			console.log('plus: ', plusSyllables[i]);
+			// console.log('plus: ', plusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}

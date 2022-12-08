@@ -7,7 +7,6 @@ import { deleteData, getData, postData } from '../../../ApiHelper';
 import PhraseItem from './PhraseItem';
 import { Phrase } from '../../../Types/Types';
 
-interface Props {}
 interface IFormInput {
   body: string;
 	topicId: number;
@@ -20,7 +19,7 @@ type Data = {
 	moderatorId: number;
 }
 
-function ModAddPhrase(props: Props) {
+function ModAddPhrase() {
 	const { topicId } = useParams();
 	const navigate = useNavigate();
   const { control, handleSubmit, setValue, reset } = useForm<IFormInput>({defaultValues:{body: ""}});

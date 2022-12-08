@@ -10,12 +10,12 @@ import { getData } from '../../../ApiHelper';
 interface Props {
   handleSwitch?: () => void;
   gameData: Game;
-	teamData: Team;
-  haikuData: Haicue;
   topicData?: Topic;
+	lineAdvancer: () => void;
 }
 
 function ModPresenting(props: Props) {
+	const { handleSwitch, gameData, topicData, lineAdvancer } = props;
 	const [turns, setTurns] = useState(0);
 	const [team, setTeam] = useState<Team>();
 	const [haiku, setHaiku] = useState<Haicue>();
@@ -31,7 +31,7 @@ function ModPresenting(props: Props) {
 		});
 
 		socket.on('buzz', () => {
-			props.handleSwitch;
+			handleSwitch;
 		});
 
 		return () => {
@@ -40,19 +40,13 @@ function ModPresenting(props: Props) {
   }, []);
   
 	useEffect(() => {
-		console.log('important: ', JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 		const round = (JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
-		console.log('important round: ', round);
 		getData(`/rounds/${round.id}`).then((rounds) => {
-			console.log('rounds: ', rounds);
-			console.log('ROUNDS TURNS: ', rounds.Turns[turns]);
 			setThisTurn(rounds.Turns[turns]);
 			getData(`/teams/${rounds.Turns[turns].teamId}`).then((team) => {
-				console.log(team);
 				setTeam(team);
 			});
 			getData(`/haicues/round/${rounds.Turns[turns].roundId}/team/${rounds.Turns[turns].performingTeamId}`).then((haicue) => {
-				console.log('THIS haicue: ', haicue);
 				setHaiku(haicue);
 				getData(`/team/${haicue.teamId}`).then((team) => {
 					setTeam(team);
@@ -64,17 +58,7 @@ function ModPresenting(props: Props) {
 	useEffect(() => {
 		setTeam(team);
 		socket.emit('presenting', team);
-	}, [team?.id])
-
-  const lineAdvancer = () => {
-    if (lineNumber < 3) {
-      setLineNumber(lineNumber + 1);
-    } else {
-      setLineNumber(1);
-    }
-  };
-
-  console.log('PROPS TOPICDATA: ', props.topicData);
+	}, [team?.id]);
 
   return (
     <>
@@ -94,14 +78,14 @@ function ModPresenting(props: Props) {
           </h1>
         </div>
         <ButtonContainer>
-        <DogEarButton onClick={props.handleSwitch} style={whiteButton}>
+        <DogEarButton onClick={handleSwitch} style={whiteButton}>
             <h3>fake buzzer</h3>
           </DogEarButton>
           <DogEarButton onClick={lineAdvancer} style={whiteButton}>
             <h3>advance haicue clue</h3>
           </DogEarButton>
-          <Link to={`/game/${props.gameData.id}/round`}>
-            <DogEarButton onClick={props.handleSwitch} style={redButton}>
+          <Link to={`/game/${gameData.id}/round`}>
+            <DogEarButton onClick={handleSwitch} style={redButton}>
               <h3>end round</h3>
             </DogEarButton>
           </Link>

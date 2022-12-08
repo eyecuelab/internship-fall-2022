@@ -17,7 +17,6 @@ function GameControl() {
 	const [team, setTeam] = useState<Team>();
 	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
-	const [color, setColor] = useState('#888');
 	const [gamePhase, setGamePhase] = useState(localStorage.getItem('game-phase') || '');
 	const [submitState, setSubmitState] = useState(true);
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
@@ -31,15 +30,12 @@ function GameControl() {
 					localStorage.clear();
 				}
 			}
-			
-			console.log(response);
+
 			localStorage.setItem('game', JSON.stringify(response));
 			setGame(response);
 
 			if (localStorage.getItem('game-phase') === 'ready') { 
-				console.log('TOPIC: ', response.Rounds.slice(-1)[0]);
 				getData(`/topics/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
-					console.log('TOPIC DATA: ', topic);
 					setTopic(topic);
 					localStorage.setItem('topic', JSON.stringify(topic));
 				});
@@ -50,12 +46,10 @@ function GameControl() {
 				.then((data) => {
 					setTeam(data);
 					localStorage.setItem('team', JSON.stringify(data));
-					setColor(eval(`colors.${data.teamName}`));
 				});
 			} else {
 				const teamData = JSON.parse(localStorage.getItem('team') as string);
 				setTeam(teamData);
-				setColor(eval(`colors.${teamData.teamName}`));
 			}
 		});
 
@@ -116,7 +110,6 @@ function GameControl() {
 			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
 			bgUrl={bgUrl}
-			color={color}
 		/>
 		</>
 	);

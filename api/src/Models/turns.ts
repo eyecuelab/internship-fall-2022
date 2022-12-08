@@ -14,7 +14,6 @@ export const getTurnsByRound = async (roundId: number) => {
 }
 
 export const getTurn = async (roundId: number) => {
-	console.log('OFFENDING ROUND: ', roundId);
 	return await prisma.turns.findMany({
 		where: {
 			roundId: Number(roundId)
