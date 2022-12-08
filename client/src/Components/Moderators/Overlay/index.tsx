@@ -1,6 +1,6 @@
 import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import '../../../index.css';
-import {Link, useLocation} from 'react-router-dom';
+import {Link, useLocation, useParams} from 'react-router-dom';
 import {Grid, Button} from '@mui/material';
 import {DogEarButton, greenButton, redButton, blackButton} from '../../componentStyles';
 import {putData} from '../../../ApiHelper';
@@ -18,6 +18,7 @@ interface Props {
 }
 
 function ModOverlay(props: Props) {
+	const { id } = useParams();
 	const { handleLogout, gameData, gameId, presenting, setPresenting } = props;
   const [time, setTime] = useState(300);
   const location = useLocation();
@@ -51,7 +52,8 @@ function ModOverlay(props: Props) {
 
   const timer = formatTimer(time);
 
-  const updateGameStatus = (gameId: any) => {
+  const updateGameStatus = (gameId: number) => {
+		console.log('OFFENDING ID: ', gameId);
     putData(`/games/${gameId}`);
   };
 
@@ -106,7 +108,7 @@ function ModOverlay(props: Props) {
         <Link to="/">
           {gameData ? (gameData.labelOne == 'game' ? (
             <>
-              <DogEarButton onClick={() => updateGameStatus(gameId)} style={greenButton}>
+              <DogEarButton onClick={() => updateGameStatus(Number(id))} style={greenButton}>
                 <h3>Publish</h3>
               </DogEarButton>
               <DogEarButton onClick={handleLogout} style={redButton}>

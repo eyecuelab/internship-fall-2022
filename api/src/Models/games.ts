@@ -65,4 +65,4 @@ export const updateGameStatus = async (id: number)=>{
 		where: { id: Number(id) },
 		data: { publishedAt: now }
 	});
-  }
+}

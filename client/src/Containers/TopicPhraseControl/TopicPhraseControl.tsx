@@ -15,7 +15,7 @@ interface Props {
 }
 
 function TopicPhraseControl(props: Props) {
-  const {id} = useParams();
+  const { id } = useParams();
   const [game, setGame] = useState<Game>();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ function TopicPhraseControl(props: Props) {
 			return (
 				<CardTemplate
 					content={<ModAddTopic gameId={Number(id)} />}
-					overlay={<ModOverlay gameData={passedInfo}  handleLogout={handleLogout}  gameId={Number(id)} />}
+					overlay={<ModOverlay gameData={passedInfo}  handleLogout={handleLogout} gameId={Number(id)} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>

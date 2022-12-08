@@ -2,7 +2,7 @@ import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
 import {Grid, TextField, Button} from '@mui/material';
 import {Link, useParams} from 'react-router-dom';
 import {useForm, SubmitHandler, Controller} from 'react-hook-form';
-import {getData} from '../../../ApiHelper';
+import {getData, putData} from '../../../ApiHelper';
 import TopicItem from './TopicItem';
 import {Topic} from '../../../Types/Types';
 import { Container, ButtonContainer } from './styles';
@@ -11,7 +11,7 @@ import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
 
 interface Props {
   setTopic: Dispatch<SetStateAction<Topic>>;
-  handleSwitch: () => void;
+  handleSwitch: Dispatch<SetStateAction<boolean>>;
 }
 
 function ModChooseTopic(props: Props) {
@@ -29,6 +29,11 @@ function ModChooseTopic(props: Props) {
 		});
   }, []);
 
+	const selectTopic = (topic: Topic) => {
+		props.setTopic(topic);
+		props.handleSwitch(true);
+	}
+
   redButton.width = '100%';
   whiteButton.width = '100%';
 
@@ -42,7 +47,7 @@ function ModChooseTopic(props: Props) {
           {
             <Grid container>
               {topics?.map((topic: Topic) => {
-                return <TopicItem key={topic.id} topic={topic} setTopic={props.setTopic} handleSwitch={props.handleSwitch}/>;
+                return <TopicItem key={topic.id} topic={topic} setTopic={props.setTopic} selectTopic={() => props.handleSwitch(true)} handleSwitch={props.handleSwitch}/>;
               })}
             </Grid>
           }
