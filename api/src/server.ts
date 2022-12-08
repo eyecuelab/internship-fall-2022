@@ -9,6 +9,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       'http://localhost:5173',
+      'http://localhost:4173',
 			'https://fancy-liger-5c83e4.netlify.app',
 			'https://haicue.com',
 			'https://www.thunderclient.com',
@@ -72,7 +73,11 @@ io.on('connection', (socket : Socket) => {
 
 	socket.on('start_guessing', () => {
 		io.emit('start_guessing');
-	})
+	});
+
+	socket.on('presenting', (team) => {
+		io.emit('presenting', team);
+	});
 
 	socket.on('buzz', (team: Teams) => {
 		io.emit('buzz', team);

@@ -1,11 +1,10 @@
-import React, {useState, useEffect, Dispatch, SetStateAction} from 'react';
-import {useParams} from 'react-router-dom';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { useParams } from 'react-router-dom';
 import CardTemplate from '../../Components/CardTemplate';
-import {getData} from '../../ApiHelper';
+import { getData } from '../../ApiHelper';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import TeamList from '../../Components/Moderators/TeamList';
 import ModLogin from '../../Components/Moderators/Login';
-import socket from '../../Hooks/WebsocketHook';
 
 interface Props {
 	setUserData: Dispatch<SetStateAction<{}>>;
@@ -24,7 +23,7 @@ function BrainstormingPhaseControl(props: Props) {
 			setGame(game);
 			localStorage.setItem('game', JSON.stringify(game))
 		});
-  }, []);
+  }, [game.id]);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
