@@ -11,7 +11,7 @@ import { getData } from '../../../ApiHelper';
 interface Props {
   handleSwitch?: () => void;
   gameData: Game;
-	// teamData: Team;
+	teamData: Team;
   haikuData: Haicue;
   topicData?: Topic;
 }
@@ -64,6 +64,10 @@ function ModPresenting(props: Props) {
 			});
 		});
 	}, []);
+
+	useEffect(() => {
+		setTeam(team);
+	}, [team?.id])
 
   const lineAdvancer = () => {
     if (lineNumber < 3) {

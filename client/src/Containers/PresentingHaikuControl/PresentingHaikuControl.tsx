@@ -117,7 +117,7 @@ function PresentingHaikuControl(props: Props) {
             <ModPresenting 
               handleSwitch={handleBuzzToggle} 
               haikuData={haiku}
-							// teamData={team} 
+							teamData={team} 
               gameData={game}
               topicData={topic}
             />
