@@ -34,8 +34,6 @@ function TeamList(props: Props) {
 						teamArr.push(haicues[i].teamId);
 					}
 					setTeamArr(teamArr);
-					console.log();
-					console.log();
 					
 					if (teamArr.length === teams.length) {
 						setPresenting(true);

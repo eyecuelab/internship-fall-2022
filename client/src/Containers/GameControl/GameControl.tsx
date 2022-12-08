@@ -30,15 +30,12 @@ function GameControl() {
 					localStorage.clear();
 				}
 			}
-			
-			console.log(response);
+
 			localStorage.setItem('game', JSON.stringify(response));
 			setGame(response);
 
 			if (localStorage.getItem('game-phase') === 'ready') { 
-				console.log('TOPIC: ', response.Rounds.slice(-1)[0]);
 				getData(`/topics/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
-					console.log('TOPIC DATA: ', topic);
 					setTopic(topic);
 					localStorage.setItem('topic', JSON.stringify(topic));
 				});

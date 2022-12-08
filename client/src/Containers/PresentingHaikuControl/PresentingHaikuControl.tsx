@@ -29,16 +29,12 @@ function PresentingHaikuControl(props: Props) {
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
-	console.log('INITIAL GAME: ', game);
-	console.log('INITIAL ROUND: ', round);
-
 	useEffect(() => {
 		socket.on('connection', () => {
 			console.log('socket open');
 		});
 
 		socket.on('buzz', (team: Team) => {
-			console.log('a team buzzed in: ', team.teamName);
 			setGuessingTeam(team);
 			setBuzzedIn(true);
 		});
@@ -56,7 +52,6 @@ function PresentingHaikuControl(props: Props) {
 		});
 
 		getData(`/turns/presentingTeam/${round.id}`).then((turn) => {
-			console.log('TURN DATA: ', turn);
 			setTurn(turn);
 			setTeam(turn.performingTeam);
 		});
@@ -64,7 +59,6 @@ function PresentingHaikuControl(props: Props) {
   }, []);
 
   useEffect(() => {
-		console.log('ROUND TOPIC ID', round.topicId);
 		getData(`/topic/${round.topicId}`).then((topic) => {
 			setTopic(topic);
 		});
@@ -74,8 +68,6 @@ function PresentingHaikuControl(props: Props) {
 		});
 
   }, [round]);
-
-  console.log('GAME: ', game);
 
   const lineAdvancer = () => {
     if (lineNumber < 3) {

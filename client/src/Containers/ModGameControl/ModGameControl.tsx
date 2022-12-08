@@ -27,7 +27,6 @@ function ModGameControl(props: Props) {
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
-				console.log(response);
 				setGames([...response.games])
 			});
 		} else {
@@ -42,7 +41,6 @@ function ModGameControl(props: Props) {
 		if (user) {
 		getData(`/moderators/${user.email}`)
 			.then((response) => {
-				console.log(response);
 				setGames([...response.games])
 			});
 		} else {

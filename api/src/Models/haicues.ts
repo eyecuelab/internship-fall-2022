@@ -7,7 +7,6 @@ export const getHaicues = async () => {
 }
 
 export const getOneHaicue = async (roundId: number, teamId: number) => {
-	console.log('TROUBLESOME ROUND: ', roundId);
 	return await prisma.haicues.findFirst({
 		where: {
 			teamId: Number(teamId),

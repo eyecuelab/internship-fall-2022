@@ -30,7 +30,6 @@ function ModChooseTopic(props: Props) {
 	const selectTopic = (topic: Topic) => {
 		setTopic(topic);
 		handleSwitch(true);
-		console.log('ChooseTopic index selectTopic');
 	}
 
   redButton.width = '100%';

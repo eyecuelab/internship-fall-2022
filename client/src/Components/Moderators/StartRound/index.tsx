@@ -23,8 +23,6 @@ function ModStartRound(props: Props) {
 		});
   }, []);
 
-	console.log('ROUND: ', round);
-
 	const doBoth = () => {
 		selectTopic();
 		handleSetTopic();
@@ -36,20 +34,14 @@ function ModStartRound(props: Props) {
 				localStorage.setItem('game', JSON.stringify(data));
 				setRound(newRound);
 				putData('/topics/', { topicId: topic.id, roundId: newRound.id }).then(() => {
-					console.log("handleSetTopic");
 					getData(`/teams/game/${id}`).then((teams) => {
-						console.log('teams:', teams)
 						getData(`/phrases/${topic.id}`).then((phrases) => {
-							console.log("phrases:", phrases)
 							for (let i=0; i<teams.length; i++) {
 								putData('/team/addPhrase', { teamId: teams[i].id, phraseId: phrases[i].id}).then(() => {
-									console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
 								});
 								if (i === teams.length - 1) {
-									console.log('i = teams length');
 									handleSwitch(true);
 									postData('/startGame', { gameId: id });
-									console.log('NEW ROUND: ', newRound);
 								}
 							}
 						});
@@ -60,17 +52,12 @@ function ModStartRound(props: Props) {
 	}
 
 	const handleSetTopic = () => {
-		console.log("handleSetTopic");
 		getData(`/teams/game/${id}`).then((teams) => {
-			console.log('teams:', teams)
 			getData(`/phrases/${topic.id}`).then((phrases) => {
-				console.log("phrases:", phrases)
 				for (let i=0; i<teams.length; i++) {
 					putData('/team/addPhrase', { teamId: teams[i].id, phraseId: phrases[i].id}).then(() => {
-						console.log('ADDED PHRASE: ', phrases[i].body, " TO TEAM: ", teams[i].teamName);
 					});
 					if (i === teams.length) {
-						// setTopic(topic);
 						handleSwitch(true);
 					}
 				}

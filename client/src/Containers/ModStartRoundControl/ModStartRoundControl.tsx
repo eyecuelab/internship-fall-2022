@@ -22,14 +22,11 @@ function ModStartRoundControl(props: Props) {
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
-	console.log(JSON.parse(localStorage.getItem('game') as string));
-
   useEffect(() => {
 		getData(`/games/${id}`).then((response) => {
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
 		});
-		console.log(topic, selectedTopic);
   }, []);
 
 	useEffect(() => {

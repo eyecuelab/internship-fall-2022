@@ -22,8 +22,6 @@ function Buzzer (props: Props) {
 		getData(`/team/${team.id}`).then((team) => {
 			setPhrase(team.phrases.slice(-1)[0]);
 			setHaicue(team.Haicues.slice(-1)[0]);
-			console.log('PRESENTING PHRASE: ', phrase);
-			console.log('PRESENTING HAICUE: ', haicue);
 		})
 	}, [team.id])
 

@@ -29,10 +29,8 @@ export const getUniquePhrase = async (topicId: number) => {
 			topicId: Number(topicId),
 		}
 	});
-		console.log('phrases: ', phrases);
 		for (let i=0; i<phrases.length; i++) {
 			if (phrases[i].teamId === null) {
-				console.log('PHRASES[i]: ', phrases[i]);
 				return phrases[i];
 			}
 		}

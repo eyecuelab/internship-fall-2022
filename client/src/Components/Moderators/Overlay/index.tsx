@@ -51,7 +51,6 @@ function ModOverlay(props: Props) {
   const timer = formatTimer(time);
 
   const updateGameStatus = (gameId: number) => {
-		console.log('OFFENDING ID: ', gameId);
     putData(`/games/${gameId}`);
   };
 
