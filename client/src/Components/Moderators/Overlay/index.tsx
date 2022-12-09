@@ -37,6 +37,7 @@ function ModOverlay(props: Props) {
     };
   }, []);
 
+
   const formatTimer = (timer: number) => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer - minutes * 60;
@@ -58,7 +59,7 @@ function ModOverlay(props: Props) {
 
   const codeToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`www.haicue.com/game/${gameData.gameCode}`);
+      await navigator.clipboard.writeText(`www.haicue.com/${gameData.gameCode}`);
     } catch (err) {
       console.log('Failed to copy: ');
     }
