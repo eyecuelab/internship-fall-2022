@@ -58,37 +58,7 @@ function ModPresenting(props: Props) {
 				setHaiku(turn.Haicue);
 			});
 		});
-
-
-    // setThisTurn(turnData);
-		// getData(`/team/${turnData.performingTeamId}`).then((team) => {
-		// 	setTeam(team);
-		// });
-		// getData(`/turns/presentingTeam/${turnData.id}`).then((turn) => {
-		// 	console.log('turn', turn);
-		// 	setHaiku(turn.Haicue);
-		// });
 	}, []);
-
-	useEffect(() => {
-		console.log('turnData: ', turnData);
-		console.log('teamData: ', teamData);
-		// getData(`/team/${turnData.performingTeamId}`).then((team) => {
-		// 	setTeam(team);
-		// });
-		// getData(`/turns/presentingTeam/${turnData.performingTeamId}`).then((turn) => {
-		// 	console.log(turn);
-		// 	setHaiku(turn.Haicue);
-		// });
-	}, []);
-
-	// useEffect(() => {
-	// 	setLineNumber(turn);
-	// }, [turn]);
-
-	const buzzer = () => {
-		socket.emit('buzz');
-	}
 
   return (
     <>

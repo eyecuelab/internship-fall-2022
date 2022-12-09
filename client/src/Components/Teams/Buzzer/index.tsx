@@ -29,10 +29,6 @@ function Buzzer (props: Props) {
 	}, [team.id]);
 
 	useEffect(() => {
-		setBuzzerState(buzzerState);
-	}, [buzzerState])
-
-	useEffect(() => {
 		socket.on('connection', () => {
 			console.log('socket open');
 		});

@@ -20,6 +20,9 @@ function ModHandleGuess(props: Props) {
 	const { handleSwitch, gameData, haikuData, turnData, guessingTeam, assignPoints } = props;
 	// @ts-ignore
 	const [buzzingTeam, setBuzzingTeam] = useState<Team>({teamName: ''});
+		// @ts-ignore
+	const [performingTeam, setPerformingTeam] = useState<Team>({teamName: ''})
+	// const [guessingTeam, setGuessingTeam] = useState<Team>({teamName: ''});
 	// @ts-ignore
 	const [haiku, setHaiku] = useState<Haicue>({ Phrase: { body: '' }});
 	console.log('INITIAL HAIKU: ', haiku);
@@ -50,6 +53,7 @@ function ModHandleGuess(props: Props) {
 		getData(`/haicues/round/${haikuData.roundId}/team/${haikuData.teamId}`).then((haiku) => {
 			console.log('GET haiku: ', haiku);
 			setHaiku(haiku);
+			setPerformingTeam(haiku.team);
 		});
 	}, []);
 
@@ -57,7 +61,7 @@ function ModHandleGuess(props: Props) {
     <>
       <Container>
         <div>
-          <h3>{buzzingTeam.teamName}</h3>
+          <h3>{performingTeam.teamName}</h3>
           <h1>{haiku.Phrase.body}</h1>
 					<br />
 					<br />

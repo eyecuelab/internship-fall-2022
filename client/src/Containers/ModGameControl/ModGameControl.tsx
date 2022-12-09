@@ -17,6 +17,7 @@ interface Props {
 function ModGameControl(props: Props) {
 	const { userData, setUserData, logout } = props;
   const [createNewGameView, setCreateNewGameView] = useState(false);
+	const [presenting, setPresenting] = useState(false);
 	const [games, setGames] = useState<Game[]>([]);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
@@ -58,7 +59,7 @@ function ModGameControl(props: Props) {
       return (
         <CardTemplate
           content={<ModGameList gameList={games} getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={logout} />}
+          overlay={<ModOverlay handleLogout={logout} setPresenting={setPresenting}/>}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />
@@ -67,7 +68,7 @@ function ModGameControl(props: Props) {
       return (
         <CardTemplate
           content={<ModNewGame getGameList={getGameList} handleCreateNewGame={handleCreateNewGame} />}
-          overlay={<ModOverlay handleLogout={logout} />}
+          overlay={<ModOverlay handleLogout={logout} setPresenting={setPresenting}/>}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
         />

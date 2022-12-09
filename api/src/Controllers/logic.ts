@@ -55,7 +55,7 @@ const startThisRound = (gameId: number) => {
 		}
 	}, 1000);
 
-	if (timeRemaining === 0) {
+	if (timeRemaining <= 0) {
 		timeRemaining = ROUND_TIME;
 	}
 }

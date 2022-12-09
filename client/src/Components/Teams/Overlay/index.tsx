@@ -9,7 +9,7 @@ interface Props {
 function TeamOverlay(props: Props) {
 	const { setSubmitState } = props;
 	const [time, setTime] = useState(300);
-	const [timerPhase, setTimerPhase] = useState(true);
+	const [timerPhase, setTimerPhase] = useState('timer');
 	const teamData = JSON.parse(localStorage.getItem('team') as string);
 
 	useEffect(() => {
@@ -21,9 +21,13 @@ function TeamOverlay(props: Props) {
 			setTime(timeInterval);
 		});
 
+		socket.on('ready', () => {
+			setTimerPhase('timer');
+		});
+
 		socket.on('start_guessing', () => {
 			setTime(300);
-			setTimerPhase(false);
+			setTimerPhase('');
 		});
 
 		return () => {
@@ -54,7 +58,7 @@ function TeamOverlay(props: Props) {
       <h3>Points</h3>
       <h1>{teamData?.teamScore}</h1>
       <br />
-			{timerPhase ? 
+			{timerPhase === 'timer' ? 
       	<><h3>Timer</h3>
     	  <h1 className={timer.minutes < 1 ? 'panic' : ''}>{timer.minutes}:{timer.seconds}</h1></>
 				: null

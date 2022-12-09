@@ -13,33 +13,19 @@ interface Props {
 
 function EndGameControl(props: Props) {
   const {id, code} = useParams();
-  const [team, setTeam] = useState<Team>();
+  const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('team') as string));
   const [color, setColor] = useState('#888');
   const [submitState, setSubmitState] = useState(true);
+	const [presenting, setPresenting] = useState(false);
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
-  const [round, setRound] = useState<Round>(
-    JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]
-  );
   const user = JSON.parse(localStorage.getItem('user') as string);
-
-  const colors = {
-    apple: '#0A1031',
-    blueberry: '#0c114a',
-    cherry: '#C70009',
-    kiwi: '#61750D',
-    lemon: '#105839',
-    peach: '#DF9190',
-    pear: '#CDA70D',
-    strawberry: '#D00D0A',
-  };
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   useEffect(() => {
-    getData(`/games/${id}`).then(games => {
-      setGame(games);
-      setRound(games.Rounds.slice(-1)[0]);
-    });
+		if (!user) {
+			swapBanner();
+		}
   }, []);
 
   const passedInfo = {
@@ -48,30 +34,41 @@ function EndGameControl(props: Props) {
     labelTwo: 'teams left',
     textTwo: 'pass #',
     gameCode: game.gameCode,
-    gameRound: round,
   };
 
-  const bgUrl = `/images/${team?.teamName}_banner.png`;
+	const swapBanner = () => {
+		switch(team?.teamName) {
+			case("apple"):
+				setColor('#0A1031');
+				break;
+			case("blueberry"):
+				setColor('#0c114a');
+				break;
+			case("cherry"):
+				setColor('#C70009');
+				break;
+			case("kiwi"):
+				setColor('#61750D');
+				break;
+			case("lemon"):
+				setColor('#105839');
+				break;
+			case("peach"):
+				setColor('#DF9190');
+				break;
+			case("pear"):
+				setColor('#CDA70D');
+				break;		
+		}
+	}
 
-  useEffect(() => {
-    getData(`/games/room/${code?.toUpperCase()}`).then(response => {
-      if (!localStorage.getItem('team')) {
-        postData('/teams', {gameId: response.id}).then(data => {
-          setTeam(data);
-          localStorage.setItem('team', JSON.stringify(data));
-        });
-      } else {
-        const teamData = JSON.parse(localStorage.getItem('team') as string);
-        setTeam(teamData);
-      }
-    });
-  }, []);
+  const bgUrl = `/images/${team?.teamName}_banner.png`;
 
   if (user) {
     return (
       <CardTemplate
-        content={<EndGame gameId={game} />}
-        overlay={<ModOverlay gameData={passedInfo} />}
+        content={<EndGame game={game} />}
+        overlay={<ModOverlay gameData={passedInfo} setPresenting={setPresenting}/>}
         bgUrl="/images/moderator_card_background_2.png"
         color="#15586a"
       />
@@ -79,7 +76,7 @@ function EndGameControl(props: Props) {
   } else {
     return (
       <CardTemplate
-        content={<EndGame gameId={game} />}
+        content={<EndGame game={game} />}
         overlay={<TeamOverlay setSubmitState={setSubmitState} />}
         bgUrl={bgUrl}
         color={color}

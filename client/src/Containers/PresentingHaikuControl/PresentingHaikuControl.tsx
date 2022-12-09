@@ -25,6 +25,7 @@ function PresentingHaikuControl(props: Props) {
   const [round, setRound]= useState<Round>(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 	const [turn, setTurn] = useState(0);
 	const [turns, setTurns] = useState<Turn[]>();
+	const [presenting, setPresenting] = useState(true);
 	// @ts-ignore
 	const [thisTurn, setThisTurn] = useState<Turn>({ id: 0 });
   const [topic, setTopic]= useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
@@ -84,6 +85,7 @@ function PresentingHaikuControl(props: Props) {
 			setTurn(turn+1);
       setLineNumber(1);
     }
+		socket.emit('buzzer_refresh');
   };
 
 	const assignPoints = () => {
@@ -117,6 +119,10 @@ function PresentingHaikuControl(props: Props) {
     setBuzzedIn(!buzzedIn);
   };
 
+	const handleEndRound = () => {
+		socket.emit('view_score');
+	}
+
   const passedInfo = {
     labelOne: 'round',
     textOne: game.Rounds.length,
@@ -144,7 +150,7 @@ function PresentingHaikuControl(props: Props) {
 							turnData={thisTurn}
 							teamData={team}
             />}
-          overlay={<ModOverlay gameData={passedInfo} />}
+          overlay={<ModOverlay gameData={passedInfo} setPresenting={setPresenting}/>}
           bgUrl="/images/moderator_card_background_2.png"
           color="#15586a"
         />
@@ -154,7 +160,7 @@ function PresentingHaikuControl(props: Props) {
         <CardTemplate
           content={
             <ModPresenting 
-              handleSwitch={handleBuzzToggle} 
+              handleSwitch={handleEndRound} 
 							lineAdvancer={lineAdvancer}
               gameData={game}
               topicData={topic}
@@ -165,7 +171,7 @@ function PresentingHaikuControl(props: Props) {
 							lineNumber={lineNumber}
             />
           }
-          overlay={<ModOverlay gameData={passedInfo} />}
+          overlay={<ModOverlay gameData={passedInfo} setPresenting={setPresenting}/>}
           bgUrl="/images/moderator_card_background_2.png"
           color="#15586a"
         />
