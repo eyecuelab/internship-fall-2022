@@ -42,6 +42,13 @@ function EndGame(props: Props) {
 			<Grid container>
 				{teams?.map((team: Team) => { return <TeamFinalItem key={team.id} team={team} /> })}
 			</Grid>
+      <ButtonContainer>
+          <Link to={`/`}>
+            <DogEarButton style={redButton}>
+              <h3>END GAME</h3>
+            </DogEarButton>
+          </Link>
+        </ButtonContainer>
       </Container>
     </>
   );
