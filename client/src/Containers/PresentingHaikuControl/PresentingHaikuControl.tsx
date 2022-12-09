@@ -128,8 +128,8 @@ function PresentingHaikuControl(props: Props) {
   const passedInfo = {
     labelOne: 'round',
     textOne: game.Rounds.length,
-    labelTwo: 'teams left',
-    textTwo: 'pass #',
+    labelTwo: '',
+    textTwo: '',
     gameCode: game.gameCode,
     gameRound: round,
   };

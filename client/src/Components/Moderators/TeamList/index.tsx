@@ -83,9 +83,9 @@ function TeamList(props: Props) {
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${game.id}/presenting`}>
-		      <DogEarButton style={greenButton} onClick={startGuessingPhase}>
+				{props.presenting ? <DogEarButton style={greenButton} onClick={startGuessingPhase}>
             <h3>Start Reading</h3>
-          </DogEarButton>
+          </DogEarButton> : null }
 		  </Link>
           <DogEarButton onClick={extendTime} style={whiteButton}>
             <h3>EXTEND 30 SECONDS</h3>
