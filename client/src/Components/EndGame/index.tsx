@@ -8,6 +8,7 @@ import {getData} from '../../ApiHelper';
 import {Game, Team} from '../../Types/Types';
 import TeamFinalItem from './TeamFinalItem';
 import socket from '../../Hooks/WebsocketHook';
+import ReactConfetti from 'react-confetti';
 
 interface Props {
   gameId: Game;
@@ -33,6 +34,7 @@ function EndGame(props: Props) {
 
   return (
     <>
+			<ReactConfetti width={window.outerWidth*1.4} height={window.outerHeight*1.4} numberOfPieces={300} gravity={0.25} recycle={false} style={{margin:'auto'}}/>
       <Container>
         <Grid container>
           <Grid container item xs={10} direction="column">
