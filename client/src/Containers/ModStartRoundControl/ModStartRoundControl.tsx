@@ -41,7 +41,7 @@ function ModStartRoundControl(props: Props) {
 			return (
 				<CardTemplate
 				// @ts-ignore
-        content={<ModStartRound topic={topic} handleSwitch={setSelectedTopic}/>}
+        content={<ModStartRound topic={topic} game={game} handleSwitch={setSelectedTopic}/>}
 					overlay={<ModOverlay gameData={passedInfo} handleLogout={logout} />}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
