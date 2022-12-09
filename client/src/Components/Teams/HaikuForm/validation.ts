@@ -3,9 +3,11 @@ export const findStems = (word: string) => {
 	const response = fetch(url, { method: 'GET' })
 	.then(response => response.json())
 	.then(data => {
-		return data[0];
+		console.log('DATA: ', data);
+		console.log('DATA META STEMS: ', data[0].meta.stems)
+		return ((data) ? data[0].meta.stems : data[0].meta.stems);
 	});
-	return response
+	return response;
 }
 
 export const compareWords = (stems: string[], words: string[]) => {
@@ -105,7 +107,7 @@ export const countSyllables = (inputWord: string) => {
 		/[aeiou][^aeioucgsz]e[^rdn]$/i,
 		// /[st]ions$/i,
 		// /[st]ion$/i,
-		/cious$/i,
+		/[cg]ious$/i,
 		/[ct]ial$/i,
 		/iate$/i,
 		/elle$/i,

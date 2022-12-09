@@ -75,7 +75,7 @@ function ModStartRound(props: Props) {
     <>
       <Container>
         <div>
-          <h3>round {game.Rounds.length} topic</h3>
+          <h3>round {JSON.parse(localStorage.getItem('game') as string).Rounds.length} topic</h3>
           <hr />
           <h1>{topic.name}</h1>
           <br />

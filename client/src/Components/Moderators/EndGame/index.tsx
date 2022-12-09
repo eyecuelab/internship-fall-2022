@@ -9,13 +9,12 @@ import { Game, Team } from '../../../Types/Types';
 import TeamFinalItem from './TeamFinalItem';
 
 interface Props {
-  gameId: Game;
+  game: Game;
 }
 
 function EndGame(props: Props) {
 	const [teams, setTeams] = useState([]);
 	const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
-	const user = JSON.parse(localStorage.getItem('user') as string);
 	
 	useEffect(() => {
 		getData(`/teams/game/${game.id}`).then((teams) => {
@@ -40,18 +39,9 @@ function EndGame(props: Props) {
         <div>
           <hr />
         </div>
-		<Grid container>
+			<Grid container>
 				{teams?.map((team: Team) => { return <TeamFinalItem key={team.id} team={team} /> })}
 			</Grid>
-        <ButtonContainer>
-		  <Link to={`/game/${props.gameId}/round`}>
-          <DogEarButton
-		  	style={redButton}
-			>
-            <h3>END GAME</h3>
-          </DogEarButton>
-		  </Link>
-        </ButtonContainer>
       </Container>
     </>
   );

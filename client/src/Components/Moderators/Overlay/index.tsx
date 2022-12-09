@@ -20,6 +20,7 @@ function ModOverlay(props: Props) {
 	const { id } = useParams();
 	const { handleLogout, gameData, setPresenting } = props;
   const [time, setTime] = useState(300);
+  const [timing, setTiming] = useState('timer');
   const location = useLocation();
 
   useEffect(() => {
@@ -30,6 +31,10 @@ function ModOverlay(props: Props) {
     socket.on('tick', (timeInterval: number) => {
       setTime(timeInterval);
     });
+
+		socket.on('start_guessing', () => {
+			setTiming('');
+		});
 
     return () => {
       socket.off('connection');
@@ -54,11 +59,10 @@ function ModOverlay(props: Props) {
   const updateGameStatus = (gameId: number) => {
     putData(`/games/${gameId}`);
   };
-  console.log(gameData)
 
   const codeToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`www.haicue.com/game/${gameData.gameCode}`);
+      await navigator.clipboard.writeText(`localhost:4173/${gameData.gameCode}`);
     } catch (err) {
       console.log('Failed to copy: ');
     }
@@ -93,7 +97,7 @@ function ModOverlay(props: Props) {
         <GameInfo h1Input={gameData.textOne} h3Input={gameData.labelOne} />
       ) : null}
 
-      {location.pathname.includes('brainstorming') ? (<><h3>timer</h3><h1 className={timer.minutes < 1 ? 'panic' : ''}>{timer.minutes}:{timer.seconds}</h1></>) : (gameData ? (
+      {( (timing === 'timer') && location.pathname.includes('brainstorming')) ? (<><h3>{timing}</h3><h1 className={timer.minutes < 1 ? 'panic' : ''}>{timer.minutes}:{timer.seconds}</h1></>) : (gameData ? (
         <GameInfo h1Input={gameData.textTwo} h3Input={gameData.labelTwo} />
       ) : null)}
 

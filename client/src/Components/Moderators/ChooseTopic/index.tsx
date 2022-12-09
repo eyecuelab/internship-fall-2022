@@ -52,9 +52,7 @@ function ModChooseTopic(props: Props) {
         </div>
       </Container>
       <div className="spacer" />
-      <Link to="/" className="bottom">
-        {' '}
-        {/* FIX THIS ROUTE */}
+      <Link to={`/game/${id}/result`} className="bottom">
         <DogEarButton style={redButton}>
           <h3>end game</h3>
         </DogEarButton>

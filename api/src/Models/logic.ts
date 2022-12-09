@@ -13,7 +13,7 @@ export const emitStartRound = (gameId: number) => {
 
 export const emitTimerTick = (gameId: number, timeRemaining: number) => {
 	io.emit('tick', timeRemaining); //.in(gameId.toString())
-} // socket.emit('buzz', team);
+}
 
 export const startGuessingPhase = (gameId: number) => {
 	io.emit('start_guessing'); //.in(gameId.toString())

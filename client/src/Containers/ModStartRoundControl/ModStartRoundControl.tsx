@@ -19,6 +19,7 @@ function ModStartRoundControl(props: Props) {
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string)); 
 	const [topic, setTopic] = useState<Topic>();
   const [selectedTopic, setSelectedTopic] = useState(false);
+	const [presenting, setPresenting] = useState(false);
 
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
@@ -41,8 +42,8 @@ function ModStartRoundControl(props: Props) {
 			return (
 				<CardTemplate
 				// @ts-ignore
-        content={<ModStartRound topic={topic} game={game} handleSwitch={setSelectedTopic}/>}
-					overlay={<ModOverlay gameData={passedInfo} handleLogout={logout} />}
+        content={<ModStartRound topic={topic} handleSwitch={setSelectedTopic}/>}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={logout} setPresenting={setPresenting}/>}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>
@@ -52,7 +53,7 @@ function ModStartRoundControl(props: Props) {
 				<CardTemplate
 				// @ts-ignore
           content={<ModChooseTopic setTopic={setTopic} handleSwitch={setSelectedTopic}/>}
-					overlay={<ModOverlay gameData={passedInfo} handleLogout={logout} />}
+					overlay={<ModOverlay gameData={passedInfo} handleLogout={logout} setPresenting={setPresenting}/>}
 					bgUrl='/images/moderator_card_background_2.png'
 					color='#15586a'
 				/>

@@ -54,9 +54,13 @@ export type Game = {
 }
 
 export type Round = {
-	id : number
+  id: number
+  game: Game
   gameId: number
+  topic: Topic
   topicId: number
+  Turns: Turn[]
+  Haicues: Haicue[]
 }
 
 export type Turn = {

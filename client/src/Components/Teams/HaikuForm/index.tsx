@@ -6,6 +6,7 @@ import { findStems, compareWords, haikuCheck } from './validation'
 import { DogEarButton, whiteButton, greenButton } from '../../componentStyles';
 import socket from '../../../Hooks/WebsocketHook';
 import { Phrase, Topic } from '../../../Types/Types';
+import { useParams } from 'react-router-dom';
 
 interface Props {
 	topic: Topic;
@@ -32,6 +33,7 @@ type Data = {
 }
 
 function HaikuForm(props: Props) {
+	const {code} = useParams();
 	const { topic, submitState, setSubmitState } = props;
 	const [stems, setStems] = useState<string[]>([]);
 	const [lineOne, setLineOne] = useState('5 Syllables');
@@ -47,21 +49,24 @@ function HaikuForm(props: Props) {
 	greenButton.width = '46%';
 
 	useEffect(() => {
-		setRound(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
-		setRoundNum(JSON.parse(localStorage.getItem('game') as string).Rounds.length);
-		const stemList: string[] = [];
-		getData(`/team/${team.id}`).then((team) => {
-			localStorage.setItem('team', JSON.stringify(team));
-			setTeam(team);
-			setPhrase(team.phrases.slice(-1)[0]);
-			setValue('roundId', topic.roundId);
-			setValue('teamId', team.id);
-			setValue('phraseId', team.phrases.slice(-1)[0].id);
-			team.phrases.slice(-1)[0].body.split(' ').forEach((word: string, index: number) => {
-				findStems(word)
-				.then((data) => {
-					stemList[index] = (data.meta.stems);
-					setStems(stemList);
+		getData(`/games/room/${code}`).then((game) => {
+			setRound(game.Rounds.slice(-1)[0]);
+			setRoundNum(game.Rounds.length);
+			const stemList: string[] = [];
+			getData(`/team/${team.id}`).then((team) => {
+				localStorage.setItem('team', JSON.stringify(team));
+				setTeam(team);
+				setPhrase(team.phrases.slice(-1)[0]);
+				setValue('roundId', topic.roundId);
+				setValue('teamId', team.id);
+				setValue('phraseId', team.phrases.slice(-1)[0].id);
+				team.phrases.slice(-1)[0].body.split(' ').forEach((word: string, index: number) => {
+					findStems(word)
+					.then((data) => {
+						stemList[index] = (data);
+						setStems(stemList);
+						console.log('HAIKU FORM STEMS: ', stems)
+					});
 				});
 			});
 		});

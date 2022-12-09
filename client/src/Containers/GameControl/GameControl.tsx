@@ -19,20 +19,14 @@ function GameControl() {
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
 	const [gamePhase, setGamePhase] = useState(localStorage.getItem('game-phase') || '');
 	const [submitState, setSubmitState] = useState(true);
-	const [color, setColor] =useState('#ffffff');
+	const [color, setColor] = useState('#ffffff');
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
 
 	useEffect(() => {
-		getData(`/games/room/${code?.toUpperCase()}`)
+		// @ts-ignore
+		getData(`/games/room/${code.toUpperCase()}`)
 		.then((response) => {
-
-			if (localStorage.getItem('game')) {
-				if (JSON.parse(localStorage.getItem('game') as string).gameCode.toLowerCase() !== response.gameCode.toLowerCase()) {
-					localStorage.clear();
-				}
-			}
-
-			localStorage.setItem('game', JSON.stringify(response));
+			console.log('GAME bY CODE: ', response);
 			setGame(response);
 
 			if (localStorage.getItem('game-phase') === 'ready') { 
@@ -40,6 +34,29 @@ function GameControl() {
 					setTopic(topic);
 					localStorage.setItem('topic', JSON.stringify(topic));
 				});
+			}
+		});
+
+	}, [gamePhase]);
+
+	useEffect(() => {
+		// @ts-ignore
+		getData(`/games/room/${code.toUpperCase()}`)
+		.then((response) => {
+			console.log('GAME bY CODE: ', response);
+			if (localStorage.getItem('game')) {
+				console.log('game in localstorage');
+				if (game.gameCode.toLowerCase() !== response.gameCode.toLowerCase()) {
+					console.log('local game code: ', game.gameCode);
+					console.log('joined game code: ', response.gameCode)
+					localStorage.clear();
+					localStorage.setItem('game', JSON.stringify(response));
+					localStorage.setItem('game-phase', '');
+					setGame(response);
+				}
+			} else {
+				localStorage.setItem('game', JSON.stringify(response));
+				setGame(response);
 			}
 
 			if (!localStorage.getItem('team')) {
@@ -54,8 +71,7 @@ function GameControl() {
 				setTeam(teamData);
 			}
 		});
-
-	}, [gamePhase]);
+	}, [])
 
 	useEffect(() => {
 		swapBanner();
@@ -82,8 +98,9 @@ function GameControl() {
 			setGamePhase('guessing');
 		});
 
-		// socket.on('end_round', () => {
-		// });
+		socket.on('end_round', () => {
+			setGamePhase('scoring');
+		})
 
 		return () => {
 			socket.off('connection');
@@ -94,21 +111,7 @@ function GameControl() {
 		}
 	})
 
-  // const fruitColors = {
-  //   apple: '#0A1031',
-  //   blueberry: '#0c114a',
-  //   cherry: '#C70009',
-  //   kiwi: '#61750D',
-  //   lemon: '#105839',
-  //   peach: '#DF9190',
-  //   pear: '#CDA70D',
-  //   strawberry: '#D00D0A'
-  // };
-
 	const bgUrl = `/images/${team?.teamName}_banner.png`;
-
-	// (team?.teamName === "blueberry") ?
-	// color= fruitColors.bluberry :
 
 	const swapBanner = () => {
 		switch(team?.teamName) {
@@ -132,9 +135,6 @@ function GameControl() {
 				break;
 			case("pear"):
 				setColor('#CDA70D');
-				break;
-			case("strawberry"):
-				setColor('#D00D0A');
 				break;		
 		}
 	}
@@ -151,12 +151,11 @@ function GameControl() {
 		<CardTemplate 
 			content={ 
 				gamePhase === 'guessing' ? 
-				<Buzzer roundNumber={2} topic={'holiday activity'} /> : 
-				( gamePhase === 'brainstorming' ? 
+				<Buzzer roundNumber={game.Rounds.length} topic={topic.name} /> : 
+				( gamePhase==='scoring' ? <Score /> : ( gamePhase === 'brainstorming' ? 
 					<HaikuForm topic={topic} submitState={submitState} setSubmitState={setSubmitState}/> 
 					// @ts-ignore
-				: <TeamLobby game={game} team={team} phase={gamePhase === 'ready'}/> )
-				/* <Score /> */ 
+				: <TeamLobby game={game} team={team} phase={gamePhase === 'ready'}/> ))
 			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
 			bgUrl={bgUrl}
