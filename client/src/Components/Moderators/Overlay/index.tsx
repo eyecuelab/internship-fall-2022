@@ -37,6 +37,7 @@ function ModOverlay(props: Props) {
     };
   }, []);
 
+
   const formatTimer = (timer: number) => {
     const minutes = Math.floor(timer / 60);
     const seconds = timer - minutes * 60;

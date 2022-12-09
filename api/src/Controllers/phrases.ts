@@ -1,4 +1,4 @@
-import { getPhrase, getUniquePhrase, createPhrase, deletePhrase } from "../Models/phrases";
+import { getPhrase, getUniquePhrase, createPhrase, deletePhrase, getSinglePhrase } from "../Models/phrases";
 
 const phrasesControllers = {
   async getPhrase(req: any, res: any) {
@@ -24,6 +24,13 @@ const phrasesControllers = {
     const destroyPhrase = await deletePhrase(id);
     res.status(200).json({ destroyPhrase });
   },
+
+  async getSinglePhrase(req: any, res: any) {
+    const { id } = req.params;
+    const phrase= await getSinglePhrase (id);
+    res.json(phrase);
+  },
+
 };
 
 export default phrasesControllers;
