@@ -27,20 +27,25 @@ function TeamList(props: Props) {
 		});
 
 		socket.on('submit', () => {
+			var teamArr = new Array;
 			getData(`/rounds/games/${game.id}`).then((round) => {
 				getData(`/haicues/round/${round[0].id}`).then((haicues) => {
-					if (haicues.length === teams.length) {
-						setPresenting(true);
+					for (let i = 0; i < haicues.length; i++) {
+						teamArr.push(haicues[i].teamId);
 					}
+					setTeamArr(teamArr);
+					
+					if (teamArr.length === teams.length) {
+						setPresenting(true);
+					} 
 				});
 			});
 		});
 
 		return () => {
       socket.off('submit');
-			setPresenting(false);
     };
-	}, []);
+	}, [presenting]);
 
 	const extendTime = () => {
 		postData('/addTime', [gameId]);

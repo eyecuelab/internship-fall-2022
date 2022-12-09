@@ -14,7 +14,7 @@ function TopicItem(props: Props) {
   const {topic, setTopic, selectTopic} = props;
 
 	useEffect(() => {
-		getData(`/topics/${topic.id}`).then((topic) => {
+		getData(`/topic/${topic.id}`).then((topic) => {
 			setTopic(topic)
 		});
 	}, [topic.id]);

@@ -20,6 +20,7 @@ function GameControl() {
 	const [gamePhase, setGamePhase] = useState(localStorage.getItem('game-phase') || '');
 	const [submitState, setSubmitState] = useState(true);
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
+	let bgUrl = '';
 
 	useEffect(() => {
 		getData(`/games/room/${code?.toUpperCase()}`)
@@ -45,6 +46,8 @@ function GameControl() {
 				postData('/teams', { gameId: response.id })
 				.then((data) => {
 					setTeam(data);
+					bgUrl = `'/images/${data.teamName}_banner.png'`;
+					console.log(bgUrl);
 					localStorage.setItem('team', JSON.stringify(data));
 				});
 			} else {
@@ -56,6 +59,7 @@ function GameControl() {
 	}, [gamePhase]);
 
 	useEffect(() => {
+
 		socket.on('connection', () => {
 			console.log('socket open');
 		});
@@ -85,9 +89,7 @@ function GameControl() {
 			socket.off('start_guessing');
 			socket.off('end_round');
 		}
-	})
-
-	const bgUrl = `/images/${team?.teamName}_banner.png`;
+	});
 
 	document.documentElement.style.backgroundImage = 'url(/images/oranges_background.png)';
 
@@ -109,7 +111,7 @@ function GameControl() {
 				/* <Score /> */ 
 			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
-			bgUrl={bgUrl}
+			bgUrl={String(bgUrl)}
 		/>
 		</>
 	);
