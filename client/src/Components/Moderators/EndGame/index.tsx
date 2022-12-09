@@ -49,7 +49,7 @@ function EndGame(props: Props) {
             </DogEarButton>
           </Link>
         </ButtonContainer>
-      </Container>
+.      </Container>
     </>
   );
 }
