@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, ButtonContainer } from './styles';
 import socket from '../../../Hooks/WebsocketHook';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
-import { Game, Haicue, Team, Topic } from '../../../Types/Types';
+import { Game, Haicue, Team, Topic, Turn } from '../../../Types/Types';
 import { getData } from '../../../ApiHelper';
 
 interface Props {
@@ -12,14 +12,16 @@ interface Props {
   gameData: Game;
   topicData?: Topic;
 	lineAdvancer: () => void;
+	turnData: Turn;
 }
 
 function ModPresenting(props: Props) {
-	const { handleSwitch, gameData, topicData, lineAdvancer } = props;
+	const { handleSwitch, gameData, topicData, turnData, lineAdvancer } = props;
 	const [turns, setTurns] = useState(0);
-	const [team, setTeam] = useState<Team>();
+	// @ts-ignore
+	const [team, setTeam] = useState<Team>({teamName: ''});
 	const [haiku, setHaiku] = useState<Haicue>();
-	const [thisTurn, setThisTurn] = useState();
+	const [thisTurn, setThisTurn] = useState<Turn>();
   const [lineNumber, setLineNumber] = useState(1);
   whiteButton.width = '100%';
   redButton.width = '100%';
@@ -40,18 +42,13 @@ function ModPresenting(props: Props) {
   }, []);
   
 	useEffect(() => {
-		const round = (JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
-		getData(`/rounds/${round.id}`).then((rounds) => {
-			setThisTurn(rounds.Turns[turns]);
-			getData(`/teams/${rounds.Turns[turns].teamId}`).then((team) => {
-				setTeam(team);
-			});
-			getData(`/haicues/round/${rounds.Turns[turns].roundId}/team/${rounds.Turns[turns].performingTeamId}`).then((haicue) => {
-				setHaiku(haicue);
-				getData(`/team/${haicue.teamId}`).then((team) => {
-					setTeam(team);
-				});
-			});
+		setThisTurn(turnData);
+		console.log(turnData);
+		getData(`/team/${turnData.performingTeamId}`).then((team) => {
+			setTeam(team);
+		});
+		getData(`/turns/presentingTeam/${turnData.performingTeamId}`).then((turn) => {
+			setHaiku(turn.Haicue);
 		});
 	}, []);
 
@@ -69,7 +66,7 @@ function ModPresenting(props: Props) {
       <Container>
         <div>
           <h3>team</h3>
-          <h1>{team?.teamName}</h1>
+          <h1>{team.teamName}</h1>
           <br />
           <br />
           <h3>line {lineNumber}</h3>

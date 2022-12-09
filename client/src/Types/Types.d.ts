@@ -60,11 +60,13 @@ export type Round = {
 }
 
 export type Turn = {
-	id: number
+  id: number
+  performingTeam: Team
   performingTeamId: number
-  performingTeamScore: number
   guessingTeamId: number
-  guessingTeamScore: number
+  Haicue: Haicue
+  haicueId: number
+  Round: Round
   roundId: number
   currentLineNumber: number
 }
@@ -80,8 +82,8 @@ export type Haicue = {
   line1: string
   line2: string
   line3: string
-  lineGuessed?: number
-  correctTeam?: number
+  lineGuessed: number
+  correctTeam: number
   Turns: Turn[]
 }
 

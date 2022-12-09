@@ -22,7 +22,9 @@ function PresentingHaikuControl(props: Props) {
   const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('presenting-team') as string));
 	const [guessingTeam, setGuessingTeam] = useState<Team>();
   const [round, setRound]= useState<Round>(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
-	const [turn, setTurn] = useState<Turn>(JSON.parse(localStorage.getItem('turn') as string));
+	const [turn, setTurn] = useState(0);
+	const [turns, setTurns] = useState<Turn[]>();
+	const [thisTurn, setThisTurn] = useState<Turn>();
   const [topic, setTopic]= useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
   const [buzzedIn, setBuzzedIn] = useState(false);
 	const [lineNumber, setLineNumber] = useState(1);
@@ -46,17 +48,24 @@ function PresentingHaikuControl(props: Props) {
 	}, []);
 
   useEffect(() => {
-    getData(`/games/${id}`).then((games) => {
-			setGame(games);
-			setRound(games.Rounds.slice(-1)[0]);
+    getData(`/games/${id}`).then((game) => {
+			setGame(game);
+			setRound(game.Rounds.slice(-1)[0]);
+			console.log('ROUND: ', game.Rounds.slice(-1)[0]);
+			getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
+				setTurns(round.Turns);
+				setThisTurn(round.Turns[0]);
+			});
+			console.log('Turns: ', game.Rounds.slice(-1)[0].Turns);
 		});
+  }, []);
 
+	useEffect(() => {
 		getData(`/turns/presentingTeam/${round.id}`).then((turn) => {
 			setTurn(turn);
 			setTeam(turn.performingTeam);
 		});
-
-  }, []);
+	}, [turn]);
 
   console.log(team);
 
@@ -68,13 +77,13 @@ function PresentingHaikuControl(props: Props) {
     getData(`/haicues/round/${round.id}`).then((haikus) => {
 			setHaiku(haikus);
 		});
-
   }, [round]);
 
   const lineAdvancer = () => {
     if (lineNumber < 3) {
       setLineNumber(lineNumber + 1);
     } else {
+			setTurn(turn+1);
       setLineNumber(1);
     }
   };
@@ -118,6 +127,7 @@ function PresentingHaikuControl(props: Props) {
   };
 
   if (localStorage.getItem('user')) {
+		if (thisTurn) {
     if (buzzedIn) {
       return (
         <CardTemplate
@@ -130,6 +140,8 @@ function PresentingHaikuControl(props: Props) {
 							assignPoints={assignPoints}
 							// @ts-ignore
 							guessingTeam={guessingTeam}
+							// @ts-ignore
+							turnData={thisTurn}
             />}
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
@@ -145,6 +157,8 @@ function PresentingHaikuControl(props: Props) {
 							lineAdvancer={lineAdvancer}
               gameData={game}
               topicData={topic}
+							// @ts-ignore
+							turnData={thisTurn}
             />
           }
           overlay={<ModOverlay gameData={passedInfo} />}
@@ -153,6 +167,9 @@ function PresentingHaikuControl(props: Props) {
         />
       );
     }
+		} else {
+			<></>
+		}
   }
   return <ModLogin setUserData={setUserData} />;
 }

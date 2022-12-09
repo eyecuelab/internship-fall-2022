@@ -46,7 +46,7 @@ export const lineCheck = (line: string[]) => {
   let sum = countArr.reduce((sum, number) => {
     return sum + number;
   }, 0);
-	// console.log(sum);
+	console.log(sum);
   return sum || 0;
 };
 
@@ -100,9 +100,9 @@ export const countSyllables = (inputWord: string) => {
 		/^[aeiou][^aeiou]e$/i,
 		/[^aeiou][aeiou][^aeiou]e$/i,
 		/[^bcilnrs][aeiou][^aeiouycdgz]e[ds]$/i,
-		/[bilr][aeiou][^aeioucgz]es$/i,
+		/[bilr][aeiou][^aeioucgsz]es$/i,
 		/[^nc|aeiou][^(l)|(hp)]e$/i,
-		/[aeiou][^aeiouz]e[^rdn]$/i,
+		/[aeiou][^aeioucgsz]e[^rdn]$/i,
 		// /[st]ions$/i,
 		// /[st]ion$/i,
 		/cious$/i,
@@ -135,21 +135,21 @@ export const countSyllables = (inputWord: string) => {
 	}
 	for (let i=0; i<doubleMinusSyllables.length; i++) {
 		if (doubleMinusSyllables[i].test(word)) {
-			// console.log('double minus: ',doubleMinusSyllables[i]);
+			console.log('double minus: ',doubleMinusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 ) - 1;
 			return syllables > 0 ? syllables : 1;
 		}
 	}
 	for (let i=0; i<minusSyllables.length; i++) {
 		if (minusSyllables[i].test(word)) {
-			// console.log('single minus: ', minusSyllables[i]);
+			console.log('single minus: ', minusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length - 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}
 	} 
 	for (let i=0; i<plusSyllables.length; i++) {
 		if (plusSyllables[i].test(word)) {
-			// console.log('plus: ', plusSyllables[i]);
+			console.log('plus: ', plusSyllables[i]);
 			const syllables = edgeCaseNum + ( vowelMatch ? vowelMatch.length + 1 : 0 );
 			return syllables > 0 ? syllables : 1;
 		}

@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useEffect, useState} from 'react';
 import ReactConfetti from 'react-confetti';
 import '../../index.css';
 import {Overlay, Content, Header, StyledCard, StyledCardMedia, StyledCardContent} from './styles';

@@ -21,6 +21,7 @@ function GameControl() {
 	const [submitState, setSubmitState] = useState(true);
 	const [color, setColor] =useState('#ffffff');
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
+	let bgUrl = '';
 
 	useEffect(() => {
 		getData(`/games/room/${code?.toUpperCase()}`)
@@ -45,6 +46,7 @@ function GameControl() {
 			if (!localStorage.getItem('team')) {
 				postData('/teams', { gameId: response.id })
 				.then((data) => {
+					setTeam(data);
 					console.log(color);
 					localStorage.setItem('team', JSON.stringify(data));
 				});

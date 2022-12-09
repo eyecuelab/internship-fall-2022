@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import socket from '../../../Hooks/WebsocketHook';
 import { Container, ButtonContainer, TeamAvatar } from './styles';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
-import { Game, Haicue, Team } from '../../../Types/Types';
+import { Game, Haicue, Team, Turn } from '../../../Types/Types';
 
 interface Props {
   handleSwitch?: () => void;
@@ -12,10 +12,11 @@ interface Props {
   haikuData?: Haicue;
 	guessingTeam: Team;
 	assignPoints: () => void;
+	turnData: Turn;
 }
 
 function ModHandleGuess(props: Props) {
-	const { handleSwitch, gameData, haikuData, guessingTeam, assignPoints } = props;
+	const { handleSwitch, gameData, haikuData, turnData, guessingTeam, assignPoints } = props;
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
