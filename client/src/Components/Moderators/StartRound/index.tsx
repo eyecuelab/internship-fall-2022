@@ -89,9 +89,11 @@ function ModStartRound(props: Props) {
           <DogEarButton style={whiteButton} onClick={() => handleSwitch(false)}>
             <h3>back to selection</h3>
           </DogEarButton>
-          <DogEarButton style={redButton}onClick={() => console.log(game.Rounds.length)}>
-            <h3>end game</h3>
-          </DogEarButton>
+					<Link to={{pathname: `/`}}>
+						<DogEarButton style={redButton}>
+							<h3>end game</h3>
+						</DogEarButton>
+					</Link>
         </ButtonContainer>
       </Container>
     </>
