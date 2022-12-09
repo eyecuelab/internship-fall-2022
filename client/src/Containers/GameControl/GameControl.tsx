@@ -19,8 +19,8 @@ function GameControl() {
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
 	const [gamePhase, setGamePhase] = useState(localStorage.getItem('game-phase') || '');
 	const [submitState, setSubmitState] = useState(true);
+	const [color, setColor] =useState('#ffffff');
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
-	let bgUrl = '';
 
 	useEffect(() => {
 		getData(`/games/room/${code?.toUpperCase()}`)
@@ -46,8 +46,7 @@ function GameControl() {
 				postData('/teams', { gameId: response.id })
 				.then((data) => {
 					setTeam(data);
-					bgUrl = `'/images/${data.teamName}_banner.png'`;
-					console.log(bgUrl);
+					console.log(color);
 					localStorage.setItem('team', JSON.stringify(data));
 				});
 			} else {
@@ -59,7 +58,11 @@ function GameControl() {
 	}, [gamePhase]);
 
 	useEffect(() => {
+		swapBanner();
+		console.log(color);
+	}, [team?.id]);
 
+	useEffect(() => {
 		socket.on('connection', () => {
 			console.log('socket open');
 		});
@@ -79,8 +82,8 @@ function GameControl() {
 			setGamePhase('guessing');
 		});
 
-		socket.on('end_round', () => {
-		});
+		// socket.on('end_round', () => {
+		// });
 
 		return () => {
 			socket.off('connection');
@@ -89,7 +92,52 @@ function GameControl() {
 			socket.off('start_guessing');
 			socket.off('end_round');
 		}
-	});
+	})
+
+  // const fruitColors = {
+  //   apple: '#0A1031',
+  //   blueberry: '#0c114a',
+  //   cherry: '#C70009',
+  //   kiwi: '#61750D',
+  //   lemon: '#105839',
+  //   peach: '#DF9190',
+  //   pear: '#CDA70D',
+  //   strawberry: '#D00D0A'
+  // };
+
+	const bgUrl = `/images/${team?.teamName}_banner.png`;
+
+	// (team?.teamName === "blueberry") ?
+	// color= fruitColors.bluberry :
+
+	const swapBanner = () => {
+		switch(team?.teamName) {
+			case("apple"):
+				setColor('#0A1031');
+				break;
+			case("blueberry"):
+				setColor('#0c114a');
+				break;
+			case("cherry"):
+				setColor('#C70009');
+				break;
+			case("kiwi"):
+				setColor('#61750D');
+				break;
+			case("lemon"):
+				setColor('#105839');
+				break;
+			case("peach"):
+				setColor('#DF9190');
+				break;
+			case("pear"):
+				setColor('#CDA70D');
+				break;
+			case("strawberry"):
+				setColor('#D00D0A');
+				break;		
+		}
+	}
 
 	document.documentElement.style.backgroundImage = 'url(/images/oranges_background.png)';
 
@@ -111,8 +159,10 @@ function GameControl() {
 				/* <Score /> */ 
 			} 
 			overlay={ <TeamOverlay setSubmitState={setSubmitState}/> } 
-			bgUrl={String(bgUrl)}
-		/>
+			bgUrl={bgUrl}
+			color={color}
+			/>
+		
 		</>
 	);
 }

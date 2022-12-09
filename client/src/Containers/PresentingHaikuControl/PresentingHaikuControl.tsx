@@ -67,6 +67,8 @@ function PresentingHaikuControl(props: Props) {
 		});
 	}, [turn]);
 
+  console.log(team);
+
   useEffect(() => {
 		getData(`/topic/${round.topicId}`).then((topic) => {
 			setTopic(topic);
