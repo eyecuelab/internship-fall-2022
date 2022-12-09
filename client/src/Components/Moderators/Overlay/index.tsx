@@ -58,7 +58,7 @@ function ModOverlay(props: Props) {
 
   const codeToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(`localhost:4173/${gameData.gameCode}`);
+      await navigator.clipboard.writeText(`www.haicue.com/${gameData.gameCode}`);
     } catch (err) {
       console.log('Failed to copy: ');
     }
