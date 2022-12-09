@@ -6,6 +6,7 @@ import TopicItem from './TopicItem';
 import { Topic } from '../../../Types/Types';
 import { Container } from './styles';
 import { whiteButton, redButton, DogEarButton } from '../../componentStyles';
+import socket from '../../../Hooks/WebsocketHook';
 
 
 interface Props {
@@ -35,6 +36,10 @@ function ModChooseTopic(props: Props) {
   redButton.width = '100%';
   whiteButton.width = '100%';
 
+	const handleEndGame = () => {
+		socket.emit('end_game');
+	}
+
   return (
     <div style={{position: 'relative', height: '100%'}}>
       <Container>
@@ -53,7 +58,7 @@ function ModChooseTopic(props: Props) {
       </Container>
       <div className="spacer" />
       <Link to={`/game/${id}/result`} className="bottom">
-        <DogEarButton style={redButton}>
+        <DogEarButton style={redButton} onClick={handleEndGame}>
           <h3>end game</h3>
         </DogEarButton>
       </Link>

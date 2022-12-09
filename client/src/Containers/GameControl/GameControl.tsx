@@ -8,12 +8,13 @@ import TeamOverlay from '../../Components/Teams/Overlay';
 import Score from '../../Components/Teams/Score';
 import socket from '../../Hooks/WebsocketHook';
 import { getData, postData } from '../../ApiHelper';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Game, Team, Topic } from '../../Types/Types';
 
 function GameControl() {
 	window.localStorage.removeItem('user');
 	const { code } = useParams();
+	const navigate = useNavigate();
 	const [team, setTeam] = useState<Team>();
 	const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
 	const [topic, setTopic] = useState<Topic>(JSON.parse(localStorage.getItem('topic') as string));
@@ -100,7 +101,11 @@ function GameControl() {
 
 		socket.on('end_round', () => {
 			setGamePhase('scoring');
-		})
+		});
+
+		socket.on('end_game', () => {
+			navigate(`/game/${game.id}/result`);
+		});
 
 		return () => {
 			socket.off('connection');

@@ -6,6 +6,7 @@ import { Topic } from '../../../Types/Types';
 import { Game } from '../../../Types/Types';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 import { postData, getData, putData } from '../../../ApiHelper';
+import socket from '../../../Hooks/WebsocketHook';
 
 interface Props {
   topic: Topic;
@@ -71,6 +72,10 @@ function ModStartRound(props: Props) {
   redButton.width = '100%';
   greenButton.width = '100%';
 
+	const handleEndGame = () => {
+		socket.emit('end_game');
+	}
+
   return (
     <>
       <Container>
@@ -90,7 +95,7 @@ function ModStartRound(props: Props) {
             <h3>back to selection</h3>
           </DogEarButton>
 					<Link to={{pathname: `/`}}>
-						<DogEarButton style={redButton}>
+						<DogEarButton style={redButton} onClick={handleEndGame}>
 							<h3>end game</h3>
 						</DogEarButton>
 					</Link>
