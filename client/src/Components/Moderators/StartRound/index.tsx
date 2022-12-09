@@ -3,16 +3,18 @@ import '../../../index.css';
 import { useParams, Link } from 'react-router-dom';
 import { Container, ButtonContainer } from './styles';
 import { Topic } from '../../../Types/Types';
+import { Game } from '../../../Types/Types';
 import { whiteButton, greenButton, redButton, DogEarButton } from '../../componentStyles';
 import { postData, getData, putData } from '../../../ApiHelper';
 
 interface Props {
   topic: Topic;
+	game: Game;
   handleSwitch: Dispatch<SetStateAction<boolean>>;
 }
 
 function ModStartRound(props: Props) {
-	const { topic, handleSwitch } = props;
+	const { topic, game, handleSwitch } = props;
   const { id } = useParams();
 	const [round, setRound] = useState(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
   const [topics, setTopics] = useState([]);
@@ -73,7 +75,7 @@ function ModStartRound(props: Props) {
     <>
       <Container>
         <div>
-          <h3>round *insert number* topic</h3>
+          <h3>round {game.Rounds.length} topic</h3>
           <hr />
           <h1>{topic.name}</h1>
           <br />
@@ -87,9 +89,11 @@ function ModStartRound(props: Props) {
           <DogEarButton style={whiteButton} onClick={() => handleSwitch(false)}>
             <h3>back to selection</h3>
           </DogEarButton>
-          <DogEarButton style={redButton}>
-            <h3>end game</h3>
-          </DogEarButton>
+					<Link to={{pathname: `/`}}>
+						<DogEarButton style={redButton}>
+							<h3>end game</h3>
+						</DogEarButton>
+					</Link>
         </ButtonContainer>
       </Container>
     </>
