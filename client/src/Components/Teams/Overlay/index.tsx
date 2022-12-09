@@ -8,13 +8,13 @@ interface Props {
 
 function TeamOverlay(props: Props) {
 	const { setSubmitState } = props;
-	const [time, setTime] = useState(300);
+	const [time, setTime] = useState(240);
 	const [timerPhase, setTimerPhase] = useState('timer');
 	const teamData = JSON.parse(localStorage.getItem('team') as string);
 
 	useEffect(() => {
 		socket.on('connection', () => {
-			console.log('socket open');
+			// console.log('socket open');;
 		});
 
 		socket.on('tick', (timeInterval: number) => {
@@ -26,7 +26,7 @@ function TeamOverlay(props: Props) {
 		});
 
 		socket.on('start_guessing', () => {
-			setTime(300);
+			setTime(240);
 			setTimerPhase('');
 		});
 

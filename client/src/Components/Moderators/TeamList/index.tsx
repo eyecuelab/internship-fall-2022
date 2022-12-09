@@ -31,8 +31,6 @@ function TeamList(props: Props) {
 					}
 					setTeamArr(teamArr);
 					if (teamArr.length === teams.length) {
-						console.log('team array: ', teamArr);
-						console.log('teams: ', teams);
 						setPresenting(true);
 					} 
 				});

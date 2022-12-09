@@ -30,7 +30,7 @@ function Buzzer (props: Props) {
 
 	useEffect(() => {
 		socket.on('connection', () => {
-			console.log('socket open');
+			// console.log('socket open');;
 		});
 
 		socket.on('buzz', () => {
@@ -39,7 +39,6 @@ function Buzzer (props: Props) {
 
 		socket.on('buzzer_refresh', () => {
 			setBuzzerState(true);
-			console.log(buzzerState);
 		});
 
 		socket.on('presenting', (presentingTeam) => {

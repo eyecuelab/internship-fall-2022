@@ -1,7 +1,7 @@
 import { startThisGame, emitTimerTick, startGuessingPhase } from "../Models/logic";
 import io from "../server";
 
-const ROUND_TIME = 300;
+const ROUND_TIME = 240;
 let timeStart = false;
 
 const logicControllers = {

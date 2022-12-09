@@ -36,11 +36,10 @@ function PresentingHaikuControl(props: Props) {
 
 	useEffect(() => {
 		socket.on('connection', () => {
-			console.log('socket open');
+			// console.log('socket open');;
 		});
 
 		socket.on('buzz', (team: Team) => {
-			console.log('buzzed team: ', team);
 			setGuessingTeam(team);
 			setBuzzedIn(true);
 		});
@@ -54,14 +53,10 @@ function PresentingHaikuControl(props: Props) {
   useEffect(() => {
 		setTurn(turn);
 		setRound(game.Rounds.slice(-1)[0]);
-		console.log('ROUND: ', game.Rounds.slice(-1)[0]);
 		getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
-			console.log('GET ROUND: ', round);
 			setTurns(round.Turns);
 			setThisTurn(round.Turns[turn]);
-			console.log('ROUND TURNS', round.Turns);
 			getData(`/turns/presentingTeam/${round.Turns[turn].id}`).then((turn) => {
-				console.log('GET TURN: ', turn);
 				setTeam(turn.performingTeam);
 				setHaiku(turn.Haicue);
 			});

@@ -65,7 +65,6 @@ function HaikuForm(props: Props) {
 					.then((data) => {
 						stemList[index] = (data);
 						setStems(stemList);
-						console.log('HAIKU FORM STEMS: ', stems)
 					});
 				});
 			});

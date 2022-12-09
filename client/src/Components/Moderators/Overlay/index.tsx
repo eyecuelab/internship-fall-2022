@@ -25,7 +25,7 @@ function ModOverlay(props: Props) {
 
   useEffect(() => {
     socket.on('connection', () => {
-      console.log('socket open');
+      // console.log('socket open');;
     });
 
     socket.on('tick', (timeInterval: number) => {
