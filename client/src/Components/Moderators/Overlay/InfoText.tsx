@@ -8,7 +8,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 600,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -39,10 +39,25 @@ function InfoText() {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="transition-modal-title" variant="h6" component="h2">
-              HaiCue Rules
+              <b>Moderator Instructions</b>
             </Typography>
             <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-              Instructions go here.
+              <ol>
+                <li>Create a Game, Topic, and Phrases.</li>
+                <li>Publish the Game.</li>
+                <li>Click on the Game Name.</li>
+                <li>Choose a Topic from the Topic List.</li>
+                <li>Click the <b>Player URL</b> button and send link to Team Leaders.</li>
+                <li>Wait for Team Leaders to join Game and Team.</li>
+                <li>Click <b>Start Round</b>.</li>
+                <li>Wait for Teams to Write Haikus.</li>
+                <li>When the status for all players has changed to DONE press the <b>Start Reading</b> button</li>
+                <li>Read Line 1 of Haiku to Teams and wait for Teams to click Buzzer.</li>
+                <li>Reward points for correct guess or dismiss guess.</li>
+                <li>Click <b>Advance HaiCue Clue</b> to advace to next line of Haiku.</li>
+                <li>Repeat step 10, 11, 12 until the last line of the Haiku has been read.</li>
+                <li>Click <b>End Round</b> to return to Topic List and select new Topic.</li>
+              </ol>
             </Typography>
           </Box>
         </Fade>
