@@ -1,4 +1,5 @@
-# internship-fall-2022
+# HaiCue
+## www.haicue.com
 
 ### Authors
 <!-- ### 🧑🏽‍🤝‍🧑🏼 Maintainers -->
@@ -84,6 +85,8 @@ a simple one-round game with 3 teams. First, a moderator might pick the topic of
 <!-- - _[Swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express)_ -->
 - _[Material UI](https://mui.com/)_
 - _[ESLint](https://eslint.org)_
+- _[fly.io](https://fly.io) backend/api hosting_
+- _[Netlify](https://netlify.com) front-end hosting_
 - [Nameless Terror](https://github.com/eyecuelab/mafia-lite.git), which was the project of the interns before us. Not a technology, but we frequently referenced their project and wanted to credit them.
 
 
@@ -92,6 +95,7 @@ a simple one-round game with 3 teams. First, a moderator might pick the topic of
 
 ### Setup/Installation Requirements <a id="installation"></a>
 
+- game can be played at www.haicue.com
 - _Please ensure you have the latest version of NodeJs and PostgreSQL_
 - _Clone this repository <https://github.com/eyecuelab/internship-fall-2022.git> locally_
 - _Navigate to the root folder `internship-fall-2022` and then `cd api` and run `npm install` and then `cd client` and run `npm install`_.
