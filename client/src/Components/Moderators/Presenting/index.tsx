@@ -11,6 +11,7 @@ interface Props {
   handleSwitch?: () => void;
   gameData: Game;
   topicData?: Topic;
+  haikuData?: any;
 	lineAdvancer: () => void;
 	turnData: Turn;
 }
@@ -23,6 +24,9 @@ function ModPresenting(props: Props) {
 	const [haiku, setHaiku] = useState<Haicue>();
 	const [thisTurn, setThisTurn] = useState<Turn>();
   const [lineNumber, setLineNumber] = useState(1);
+  	// @ts-ignore
+  const [phrase, setPhrase]=useState({body: ""});
+
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
@@ -47,10 +51,21 @@ function ModPresenting(props: Props) {
 		getData(`/team/${turnData.performingTeamId}`).then((team) => {
 			setTeam(team);
 		});
+    getData(`/phrases/single/${props.haikuData[0].phraseId}`).then((phrase) => {
+			setPhrase(phrase);
+		});
 		getData(`/turns/presentingTeam/${turnData.performingTeamId}`).then((turn) => {
 			setHaiku(turn.Haicue);
 		});
 	}, []);
+
+  console.log(phrase.body);
+
+  useEffect(() => {
+	
+	}, []);
+
+  console.log(phrase)
 
 	useEffect(() => {
 		setTeam(team);
@@ -61,12 +76,14 @@ function ModPresenting(props: Props) {
 		socket.emit('buzz');
 	}
 
+  // console.log(props.haikuData[0].phraseId)
+
   return (
     <>
       <Container>
         <div>
-          <h3>team</h3>
-          <h1>{team.teamName}</h1>
+          <h3>{team.teamName}</h3>
+          <h1>{phrase.body}</h1>
           <br />
           <br />
           <h3>line {lineNumber}</h3>
