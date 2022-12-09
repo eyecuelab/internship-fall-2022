@@ -40,8 +40,16 @@ io.on('connection', (socket : Socket) => {
 	});
 
 	socket.on('buzzer_refresh', () => {
-		io.emit('buzzer_refresh')
+		io.emit('buzzer_refresh');
 	});
+
+	socket.on('end_round', () => {
+		io.emit('end_round');
+	});
+
+	socket.on('end_game', () => {
+		io.emit('end_game');
+	})
 });
 
 export default io;
