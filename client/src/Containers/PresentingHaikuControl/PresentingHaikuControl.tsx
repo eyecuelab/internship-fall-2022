@@ -51,6 +51,7 @@ function PresentingHaikuControl(props: Props) {
 	}, []);
 
   useEffect(() => {
+		setTurn(turn);
 		setRound(game.Rounds.slice(-1)[0]);
 		console.log('ROUND: ', game.Rounds.slice(-1)[0]);
 		getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
@@ -60,19 +61,11 @@ function PresentingHaikuControl(props: Props) {
 			console.log('ROUND TURNS', round.Turns);
 			getData(`/turns/presentingTeam/${round.Turns[turn].id}`).then((turn) => {
 				console.log('GET TURN: ', turn);
-				setTurn(turn);
 				setTeam(turn.performingTeam);
 				setHaiku(turn.Haicue);
 			});
 		});
   }, []);
-
-	// useEffect(() => {
-	// 	getData(`/turns/presentingTeam/${thisTurn.id}`).then((turn) => {
-	// 		setTurn(turn);
-	// 		setTeam(turn.performingTeam);
-	// 	});
-	// }, [turn]);
 
   useEffect(() => {
 		getData(`/topic/${round.topicId}`).then((topic) => {
@@ -116,9 +109,11 @@ function PresentingHaikuControl(props: Props) {
 		putData('/team/addPoints', {teamId: guessingTeam?.id, points: (guessingTeamScore)});
 		putData('/team/addPoints', {teamId: team.id, points: presentingTeamScore});
 		setTurn(turn+1);
+		setBuzzedIn(false);
 	}
 
   const handleBuzzToggle = () => {
+		socket.emit('buzzer_refresh');
     setBuzzedIn(!buzzedIn);
   };
 

@@ -18,15 +18,19 @@ function Buzzer (props: Props) {
 	const [buzzerState, setBuzzerState] = useState(true);
 	const [presenting, setPresenting] = useState(false);
 
+	greenButton.width = '100%';
+	redButton.width = '100%';
+
 	useEffect(() => {
 		getData(`/team/${team.id}`).then((team) => {
 			setPhrase(team.phrases.slice(-1)[0]);
 			setHaicue(team.Haicues.slice(-1)[0]);
 		})
-	}, [team.id])
+	}, [team.id]);
 
-	greenButton.width = '100%';
-	redButton.width = '100%';
+	useEffect(() => {
+		setBuzzerState(buzzerState);
+	}, [buzzerState])
 
 	useEffect(() => {
 		socket.on('connection', () => {
@@ -39,6 +43,7 @@ function Buzzer (props: Props) {
 
 		socket.on('buzzer_refresh', () => {
 			setBuzzerState(true);
+			console.log(buzzerState);
 		});
 
 		socket.on('presenting', (presentingTeam) => {
