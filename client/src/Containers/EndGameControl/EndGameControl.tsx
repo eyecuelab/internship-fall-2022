@@ -31,8 +31,8 @@ function EndGameControl(props: Props) {
   const passedInfo = {
     labelOne: 'round',
     textOne: game.Rounds.length,
-    labelTwo: 'teams left',
-    textTwo: 'pass #',
+    labelTwo: '',
+    textTwo: '',
     gameCode: game.gameCode,
   };
 
