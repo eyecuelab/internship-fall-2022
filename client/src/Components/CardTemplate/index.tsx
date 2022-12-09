@@ -13,6 +13,9 @@ type CardTemplateProps = {
 function CardTemplate(props: CardTemplateProps) {
 	const { content, overlay, bgUrl, color } = props;
 
+  // console.log(`bgUrl= ${bgUrl}`);
+
+
   return (
     <>
 			<Header>
