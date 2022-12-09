@@ -32,7 +32,7 @@ function ModPresenting(props: Props) {
 
   useEffect(()=>{
     socket.on('connection', () => {
-			console.log('socket open');
+			// console.log('socket open');;
 		});
 
 		socket.on('buzz', () => {
@@ -47,10 +47,7 @@ function ModPresenting(props: Props) {
 	useEffect(() => {
 		const game = JSON.parse(localStorage.getItem('game') as string);
 		getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
-			console.log('GET ROUND: ', round);
-			console.log('ROUND TURNS', round.Turns);
 			getData(`/turns/presentingTeam/${round.Turns[turn].id}`).then((turn) => {
-				console.log('GET TURN: ', turn);
 				setThisTurn(turn);
 				setTeam(turn.performingTeam);
 				socket.emit('presenting', turn.performingTeam);

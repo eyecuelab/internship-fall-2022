@@ -25,14 +25,13 @@ function ModHandleGuess(props: Props) {
 	// const [guessingTeam, setGuessingTeam] = useState<Team>({teamName: ''});
 	// @ts-ignore
 	const [haiku, setHaiku] = useState<Haicue>({ Phrase: { body: '' }});
-	console.log('INITIAL HAIKU: ', haiku);
   whiteButton.width = '100%';
   redButton.width = '100%';
   greenButton.width = '100%';
 
   useEffect(() => {
 		socket.on('connection', () => {
-			console.log('socket open');
+			// console.log('socket open');;
 		});
 
 		return () => {
@@ -45,17 +44,18 @@ function ModHandleGuess(props: Props) {
 	}, []);
 
 	useEffect(() => {
-		console.log('HAIKU DATA: ', haikuData);
 		getData(`/team/${guessingTeam.id}`).then((team: Team) => {
-			console.log('GET team: ', team);
 			setBuzzingTeam(team);
 		});
 		getData(`/haicues/round/${haikuData.roundId}/team/${haikuData.teamId}`).then((haiku) => {
-			console.log('GET haiku: ', haiku);
 			setHaiku(haiku);
 			setPerformingTeam(haiku.Team);
 		});
-	}, [turnData.id]);
+	}, []);
+
+	const handleEndRound = () => {
+		socket.emit('end_round');
+	}
 
   return (
     <>

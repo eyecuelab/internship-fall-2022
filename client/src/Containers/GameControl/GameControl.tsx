@@ -27,7 +27,6 @@ function GameControl() {
 		// @ts-ignore
 		getData(`/games/room/${code.toUpperCase()}`)
 		.then((response) => {
-			console.log('GAME bY CODE: ', response);
 			setGame(response);
 
 			if (localStorage.getItem('game-phase') === 'ready') { 
@@ -44,12 +43,8 @@ function GameControl() {
 		// @ts-ignore
 		getData(`/games/room/${code.toUpperCase()}`)
 		.then((response) => {
-			console.log('GAME bY CODE: ', response);
 			if (localStorage.getItem('game')) {
-				console.log('game in localstorage');
 				if (game.gameCode.toLowerCase() !== response.gameCode.toLowerCase()) {
-					console.log('local game code: ', game.gameCode);
-					console.log('joined game code: ', response.gameCode)
 					localStorage.clear();
 					localStorage.setItem('game', JSON.stringify(response));
 					localStorage.setItem('game-phase', '');
@@ -64,7 +59,6 @@ function GameControl() {
 				postData('/teams', { gameId: response.id })
 				.then((data) => {
 					setTeam(data);
-					console.log(color);
 					localStorage.setItem('team', JSON.stringify(data));
 				});
 			} else {
@@ -76,12 +70,11 @@ function GameControl() {
 
 	useEffect(() => {
 		swapBanner();
-		console.log(color);
 	}, [team?.id]);
 
 	useEffect(() => {
 		socket.on('connection', () => {
-			console.log('socket open');
+			// console.log('socket open');;
 		});
 
 		socket.on('start_game', () => {
@@ -113,6 +106,7 @@ function GameControl() {
 			socket.off('start_round');
 			socket.off('start_guessing');
 			socket.off('end_round');
+			socket.off('end_game');
 		}
 	})
 
