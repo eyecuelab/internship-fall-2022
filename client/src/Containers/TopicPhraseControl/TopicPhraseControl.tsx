@@ -26,8 +26,9 @@ function TopicPhraseControl(props: Props) {
   }, []);
 
   const getGameList = async () => {
-		const game = await getData(`/games/${id}`);
-		setGame(game);
+		getData(`/games/${id}`).then((game) => {
+			setGame(game);
+		});
   }
 
 	const passedInfo = { labelOne: "game", textOne: game?.name };

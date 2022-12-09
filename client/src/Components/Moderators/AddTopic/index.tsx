@@ -42,8 +42,9 @@ function ModAddTopic(props: Props) {
 	}
 
 	const getTopicList = async () => {
-		const topicList = await getData(`/topics/game/${gameId}`);
-		setTopics(topicList);
+		getData(`/topics/game/${gameId}`).then((topics) => {
+			setTopics(topics);
+		});
 	};
 
   greenButton.width = '100%';
