@@ -7,6 +7,7 @@ import {Container, ButtonContainer} from './styles';
 import {getData} from '../../ApiHelper';
 import {Game, Team} from '../../Types/Types';
 import TeamFinalItem from './TeamFinalItem';
+import socket from '../../Hooks/WebsocketHook';
 
 interface Props {
   gameId: Game;
@@ -25,6 +26,10 @@ function EndGame(props: Props) {
 
   whiteButton.width = '100%';
   redButton.width = '100%';
+
+	const handleEndGame = () => {
+		socket.emit('end_game');
+	}
 
   return (
     <>
@@ -47,7 +52,7 @@ function EndGame(props: Props) {
         </Grid>
         <ButtonContainer>
           <Link to={`/game/${props.gameId}/round`}>
-            <DogEarButton style={redButton}>
+            <DogEarButton style={redButton} onClick={handleEndGame}>
               <h3>END GAME</h3>
             </DogEarButton>
           </Link>

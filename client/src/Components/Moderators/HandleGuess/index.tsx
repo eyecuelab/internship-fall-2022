@@ -55,7 +55,7 @@ function ModHandleGuess(props: Props) {
 			setHaiku(haiku);
 			setPerformingTeam(haiku.Team);
 		});
-	}, []);
+	}, [turnData.id]);
 
   return (
     <>
