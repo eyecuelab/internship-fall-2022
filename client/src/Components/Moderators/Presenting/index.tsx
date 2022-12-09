@@ -12,14 +12,14 @@ interface Props {
   gameData: Game;
   topicData?: Topic;
 	lineAdvancer: () => void;
-	turnData: Turn;
-	teamData: Team;
+	turnData?: Turn;
+	teamData?: Team;
 	turn: number;
   lineNumber: Number;
 }
 
 function ModPresenting(props: Props) {
-	const { handleSwitch, gameData, turnData, teamData, turn, lineAdvancer, lineNumber } = props;
+	const { handleSwitch, gameData, turn, lineAdvancer, lineNumber } = props;
 	// @ts-ignore
 	const [team, setTeam] = useState<Team>({teamName: ''});
 	// @ts-ignore
@@ -53,9 +53,10 @@ function ModPresenting(props: Props) {
 				console.log('GET TURN: ', turn);
 				setThisTurn(turn);
 				setTeam(turn.performingTeam);
-				console.log(turn.performingTeam);
 				socket.emit('presenting', turn.performingTeam);
-				setHaiku(turn.Haicue);
+				getData(`/haicues/round/${round.id}/team/${turn.performingTeamId}`).then((haiku) => {
+					setHaiku(haiku)
+				});
 			});
 		});
 	}, []);
@@ -65,7 +66,7 @@ function ModPresenting(props: Props) {
       <Container>
         <div>
           <h3>{team.teamName}</h3>
-          <h1>phrase</h1>
+          <h1>{haiku.Phrase.body}</h1>
           <br />
           <br />
           <h3>line {Number(lineNumber)}</h3>

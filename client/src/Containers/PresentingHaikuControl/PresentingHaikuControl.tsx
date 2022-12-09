@@ -110,7 +110,9 @@ function PresentingHaikuControl(props: Props) {
 		}
 		putData('/team/addPoints', {teamId: guessingTeam?.id, points: (guessingTeamScore)});
 		putData('/team/addPoints', {teamId: team.id, points: presentingTeamScore});
+		socket.emit('buzzer_refresh');
 		setTurn(turn+1);
+		setLineNumber(1);
 		setBuzzedIn(false);
 	}
 

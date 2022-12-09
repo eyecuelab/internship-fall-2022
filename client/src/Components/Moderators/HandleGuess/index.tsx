@@ -53,7 +53,7 @@ function ModHandleGuess(props: Props) {
 		getData(`/haicues/round/${haikuData.roundId}/team/${haikuData.teamId}`).then((haiku) => {
 			console.log('GET haiku: ', haiku);
 			setHaiku(haiku);
-			setPerformingTeam(haiku.team);
+			setPerformingTeam(haiku.Team);
 		});
 	}, []);
 
