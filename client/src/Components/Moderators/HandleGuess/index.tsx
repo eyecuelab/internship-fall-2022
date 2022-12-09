@@ -55,6 +55,7 @@ function ModHandleGuess(props: Props) {
 
 	const handleEndRound = () => {
 		socket.emit('end_round');
+		handleSwitch;
 	}
 
   return (
@@ -77,7 +78,7 @@ function ModHandleGuess(props: Props) {
             <h3>dismiss guess</h3>
           </DogEarButton>
           <Link to={`/game/${gameData?.id}/round`}>
-            <DogEarButton onClick={handleSwitch} style={redButton}>
+            <DogEarButton onClick={handleEndRound} style={redButton}>
               <h3>end round</h3>
             </DogEarButton>
           </Link>
