@@ -10,6 +10,16 @@ type Phrase = {
   topicId: number
 }
 
+export const getSinglePhrase = async (phraseId: number) => {
+	return await prisma.phrases.findUnique({
+		where: {
+			id: Number(phraseId)
+		}
+	})
+}
+
+
+
 export const getPhrase = async (topicId: number) => {
   try {
 		return await prisma.phrases.findMany({
