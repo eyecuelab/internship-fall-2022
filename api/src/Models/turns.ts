@@ -19,7 +19,8 @@ export const getTurn = async (id: number) => {
 			id: Number(id)
 		},
 		include: {
-			Haicue: true
+			Haicue: true,
+			performingTeam: true,
 		}
 	});
 }

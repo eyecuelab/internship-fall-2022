@@ -52,14 +52,14 @@ export const createTeam = async (gameId: number) => {
 }
 
 export const randomlyGenerateTeam = () => {
-	const teams = ['apple', 'blueberry', 'cherry', 'kiwi', 'lemon', 'peach', 'pear', 'strawberry']
+	const teams = ['apple', 'blueberry', 'cherry', 'kiwi', 'lemon', 'peach', 'pear', 'straw berry']
   let randomIndex = Math.floor(Math.random() * 8);
   const teamName = teams[randomIndex];
   return teamName;
 }
 
 export const setUniqueTeam = async (gameId: number) => {
-  const maxNumOfTeams = 5;
+  const maxNumOfTeams = 8;
   const teamsInGame = await getTeamsByGame(gameId);
   let uniqueTeam = randomlyGenerateTeam();
 
@@ -72,7 +72,7 @@ export const setUniqueTeam = async (gameId: number) => {
     if (!teamAlreadyAssigned) {
 			return uniqueTeam;
     } else if (teamAlreadyAssigned(uniqueTeam) && maxNumOfTeams === teamsInGame.length) {
-      return 'sixth team';
+      return 'ninth';
     }
   }
 	return uniqueTeam;
