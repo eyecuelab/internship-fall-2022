@@ -60,8 +60,9 @@ function HaikuForm(props: Props) {
 			team.phrases.slice(-1)[0].body.split(' ').forEach((word: string, index: number) => {
 				findStems(word)
 				.then((data) => {
-					stemList[index] = (data.meta.stems);
+					stemList[index] = (data);
 					setStems(stemList);
+					console.log('HAIKU FORM STEMS: ', stems)
 				});
 			});
 		});

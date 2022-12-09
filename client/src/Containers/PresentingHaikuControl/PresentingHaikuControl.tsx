@@ -18,13 +18,15 @@ function PresentingHaikuControl(props: Props) {
   const { id } = useParams();
 	const { setUserData } = props;
   const [game, setGame] = useState<Game>(JSON.parse(localStorage.getItem('game') as string));
-  const [haiku, setHaiku] = useState<Haicue>();
+	// @ts-ignore
+  const [haiku, setHaiku] = useState<Haicue>({ Phrase: { body: '' }});
   const [team, setTeam] = useState<Team>(JSON.parse(localStorage.getItem('presenting-team') as string));
 	const [guessingTeam, setGuessingTeam] = useState<Team>();
   const [round, setRound]= useState<Round>(JSON.parse(localStorage.getItem('game') as string).Rounds.slice(-1)[0]);
 	const [turn, setTurn] = useState(0);
 	const [turns, setTurns] = useState<Turn[]>();
-	const [thisTurn, setThisTurn] = useState<Turn>();
+	// @ts-ignore
+	const [thisTurn, setThisTurn] = useState<Turn>({ id: 0 });
   const [topic, setTopic]= useState<Topic>(JSON.parse(localStorage.getItem('game') as string).Topic.filter((topic: Topic) => topic.roundId === round.id));
   const [buzzedIn, setBuzzedIn] = useState(false);
 	const [lineNumber, setLineNumber] = useState(1);
@@ -37,6 +39,7 @@ function PresentingHaikuControl(props: Props) {
 		});
 
 		socket.on('buzz', (team: Team) => {
+			console.log('buzzed team: ', team);
 			setGuessingTeam(team);
 			setBuzzedIn(true);
 		});
@@ -48,26 +51,28 @@ function PresentingHaikuControl(props: Props) {
 	}, []);
 
   useEffect(() => {
-    getData(`/games/${id}`).then((game) => {
-			setGame(game);
-			setRound(game.Rounds.slice(-1)[0]);
-			console.log('ROUND: ', game.Rounds.slice(-1)[0]);
-			getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
-				setTurns(round.Turns);
-				setThisTurn(round.Turns[0]);
+		setRound(game.Rounds.slice(-1)[0]);
+		console.log('ROUND: ', game.Rounds.slice(-1)[0]);
+		getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
+			console.log('GET ROUND: ', round);
+			setTurns(round.Turns);
+			setThisTurn(round.Turns[turn]);
+			console.log('ROUND TURNS', round.Turns);
+			getData(`/turns/presentingTeam/${round.Turns[turn].id}`).then((turn) => {
+				console.log('GET TURN: ', turn);
+				setTurn(turn);
+				setTeam(turn.performingTeam);
+				setHaiku(turn.Haicue);
 			});
-			console.log('Turns: ', game.Rounds.slice(-1)[0].Turns);
 		});
   }, []);
 
-	useEffect(() => {
-		getData(`/turns/presentingTeam/${round.id}`).then((turn) => {
-			setTurn(turn);
-			setTeam(turn.performingTeam);
-		});
-	}, [turn]);
-
-  console.log(team);
+	// useEffect(() => {
+	// 	getData(`/turns/presentingTeam/${thisTurn.id}`).then((turn) => {
+	// 		setTurn(turn);
+	// 		setTeam(turn.performingTeam);
+	// 	});
+	// }, [turn]);
 
   useEffect(() => {
 		getData(`/topic/${round.topicId}`).then((topic) => {
@@ -110,11 +115,11 @@ function PresentingHaikuControl(props: Props) {
 		}
 		putData('/team/addPoints', {teamId: guessingTeam?.id, points: (guessingTeamScore)});
 		putData('/team/addPoints', {teamId: team.id, points: presentingTeamScore});
+		setTurn(turn+1);
 	}
 
   const handleBuzzToggle = () => {
-		socket.emit('buzzer_refresh');
-    setBuzzedIn(false);
+    setBuzzedIn(!buzzedIn);
   };
 
   const passedInfo = {
@@ -142,6 +147,7 @@ function PresentingHaikuControl(props: Props) {
 							guessingTeam={guessingTeam}
 							// @ts-ignore
 							turnData={thisTurn}
+							teamData={team}
             />}
           overlay={<ModOverlay gameData={passedInfo} />}
           bgUrl="/images/moderator_card_background_2.png"
@@ -159,6 +165,9 @@ function PresentingHaikuControl(props: Props) {
               topicData={topic}
 							// @ts-ignore
 							turnData={thisTurn}
+							teamData={team}
+							turn={turn}
+							lineNumber={lineNumber}
             />
           }
           overlay={<ModOverlay gameData={passedInfo} />}

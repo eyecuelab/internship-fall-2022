@@ -23,9 +23,10 @@ function GameControl() {
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
 
 	useEffect(() => {
-		getData(`/games/room/${code?.toUpperCase()}`)
+		// @ts-ignore
+		getData(`/games/room/${code.toUpperCase()}`)
 		.then((response) => {
-
+			console.log('GAME bY CODE: ', response);
 			if (localStorage.getItem('game')) {
 				if (JSON.parse(localStorage.getItem('game') as string).gameCode.toLowerCase() !== response.gameCode.toLowerCase()) {
 					localStorage.clear();
@@ -94,21 +95,7 @@ function GameControl() {
 		}
 	})
 
-  // const fruitColors = {
-  //   apple: '#0A1031',
-  //   blueberry: '#0c114a',
-  //   cherry: '#C70009',
-  //   kiwi: '#61750D',
-  //   lemon: '#105839',
-  //   peach: '#DF9190',
-  //   pear: '#CDA70D',
-  //   strawberry: '#D00D0A'
-  // };
-
 	const bgUrl = `/images/${team?.teamName}_banner.png`;
-
-	// (team?.teamName === "blueberry") ?
-	// color= fruitColors.bluberry :
 
 	const swapBanner = () => {
 		switch(team?.teamName) {
@@ -132,9 +119,6 @@ function GameControl() {
 				break;
 			case("pear"):
 				setColor('#CDA70D');
-				break;
-			case("strawberry"):
-				setColor('#D00D0A');
 				break;		
 		}
 	}
@@ -151,7 +135,7 @@ function GameControl() {
 		<CardTemplate 
 			content={ 
 				gamePhase === 'guessing' ? 
-				<Buzzer roundNumber={2} topic={'holiday activity'} /> : 
+				<Buzzer roundNumber={game.Rounds.length} topic={topic.name} /> : 
 				( gamePhase === 'brainstorming' ? 
 					<HaikuForm topic={topic} submitState={submitState} setSubmitState={setSubmitState}/> 
 					// @ts-ignore

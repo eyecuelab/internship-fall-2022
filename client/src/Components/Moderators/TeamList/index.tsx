@@ -22,10 +22,6 @@ function TeamList(props: Props) {
 	const [game, setGame] = useState(JSON.parse(localStorage.getItem('game') as string));
 
 	useEffect(() => {
-		getData(`/teams/game/${game.id}`).then((teams) => {
-			setTeams(teams);
-		});
-
 		socket.on('submit', () => {
 			var teamArr = new Array;
 			getData(`/rounds/games/${game.id}`).then((round) => {
@@ -34,8 +30,9 @@ function TeamList(props: Props) {
 						teamArr.push(haicues[i].teamId);
 					}
 					setTeamArr(teamArr);
-					
 					if (teamArr.length === teams.length) {
+						console.log('team array: ', teamArr);
+						console.log('teams: ', teams);
 						setPresenting(true);
 					} 
 				});
@@ -45,6 +42,12 @@ function TeamList(props: Props) {
 		return () => {
       socket.off('submit');
     };
+	}, []);
+
+	useEffect(() => {
+		getData(`/teams/game/${game.id}`).then((teams) => {
+			setTeams(teams);
+		});
 	}, [presenting]);
 
 	const extendTime = () => {
@@ -80,9 +83,9 @@ function TeamList(props: Props) {
 			</Grid>
         <ButtonContainer>
 		<Link to={`/game/${game.id}/presenting`}>
-		      {presenting ? <DogEarButton style={greenButton} onClick={startGuessingPhase}>
+		      <DogEarButton style={greenButton} onClick={startGuessingPhase}>
             <h3>Start Reading</h3>
-          </DogEarButton> : null }
+          </DogEarButton>
 		  </Link>
           <DogEarButton onClick={extendTime} style={whiteButton}>
             <h3>EXTEND 30 SECONDS</h3>

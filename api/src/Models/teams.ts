@@ -52,7 +52,7 @@ export const createTeam = async (gameId: number) => {
 }
 
 export const randomlyGenerateTeam = () => {
-	const teams = ['apple', 'blueberry', 'cherry', 'kiwi', 'lemon', 'peach', 'pear', 'straw berry']
+	const teams = ['apple', 'blueberry', 'cherry', 'kiwi', 'lemon', 'peach', 'pear']
   let randomIndex = Math.floor(Math.random() * 8);
   const teamName = teams[randomIndex];
   return teamName;
