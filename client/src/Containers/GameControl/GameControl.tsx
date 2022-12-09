@@ -21,7 +21,6 @@ function GameControl() {
 	const [submitState, setSubmitState] = useState(true);
 	const [color, setColor] =useState('#ffffff');
 	localStorage.getItem('game-phase') ? null : localStorage.setItem('gamePhase', '');
-	let bgUrl = '';
 
 	useEffect(() => {
 		getData(`/games/room/${code?.toUpperCase()}`)
@@ -83,8 +82,8 @@ function GameControl() {
 			setGamePhase('guessing');
 		});
 
-		socket.on('end_round', () => {
-		});
+		// socket.on('end_round', () => {
+		// });
 
 		return () => {
 			socket.off('connection');
