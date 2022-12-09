@@ -46,13 +46,15 @@ function ModAddPhrase() {
 	}
 
 	const getPhraseList = async () => {
-		const phraseList = await getData(`/phrases/${Number(topicId)}`);
-		setPhrases(phraseList);
+		getData(`/phrases/${Number(topicId)}`).then((phrases) => {
+			setPhrases(phrases);
+		});
 	};
 
 	const getTopicName = async () => {
-		const topic = await getData(`/topic/${topicId}`);
-		setTopicName(topic.name);
+		getData(`/topic/${topicId}`).then((topic) => {
+			setTopicName(topic.name);
+		})
 	}
 
   greenButton.width = '100%';
