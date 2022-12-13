@@ -6,11 +6,11 @@ import ModGameList from '../../Components/Moderators/GameList';
 import ModNewGame from '../../Components/Moderators/NewGame';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import { getData } from '../../ApiHelper';
-import { Game, User } from '../../Types/Types';
+import { Game, Moderator } from '../../Types/Types';
 
 interface Props {
-	userData: User | undefined;
-	setUserData: Dispatch<SetStateAction<User | undefined>>;
+	userData: Moderator | undefined;
+	setUserData: Dispatch<SetStateAction<Moderator | undefined>>;
 	logout: () => void;
 }
 
@@ -26,9 +26,9 @@ function ModGameControl(props: Props) {
 		setGames([]);
 		const user = JSON.parse(localStorage.getItem('user') as string);
 		if (user) {
-		getData(`/moderators/${user.email}`)
+		getData(`/moderator/${user.email}`)
 			.then((response) => {
-				setGames([...response.games])
+				setGames([...response.Games])
 			});
 		} else {
 			setGames([...[]]);
@@ -40,9 +40,9 @@ function ModGameControl(props: Props) {
 		setGames([]);
 		const user = JSON.parse(localStorage.getItem('user') as string);
 		if (user) {
-		getData(`/moderators/${user.email}`)
+		getData(`/moderator/${user.email}`)
 			.then((response) => {
-				setGames([...response.games])
+				setGames([...response.Games])
 			});
 		} else {
 			setGames([...[]]);

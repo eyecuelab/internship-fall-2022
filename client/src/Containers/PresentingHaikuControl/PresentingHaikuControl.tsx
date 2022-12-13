@@ -6,12 +6,12 @@ import ModPresenting from '../../Components/Moderators/Presenting';
 import ModHandleGuess from '../../Components/Moderators/HandleGuess';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
-import { Game, Haicue, Round, Team, Topic, Turn, User } from '../../Types/Types';
+import { Game, Haicue, Round, Team, Topic, Turn, Moderator } from '../../Types/Types';
 import socket from '../../Hooks/WebsocketHook';
 
 
 interface Props {
-  setUserData: Dispatch<SetStateAction<User | undefined>>;
+  setUserData: Dispatch<SetStateAction<Moderator | undefined>>;
 }
 
 function PresentingHaikuControl(props: Props) {
@@ -53,10 +53,10 @@ function PresentingHaikuControl(props: Props) {
   useEffect(() => {
 		setTurn(turn);
 		setRound(game.Rounds.slice(-1)[0]);
-		getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
+		getData(`/round/${game.Rounds.slice(-1)[0].id}`).then((round) => {
 			setTurns(round.Turns);
 			setThisTurn(round.Turns[turn]);
-			getData(`/turns/presentingTeam/${round.Turns[turn].id}`).then((turn) => {
+			getData(`/turn/team/${round.Turns[turn].id}`).then((turn) => {
 				setTeam(turn.performingTeam);
 				setHaiku(turn.Haicue);
 			});
@@ -84,8 +84,8 @@ function PresentingHaikuControl(props: Props) {
   };
 
 	const assignPoints = () => {
-		let guessingTeamScore = guessingTeam?.teamScore;
-		let presentingTeamScore = team.teamScore
+		let guessingTeamScore = guessingTeam?.points;
+		let presentingTeamScore = team.points
 		switch (lineNumber) {
 			case(1):
 				(guessingTeamScore as number) += 5;

@@ -6,10 +6,10 @@ import { getData} from '../../ApiHelper';
 import ModAddPhrase from '../../Components/Moderators/AddPhrase';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
-import { Game, User } from '../../Types/Types';
+import { Game, Moderator } from '../../Types/Types';
 
 interface Props {
-	setUserData: Dispatch<SetStateAction<User | undefined>>;
+	setUserData: Dispatch<SetStateAction<Moderator | undefined>>;
 	logout: () => void;
   viewPhrases: boolean;
 }
@@ -26,7 +26,7 @@ function TopicPhraseControl(props: Props) {
   }, []);
 
   const getGameList = async () => {
-		getData(`/games/${id}`).then((game) => {
+		getData(`/game/${id}`).then((game) => {
 			setGame(game);
 		});
   }

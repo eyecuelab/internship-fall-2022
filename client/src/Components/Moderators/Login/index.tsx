@@ -30,8 +30,8 @@ function ModLogin(props: Props) {
 				localStorage.clear();
 				localStorage.setItem('user', JSON.stringify(data));
 				const user = JSON.parse(localStorage.getItem('user') as string);
-				getData(`/moderators/${user.email}`).then((moderator) => {
-					!moderator && postData('/moderators', { email: user.email });
+				getData(`/moderator/${user.email}`).then((moderator) => {
+					!moderator && postData('/moderator', { email: user.email });
 				}) ;
 				setUserData(data);
 				navigate('/');

@@ -24,7 +24,7 @@ function TeamList(props: Props) {
 	useEffect(() => {
 		socket.on('submit', () => {
 			var teamArr = new Array;
-			getData(`/rounds/games/${game.id}`).then((round) => {
+			getData(`/round/game/${game.id}`).then((round) => {
 				getData(`/haicues/round/${round[0].id}`).then((haicues) => {
 					for (let i = 0; i < haicues.length; i++) {
 						teamArr.push(haicues[i].teamId);

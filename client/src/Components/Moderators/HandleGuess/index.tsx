@@ -47,7 +47,7 @@ function ModHandleGuess(props: Props) {
 		getData(`/team/${guessingTeam.id}`).then((team: Team) => {
 			setBuzzingTeam(team);
 		});
-		getData(`/haicues/round/${haikuData.roundId}/team/${haikuData.teamId}`).then((haiku) => {
+		getData(`/haicue/round/${haikuData.roundId}/team/${haikuData.teamId}`).then((haiku) => {
 			setHaiku(haiku);
 			setPerformingTeam(haiku.Team);
 		});
@@ -62,13 +62,13 @@ function ModHandleGuess(props: Props) {
     <>
       <Container>
         <div>
-          <h3>{performingTeam.teamName}</h3>
+          <h3>{performingTeam.name}</h3>
           <h1>{haiku.Phrase.body}</h1>
 					<br />
 					<br />
           <h3>buzzer pressed!</h3>
-          <h1>{buzzingTeam.teamName}</h1>
-					<TeamAvatar src={`/images/${buzzingTeam.teamName}_icon.png`}/>
+          <h1>{buzzingTeam.name}</h1>
+					<TeamAvatar src={`/images/${buzzingTeam.name}_icon.png`}/>
         </div>
         <ButtonContainer>
           <DogEarButton onClick={assignPoints}  style={greenButton}>

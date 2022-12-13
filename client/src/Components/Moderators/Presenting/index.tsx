@@ -46,12 +46,12 @@ function ModPresenting(props: Props) {
   
 	useEffect(() => {
 		const game = JSON.parse(localStorage.getItem('game') as string);
-		getData(`/rounds/${game.Rounds.slice(-1)[0].id}`).then((round) => {
-			getData(`/turns/presentingTeam/${round.Turns[turn].id}`).then((turn) => {
+		getData(`/round/${game.Rounds.slice(-1)[0].id}`).then((round) => {
+			getData(`/turn/team/${round.Turns[turn].id}`).then((turn) => {
 				setThisTurn(turn);
 				setTeam(turn.performingTeam);
 				socket.emit('presenting', turn.performingTeam);
-				getData(`/haicues/round/${round.id}/team/${turn.performingTeamId}`).then((haiku) => {
+				getData(`/haicue/round/${round.id}/team/${turn.performingTeamId}`).then((haiku) => {
 					setHaiku(haiku)
 				});
 			});
@@ -62,7 +62,7 @@ function ModPresenting(props: Props) {
     <>
       <Container>
         <div>
-          <h3>{team.teamName}</h3>
+          <h3>{team.name}</h3>
           <h1>{haiku.Phrase.body}</h1>
           <br />
           <br />

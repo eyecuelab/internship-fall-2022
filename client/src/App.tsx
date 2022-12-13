@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import './App.scss';
 import { client_id } from '../endpoints';
-import { User } from './Types/Types';
+import { Moderator } from './Types/Types';
 
 const ModGameControl = lazy(() => import('./Containers/ModGameControl/ModGameControl'))
 const TopicPhraseControl=lazy(() => import('./Containers/TopicPhraseControl/TopicPhraseControl'))
@@ -14,7 +14,7 @@ const BrainstormingPhaseControl=lazy(() => import('./Containers/BrainstormingPha
 const EndGameControl=lazy(() => import('./Containers/EndGameControl/EndGameControl'))
 
 function App() {
-	const [userData, setUserData] = useState<User | undefined>();
+	const [userData, setUserData] = useState<Moderator | undefined>();
 
 	useEffect(() => {
 		setUserData(userData);

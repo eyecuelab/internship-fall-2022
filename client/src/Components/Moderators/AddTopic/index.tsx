@@ -23,7 +23,7 @@ function ModAddTopic(props: Props) {
   const [topics, setTopics] = useState([]);
 	const user = JSON.parse(localStorage.getItem('user') as string);
 
-	getData(`/moderators/${user.email}`).then((moderator) => {
+	getData(`/moderator/${user.email}`).then((moderator) => {
 		setValue('moderatorId', moderator.id);
 		setValue('gameId', gameId);
 	});
@@ -33,12 +33,12 @@ function ModAddTopic(props: Props) {
 	}, []);
 
   const addNewTopic: SubmitHandler<IFormInput> = (data: unknown) => {
-    postData('/topics', data).then(() => getTopicList());
+    postData('/topic', data).then(() => getTopicList());
 		reset((data) => ({ ...data, name: '' }))
   };
 
 	const deleteTopic = (topicId: any) => {
-		deleteData(`/topics/${topicId}`).then(() => getTopicList());
+		deleteData(`/topic/${topicId}`).then(() => getTopicList());
 	}
 
 	const getTopicList = async () => {

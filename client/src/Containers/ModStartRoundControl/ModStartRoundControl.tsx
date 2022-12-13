@@ -6,10 +6,10 @@ import { getData } from '../../ApiHelper';
 import ModChooseTopic from '../../Components/Moderators/ChooseTopic';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import ModLogin from '../../Components/Moderators/Login';
-import { Game, Topic, User } from '../../Types/Types';
+import { Game, Topic, Moderator } from '../../Types/Types';
 
 interface Props {
-	setUserData: Dispatch<SetStateAction<User | undefined>>;
+	setUserData: Dispatch<SetStateAction<Moderator | undefined>>;
 	logout: () => void;
 }
 
@@ -24,7 +24,7 @@ function ModStartRoundControl(props: Props) {
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   useEffect(() => {
-		getData(`/games/${id}`).then((response) => {
+		getData(`/game/${id}`).then((response) => {
 			setGame(response);
 			localStorage.setItem('game', JSON.stringify(response));
 		});

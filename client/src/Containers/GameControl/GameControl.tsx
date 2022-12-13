@@ -25,12 +25,12 @@ function GameControl() {
 
 	useEffect(() => {
 		// @ts-ignore
-		getData(`/games/room/${code.toUpperCase()}`)
+		getData(`/game/room/${code.toUpperCase()}`)
 		.then((response) => {
 			setGame(response);
 
 			if (localStorage.getItem('game-phase') === 'ready') { 
-				getData(`/topics/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
+				getData(`/topic/round/${response.Rounds.slice(-1)[0].id}`).then((topic) => {
 					setTopic(topic);
 					localStorage.setItem('topic', JSON.stringify(topic));
 				});
@@ -41,7 +41,7 @@ function GameControl() {
 
 	useEffect(() => {
 		// @ts-ignore
-		getData(`/games/room/${code.toUpperCase()}`)
+		getData(`/game/room/${code.toUpperCase()}`)
 		.then((response) => {
 			if (localStorage.getItem('game')) {
 				if (game.gameCode.toLowerCase() !== response.gameCode.toLowerCase()) {
@@ -56,7 +56,7 @@ function GameControl() {
 			}
 
 			if (!localStorage.getItem('team')) {
-				postData('/teams', { gameId: response.id })
+				postData('/team', { gameId: response.id })
 				.then((data) => {
 					setTeam(data);
 					localStorage.setItem('team', JSON.stringify(data));
@@ -110,10 +110,10 @@ function GameControl() {
 		}
 	})
 
-	const bgUrl = `/images/${team?.teamName}_banner.png`;
+	const bgUrl = `/images/${team?.name}_banner.png`;
 
 	const swapBanner = () => {
-		switch(team?.teamName) {
+		switch(team?.name) {
 			case("apple"):
 				setColor('#0A1031');
 				break;

@@ -30,12 +30,12 @@ function ModNewGame(props: Props) {
 		getGameList();
 	}, []);
 
-	getData(`/moderators/${userData?.email}`).then((response) => {
+	getData(`/moderator/${userData?.email}`).then((response) => {
 		setValue('moderatorId', response.id);
 	});
 
 	const createNewGame: SubmitHandler<IFormInput> = (data: Data) => {
-		postData('/games', data);
+		postData('/game', data);
 		handleCreateNewGame();
 	}
 
