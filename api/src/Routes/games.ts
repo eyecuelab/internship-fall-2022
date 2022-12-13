@@ -3,11 +3,11 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/games/:id', gamesControllers.getGameById);
-router.get('/games/room/:code', gamesControllers.getGameByCode);
-router.get('/games/moderator/:moderatorId', gamesControllers.getGameByModerator);
-router.post('/games', gamesControllers.createGame);
-router.delete('/games/:id', gamesControllers.deleteGame);
-router.put('/games/:id', gamesControllers.updateGameStatus);
+router.get('/game/:id', gamesControllers.getGameById);
+router.get('/game/room/:code', gamesControllers.getGameByCode);
+router.get('/games/moderator/:moderatorId', gamesControllers.getGamesByModerator);
+router.post('/game', gamesControllers.createGame);
+router.delete('/game/:id', gamesControllers.deleteGame);
+router.put('/game/:id', gamesControllers.publishGame);
 
 export default router; 

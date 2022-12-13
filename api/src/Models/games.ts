@@ -3,7 +3,19 @@ import GameCode from '../GenerateGameCode';
 
 const prisma = new PrismaClient();
 
-export const getOneGame = async (id: number) => {
+export const createGame = async (name: string, moderatorId: number) => {
+  return await prisma.games.create({
+    data: {
+			...{
+				name: name,
+				gameCode: GameCode.generate(),
+				Moderator: { connect: { id: moderatorId } }
+			}
+    }
+  });
+}
+
+export const getGameById = async (id: number) => {
   return await prisma.games.findUnique({
 		where: {
 			id: Number(id)
@@ -28,27 +40,25 @@ export const getGameByCode = async (code: string) => {
 	});
 }
 
-export const getGameByModerator = async (moderatorId: number) => {
+export const getGamesByModerator = async (moderatorId: number) => {
   return await prisma.games.findMany({
 		where: {
 			moderatorId: Number(moderatorId)
 		},
 		include: {
 			Topic: true,
+			Team: true,
+			Rounds: true
 		}
 	});
 }
 
-export const createGame = async (name: string, moderatorId: number) => {
-  return await prisma.games.create({
-    data: {
-			...{
-				name: name,
-				gameCode: GameCode.generate(),
-				moderator: { connect: { id: moderatorId } }
-			}
-    }
-  });
+export const publishGame = async (id: number)=>{
+	const now = new Date();
+	return await prisma.games.update({
+		where: { id: Number(id) },
+		data: { publishedAt: now }
+	});
 }
 
 export const deleteGame = async (id: number)=>{
@@ -57,12 +67,4 @@ export const deleteGame = async (id: number)=>{
       id: Number(id),
     }
   });
-}
-
-export const updateGameStatus = async (id: number)=>{
-	const now = new Date();
-	return await prisma.games.update({
-		where: { id: Number(id) },
-		data: { publishedAt: now }
-	});
 }

@@ -1,63 +1,64 @@
-export type User = {
-	id: number
-	name: string
-	role: Role
-	roleId: number
-	team: Team
-	teamId: number
-	game: Game
-	gameId: number
-}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-export type Role = {
-	id: number
-	name: string
-	users: User[]
+
+export type Moderator = {
+  id: number
+  email: String
+  Games: Game[]
+  socketId: string
 }
 
 export type Team = {
-	id: number
-  teamName: string
-  teamLeaderId: number
-  teamScore: number
-  game: Game
+  id: number
+  name: string
+  points: number
+  Game: Game
   gameId: number
+  Phrases: Phrase[]
+  Turns: Turn[]
+  Haicues: Haicue[]
+  socketId: string
 }
 
 export type Topic = {
-	id: number
+  id: number
   name: string
-  Phrase: Phrase[]
-  game: Game
+  Phrases: Phrase[]
+  Game: Game
   gameId: number
-	round: Round
-	roundId: number
+  Round: Round
+  roundId: number
 }
 
 export type Phrase = {
-	id: number
+  id: number
   body: string
   wordCount: number
-  topic: Topic
+  Topic: Topic
   topicId: number
+  Team: Team
+  teamId: number
+  Haicues: Haicue
 }
 
 export type Game = {
-	id: number
-	name: string				
-  rounds: number
+  id: number
+  name: string
   gameCode: string
-	publishedAt: Date					
+  publishedAt: Date
   Teams: Team[]
-	Topics: Topic[]
-	Rounds: Round[]
+  Topics: Topic[]
+  Rounds: Round[]
+  Moderator: Moderator
+  moderatorId: number
 }
 
 export type Round = {
   id: number
-  game: Game
+  Game: Game
   gameId: number
-  topic: Topic
+  Topic: Topic
   topicId: number
   Turns: Turn[]
   Haicues: Haicue[]
@@ -67,12 +68,10 @@ export type Turn = {
   id: number
   performingTeam: Team
   performingTeamId: number
-  guessingTeamId: number
   Haicue: Haicue
   haicueId: number
   Round: Round
   roundId: number
-  currentLineNumber: number
 }
 
 export type Haicue = {
@@ -86,14 +85,12 @@ export type Haicue = {
   line1: string
   line2: string
   line3: string
-  lineGuessed: number
-  correctTeam: number
-  Turns: Turn[]
+  Turn: Turn
+  turnId: number
 }
 
 export type Buzzer = {
-	id: number
+  id: number
   turnId: number
   teamId: number
-  buzzAt: Date
 }

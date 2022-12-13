@@ -57,7 +57,7 @@ function ModOverlay(props: Props) {
   const timer = formatTimer(time);
 
   const updateGameStatus = (gameId: number) => {
-    putData(`/games/${gameId}`);
+    putData(`/game/${gameId}`);
   };
 
   const codeToClipboard = async () => {

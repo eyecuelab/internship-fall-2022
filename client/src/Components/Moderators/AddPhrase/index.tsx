@@ -26,7 +26,7 @@ function ModAddPhrase() {
   const [phrases, setPhrases] = useState([]);
 	const [topicName, setTopicName] = useState("");
 	const user = JSON.parse(localStorage.getItem('user') as string);
-	getData(`/moderators/${user.email}`).then((moderator) => {
+	getData(`/moderator/${user.email}`).then((moderator) => {
 		setValue('moderatorId', moderator.id);
 		setValue('topicId', Number(topicId));
 	});
@@ -37,12 +37,12 @@ function ModAddPhrase() {
 	}, [topicName]);
 
 	const addNewPhrase: SubmitHandler<IFormInput> = (data: Data) => {
-    postData('/phrases', data).then(() => getPhraseList());
+    postData('/phrase', data).then(() => getPhraseList());
 		reset((data) => ({ ...data, body: '' }))
   };
 
 	const deletePhrase = (phraseId: number) => {
-		deleteData(`/phrases/${phraseId}`).then(() => getPhraseList());
+		deleteData(`/phrase/${phraseId}`).then(() => getPhraseList());
 	}
 
 	const getPhraseList = async () => {

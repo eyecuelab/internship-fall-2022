@@ -3,10 +3,10 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/teams/game/:gameId', teamsControllers.getTeams);
-router.get('/team/:id', teamsControllers.getOneTeam);
-router.post('/teams', teamsControllers.createUniqueTeam);
-router.put('/team/addPhrase', teamsControllers.addPhrase);
-router.put('/team/addPoints', teamsControllers.addPoints)
+router.get('/teams/game/:gameId', teamsControllers.getTeamsByGame);
+router.get('/team/:id', teamsControllers.getTeamById);
+router.post('/team', teamsControllers.createUniqueTeam);
+router.put('/team/addPhrase', teamsControllers.addUniquePhrase);
+router.put('/team/addPoints', teamsControllers.assignPoints);
 
 export default router; 

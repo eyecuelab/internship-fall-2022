@@ -49,7 +49,7 @@ function HaikuForm(props: Props) {
 	greenButton.width = '46%';
 
 	useEffect(() => {
-		getData(`/games/room/${code}`).then((game) => {
+		getData(`/game/room/${code}`).then((game) => {
 			setRound(game.Rounds.slice(-1)[0]);
 			setRoundNum(game.Rounds.length);
 			const stemList: string[] = [];
@@ -74,15 +74,15 @@ function HaikuForm(props: Props) {
 
   const onSubmit: SubmitHandler<IFormInput> = (data: Data) => {
 		if (submitted) {
-			getData(`/haicues/round/${round.id}/team/${team.id}`).then((haicue) => {
-				putData('/haicues', {id: Number(haicue.id), line1: data.line1, line2: data.line2, line3: data.line3}).then(() => {
+			getData(`/haicue/round/${round.id}/team/${team.id}`).then((haicue) => {
+				putData('/haicue', {id: Number(haicue.id), line1: data.line1, line2: data.line2, line3: data.line3}).then(() => {
 					socket.emit('submit');
 				});
 			});
 		} else {
-			postData('/addHaicue', data).then((haicue) => {
+			postData('/haicue', data).then((haicue) => {
 				// @ts-ignore
-				postData('/turns', {roundId: round.id, presentingTeamId: team.id, phraseId: phrase.id,  haicueId: haicue.id}).then(() => {
+				postData('/turn', {roundId: round.id, presentingTeamId: team.id, phraseId: phrase.id,  haicueId: haicue.id}).then(() => {
 					socket.emit('submit');
 				});
 			});

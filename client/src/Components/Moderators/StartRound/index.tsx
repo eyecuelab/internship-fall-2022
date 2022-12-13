@@ -33,10 +33,10 @@ function ModStartRound(props: Props) {
 
 	const selectTopic = () => {
 		postData('/round', { gameId: id, topicId: topic.id }).then((newRound) => {
-			getData(`/games/${id}`).then((data) => {
+			getData(`/game/${id}`).then((data) => {
 				localStorage.setItem('game', JSON.stringify(data));
 				setRound(newRound);
-				putData('/topics/', { topicId: topic.id, roundId: newRound.id }).then(() => {
+				putData('/topic', { topicId: topic.id, roundId: newRound.id }).then(() => {
 					getData(`/teams/game/${id}`).then((teams) => {
 						getData(`/phrases/${topic.id}`).then((phrases) => {
 							for (let i=0; i<teams.length; i++) {

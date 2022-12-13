@@ -18,7 +18,7 @@ function ModGameList(props: Props) {
 	}, []);
 
   const deleteGame = (gameId: any)=> {
-    deleteData(`/games/${gameId}`).then(() => props.getGameList());
+    deleteData(`/game/${gameId}`).then(() => props.getGameList());
   }
 
   greenButton.width = '100%';

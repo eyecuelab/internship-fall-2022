@@ -3,8 +3,8 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/rounds/:id', roundsControllers.getRound);
-router.get('/rounds/games/:id', roundsControllers.getCurRoundsByGameId);
+router.get('/round/:id', roundsControllers.getRoundById);
+router.get('/round/game/:id', roundsControllers.getCurRoundByGame);
 router.post('/round', roundsControllers.assignRoundToGame);
 
 export default router;

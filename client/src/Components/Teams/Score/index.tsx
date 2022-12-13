@@ -9,7 +9,7 @@ function Score () {
 
 	useEffect(() => {
 		const thisTeam = JSON.parse(localStorage.getItem('team') as string);
-		getData(`/teams/${thisTeam.id}`).then((team) => {
+		getData(`/team/${thisTeam.id}`).then((team) => {
 			setTeam(team);
 		});
 	}, []);
@@ -24,7 +24,7 @@ function Score () {
 				sx={{ height: '100%', paddingTop: '15%', paddingBottom: '15%' }}
 			>
 				<h3 className="fade-in-down" style={{ display: 'block', width: '100%', textAlign: 'center' }}>your team has scored</h3>
-				<h2 className="fade-in-left" style={{ width: '100%', textAlign: 'center'}}>{team.teamScore}</h2>
+				<h2 className="fade-in-left" style={{ width: '100%', textAlign: 'center'}}>{team.points}</h2>
 				<h3 className="fade-in-left">points</h3>
 			</Grid>
 		</>

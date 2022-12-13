@@ -5,10 +5,10 @@ import { getData } from '../../ApiHelper';
 import ModOverlay from '../../Components/Moderators/Overlay';
 import TeamList from '../../Components/Moderators/TeamList';
 import ModLogin from '../../Components/Moderators/Login';
-import { User } from '../../Types/Types';
+import { Moderator } from '../../Types/Types';
 
 interface Props {
-	setUserData: Dispatch<SetStateAction<User | undefined>>;
+	setUserData: Dispatch<SetStateAction<Moderator | undefined>>;
 }
 
 function BrainstormingPhaseControl(props: Props) {
@@ -21,7 +21,7 @@ function BrainstormingPhaseControl(props: Props) {
   document.documentElement.style.background = 'url(/images/moderator_background.png)';
 
   useEffect(() => {
-    getData(`/games/${ id }`).then((game) => {
+    getData(`/game/${id}`).then((game) => {
 			setPassedInfo({textOne: game.Rounds.length, labelOne: 'round', gameCode: game.gameCode});
 			setGame(game);
 			localStorage.setItem('game', JSON.stringify(game))
