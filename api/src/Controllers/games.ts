@@ -1,10 +1,10 @@
-import { getOneGame, getGameByCode, getGameByModerator, createGame, deleteGame, updateGameStatus } from '../Models/games';
+import { getGameById, getGameByCode, getGamesByModerator, createGame, deleteGame, publishGame } from '../Models/games';
 
 const gamesControllers = {
 
   async getGameById(req: any, res: any) {
 		const { id } = req.params;
-    const game = await getOneGame(id);
+    const game = await getGameById(id);
     res.json(game);
   },
 
@@ -14,9 +14,9 @@ const gamesControllers = {
 		return res.json(game);
 	},
 
-  async getGameByModerator(req: any, res: any) {
+  async getGamesByModerator(req: any, res: any) {
 		const { moderatorId } = req.params;
-    const games = await getGameByModerator(Number(moderatorId));
+    const games = await getGamesByModerator(Number(moderatorId));
     return res.json(games);
   },
 
@@ -32,9 +32,9 @@ const gamesControllers = {
 		res.status(200).json({destroyGame})
 	},
 
-	async updateGameStatus(req: any, res: any) {
+	async publishGame(req: any, res: any) {
 		const { id } = req.params;
-		const updateGame = await updateGameStatus(id);
+		const updateGame = await publishGame(id);
 		res.status(200).json(updateGame);
 	},
 

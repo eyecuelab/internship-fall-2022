@@ -3,9 +3,9 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/phrases/:topicId', phrasesControllers.getPhrase);
-router.get('/phrases/one/:topicId', phrasesControllers.getOnePhrase);
-router.post('/phrases', phrasesControllers.createPhrase);
-router.delete('/phrases/:id', phrasesControllers.deletePhrase);
+router.get('/phrases/:topicId', phrasesControllers.getPhrasesByTopic);
+router.get('/phrase/unique/:topicId', phrasesControllers.getUniquePhrase);
+router.post('/phrase', phrasesControllers.createPhrase);
+router.delete('/phrase/:id', phrasesControllers.deletePhrase);
 
 export default router; 

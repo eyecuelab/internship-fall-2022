@@ -2,7 +2,16 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getOneRound = async (roundId: number) => {
+export const addRound = async (gameId: number, topicId: number) => {
+	return await prisma.rounds.create({
+		data: {
+			gameId: Number(gameId),
+			topicId: Number(topicId),
+		}
+	});
+}
+
+export const getRoundById = async (roundId: number) => {
 	return await prisma.rounds.findUnique({
 		where: {
 			id: Number(roundId)
@@ -14,7 +23,7 @@ export const getOneRound = async (roundId: number) => {
 	})
 }
 
-export const getCurRoundIdByGameId = async (gameId: number) => {
+export const getCurRoundByGame = async (gameId: number) => {
 	return await prisma.rounds.findMany({
 		where: {
 			gameId: Number(gameId)
@@ -25,22 +34,3 @@ export const getCurRoundIdByGameId = async (gameId: number) => {
 		take: 1
 	});
 }
-
-export const addRound = async (gameId: number, topicId: number) => {
-	return await prisma.rounds.create({
-		data: {
-			gameId: Number(gameId),
-			topicId: Number(topicId),
-		}
-	});
-}
-
-// const assignTurns = async (round: Rounds, ) => {
-// 	for (let i=0; i<round.Haicues.length; i++) {
-// 		await prisma.turns.create({
-// 			data: {
-
-// 			}
-// 		})
-// 	}
-// }

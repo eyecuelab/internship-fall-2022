@@ -1,13 +1,13 @@
-import { getPhrase, getUniquePhrase, createPhrase, deletePhrase } from "../Models/phrases";
+import { getPhrasesByTopic, getUniquePhrase, createPhrase, deletePhrase } from "../Models/phrases";
 
 const phrasesControllers = {
-  async getPhrase(req: any, res: any) {
+  async getPhrasesByTopic(req: any, res: any) {
     const { topicId } = req.params;
-    const phrases = await getPhrase(Number(topicId));
+    const phrases = await getPhrasesByTopic(Number(topicId));
     res.json(phrases);
   },
 
-	async getOnePhrase (req: any, res: any) {
+	async getUniquePhrase (req: any, res: any) {
 		const { topicId } = req.params;
 		const phrase = await getUniquePhrase(Number(topicId));
 		res.json(phrase);

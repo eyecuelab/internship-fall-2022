@@ -1,11 +1,10 @@
-import { getModerators, createModerator } from '../Models/moderators';
-import io from '../server';
+import { getModeratorByEmail, createModerator } from '../Models/moderators';
 
 const moderatorsControllers = {
 
-  async getModerators(req: any, res: any) {
+  async getModeratorByEmail(req: any, res: any) {
 		const { email } = req.params;
-    const moderators = await getModerators(email);
+    const moderators = await getModeratorByEmail(email);
     return res.json(moderators);
   },
 

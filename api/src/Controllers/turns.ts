@@ -1,15 +1,15 @@
-import { createTurn, getTurn, getTurnsByRound, updatePresentingTeam } from '../Models/turns';
+import { createTurn, getTurnById, getTurnsByRound, setPresentingTeam } from '../Models/turns';
 
 const turnsControllers = {
-	async getRoundTurns(req: any, res: any) {
+	async getTurnsByRound(req: any, res: any) {
 		const { id } = req.params;
 		const turns = await getTurnsByRound(id);
 		return res.json(turns)
 	},
 
-	async getTurn(req: any, res: any) {
+	async getTurnById(req: any, res: any) {
 		const { id } = req.params;
-		const turn = await getTurn(id);
+		const turn = await getTurnById(id);
 		return res.json(turn);
 	},
 
@@ -21,7 +21,7 @@ const turnsControllers = {
 
 	async setPresentingTeam(req: any, res: any) {
 		const { roundId, teamId } = req.body;
-		const presentingTeam = await updatePresentingTeam(roundId, teamId);
+		const presentingTeam = await setPresentingTeam(roundId, teamId);
 		return res.status(201).json(presentingTeam);
 	}
 }

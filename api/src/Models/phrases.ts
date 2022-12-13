@@ -2,15 +2,17 @@ import { Phrases, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-type Phrase = {
-	id: number
-  body: String
-  wordCount: number
-  topic: any
-  topicId: number
+export const createPhrase = async (body: string, topicId: number, moderatorId: number) => {
+  return await prisma.phrases.create({
+    data: {
+      body: body,
+			wordCount: Number(body.split(" ").length),
+			Topic: { connect: { id: topicId } },
+    }
+  });
 }
 
-export const getPhrase = async (topicId: number) => {
+export const getPhrasesByTopic = async (topicId: number) => {
   try {
 		return await prisma.phrases.findMany({
 			where: {
@@ -34,17 +36,6 @@ export const getUniquePhrase = async (topicId: number) => {
 				return phrases[i];
 			}
 		}
-}
-
-export const createPhrase = async (body: string, topicId: number, moderatorId: number) => {
-  return await prisma.phrases.create({
-    data: {
-      body: body,
-			wordCount: Number(body.split(" ").length),
-			topic: { connect: { id: topicId } },
-			moderator: { connect: { id: moderatorId } },
-    }
-  });
 }
 
 export const deletePhrase = async(id: number) => {

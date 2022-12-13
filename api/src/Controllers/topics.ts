@@ -1,22 +1,21 @@
-import { getTopic, getTopics, getRoundTopic, createTopic, updateTopicRound, deleteTopic } from "../Models/topics";
-import io from "../server";
+import { getTopicById, getTopicsByGame, getTopicByRound, createTopic, assignTopicToRound, deleteTopic } from "../Models/topics";
 
 const topicsControllers = {
-	async getTopic(req: any, res: any) {
+	async getTopicById(req: any, res: any) {
 		const { topicId } = req.params;
-		const topic = await getTopic(topicId);
+		const topic = await getTopicById(topicId);
 		return res.json(topic);
 	},
 
-  async getTopics(req: any, res: any) {
+  async getTopicsByGame(req: any, res: any) {
 		const { gameId } = req.params;
-    const topics = await getTopics(gameId);
+    const topics = await getTopicsByGame(gameId);
     return res.json(topics);
   },
 
 	async getTopicByRound(req: any, res: any) {
 		const { roundId } = req.params;
-		const topic = await getRoundTopic(roundId);
+		const topic = await getTopicByRound(roundId);
 		return res.json(topic);
 	},
 
@@ -28,7 +27,7 @@ const topicsControllers = {
 
 	async assignTopicToRound(req: any, res: any) {
 		const { topicId, roundId } = req.body;
-		const topic = await updateTopicRound(topicId, roundId);
+		const topic = await assignTopicToRound(topicId, roundId);
 		res.status(201).json(topic);
 	},
 
@@ -37,7 +36,6 @@ const topicsControllers = {
     const destroyTopic = await deleteTopic(id);
     res.status(200).json({ destroyTopic });
   },
-
 
 };
 

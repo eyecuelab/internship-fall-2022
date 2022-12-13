@@ -3,7 +3,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.get('/moderators/:email', moderatorsControllers.getModerators);
-router.post('/moderators', moderatorsControllers.createModerator);
+router.get('/moderator/:email', moderatorsControllers.getModeratorByEmail);
+router.post('/moderator', moderatorsControllers.createModerator);
 
 export default router; 

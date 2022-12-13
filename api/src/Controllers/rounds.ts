@@ -1,15 +1,15 @@
-import { addRound, getOneRound, getCurRoundIdByGameId } from '../Models/rounds';
+import { addRound, getRoundById, getCurRoundByGame } from '../Models/rounds';
 
 const roundsControllers = {
-	async getRound (req: any, res: any) {
+	async getRoundById (req: any, res: any) {
 		const { id } = req.params;
-		const round = await getOneRound(id);
+		const round = await getRoundById(id);
 		return res.json(round)
 	},
 
-	async getCurRoundsByGameId(req: any, res: any) {
+	async getCurRoundByGame(req: any, res: any) {
 		const { id } = req.params;
-		const CurRound = await getCurRoundIdByGameId(id);
+		const CurRound = await getCurRoundByGame(id);
 		return res.json(CurRound);
 	},
 

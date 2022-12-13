@@ -2,18 +2,17 @@ import { Phrases, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const getTurnsByRound = async (roundId: number) => {
-	return await prisma.turns.findMany({
-		where: {
-			roundId: Number(roundId)
-		},
-		include: {
-			Haicue: true
+export const createTurn = async (roundId: number, presentingTeamId: number, haicueId: number) => {
+	return await prisma.turns.create({
+		data: {
+			Round: { connect: { id: Number(roundId) }},
+			performingTeam: { connect: { id: Number(presentingTeamId)}},
+			Haicue: { connect: { id: Number(haicueId) }}
 		}
 	});
 }
 
-export const getTurn = async (id: number) => {
+export const getTurnById = async (id: number) => {
 	return await prisma.turns.findUnique({
 		where: {
 			id: Number(id)
@@ -25,17 +24,18 @@ export const getTurn = async (id: number) => {
 	});
 }
 
-export const createTurn = async (roundId: number, presentingTeamId: number, haicueId: number) => {
-	return await prisma.turns.create({
-		data: {
-			Round: { connect: { id: Number(roundId) }},
-			performingTeam: { connect: { id: Number(presentingTeamId)}},
-			Haicue: { connect: { id: Number(haicueId) }}
+export const getTurnsByRound = async (roundId: number) => {
+	return await prisma.turns.findMany({
+		where: {
+			roundId: Number(roundId)
+		},
+		include: {
+			Haicue: true
 		}
 	});
 }
 
-export const updatePresentingTeam = async (turnId: number, teamId: number) => {
+export const setPresentingTeam = async (turnId: number, teamId: number) => {
 	return await prisma.turns.update({
 		where: {
 			id: Number(turnId)

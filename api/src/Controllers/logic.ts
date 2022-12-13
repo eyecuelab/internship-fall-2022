@@ -1,5 +1,4 @@
 import { startThisGame, emitTimerTick, startGuessingPhase } from "../Models/logic";
-import io from "../server";
 
 const ROUND_TIME = 240;
 let timeStart = false;
@@ -8,7 +7,7 @@ const logicControllers = {
 	async startGame (req: any, res: any) {
 		const { gameId } = req.body;
 		startThisGame(gameId);
-		setTimeout(() =>startThisRound(gameId), 5000);
+		setTimeout(() => startThisRound(gameId), 5000);
 		res.json(200);
 	},
 	
