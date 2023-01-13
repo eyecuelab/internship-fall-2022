@@ -120,49 +120,6 @@ a simple one-round game with 3 teams. First, a moderator might pick the topic of
 - Navigate one terminal into the `/api` directory and run `npm run dev`
 - Navigate the second terminal into the `/client` directory and run `npm run dev` as well. If your browser does not automatically load, type `http://localhost:5173/` manually in the browser
 
-## The Nameless Terror API Reference <a id="the-mafia-api-reference"></a>
-
-- Everything you need to interact with our API.
-- If you want to access our API directly, you can use the following base URL: `http://localhost:3000/swagger` after running the app locally.
-
-### Making Requests
-
-- All requests should be made to the base URL: `http://localhost:3000/` and use Postman/Thunderclient and requests should be made using the HTTP verbs `GET`, `POST`, `PUT`, `PATCH`, and `DELETE`.
-
-<!-- - Player:
-  - GET `/player` retrieves a single player by Id.
-  - GET `/player/:gameId` retrieves all players by gameId.
-  - POST `/player/` creates a new player.
-  - PUT `/player/:id` updates a single player by Id.
-
-- Game:
-  - GET `/games` retrieves all games.
-  - GET `/game/:id` retrieves a single game by Id.
-  - POST `/game/:id` creates a new game.
-
-- Round:
-  - GET `/round/:id` retrieves specific round from game.
-  - GET `/rounds/:gameID` retrieves all rounds from game.
-
-- Role:
-  - GET `/roles` retrieves all roles.
-  - GET `/role/:id` retrieves a single role by Id.
-  - POST `/role/` creates a new role.
-
-- Vote:
-  - GET `/vote/:id` retrieves a single vote by Id.
-  - GET `/votes/:gameId` retrieves all votes by gameId.
-  - POST `/vote/` creates a new vote.
-  - POST `/tallyVote` Counts casted votes and tally them.
-  - POST `/vote/` casted votes are collected. -->
-
-### The Request Body
-
-- In progress
-
-### Models
-
-- In progress
 
 ## Known 🐛 Bugs <a id="bugs"></a>
 
